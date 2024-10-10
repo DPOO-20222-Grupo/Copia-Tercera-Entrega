@@ -14,7 +14,7 @@ public class Actividad {
     private boolean esObligatoria;
     private String resenas;
     private float rating;
-    private List<Actividad> actividadesPrevias;
+    private List<Actividad> actividadesPrevia;
     private List<Actividad> actividadesSeguimiento;
 
     // Constructor
