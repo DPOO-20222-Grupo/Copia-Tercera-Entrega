@@ -8,11 +8,16 @@ public class Estudiante extends Usuario {
     }
 
     // Métodos adicionales 
-    public void inscribirseLP(){
-
+    
+    public void inscribirseEnLearningPath(LearningPath path) {
+        path.inscribirAlumno(this);
     }
 
-    public void iniciarActividad(){
+    public void completarActividad(Actividad actividad) {
+        actividad.completar();
+    }
 
+    public void dejarReseña(Actividad actividad, String reseña, float rating) {
+        actividad.dejarFeedback(reseña, rating);
     }
 }

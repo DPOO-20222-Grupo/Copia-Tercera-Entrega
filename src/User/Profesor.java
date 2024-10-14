@@ -1,35 +1,49 @@
 package User;
 
+import java.util.Date;
+
 public class Profesor extends Usuario {
-    
+
     // Constructor
     public Profesor(String login, String password) {
         super(login, password);
     }
 
-    // Metodos Adicionales
+    // Métodos adicionales
 
-    public void crearActividad(){
-
+    public LearningPaths crearLearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaCreacion) {
+        return new LearningPaths(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaCreacion);
     }
 
-    public void clonarActividad(){
-
+    public void editarLearningPath(LearningPath path, String nuevoTitulo, String nuevaDescripcion, String nuevosObjetivos, String nuevoNivelDificultad, int nuevaDuracionMinutos, Date nuevaFechaCreacion) {
+        path.setTitulo(nuevoTitulo);
+        path.setDescripcion(nuevaDescripcion);
+        path.setObjetivos(nuevosObjetivos);
+        path.setNivelDificultad(nuevoNivelDificultad);
+        path.setDuracionMinutos(nuevaDuracionMinutos);
+        path.setFechaCreacion(nuevaFechaCreacion);
     }
 
-    public void modificarActividad(){
-
+    public LearningPath copiarLearningPath(LearningPath path) {
+        return new LearningPath(
+            path.getTitulo(), 
+            path.getDescripcion(), 
+            path.getObjetivos(), 
+            path.getNivelDificultad(), 
+            path.getDuracionMinutos(), 
+            path.getFechaCreacion()
+        );
     }
 
-    public void crearLP(){
-
+    public void agregarActividad(LearningPath path, Actividad actividad) {
+        path.agregarActividad(actividad);
     }
 
-    public void modificarLP(){
-
+    public void calificarTarea(Tarea tarea, String resultado) {
+        tarea.setResultado(resultado);
     }
 
-    public void clonarLP(){
-
+    public void calificarExamen(Examen examen, String resultado) {
+        examen.setResultado(resultado);
     }
 }
