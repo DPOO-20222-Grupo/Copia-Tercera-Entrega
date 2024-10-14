@@ -25,6 +25,18 @@ public class LearningPaths {
         this.fechaUltimaModificacion = fechaUltimaModificacion;
         this.version = version;
     }
+    
+    //Constructor Numero Dos
+    public LearningPaths(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version) {
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.objetivos = objetivos;
+        this.nivelDificultad = nivelDificultad;
+        this.duracionMinutos = duracionMinutos;
+        this.fechaCreacion = fechaCreacion;
+    }
+    
+    //Getters y Setters
 
     public String getTitulo() {
         return titulo;
@@ -99,7 +111,14 @@ public class LearningPaths {
     }
     
     //Metodos Funcionales Del Programa
-    
-    
+
+    public void mostrarDetalles() {
+        System.out.println("Título: " + this.titulo);
+        System.out.println("Descripción: " + this.descripcion);
+        System.out.println("Objetivos: " + this.objetivos);
+        System.out.println("Nivel de Dificultad: " + this.nivelDificultad);
+        System.out.println("Duración (minutos): " + this.duracionMinutos);
+        System.out.println("Fecha de Creación: " + this.fechaCreacion);
+    } 
 }
 
