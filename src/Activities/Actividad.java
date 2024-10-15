@@ -107,6 +107,18 @@ public class Actividad {
     public void setRating(float rating) {
         this.rating = rating;
     }
+    
+    //Metodos Adicionales
+
+	public void completar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void dejarFeedback(String reseña, float rating2) {
+		// TODO Auto-generated method stub
+		
+	}
   
 }
 

@@ -1,5 +1,9 @@
 package User;
 
+
+import Activities.Actividad; 
+import LearningPath.LearningPath;
+
 public class Estudiante extends Usuario {
 
     // Constructor

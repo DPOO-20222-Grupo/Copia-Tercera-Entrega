@@ -2,6 +2,9 @@ package LearningPath;
 
 import java.util.Date;
 
+import Activities.Actividad;
+import User.Estudiante;
+
 public class LearningPath {
     private String titulo;
     private String descripcion;
@@ -27,7 +30,7 @@ public class LearningPath {
     }
     
     //Constructor Numero Dos
-    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version) {
+    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaCreacion) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.objetivos = objetivos;
@@ -119,6 +122,18 @@ public class LearningPath {
         System.out.println("Nivel de Dificultad: " + this.nivelDificultad);
         System.out.println("Duración (minutos): " + this.duracionMinutos);
         System.out.println("Fecha de Creación: " + this.fechaCreacion);
-    } 
+    }
+
+	public void inscribirAlumno(Estudiante estudiante) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void agregarActividad(Actividad actividad) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
 

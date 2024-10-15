@@ -1,6 +1,11 @@
 package User;
 
-import java.util.Date;
+import java.util.Date;  
+
+import Activities.Actividad;
+import Activities.Examen;
+import Activities.Tarea;
+import LearningPath.LearningPath;
 
 public class Profesor extends Usuario {
 
@@ -11,8 +16,8 @@ public class Profesor extends Usuario {
 
     // Métodos adicionales
 
-    public LearningPaths crearLearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaCreacion) {
-        return new LearningPaths(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaCreacion);
+    public LearningPath crearLearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaCreacion) {
+        return new LearningPath(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaCreacion);
     }
 
     public void editarLearningPath(LearningPath path, String nuevoTitulo, String nuevaDescripcion, String nuevosObjetivos, String nuevoNivelDificultad, int nuevaDuracionMinutos, Date nuevaFechaCreacion) {

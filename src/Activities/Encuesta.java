@@ -1,6 +1,7 @@
-package Activities;
 
+package Activities;
 import java.util.Date;
+
 
 public class Encuesta extends Actividad {
     private int numPreguntas;
