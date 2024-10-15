@@ -10,5 +10,8 @@ public class PersistenciaJson {
 		objectMapper.writeValue(new File(filePath), inf);
 	}
 	
-	public static <T> List<T> cargarJSON(String filePath, TypeReference<List<T>> typeReference) 
+	public static <T> List<T> cargarJSON(String filePath, TypeReference<List<T>> typeReference) throws IOException{
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.readValue(new File(filePath), typeReference);
+	}
 }
