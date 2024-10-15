@@ -2,7 +2,7 @@ package LearningPath;
 
 import java.util.Date;
 
-public class LearningPaths {
+public class LearningPath {
     private String titulo;
     private String descripcion;
     private String objetivos;
@@ -14,7 +14,7 @@ public class LearningPaths {
     private String version;
 
     // Constructor
-    public LearningPaths(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version) {
+    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.objetivos = objetivos;
@@ -27,7 +27,7 @@ public class LearningPaths {
     }
     
     //Constructor Numero Dos
-    public LearningPaths(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version) {
+    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.objetivos = objetivos;
