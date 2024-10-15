@@ -1,6 +1,6 @@
 package User;
 
-import java.util.Date; 
+import java.util.Date;  
 
 import Activities.Actividad;
 import Activities.Examen;

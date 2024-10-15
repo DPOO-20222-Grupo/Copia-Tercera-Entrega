@@ -1,5 +1,5 @@
 
-package Activities
+package Activities;
 import java.util.Date;
 
 

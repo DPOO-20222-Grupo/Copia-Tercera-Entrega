@@ -1,9 +1,7 @@
 package User;
 
-<<<<<<< HEAD
-=======
-import Activities.Actividad;
->>>>>>> refs/remotes/origin/main
+
+import Activities.Actividad; 
 import LearningPath.LearningPath;
 
 public class Estudiante extends Usuario {
