@@ -66,4 +66,10 @@ public class PreguntaSeleccionMultiple extends Pregunta {
     public void setOpcionEscogida(int opcionEscogida) {
         this.opcionEscogida = opcionEscogida;
     }
+    
+    //Metodos adicionales 
+    
+    public boolean verificarRespuesta() {
+        return this.opcionEscogida == this.opcionCorrecta;
+    }
 }

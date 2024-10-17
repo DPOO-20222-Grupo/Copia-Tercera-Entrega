@@ -1,5 +1,6 @@
 package Actividades;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,8 +13,9 @@ public class Actividad {
     private Date fechaLimite;
     private String resultado;
     private boolean esObligatoria;
-    private String resenas;
-    private float rating;
+    private String resenas; 
+    private float rating; 
+    private int contadorRatings; 
     private List<Actividad> actividadesPrevias;
     private List<Actividad> actividadesSeguimiento;
 
@@ -26,8 +28,14 @@ public class Actividad {
         this.duracionMinutos = duracionMinutos;
         this.fechaLimite = fechaLimite;
         this.esObligatoria = esObligatoria;
+        this.rating = 0.0f; 
+        this.resenas = ""; 
+        this.contadorRatings = 0;
+        this.actividadesPrevias = new ArrayList<>(); 
+        this.actividadesSeguimiento = new ArrayList<>();
     }
 
+    // Getters y Setters
     public String getTitulo() {
         return titulo;
     }
@@ -108,21 +116,45 @@ public class Actividad {
         this.rating = rating;
     }
     
-    //Metodos Adicionales
+    // Métodos para gestionar actividades previas y de seguimiento
 
-	public void completar() {
-		// TODO Auto-generated method stub
-		
-	}
+    public void agregarActividadPrevia(Actividad actividad) {
+        if (!actividadesPrevias.contains(actividad)) {
+            actividadesPrevias.add(actividad);
+        }
+    }
 
-	public void dejarFeedback(String reseña, float rating2) {
-		// TODO Auto-generated method stub
-		
-	}
+    public void eliminarActividadPrevia(Actividad actividad) {
+        actividadesPrevias.remove(actividad);
+    }
 
-	public static void AgregarActividad(Actividad actividad) {
-		// TODO Auto-generated method stub
-		
-	}
-  
+    public List<Actividad> getActividadesPrevias() {
+        return actividadesPrevias;
+    }
+
+    public void agregarActividadSeguimiento(Actividad actividad) {
+        if (!actividadesSeguimiento.contains(actividad)) {
+            actividadesSeguimiento.add(actividad);
+        }
+    }
+
+    public void eliminarActividadSeguimiento(Actividad actividad) {
+        actividadesSeguimiento.remove(actividad);
+    }
+
+    public List<Actividad> getActividadesSeguimiento() {
+        return actividadesSeguimiento;
+    }
+
+    // Métodos Adicionales
+
+    public void completar() {
+        System.out.println("La actividad " + titulo + " ha sido completada.");
+    }
+
+    public void dejarFeedback(String reseña, float rating) {
+        this.resenas += reseña + "\n"; 
+        contadorRatings++; 
+        this.rating = ((this.rating * (contadorRatings - 1)) + rating) / contadorRatings; 
+    }
 }

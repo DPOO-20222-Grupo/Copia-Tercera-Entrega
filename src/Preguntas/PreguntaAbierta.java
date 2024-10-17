@@ -1,31 +1,32 @@
 package Preguntas;
 
 public class PreguntaAbierta extends Pregunta {
-    private String respuesta;
+
+	private String respuestaCorrecta; // Respuesta esperada
+    private boolean esRespuestaCorrecta; // Estado de la respuesta según el profesor
 
     // Constructor
-    public PreguntaAbierta(String enunciado, String respuesta) {
+    public PreguntaAbierta(String enunciado) {
         super(enunciado);
-        this.respuesta = respuesta;
-    }
-
-    public String getRespuesta() {
-        return respuesta;
-    }
-
-    public void setRespuesta(String respuesta) {
-        this.respuesta = respuesta;
+        this.esRespuestaCorrecta = false; // Por defecto, se establece como incorrecta
     }
     
-    // Metodos Adicionales
-    
-    // Método para verificar si la respuesta es correcta
-    public boolean verificarRespuesta(String respuestaEsperada) {
-        return this.respuesta.trim().equalsIgnoreCase(respuestaEsperada.trim());
-    }
+    // Getters and Setters
 
-    // Método para limpiar espacios en blanco de la respuesta
-    public void limpiarEspaciosRespuesta() {
-        this.respuesta = this.respuesta.trim();
-    }
+	public String getRespuestaCorrecta() {
+		return respuestaCorrecta;
+	}
+
+	public void setRespuestaCorrecta(String respuestaCorrecta) {
+		this.respuestaCorrecta = respuestaCorrecta;
+	}
+
+	public boolean isEsRespuestaCorrecta() {
+		return esRespuestaCorrecta;
+	}
+
+	public void setEsRespuestaCorrecta(boolean esRespuestaCorrecta) {
+		this.esRespuestaCorrecta = esRespuestaCorrecta;
+	}
+      
 }
