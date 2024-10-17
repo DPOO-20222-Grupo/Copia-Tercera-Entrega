@@ -1,8 +1,10 @@
 package LearningPath;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import Activities.Actividad;
+import Actividades.Actividad;
 import User.Estudiante;
 
 public class LearningPath {
@@ -15,6 +17,8 @@ public class LearningPath {
     private Date fechaCreacion;
     private Date fechaUltimaModificacion;
     private String version;
+    private List<Estudiante> estudiantesInscritos;
+    private List<Actividad> actividades;
 
     // Constructor
     public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version) {
@@ -27,19 +31,23 @@ public class LearningPath {
         this.fechaCreacion = fechaCreacion;
         this.fechaUltimaModificacion = fechaUltimaModificacion;
         this.version = version;
+        this.estudiantesInscritos = new ArrayList<>();
+        this.actividades = new ArrayList<>();
     }
     
-    //Constructor Numero Dos
-    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaCreacion) {
+    // Constructor Número Dos
+    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaCreacion, List<Estudiante> estudiantesInscritos, List<Actividad> actividades) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.objetivos = objetivos;
         this.nivelDificultad = nivelDificultad;
         this.duracionMinutos = duracionMinutos;
         this.fechaCreacion = fechaCreacion;
+        this.estudiantesInscritos = new ArrayList<>();
+        this.actividades = new ArrayList<>();
     }
     
-    //Getters y Setters
+    // Getters y Setters
 
     public String getTitulo() {
         return titulo;
@@ -112,28 +120,46 @@ public class LearningPath {
     public void setVersion(String version) {
         this.version = version;
     }
-    
-    //Metodos Funcionales Del Programa
 
-    public void mostrarDetalles() {
-        System.out.println("Título: " + this.titulo);
-        System.out.println("Descripción: " + this.descripcion);
-        System.out.println("Objetivos: " + this.objetivos);
-        System.out.println("Nivel de Dificultad: " + this.nivelDificultad);
-        System.out.println("Duración (minutos): " + this.duracionMinutos);
-        System.out.println("Fecha de Creación: " + this.fechaCreacion);
+    public List<Estudiante> getEstudiantesInscritos() {
+        return estudiantesInscritos;
     }
 
-	public void inscribirAlumno(Estudiante estudiante) {
-		// TODO Auto-generated method stub
-		
-	}
+    public List<Actividad> getActividades() {
+        return actividades;
+    }
+    
+    // Métodos Funcionales del Programa
 
-	public void agregarActividad(Actividad actividad) {
-		// TODO Auto-generated method stub
-		
-	}
+    // Métodos para manejar estudiantes
+    public void inscribirEstudiante(Estudiante estudiante) {
+        if (!estudiantesInscritos.contains(estudiante)) {
+            estudiantesInscritos.add(estudiante);
+        }
+    }
 
-	
+    public void eliminarEstudiante(Estudiante estudiante) {
+        estudiantesInscritos.remove(estudiante);
+    }
+    
+    // Métodos para manejar actividades
+    public void agregarActividad(Actividad actividad) {
+        if (!actividades.contains(actividad)) {
+            actividades.add(actividad);
+        }
+    }
+
+    public void eliminarActividad(Actividad actividad) {
+        actividades.remove(actividad);
+    }
+
+    // Calcular la duración total de todas las actividades en el Learning Path
+    public int calcularDuracionTotal() {
+        int duracionTotal = 0;
+        for (Actividad actividad : actividades) {
+            duracionTotal += actividad.getDuracionMinutos();
+        }
+        return duracionTotal;
+    }
 }
 

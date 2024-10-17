@@ -1,20 +1,31 @@
 package User;
 
-
-import Activities.Actividad; 
+import Actividades.Actividad;
 import LearningPath.LearningPath;
 
 public class Estudiante extends Usuario {
+    private String nombre;
 
     // Constructor
-    public Estudiante(String login, String password) {
+    public Estudiante(String login, String password, String nombre) {
         super(login, password);
+        this.nombre = nombre;
+    }
+    
+    // Getter and Setter
+    
+    public String getNombre() {
+        return this.nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     // Métodos adicionales 
     
-    public void inscribirseEnLearningPath(LearningPath path) {
-        path.inscribirAlumno(this);
+    public void inscribirEstudiante(LearningPath path) {
+        path.inscribirEstudiante(this);
     }
 
     public void completarActividad(Actividad actividad) {
