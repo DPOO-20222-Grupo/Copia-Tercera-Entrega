@@ -2,14 +2,17 @@ package Actividades;
 
 import java.util.Date;
 
+import User.Profesor;
+
 
 public class Examen extends Actividad {
+	private static String TIPO = "Examen";
     private String estado;
     private int numPreguntas;
 
     // Constructor
-    public Examen(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, boolean esObligatoria, String estado, int numPreguntas) {
-        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, esObligatoria);
+    public Examen(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, boolean esObligatoria, String estado, int numPreguntas, Profesor profesorCreador) {
+        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador,  esObligatoria);
         this.estado = estado;
         this.numPreguntas = numPreguntas;
     }
@@ -28,5 +31,9 @@ public class Examen extends Actividad {
 
     public void setNumPreguntas(int numPreguntas) {
         this.numPreguntas = numPreguntas;
+    }
+    
+    public String getTipoActividad () {
+    	return TIPO;
     }
 }

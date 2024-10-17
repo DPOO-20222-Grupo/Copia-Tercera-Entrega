@@ -6,10 +6,12 @@ import java.util.List;
 
 import Actividades.Actividad;
 import User.Estudiante;
+import User.Profesor;
 
 public class LearningPath {
     private String titulo;
     private String descripcion;
+    private Profesor profesorCreador;
     private String objetivos;
     private String nivelDificultad;
     private int duracionMinutos;
@@ -21,9 +23,11 @@ public class LearningPath {
     private List<Actividad> actividades;
 
     // Constructor
-    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version) {
+    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, 
+    					float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version, Profesor profesorCreador) {
         this.titulo = titulo;
         this.descripcion = descripcion;
+        this.profesorCreador = profesorCreador;
         this.objetivos = objetivos;
         this.nivelDificultad = nivelDificultad;
         this.duracionMinutos = duracionMinutos;
@@ -36,7 +40,8 @@ public class LearningPath {
     }
     
     // Constructor Número Dos
-    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaCreacion, List<Estudiante> estudiantesInscritos, List<Actividad> actividades) {
+    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, 
+    					Date fechaCreacion, List<Estudiante> estudiantesInscritos, List<Actividad> actividades) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.objetivos = objetivos;
@@ -129,9 +134,19 @@ public class LearningPath {
         return actividades;
     }
     
+    public Profesor getProfesorCreador() {
+ 		return profesorCreador;
+ 	}
+
+ 	public void setProfesorCreador(Profesor profesorCreador) {
+ 		this.profesorCreador = profesorCreador;
+ 	}
+    
     // Métodos Funcionales del Programa
 
-    // Métodos para manejar estudiantes
+ 
+
+	// Métodos para manejar estudiantes
     public void inscribirEstudiante(Estudiante estudiante) {
         if (!estudiantesInscritos.contains(estudiante)) {
             estudiantesInscritos.add(estudiante);
