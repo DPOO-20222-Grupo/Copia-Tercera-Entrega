@@ -1,17 +1,18 @@
 package Central;
 
-import java.util.Map;  
+import java.util.Map;   
 
 import User.Estudiante;
 import User.Profesor;
 import LearningPath.LearningPath;
-import Activities.Tarea;
-import Activities.RevisarRecurso;
-import Activities.Encuesta;
-import Activities.Examen;
-import Activities.Quiz;
-import Questions.PreguntaAbierta;
-import Questions.PreguntaSeleccionMultiple;
+import Preguntas.PreguntaAbierta;
+import Preguntas.PreguntaSeleccionMultiple;
+import Actividades.Tarea;
+import Actividades.RevisarRecurso;
+import Actividades.Encuesta;
+import Actividades.Examen;
+import Actividades.Quiz;
+
 
 
 public class Aplicacion {

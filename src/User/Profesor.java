@@ -2,9 +2,9 @@ package User;
 
 import java.util.Date;  
 
-import Activities.Actividad;
-import Activities.Examen;
-import Activities.Tarea;
+import Actividades.Actividad;
+import Actividades.Examen;
+import Actividades.Tarea;
 import LearningPath.LearningPath;
 
 public class Profesor extends Usuario {

@@ -1,7 +1,7 @@
 package User;
 
 
-import Activities.Actividad; 
+import Actividades.Actividad; 
 import LearningPath.LearningPath;
 
 public class Estudiante extends Usuario {

@@ -1,8 +1,8 @@
 package LearningPath;
 
-import java.util.Date;
+import java.util.Date; 
 
-import Activities.Actividad;
+import Actividades.Actividad;
 import User.Estudiante;
 
 public class LearningPath {
@@ -130,9 +130,9 @@ public class LearningPath {
 	}
 
 	public void agregarActividad(Actividad actividad) {
-		// TODO Auto-generated method stub
-		
-	}
+		Actividad.AgregarActividad(actividad);
+        System.out.println("Actividad agregada exitosamente.");
+    }
 
 	
 }
