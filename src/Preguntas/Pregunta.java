@@ -1,11 +1,14 @@
 package Preguntas;
 
-public class Pregunta {
+public abstract class Pregunta {
     private String enunciado;
+    private String titulo;
+    private int id;
 
     // Constructor
-    public Pregunta(String enunciado) {
+    public Pregunta(String enunciado, String titulo) {
         this.enunciado = enunciado;
+        this.titulo = titulo;
     }
 
     public String getEnunciado() {
@@ -15,5 +18,14 @@ public class Pregunta {
     public void setEnunciado(String enunciado) {
         this.enunciado = enunciado;
     }
+    
+    
+    public String getTitulo() {
+		return titulo;
+	}
+
+	public abstract String getTipo();
+	
+	public abstract int getId();
 }
 

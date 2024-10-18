@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class Actividad {
+import User.Profesor;
+
+public abstract class Actividad {
     private String titulo;
     private String descripcion;
     private String objetivos;
     private String nivelDificultad;
+    private Profesor profesorCreador;
     private int duracionMinutos;
     private Date fechaLimite;
     private String resultado;
@@ -20,11 +23,12 @@ public class Actividad {
     private List<Actividad> actividadesSeguimiento;
 
     // Constructor
-    public Actividad(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, boolean esObligatoria) {
+    public Actividad(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, Profesor profesorCreador, boolean esObligatoria) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.objetivos = objetivos;
         this.nivelDificultad = nivelDificultad;
+        this.profesorCreador = profesorCreador;
         this.duracionMinutos = duracionMinutos;
         this.fechaLimite = fechaLimite;
         this.esObligatoria = esObligatoria;
@@ -116,9 +120,20 @@ public class Actividad {
         this.rating = rating;
     }
     
+    public Profesor getProfesorCreador() {
+ 		return profesorCreador;
+ 	}
+
+ 	public void setProfesorCreador(Profesor profesorCreador) {
+ 		this.profesorCreador = profesorCreador;
+ 	}
+    
+    
     // Métodos para gestionar actividades previas y de seguimiento
 
-    public void agregarActividadPrevia(Actividad actividad) {
+ 
+
+	public void agregarActividadPrevia(Actividad actividad) {
         if (!actividadesPrevias.contains(actividad)) {
             actividadesPrevias.add(actividad);
         }
@@ -157,4 +172,6 @@ public class Actividad {
         contadorRatings++; 
         this.rating = ((this.rating * (contadorRatings - 1)) + rating) / contadorRatings; 
     }
+    
+    public abstract String getTipoActividad();
 }
