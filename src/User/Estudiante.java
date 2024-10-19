@@ -4,7 +4,8 @@ import Actividades.Actividad;
 import LearningPath.LearningPath;
 
 public class Estudiante extends Usuario {
-    private String nombre;
+    private static String tipo = "Estudiante";
+	private String nombre;
 
     // Constructor
     public Estudiante(String login, String password, String nombre) {
@@ -35,4 +36,8 @@ public class Estudiante extends Usuario {
     public void dejarReseña(Actividad actividad, String reseña, float rating) {
         actividad.dejarFeedback(reseña, rating);
     }
+
+	public String getTipo() {
+		return tipo;
+	}
 }

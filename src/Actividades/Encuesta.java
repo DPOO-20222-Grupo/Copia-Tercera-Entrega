@@ -26,6 +26,4 @@ public class Encuesta extends Actividad {
 	public String getTipoActividad() {
 		return TIPO;
 	}
-    
-    
 }
