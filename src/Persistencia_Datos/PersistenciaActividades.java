@@ -14,32 +14,37 @@ import Actividades.Tarea;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 public class PersistenciaActividades {
 		
 		public static void persistirActividades(HashMap<String, Examen> ExamenMap, 
-				HashMap<String, Encuesta> EncuestaMap,
-				HashMap<String, Quiz> QuizMap,
-				HashMap<String, RevisarRecurso> RevisarMap,
-				HashMap<String, Tarea> TareaMap,
+				HashMap<String, Encuesta> EncuestaMap,HashMap<String, Quiz> QuizMap,
+				HashMap<String, RevisarRecurso> RevisarMap,HashMap<String, Tarea> TareaMap,
 				String archivo) {
 			
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			JsonObject jsonObject = new JsonObject();
 			
-			//List<String> = new List<>
+			String[] activs = {"Encuesta", "Quiz", "Examen", "RevisarRecurso", "Tarea"};
 			
-			//for(Entry<String, Estudiante> entry: studentMap.entrySet()) {
+			List<String> acts = Arrays.asList(activs);
+			
+			for(String actividad: acts) {
+				
+			for(Entry<String, acts> entry: studentMap.entrySet()) {
 				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
 			}
 			
 			for(Entry<String, Profesor> entry: profMap.entrySet()) {
 				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
 			}
-			
+			}
+		
 			try (FileWriter writer = new FileWriter(archivo)){
 				gson.toJson(jsonObject, writer);
 				System.out.printf("Usuarios guardados correctamente en archivo JSON: '%s'.", archivo);
