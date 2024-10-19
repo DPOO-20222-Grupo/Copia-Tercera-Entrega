@@ -1,5 +1,7 @@
 package PersistenciaEstudiantes;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 import User.Estudiante;
 import User.Profesor;
 
@@ -9,8 +11,8 @@ import java.util.HashMap;
 
 public class PersistenciaUsuarios {
 	
-	public static void persistirEstudiantes(HashMap<String, Estudiante> studentMap, String archivo) {
-		ObjectMapper mp = new ObjectMapper();
+	public static void persistirEstudiantes(HashMap<String, Estudiante> studentMap, HashMap<String, Profesor> profMap, String archivo) {
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		
 		try {
 			mp.writeValue(new File(archivo), studentMap);
@@ -18,11 +20,4 @@ public class PersistenciaUsuarios {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static void persistirProfesores(HashMap<String, Profesor> profMap, String archivo) {
-		
-		
-	}
-
 }

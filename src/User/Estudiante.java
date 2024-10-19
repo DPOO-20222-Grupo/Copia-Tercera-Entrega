@@ -37,7 +37,7 @@ public class Estudiante extends Usuario {
         actividad.dejarFeedback(reseña, rating);
     }
 
-	public String getTipo() {
+	public static String getTipo() {
 		return tipo;
 	}
 }
