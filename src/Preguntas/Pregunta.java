@@ -3,7 +3,7 @@ package Preguntas;
 public abstract class Pregunta {
     private String enunciado;
     private String titulo;
-    private int id;
+    protected int id;
 
     // Constructor
     public Pregunta(String enunciado, String titulo) {

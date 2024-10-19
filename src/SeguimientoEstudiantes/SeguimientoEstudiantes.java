@@ -1,17 +1,34 @@
 package SeguimientoEstudiantes;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import Actividades.Actividad;
+import LearningPath.LearningPath;
+
 public class SeguimientoEstudiantes {
+	private HashMap<Actividad, Boolean> actividadesCompletadas;
+	private LearningPath learningPath;
     private float progreso;
     private float totalTiempo;
     private float tasaExito;
     private float tasaFracaso;
 
     // Constructor
-    public SeguimientoEstudiantes(float progreso, float totalTiempo, float tasaExito, float tasaFracaso) {
+    public SeguimientoEstudiantes(float progreso, float totalTiempo, float tasaExito, float tasaFracaso, LearningPath learningPath) {
         this.progreso = progreso;
         this.totalTiempo = totalTiempo;
         this.tasaExito = tasaExito;
         this.tasaFracaso = tasaFracaso;
+        ArrayList<Actividad> actividadesLearningPath = learningPath.getActividades();
+        
+        for(Actividad actividad: actividadesLearningPath) {
+        	
+        	actividadesCompletadas.put(actividad, false);
+        	
+        }
+        
+    
     }
 
     public float getProgreso() {

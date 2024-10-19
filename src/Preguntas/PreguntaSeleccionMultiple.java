@@ -9,7 +9,6 @@ public class PreguntaSeleccionMultiple extends Pregunta {
     private String opcion4;
     private int opcionCorrecta;
     private int opcionEscogida;
-    private int id;
 
     // Constructor
     public PreguntaSeleccionMultiple(String enunciado, String titulo, String opcion1, String opcion2, String opcion3, String opcion4, int opcionCorrecta) {

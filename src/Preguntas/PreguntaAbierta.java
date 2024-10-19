@@ -8,7 +8,6 @@ public class PreguntaAbierta extends Pregunta {
 
 	private String respuestaCorrecta; // Respuesta esperada
     private boolean esRespuestaCorrecta; // Estado de la respuesta según el profesor
-    private int id;
 
     // Constructor
     public PreguntaAbierta(String enunciado, String titulo) {
