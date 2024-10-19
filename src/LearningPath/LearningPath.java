@@ -19,8 +19,8 @@ public class LearningPath {
     private Date fechaCreacion;
     private Date fechaUltimaModificacion;
     private String version;
-    private List<Estudiante> estudiantesInscritos;
-    private List<Actividad> actividades;
+    private ArrayList<Estudiante> estudiantesInscritos;
+    private ArrayList<Actividad> actividades;
 
     // Constructor
     public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, 
@@ -35,8 +35,8 @@ public class LearningPath {
         this.fechaCreacion = fechaCreacion;
         this.fechaUltimaModificacion = fechaUltimaModificacion;
         this.version = version;
-        this.estudiantesInscritos = new ArrayList<>();
-        this.actividades = new ArrayList<>();
+        this.estudiantesInscritos = new ArrayList<Estudiante>();
+        this.actividades = new ArrayList<Actividad>();
     }
     
     // Constructor Número Dos
@@ -126,11 +126,11 @@ public class LearningPath {
         this.version = version;
     }
 
-    public List<Estudiante> getEstudiantesInscritos() {
+    public ArrayList<Estudiante> getEstudiantesInscritos() {
         return estudiantesInscritos;
     }
 
-    public List<Actividad> getActividades() {
+    public ArrayList<Actividad> getActividades() {
         return actividades;
     }
     
