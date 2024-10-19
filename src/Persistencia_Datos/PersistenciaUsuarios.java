@@ -1,4 +1,5 @@
-package PersistenciaEstudiantes;
+package Persistencia_Datos;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
@@ -17,7 +18,7 @@ public class PersistenciaUsuarios {
 	
 	public static void persistirUsuarios(HashMap<String, Estudiante> studentMap, HashMap<String, Profesor> profMap, String archivo) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
-		JsonObject jsonObject = new JssonObject();
+		JsonObject jsonObject = new JsonObject();
 		
 		for(Entry<String, Estudiante> entry: studentMap.entrySet()) {
 			jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
