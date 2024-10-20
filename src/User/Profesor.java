@@ -10,7 +10,7 @@ import LearningPath.LearningPath;
 import Preguntas.PreguntaAbierta;
 
 public class Profesor extends Usuario {
-    private static String tipo = "Profesor";
+    private static String TIPO = "Profesor";
 	private String nombre;
 	
     // Constructor
@@ -82,7 +82,7 @@ public class Profesor extends Usuario {
     }
 
 	public static String getTipo() {
-		return tipo;
+		return TIPO;
 	}
 
 }
