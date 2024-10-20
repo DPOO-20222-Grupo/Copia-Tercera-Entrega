@@ -12,6 +12,7 @@ import User.Estudiante;
 import User.Profesor;
 import exceptions.ModificarActividadesLearningPathException;
 import exceptions.ModificarEstudianteLearningPathException;
+import exceptions.ModificarObjetivosException;
 import exceptions.ObjetivoNoExisteException;
 import exceptions.ObjetivoYaExistenteException;
 
@@ -108,10 +109,10 @@ public class LearningPath {
 		this.actualizarFechaUltimaModificacion();
 	}
 	
-	public void agregarObjetivo(String objetivo) throws ObjetivoYaExistenteException {
+	public void agregarObjetivo(String objetivo) throws ModificarObjetivosException {
 		List<String> objetivos = this.getObjetivos();
 		if (objetivos.contains(objetivo)) {
-			throw new ObjetivoYaExistenteException(objetivo);
+			throw new ModificarObjetivosException(objetivo, "Agregar", "LearningPath");
 		}
 		
 		else {
@@ -121,7 +122,7 @@ public class LearningPath {
 		
 	}
 	
-	public void eliminarObjetivo(String objetivo) throws ObjetivoNoExisteException {
+	public void eliminarObjetivo(String objetivo) throws ModificarObjetivosException {
 		List<String> objetivos = this.getObjetivos();
 		if (objetivos.contains(objetivo)) {
 			objetivos.remove(objetivo);
@@ -129,7 +130,7 @@ public class LearningPath {
 		}
 		
 		else {
-			throw new ObjetivoNoExisteException(objetivo);
+			throw new ModificarObjetivosException(objetivo, "Eliminar", "LearningPath");
 			
 		}
 	}

@@ -5,25 +5,26 @@ import java.util.Date;
 import java.util.List;
 
 import User.Profesor;
+import exceptions.ModificarActividadesPreviasException;
+import exceptions.ModificarActividadesSeguimientoException;
+import exceptions.ModificarObjetivosException;
 
 public abstract class Actividad {
     private String titulo;
     private String descripcion;
-    private String objetivos;
+    private List<String> objetivos;
     private String nivelDificultad;
     private Profesor profesorCreador;
     private int duracionMinutos;
     private Date fechaLimite;
-    private String resultado;
-    private boolean esObligatoria;
-    private String resenas; 
+    private List<String> resenas; 
     private float rating; 
     private int contadorRatings; 
     private List<Actividad> actividadesPrevias;
     private List<Actividad> actividadesSeguimiento;
 
     // Constructor
-    public Actividad(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, Profesor profesorCreador, boolean esObligatoria) {
+    public Actividad(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, Profesor profesorCreador) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.objetivos = objetivos;
@@ -31,15 +32,15 @@ public abstract class Actividad {
         this.profesorCreador = profesorCreador;
         this.duracionMinutos = duracionMinutos;
         this.fechaLimite = fechaLimite;
-        this.esObligatoria = esObligatoria;
         this.rating = 0.0f; 
-        this.resenas = ""; 
+        this.resenas = new ArrayList<String>(); 
         this.contadorRatings = 0;
-        this.actividadesPrevias = new ArrayList<>(); 
+        this.actividadesPrevias = new ArrayList<Actividad>(); 
         this.actividadesSeguimiento = new ArrayList<>();
     }
 
-    // Getters y Setters
+    // Getters, Setters y Actualizaciones
+    
     public String getTitulo() {
         return titulo;
     }
@@ -56,13 +57,28 @@ public abstract class Actividad {
         this.descripcion = descripcion;
     }
 
-    public String getObjetivos() {
+    public List<String> getObjetivos() {
         return objetivos;
     }
 
-    public void setObjetivos(String objetivos) {
+    private void setObjetivos(List<String> objetivos) {
         this.objetivos = objetivos;
     }
+  
+	
+	public void agregarObjetivo(String objetivo) throws ModificarObjetivosException {
+		List<String> objetivos = this.getObjetivos();
+		if (objetivos.contains(objetivo)) {
+			throw new ModificarObjetivosException(objetivo, "Agregar", "Actividad");
+		}
+		
+		else {
+			objetivos.add(objetivo);
+			this.setObjetivos(objetivos);
+		}
+		
+	}
+    
 
     public String getNivelDificultad() {
         return nivelDificultad;
@@ -88,92 +104,123 @@ public abstract class Actividad {
         this.fechaLimite = fechaLimite;
     }
 
-    public String getResultado() {
-        return resultado;
-    }
 
-    public void setResultado(String resultado) {
-        this.resultado = resultado;
-    }
 
-    public boolean isEsObligatoria() {
-        return esObligatoria;
-    }
-
-    public void setEsObligatoria(boolean esObligatoria) {
-        this.esObligatoria = esObligatoria;
-    }
-
-    public String getResenas() {
+    public List<String> getResenas() {
         return resenas;
     }
 
-    public void setResenas(String resenas) {
+    private void setResenas(List<String> resenas) {
         this.resenas = resenas;
+    }
+    
+    public void agregarResena(String resena) {
+    	this.getResenas().add(resena);
     }
 
     public float getRating() {
         return rating;
     }
 
-    public void setRating(float rating) {
+    private void setRating(float rating) {
         this.rating = rating;
     }
+    
+    public void actualizarRating (float nuevoRating) {
+    	
+    	int numRatings = this.getContadorRatings();
+    	
+    	if (numRatings == 0) {
+    		this.setRating(numRatings);
+    		this.setContadorRatings(numRatings+1);
+    	}
+    	
+    	else {
+    		int numRatingsActualizado = numRatings+1;
+    		float ratingActual = this.getRating();
+    		
+    		float ratingActualizado = ratingActual*(numRatings/numRatingsActualizado)+ nuevoRating*(1/numRatingsActualizado);
+    		
+    		this.setRating(ratingActualizado);
+    	}
+    	
+    	
+    }
+    
+    
     
     public Profesor getProfesorCreador() {
  		return profesorCreador;
  	}
-
- 	public void setProfesorCreador(Profesor profesorCreador) {
- 		this.profesorCreador = profesorCreador;
- 	}
+    
+    public int getContadorRatings() {
+		return contadorRatings;
+	}
+    
+	private void setContadorRatings(int contadorRatings) {
+		this.contadorRatings = contadorRatings;
+	}
+    
     
     
     // Métodos para gestionar actividades previas y de seguimiento
 
- 
 
-	public void agregarActividadPrevia(Actividad actividad) {
+	public void agregarActividadPrevia(Actividad actividad) throws ModificarActividadesPreviasException {
         if (!actividadesPrevias.contains(actividad)) {
             actividadesPrevias.add(actividad);
         }
+        else {
+        	throw new ModificarActividadesPreviasException(actividad, "Agregar");
+        }
     }
+	
 
-    public void eliminarActividadPrevia(Actividad actividad) {
-        actividadesPrevias.remove(actividad);
+    public void eliminarActividadPrevia(Actividad actividad) throws ModificarActividadesPreviasException {
+    	if (actividadesPrevias.contains(actividad)) {
+    		actividadesPrevias.remove(actividad);
+    	}
+        
+    	else {
+    		throw new ModificarActividadesPreviasException(actividad, "Agregar");
+    	}
     }
 
     public List<Actividad> getActividadesPrevias() {
         return actividadesPrevias;
     }
-
-    public void agregarActividadSeguimiento(Actividad actividad) {
-        if (!actividadesSeguimiento.contains(actividad)) {
-            actividadesSeguimiento.add(actividad);
+    
+	public void agregarActividadSeguimiento(Actividad actividad) throws ModificarActividadesSeguimientoException {
+        if (!actividadesPrevias.contains(actividad)) {
+            actividadesPrevias.add(actividad);
+        }
+        else {
+        	throw new ModificarActividadesSeguimientoException(actividad, "Agregar");
         }
     }
+	
 
-    public void eliminarActividadSeguimiento(Actividad actividad) {
-        actividadesSeguimiento.remove(actividad);
+    public void eliminarActividadSeguimiento(Actividad actividad) throws ModificarActividadesSeguimientoException {
+    	if (actividadesPrevias.contains(actividad)) {
+    		actividadesPrevias.remove(actividad);
+    	}
+        
+    	else {
+    		throw new ModificarActividadesSeguimientoException(actividad, "Agregar");
+    	}
     }
+
+
 
     public List<Actividad> getActividadesSeguimiento() {
         return actividadesSeguimiento;
     }
+    
+    public abstract String getTipoActividad();
 
     // Métodos Adicionales
 
-    public void completar() {
-        System.out.println("La actividad " + titulo + " ha sido completada.");
-    }
 
-    public void dejarFeedback(String reseña, float rating) {
-        this.resenas += reseña + "\n"; 
-        contadorRatings++; 
-        this.rating = ((this.rating * (contadorRatings - 1)) + rating) / contadorRatings; 
-    }
-    
-    public abstract String getTipoActividad();
     
     public String getIdActividad() {
     	String titulo = this.getTitulo();

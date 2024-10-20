@@ -1,12 +1,15 @@
 package Actividades;
 
 import java.util.Date;
+import java.util.List;
 
+import Preguntas.PreguntaAbierta;
 import User.Profesor;
 
 
 public class Encuesta extends Actividad {
 	private static String TIPO = "Encuesta";
+	private List<PreguntaAbierta> preguntas;
     private int numPreguntas;
 
     // Constructor

@@ -1,6 +1,7 @@
 package Actividades;
 
 import java.util.Date;
+import java.util.List;
 
 import User.Profesor;
 
@@ -10,8 +11,8 @@ public class Tarea extends Actividad {
     private String metodoEnvio;
 
     // Constructor
-    public Tarea(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, boolean esObligatoria, String estado, String metodoEnvio, Profesor profesorCreador) {
-        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador, esObligatoria);
+    public Tarea(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite,  Profesor profesorCreador) {
+        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
         this.estado = estado;
         this.metodoEnvio = metodoEnvio;
     }
