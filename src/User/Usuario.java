@@ -1,6 +1,6 @@
 package User;
 
-public class Usuario {
+public abstract class Usuario {
     private String login;
     private String password;
     private boolean isLoggedIn;
@@ -51,5 +51,7 @@ public class Usuario {
     public boolean isLoggedIn() {
         return this.isLoggedIn;
     }
+    
+    public abstract String getTipo();
 }
 

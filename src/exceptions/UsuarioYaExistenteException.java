@@ -1,4 +1,4 @@
-package Execptions;
+package exceptions;
 
 public class UsuarioYaExistenteException extends Exception{
 
@@ -12,7 +12,7 @@ public class UsuarioYaExistenteException extends Exception{
 	
 	@Override
 	public String getMessage() {
-		String mensaje = "El login "+this.login+" ya fue registrado.";
+		String mensaje = "El login "+this.login+" ya fue registrado en la plataforma.";
 		return mensaje;
 	}
 }

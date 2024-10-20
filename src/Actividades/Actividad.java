@@ -174,4 +174,15 @@ public abstract class Actividad {
     }
     
     public abstract String getTipoActividad();
+    
+    public String getIdActividad() {
+    	String titulo = this.getTitulo();
+    	String loginProfesor = this.getProfesorCreador().getLogin();
+    	
+    	String id = titulo + " - " + loginProfesor;
+    	
+    	return id;
+    }
 }
+
+	

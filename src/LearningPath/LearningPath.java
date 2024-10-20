@@ -2,171 +2,326 @@ package LearningPath;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Actividades.Actividad;
+import SeguimientoEstudiantes.SeguimientoLearningPath;
 import User.Estudiante;
 import User.Profesor;
+import exceptions.ModificarActividadesLearningPathException;
+import exceptions.ModificarEstudianteLearningPathException;
+import exceptions.ObjetivoNoExisteException;
+import exceptions.ObjetivoYaExistenteException;
 
 public class LearningPath {
     private String titulo;
     private String descripcion;
     private Profesor profesorCreador;
-    private String objetivos;
+    private List<String> objetivos;
     private String nivelDificultad;
     private int duracionMinutos;
     private float rating;
     private Date fechaCreacion;
     private Date fechaUltimaModificacion;
-    private String version;
-    private ArrayList<Estudiante> estudiantesInscritos;
-    private ArrayList<Actividad> actividades;
+    private double version;
+    private Map <String, SeguimientoLearningPath> estudiantesInscritos;
+    private List<Actividad> actividades;
+    private Map<String, Boolean> mapaActividadesObligatorias;
+    private int contadorRatings;
 
     // Constructor
-    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, 
-    					float rating, Date fechaCreacion, Date fechaUltimaModificacion, String version, Profesor profesorCreador) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.profesorCreador = profesorCreador;
-        this.objetivos = objetivos;
-        this.nivelDificultad = nivelDificultad;
-        this.duracionMinutos = duracionMinutos;
-        this.rating = rating;
-        this.fechaCreacion = fechaCreacion;
-        this.fechaUltimaModificacion = fechaUltimaModificacion;
-        this.version = version;
-        this.estudiantesInscritos = new ArrayList<Estudiante>();
-        this.actividades = new ArrayList<Actividad>();
+    
+    public LearningPath(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, Profesor profesorCreador,
+    					List <Actividad> listaActividades, Map<String, Boolean> mapaObligatoriedad) 
+    {
+    	this.titulo = titulo;
+    	this.descripcion = descripcion;
+    	this.objetivos = objetivos;
+    	this.nivelDificultad = nivelDificultad;
+    	this.profesorCreador = profesorCreador;
+    	this.actividades = listaActividades;
+    	this.mapaActividadesObligatorias = mapaObligatoriedad;
+    	
+    	this.duracionMinutos = calcularDuracionTotalLista (listaActividades);
+    	
+    	this.rating = 0;
+    	this.fechaCreacion = new Date();
+    	this.fechaUltimaModificacion = fechaCreacion;
+    	this.version = 1;
+    	
+    	this.estudiantesInscritos = new HashMap<String, SeguimientoLearningPath>();
+    	this.contadorRatings = 0;
+    	
     }
     
-    // Constructor Número Dos
-    public LearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, 
-    					Date fechaCreacion, List<Estudiante> estudiantesInscritos, List<Actividad> actividades) {
-        this.titulo = titulo;
-        this.descripcion = descripcion;
-        this.objetivos = objetivos;
-        this.nivelDificultad = nivelDificultad;
-        this.duracionMinutos = duracionMinutos;
-        this.fechaCreacion = fechaCreacion;
-        this.estudiantesInscritos = new ArrayList<>();
-        this.actividades = new ArrayList<>();
-    }
     
-    // Getters y Setters
 
+    
+    // GETTERS, SETTERS Y ACTUALIZACIONES ADECUADAS
+    
+    //Titulo
     public String getTitulo() {
-        return titulo;
-    }
+		return titulo;
+	}
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
+	private void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+	
+	public void modificarTitulo (String titulo) {
+		this.setTitulo(titulo);
+		this.actualizarVersion();
+		this.actualizarFechaUltimaModificacion();
+	}
+	
+	//Descripcion
+	public String getDescripcion() {
+		return descripcion;
+	}
 
-    public String getDescripcion() {
-        return descripcion;
-    }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
+	private void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	private void modificarDescripcion (String descripcion) {
+		this.setDescripcion(descripcion);
+		this.actualizarVersion();
+		this.actualizarFechaUltimaModificacion();
+	}
+	
+	//Objetivos
+	public List<String> getObjetivos() {
+		return objetivos;
+	}
 
-    public String getObjetivos() {
-        return objetivos;
-    }
 
-    public void setObjetivos(String objetivos) {
-        this.objetivos = objetivos;
-    }
+	private void setObjetivos(List<String> objetivos) {
+		this.objetivos = objetivos;
+	}
+	
+	public void modificarObjetivosLista(List<String> objetivos) {
+		this.setObjetivos(objetivos);
+		this.actualizarVersion();
+		this.actualizarFechaUltimaModificacion();
+	}
+	
+	public void agregarObjetivo(String objetivo) throws ObjetivoYaExistenteException {
+		List<String> objetivos = this.getObjetivos();
+		if (objetivos.contains(objetivo)) {
+			throw new ObjetivoYaExistenteException(objetivo);
+		}
+		
+		else {
+			objetivos.add(objetivo);
+			this.modificarObjetivosLista(objetivos);
+		}
+		
+	}
+	
+	public void eliminarObjetivo(String objetivo) throws ObjetivoNoExisteException {
+		List<String> objetivos = this.getObjetivos();
+		if (objetivos.contains(objetivo)) {
+			objetivos.remove(objetivo);
+			this.modificarObjetivosLista(objetivos);;
+		}
+		
+		else {
+			throw new ObjetivoNoExisteException(objetivo);
+			
+		}
+	}
 
-    public String getNivelDificultad() {
-        return nivelDificultad;
-    }
+	//Nivel de Dificultad
+	public String getNivelDificultad() {
+		return nivelDificultad;
+	}
 
-    public void setNivelDificultad(String nivelDificultad) {
-        this.nivelDificultad = nivelDificultad;
-    }
 
-    public int getDuracionMinutos() {
-        return duracionMinutos;
-    }
+	private void setNivelDificultad(String nivelDificultad) {
+		this.nivelDificultad = nivelDificultad;
+	}
+	
+	public void actualizarDificultad(String nivelDificultad) {
+		this.setNivelDificultad(nivelDificultad);
+		this.actualizarVersion();
+		this.actualizarFechaUltimaModificacion();
+	}
+	
+	//Duracion ( se modifica automaticamente cuando se añaden o eliminan actividades)
 
-    public void setDuracionMinutos(int duracionMinutos) {
-        this.duracionMinutos = duracionMinutos;
-    }
+	public int getDuracionMinutos() {
+		return duracionMinutos;
+	}
 
-    public float getRating() {
-        return rating;
-    }
 
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
+	private void setDuracionMinutos(int duracionMinutos) {
+		this.duracionMinutos = duracionMinutos;
+	}
+	
+	//Rating
+	public float getRating() {
+		return rating;
+	}
 
-    public Date getFechaCreacion() {
-        return fechaCreacion;
-    }
 
-    public void setFechaCreacion(Date fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
+	private void setRating(float rating) {
+		this.rating = rating;
+	}
+	
+	public void actualizarRating(float nuevoRating) {
+		int numRatings = this.getContadorRatings();
+		float ratingActual = this.getRating();
+		
+		if (numRatings == 0) {
+			this.actualizarContadorRatings();
+			this.setRating(nuevoRating);
+		}
+		
+		else {
+			int numRatingsActualizado = numRatings+1;
+			float ratingActualizado = ratingActual*(numRatings/numRatingsActualizado)+ nuevoRating*(1/numRatingsActualizado);
+			this.actualizarContadorRatings();
+			this.setRating(ratingActualizado);
+		}
+		
+		
+	}
 
-    public Date getFechaUltimaModificacion() {
-        return fechaUltimaModificacion;
-    }
 
-    public void setFechaUltimaModificacion(Date fechaUltimaModificacion) {
-        this.fechaUltimaModificacion = fechaUltimaModificacion;
-    }
+	public Date getFechaUltimaModificacion() {
+		return fechaUltimaModificacion;
+	}
 
-    public String getVersion() {
-        return version;
-    }
 
-    public void setVersion(String version) {
-        this.version = version;
-    }
+	private void setFechaUltimaModificacion(Date fechaUltimaModificacion) {
+		this.fechaUltimaModificacion = fechaUltimaModificacion;
+	}
+	
+	private void actualizarFechaUltimaModificacion() {
+		Date fechaAhora = new Date();
+		this.setFechaUltimaModificacion(fechaAhora);
+	}
 
-    public ArrayList<Estudiante> getEstudiantesInscritos() {
-        return estudiantesInscritos;
-    }
+	// Version
+	public double getVersion() {
+		return version;
+	}
 
-    public ArrayList<Actividad> getActividades() {
-        return actividades;
-    }
-    
-    public Profesor getProfesorCreador() {
- 		return profesorCreador;
- 	}
+	private void setVersion(double version) {
+		this.version = version;
+	}
+	
+	private void actualizarVersion () {
+		double versionActual = this.getVersion();
+		this.setVersion(versionActual+0.1);
+	}
+	
+	//Profesor Creador
+	public Profesor getProfesorCreador() {
+		return profesorCreador;
+	}
+	
+	//Fecha Creacion
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+	
+	//Actividades
+	public List<Actividad> getActividades() {
+		return actividades;
+	}
 
- 	public void setProfesorCreador(Profesor profesorCreador) {
- 		this.profesorCreador = profesorCreador;
- 	}
-    
-    // Métodos Funcionales del Programa
-
- 
-
-	// Métodos para manejar estudiantes
-    public void inscribirEstudiante(Estudiante estudiante) {
-        if (!estudiantesInscritos.contains(estudiante)) {
-            estudiantesInscritos.add(estudiante);
-        }
-    }
-
-    public void eliminarEstudiante(Estudiante estudiante) {
-        estudiantesInscritos.remove(estudiante);
-    }
-    
-    // Métodos para manejar actividades
-    public void agregarActividad(Actividad actividad) {
+    public void agregarActividad(Actividad actividad, boolean obligatoriedad) throws ModificarActividadesLearningPathException {
         if (!actividades.contains(actividad)) {
             actividades.add(actividad);
+            mapaActividadesObligatorias.put(actividad.getIdActividad(), obligatoriedad);
+            
+            int nuevaDuracion = this.calcularDuracionTotal();
+            this.setDuracionMinutos(nuevaDuracion);
+            
+            this.actualizarFechaUltimaModificacion();
+            this.actualizarVersion();
+        }
+        else {
+        	throw new ModificarActividadesLearningPathException(actividad, "Agregar");
         }
     }
 
-    public void eliminarActividad(Actividad actividad) {
-        actividades.remove(actividad);
+    public void eliminarActividad(Actividad actividad) throws ModificarActividadesLearningPathException{
+    	if (actividades.contains(actividad)) {
+    		
+    		actividades.remove(actividad);
+    		mapaActividadesObligatorias.remove(actividad.getIdActividad());
+    		int nuevaDuracion = this.calcularDuracionTotal();
+    		this.setDuracionMinutos(nuevaDuracion);
+    		
+    		this.actualizarFechaUltimaModificacion();
+    		this.actualizarVersion();
+    		
+        
+    	}
+    	
+    	else {
+    		throw new  ModificarActividadesLearningPathException(actividad, "Eliminar");
+    	}
     }
+    
+    
+    //Mapa Obligatoriedad Actividades
+	public Map<String, Boolean> getMapaActividadesObligatorias() {
+		return mapaActividadesObligatorias;
+	}
+	
+	public void modificarObligatoriedadActividad(Actividad actividad) {
+		String llave = actividad.getIdActividad();
+		boolean valorAnterior = mapaActividadesObligatorias.get(llave);
+		
+		mapaActividadesObligatorias.replace(llave, !valorAnterior);
+	}
+	
+	//Contador Ratings
+	public int getContadorRatings() {
+		return contadorRatings;
+	}
+
+	private void setContadorRatings(int contadorRatings) {
+		this.contadorRatings = contadorRatings;
+	}
+	
+	private void actualizarContadorRatings() {
+		this.setContadorRatings(this.getContadorRatings()+1);
+	}
+	
+	//Estudiantes Inscritos
+		public Map<String, SeguimientoLearningPath> getEstudiantesInscritos() {
+			return estudiantesInscritos;
+		}
+
+		
+    public void inscribirEstudiante(Estudiante estudiante, SeguimientoLearningPath seguimiento) throws ModificarEstudianteLearningPathException {
+        if (!estudiantesInscritos.containsKey(estudiante.getLogin())) {
+            estudiantesInscritos.put(estudiante.getLogin(), seguimiento);
+        }
+        
+        else {
+        	throw new ModificarEstudianteLearningPathException (estudiante, "Agregar");
+        }
+    }
+
+	public void eliminarEstudiante(Estudiante estudiante) throws ModificarEstudianteLearningPathException {
+		if (estudiantesInscritos.containsKey(estudiante.getLogin())) {
+			estudiantesInscritos.remove(estudiante);
+        
+		}
+		
+		else {
+			throw new ModificarEstudianteLearningPathException (estudiante, "Eliminar");
+		}
+    }
+    
 
     // Calcular la duración total de todas las actividades en el Learning Path
     public int calcularDuracionTotal() {
@@ -176,5 +331,23 @@ public class LearningPath {
         }
         return duracionTotal;
     }
+    
+    public String getIdLearnginPath () {
+    	String titulo = this.getTitulo();
+    	String loginProfesor = this.getProfesorCreador().getLogin();
+    	
+    	String id = titulo + " - " + loginProfesor;
+    	
+    	return id;
+    }
+    
+    public int calcularDuracionTotalLista (List<Actividad> actividades) {
+        int duracionTotal = 0;
+        for (Actividad actividad : actividades) {
+            duracionTotal += actividad.getDuracionMinutos();
+        }
+        return duracionTotal;
+    }
+    
 }
 

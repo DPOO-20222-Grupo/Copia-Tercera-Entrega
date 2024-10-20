@@ -81,7 +81,7 @@ public class Profesor extends Usuario {
         examen.setResultado(resultado);
     }
 
-	public static String getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
