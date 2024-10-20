@@ -10,13 +10,16 @@ import Actividades.Examen;
 import Actividades.Quiz;
 import Actividades.RevisarRecurso;
 import Actividades.Tarea;
-import Execptions.UsuarioYaExistenteException;
 import LearningPath.LearningPath;
 import Preguntas.Pregunta;
 import Preguntas.PreguntaAbierta;
 import Preguntas.PreguntaSeleccionMultiple;
 import User.Estudiante;
 import User.Profesor;
+import User.Usuario;
+import exceptions.ActividadYaExistenteException;
+import exceptions.LearningPathYaExistenteException;
+import exceptions.UsuarioYaExistenteException;
 
 public class Aplicacion {
 
@@ -49,33 +52,20 @@ public class Aplicacion {
 	
 	//Registrar nuevas entradas a la aplicacion
 	
-	public void registrarUsuario(String login, String password, String nombre, boolean isEstudiante) throws UsuarioYaExistenteException {
-		if (isEstudiante == true) {
-			
-			if (mapaEstudiantes.containsKey(login)) {
-				throw new UsuarioYaExistenteException(login);
+	public void registrarUsuario(Usuario nuevoUsuario) {
+		if (nuevoUsuario.getTipo().equals("Estudiante")) { 
+				mapaEstudiantes.put(nuevoUsuario.getLogin(), (Estudiante) nuevoUsuario);
 			}
-			else {
-				Estudiante nuevoEstudiante = new Estudiante(login, password, nombre);
-				mapaEstudiantes.put(login, nuevoEstudiante);
-			}
-		}
 		
 		else {
-			if (mapaEstudiantes.containsKey(login)) {
-				throw new UsuarioYaExistenteException(login);
+				mapaProfesores.put(nuevoUsuario.getLogin(), (Profesor) nuevoUsuario);
 			}
-			else {
-				Profesor nuevoProfesor = new Profesor(login, password, nombre);
-				mapaProfesores.put(login, nuevoProfesor);
-			}
-		}
+
 	}
 	
 	public void registrarLearningPath (LearningPath pLearningPath) {
-		String titulo = pLearningPath.getTitulo();
-		String loginProfesor = pLearningPath.getProfesorCreador().getLogin();
-		String llave = titulo + " - " + loginProfesor;
+
+		String llave = pLearningPath.getIdLearnginPath();
 		
 		mapaLearningPaths.put(llave, pLearningPath);
 		
@@ -83,9 +73,7 @@ public class Aplicacion {
 	
 	public  void registrarActividad(Actividad actividad) {
 		
-		String titulo = actividad.getTitulo();
-		String loginProfesor = actividad.getProfesorCreador().getLogin();
-		String llave = titulo + " - "+ loginProfesor;
+		String llave = actividad.getIdActividad();
 		
 		String tipoActividad = actividad.getTipoActividad();
 		
@@ -118,9 +106,7 @@ public class Aplicacion {
 	
 	public void registrarPregunta (Pregunta pregunta) {
 		
-		String titulo = pregunta.getTitulo();
-		int id = pregunta.getId();
-		String llave =  Integer.toString(id)+" - " + titulo;
+		String llave =  pregunta.getIdPregunta();
 		
 		String tipo = pregunta.getTipo();
 		
@@ -136,13 +122,71 @@ public class Aplicacion {
 			
 		}
 		
+	
+	}
+	
+	public String generarLlaveLearningsActividades (String titulo, String login) {
+		
+		String llave = titulo + " - " + login;
+		
+		return llave;
+	}
+		
+	public void revisarActividadRepetida (String titulo, String login, String tipo) throws ActividadYaExistenteException {
+		
+		String llave = generarLlaveLearningsActividades (titulo, login);
+		
+		if (tipo == "Tarea") {
+			if (mapaTareas.containsKey(llave)) {
+				throw new ActividadYaExistenteException (titulo, tipo);
+			}
+		}
+		else if (tipo == "Quiz") {
+			
+			if (mapaQuices.containsKey(llave)) {
+				throw new ActividadYaExistenteException (titulo, tipo);
+			}
+			
+		}
+		else if (tipo == "Recurso") {
+			
+			if (mapaRevisarRecurso.containsKey(llave)){
+				throw new ActividadYaExistenteException (titulo, tipo);
+			}
+			
+		}
+		else if (tipo == "Examen") {
+			
+			if (mapaExamenes.containsKey(llave)) {
+				throw new ActividadYaExistenteException (titulo, tipo);
+			}
+			
+		}
+		
+		else {
+			if (mapaEncuestas.containsKey(llave)) {
+				throw new ActividadYaExistenteException (titulo, tipo);
+			}
+		}
 		
 		
+	}
+	
+	public void revisarLearningPathRepetido (String titulo, String login) throws LearningPathYaExistenteException {
 		
+		String llave = generarLlaveLearningsActividades(titulo, login);
+		
+		if (mapaLearningPaths.containsKey(llave)) {
+			throw new LearningPathYaExistenteException(titulo);
+		}
+		
+	}
+	
+	
+
 	}
 	
 
 	
 	
-}
 

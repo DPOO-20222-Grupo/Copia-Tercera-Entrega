@@ -27,5 +27,13 @@ public abstract class Pregunta {
 	public abstract String getTipo();
 	
 	public abstract int getId();
+	
+	public String getIdPregunta () {
+		String titulo = this.getTitulo();
+		int id = this.getId();
+		String llave =  Integer.toString(id)+" - " + titulo;
+		
+		return llave;
+	}
 }
 

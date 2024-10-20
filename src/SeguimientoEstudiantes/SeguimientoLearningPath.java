@@ -2,11 +2,12 @@ package SeguimientoEstudiantes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import Actividades.Actividad;
 import LearningPath.LearningPath;
 
-public class SeguimientoEstudiantes {
+public class SeguimientoLearningPath {
 	private HashMap<Actividad, Boolean> actividadesCompletadas;
 	private LearningPath learningPath;
     private float progreso;
@@ -15,12 +16,12 @@ public class SeguimientoEstudiantes {
     private float tasaFracaso;
 
     // Constructor
-    public SeguimientoEstudiantes(float progreso, float totalTiempo, float tasaExito, float tasaFracaso, LearningPath learningPath) {
+    public SeguimientoLearningPath(float progreso, float totalTiempo, float tasaExito, float tasaFracaso, LearningPath learningPath) {
         this.progreso = progreso;
         this.totalTiempo = totalTiempo;
         this.tasaExito = tasaExito;
         this.tasaFracaso = tasaFracaso;
-        ArrayList<Actividad> actividadesLearningPath = learningPath.getActividades();
+        List<Actividad> actividadesLearningPath = learningPath.getActividades();
         
         for(Actividad actividad: actividadesLearningPath) {
         	
