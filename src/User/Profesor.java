@@ -1,22 +1,30 @@
 package User;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import Actividades.Actividad;
 import Actividades.Examen;
 import Actividades.Tarea;
 import LearningPath.LearningPath;
 import Preguntas.PreguntaAbierta;
+import exceptions.ModificarActividadesLearningPathException;
 
 public class Profesor extends Usuario {
     private static String tipo = "Profesor";
 	private String nombre;
+	private Map <String, Actividad> actividadesPropias;
+	private Map<String, LearningPath> learningPathPropios;
+	
 	
     // Constructor
     public Profesor(String login, String password, String nombre) {
         super(login, password);
         this.nombre = nombre;
+        this.actividadesPropias = new HashMap<String, Actividad>();
+        this.learningPathPropios = new HashMap<String, LearningPath>();
     }
     
     // Getters y Setters
@@ -32,31 +40,10 @@ public class Profesor extends Usuario {
 
     // Métodos adicionales
 
-    public LearningPath crearLearningPath(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaCreacion, List<Estudiante> estudiantesInscritos, List<Actividad> actividades) {
-        return new LearningPath(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaCreacion, estudiantesInscritos, actividades);
-    }
-
-    public void editarLearningPath(LearningPath path, String nuevoTitulo, String nuevaDescripcion, String nuevosObjetivos, String nuevoNivelDificultad, int nuevaDuracionMinutos, Date nuevaFechaCreacion) {
-        path.setTitulo(nuevoTitulo);
-        path.setDescripcion(nuevaDescripcion);
-        path.setObjetivos(nuevosObjetivos);
-        path.setNivelDificultad(nuevoNivelDificultad);
-        path.setDuracionMinutos(nuevaDuracionMinutos);
-        path.setFechaCreacion(nuevaFechaCreacion);
+    public LearningPath crearLearningPath(String titulo, String descripcion, List<String> objetivos, 
+    		String nivelDificultad, List<Actividad> actividades, Map<String, Boolean> obligatoriedadActividades) {
+        return new LearningPath(titulo, descripcion, objetivos, nivelDificultad, this, actividades, obligatoriedadActividades);
         
-    }
-
-    public LearningPath copiarLearningPath(LearningPath path) {
-        return new LearningPath(
-            path.getTitulo(), 
-            path.getDescripcion(), 
-            path.getObjetivos(), 
-            path.getNivelDificultad(), 
-            path.getDuracionMinutos(), 
-            path.getFechaCreacion(), 
-            path.getEstudiantesInscritos(),
-            path.getActividades()
-        );
     }
     
     // Método para establecer la respuesta correcta de una pregunta
@@ -69,8 +56,8 @@ public class Profesor extends Usuario {
         pregunta.setEsRespuestaCorrecta(esCorrecta);
     }
 
-    public void agregarActividad(LearningPath path, Actividad actividad) {
-        path.agregarActividad(actividad);
+    public void agregarActividad(LearningPath path, Actividad actividad, boolean obligatoriedad) throws ModificarActividadesLearningPathException{
+        path.agregarActividad(actividad, obligatoriedad);
     }
 
     public void calificarTarea(Tarea tarea, String resultado) {
