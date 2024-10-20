@@ -13,7 +13,7 @@ import Preguntas.PreguntaAbierta;
 import exceptions.ModificarActividadesLearningPathException;
 
 public class Profesor extends Usuario {
-    private static String tipo = "Profesor";
+    private static String TIPO = "Profesor";
 	private String nombre;
 	private Map <String, Actividad> actividadesPropias;
 	private Map<String, LearningPath> learningPathPropios;
@@ -69,7 +69,7 @@ public class Profesor extends Usuario {
     }
     
 	public String getTipo() {
-		return tipo;
+		return TIPO;
 	}
 	
 }
