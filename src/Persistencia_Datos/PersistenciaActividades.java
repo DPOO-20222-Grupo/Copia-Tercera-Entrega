@@ -10,6 +10,7 @@ import Actividades.Examen;
 import Actividades.Quiz;
 import Actividades.RevisarRecurso;
 import Actividades.Tarea;
+import User.Profesor;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -29,58 +30,158 @@ public class PersistenciaActividades {
 			
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			JsonObject jsonObject = new JsonObject();
-			
-			String[] activs = {"Encuesta", "Quiz", "Examen", "RevisarRecurso", "Tarea"};
-			
-			List<String> acts = Arrays.asList(activs);
-			
-			for(String actividad: acts) {
 				
-			for(Entry<String, acts> entry: studentMap.entrySet()) {
+			for(Entry<String, Encuesta> entry: EncuestaMap.entrySet()) {
 				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
 			}
 			
-			for(Entry<String, Profesor> entry: profMap.entrySet()) {
+			for(Entry<String, Examen> entry: ExamenMap.entrySet()) {
 				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
 			}
+			
+			for(Entry<String, Quiz> entry: QuizMap.entrySet()) {
+				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+			}
+			
+			for(Entry<String, RevisarRecurso> entry: RevisarMap.entrySet()) {
+				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+			}
+			
+			for(Entry<String, Tarea> entry: TareaMap.entrySet()) {
+				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
 			}
 		
 			try (FileWriter writer = new FileWriter(archivo)){
 				gson.toJson(jsonObject, writer);
-				System.out.printf("Usuarios guardados correctamente en archivo JSON: '%s'.", archivo);
+				System.out.printf("Actividades guardadas correctamente en archivo JSON: '%s'.", archivo);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 		
-		public static void cargarActividades(String archivo) {
+		public static HashMap<String, Examen> cargarExamen(String archivo) {
 			Gson gson = new Gson();
 			
-			HashMap<String, Estudiante> studentMap = new HashMap<>();
-			HashMap<String, Profesor> profMap = new HashMap<>();			
+			HashMap<String, Examen> ExamenMap = new HashMap<>();			
 			
 			try(FileReader reader = new FileReader(archivo)){
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
 				
-				for (Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
+				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
 					JsonObject userObject = entry.getValue().getAsJsonObject();
-					String tipo = userObject.get("tipo").getAsString();
+					String tipo = userObject.get("TIPO").getAsString();
 					
-					if("Estudiante".equals(tipo)) {
-						Estudiante estudiante = gson.fromJson(userObject, Estudiante.class);
-						studentMap.put(entry.getKey(), estudiante);
-					} else if ("Profesor".equals(tipo)) {
-						Profesor profesor = gson.fromJson(userObject, Profesor.class);
-						profMap.put(entry.getKey(), profesor);
+					if("Examen".equals(tipo)) {
+						Examen examen = gson.fromJson(userObject, Examen.class);
+						ExamenMap.put(entry.getKey(), examen);
 					}
 				}
 				
 			} catch(IOException e){
 				e.printStackTrace();			
 			}
+			
+			return ExamenMap;
 		}
-
-	}
-
+		
+		public static HashMap<String, Encuesta> cargarEncuesta(String archivo) {
+			Gson gson = new Gson();
+			
+			HashMap<String, Encuesta> EncuestaMap = new HashMap<>();			
+			
+			try(FileReader reader = new FileReader(archivo)){
+				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+				
+				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
+					JsonObject userObject = entry.getValue().getAsJsonObject();
+					String tipo = userObject.get("TIPO").getAsString();
+					
+					if("Encuesta".equals(tipo)) {
+						Encuesta encuesta = gson.fromJson(userObject, Encuesta.class);
+						EncuestaMap.put(entry.getKey(), encuesta);
+					}
+				}
+				
+			} catch(IOException e){
+				e.printStackTrace();			
+			}
+			
+			return EncuestaMap;
+		}
+		
+		public static HashMap<String, Quiz> cargarQuiz(String archivo) {
+			Gson gson = new Gson();
+			
+			HashMap<String, Quiz> QuizMap = new HashMap<>();			
+			
+			try(FileReader reader = new FileReader(archivo)){
+				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+				
+				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
+					JsonObject userObject = entry.getValue().getAsJsonObject();
+					String tipo = userObject.get("TIPO").getAsString();
+					
+					if("Quiz".equals(tipo)) {
+						Quiz quiz = gson.fromJson(userObject, Quiz.class);
+						QuizMap.put(entry.getKey(), quiz);
+					}
+				}
+				
+			} catch(IOException e){
+				e.printStackTrace();			
+			}
+			
+			return QuizMap;
+		}
+		
+		public static HashMap<String, RevisarRecurso> cargarRecurso(String archivo) {
+			Gson gson = new Gson();
+			
+			HashMap<String, RevisarRecurso> RecursosMap = new HashMap<>();			
+			
+			try(FileReader reader = new FileReader(archivo)){
+				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+				
+				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
+					JsonObject userObject = entry.getValue().getAsJsonObject();
+					String tipo = userObject.get("TIPO").getAsString();
+					
+					if("Recurso".equals(tipo)) {
+						RevisarRecurso recurso = gson.fromJson(userObject, RevisarRecurso.class);
+						RecursosMap.put(entry.getKey(), recurso);
+					}
+				}
+				
+			} catch(IOException e){
+				e.printStackTrace();			
+			}
+			
+			return RecursosMap;
+		}
+		
+		public static HashMap<String, Tarea> cargarTarea(String archivo) {
+			Gson gson = new Gson();
+			
+			HashMap<String, Tarea> TareaMap = new HashMap<>();			
+			
+			try(FileReader reader = new FileReader(archivo)){
+				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+				
+				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
+					JsonObject userObject = entry.getValue().getAsJsonObject();
+					String tipo = userObject.get("TIPO").getAsString();
+					
+					if("Tarea".equals(tipo)) {
+						Tarea tarea = gson.fromJson(userObject, Tarea.class);
+						TareaMap.put(entry.getKey(), tarea);
+					}
+				}
+				
+			} catch(IOException e){
+				e.printStackTrace();			
+			}
+			
+			return TareaMap;
+		}
 	
 }
