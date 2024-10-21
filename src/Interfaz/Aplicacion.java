@@ -2,7 +2,6 @@
 package Interfaz;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import Actividades.Actividad;
 import Actividades.Encuesta;
