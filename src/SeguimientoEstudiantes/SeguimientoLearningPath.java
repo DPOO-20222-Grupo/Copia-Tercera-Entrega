@@ -22,10 +22,11 @@ public class SeguimientoLearningPath {
         this.tasaExito = tasaExito;
         this.tasaFracaso = tasaFracaso;
         List<Actividad> actividadesLearningPath = learningPath.getActividades();
+        HashMap<Actividad, Boolean> actividadesCompletadas = new HashMap<>();
         
         for(Actividad actividad: actividadesLearningPath) {
         	
-        	actividadesCompletadas.put(actividad, false);
+			actividadesCompletadas.put(actividad, false);
         	
         }
         
