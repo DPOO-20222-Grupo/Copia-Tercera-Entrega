@@ -7,10 +7,12 @@ import User.Estudiante;
 public class SeguimientoTarea extends SeguimientoActividad {
 	
 	private String metodoEnvio;
+	private String resultado;
 	
 	public SeguimientoTarea(Tarea tarea, Estudiante estudiante) {
 		super(tarea, estudiante);
 		this.metodoEnvio = "";
+		this.resultado = "";
 	}
 
 	public String getMetodoEnvio() {
@@ -20,6 +22,9 @@ public class SeguimientoTarea extends SeguimientoActividad {
 	public void setMetodoEnvio(String metodoEnvio) {
 		this.metodoEnvio = metodoEnvio;
 	}
+	
+	
+	
 	
 	public void actualizarEstadoEnviado() {
 		this.setEstado("Enviado");

@@ -8,7 +8,7 @@ import Actividades.Actividad;
 import LearningPath.LearningPath;
 
 public class SeguimientoLearningPath {
-	private HashMap<Actividad, Boolean> actividadesCompletadas;
+	private HashMap<Actividad, SeguimientoActividad> mapaSeguimientoActividades;
 	private LearningPath learningPath;
     private float progreso;
     private float totalTiempo;

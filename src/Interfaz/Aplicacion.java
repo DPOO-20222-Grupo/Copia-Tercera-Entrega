@@ -183,10 +183,11 @@ public class Aplicacion {
 	}
 	
 	
-
-	}
+	// Requerimientos funcionales
 	
 
+	
+}
 	
 	
 
