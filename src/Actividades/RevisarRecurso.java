@@ -1,17 +1,21 @@
 package Actividades;
 
 import java.util.Date;
+import java.util.List;
 
 import User.Profesor;
 
 public class RevisarRecurso extends Actividad {
 	private static String TIPO = "Recurso";
     private String tipoRecurso;
+    private String enlaceRecurso;
 
     // Constructor
-    public RevisarRecurso(String titulo, String descripcion, String objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, boolean esObligatoria, String tipoRecurso, Profesor profesorCreador) {
-        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador, esObligatoria);
+    public RevisarRecurso(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos, 
+    						Date fechaLimite, String tipoRecurso, Profesor profesorCreador, String enlaceRecurso) {
+        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
         this.tipoRecurso = tipoRecurso;
+        this.enlaceRecurso = enlaceRecurso;
     }
 
     public String getTipoRecurso() {
@@ -25,4 +29,14 @@ public class RevisarRecurso extends Actividad {
     public String getTipoActividad() {
     	return TIPO;
     }
+
+	public String getEnlaceRecurso() {
+		return enlaceRecurso;
+	}
+
+	public void setEnlaceRecurso(String enlaceRecurso) {
+		this.enlaceRecurso = enlaceRecurso;
+	}
+    
+    
 }
