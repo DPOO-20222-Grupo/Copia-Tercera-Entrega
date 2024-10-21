@@ -6,25 +6,43 @@ import java.util.List;
 import java.util.Map;
 
 import Actividades.Actividad;
+import Actividades.Encuesta;
 import Actividades.Examen;
+import Actividades.Quiz;
+import Actividades.RevisarRecurso;
 import Actividades.Tarea;
 import LearningPath.LearningPath;
 import Preguntas.PreguntaAbierta;
+import Preguntas.PreguntaSeleccionMultiple;
 import exceptions.ModificarActividadesLearningPathException;
 
 public class Profesor extends Usuario {
     private static String tipo = "Profesor";
 	private String nombre;
-	private Map <String, Actividad> actividadesPropias;
-	private Map<String, LearningPath> learningPathPropios;
+	private Map <String, RevisarRecurso> mapaRecursosPropios;
+	private Map <String, Tarea> mapaTareasPropias;
+	private Map <String, Examen> mapaExamenesPropios;
+	private Map <String, Encuesta> mapaEncuestasPropias;
+	private Map <String, Quiz> mapaQuicesPropios;
+	private Map <String, LearningPath> learningPathPropios;
+	private Map <String, PreguntaAbierta> preguntasAbiertasPropias;
+	private Map <String, PreguntaSeleccionMultiple> preguntasSeleccionPropias;
 	
 	
     // Constructor
     public Profesor(String login, String password, String nombre) {
         super(login, password);
         this.nombre = nombre;
-        this.actividadesPropias = new HashMap<String, Actividad>();
+        this.mapaEncuestasPropias = new HashMap<String, Encuesta>();
+        this.mapaTareasPropias = new HashMap<String, Tarea>();
+        this.mapaExamenesPropios = new HashMap<String, Examen>();
+        this.mapaQuicesPropios = new HashMap<String, Quiz>();
+        this.mapaRecursosPropios = new HashMap<String, RevisarRecurso>();
         this.learningPathPropios = new HashMap<String, LearningPath>();
+        this.preguntasSeleccionPropias = new HashMap <String, PreguntaSeleccionMultiple>();
+        this.preguntasAbiertasPropias = new HashMap < String, PreguntaAbierta>();
+        
+        
     }
     
     // Getters y Setters
@@ -40,36 +58,87 @@ public class Profesor extends Usuario {
 
     // Métodos adicionales
 
-    public LearningPath crearLearningPath(String titulo, String descripcion, List<String> objetivos, 
-    		String nivelDificultad, List<Actividad> actividades, Map<String, Boolean> obligatoriedadActividades) {
-        return new LearningPath(titulo, descripcion, objetivos, nivelDificultad, this, actividades, obligatoriedadActividades);
-        
+    public void registrarLearningPath (LearningPath learningPath) {
+    	
+    	String llave = learningPath.getIdLearnginPath();
+    	this.getLearningPathPropios().put(llave, learningPath);
+    	
     }
     
-    // Método para establecer la respuesta correcta de una pregunta
-    public void establecerRespuestaCorrecta(PreguntaAbierta pregunta, String respuesta) {
-        pregunta.setRespuestaCorrecta(respuesta);
+    public void registrarActividad(Actividad actividad) {
+    	String llave = actividad.getIdActividad();
+		
+		String tipoActividad = actividad.getTipoActividad();
+		
+		if (tipoActividad.equals("Encuesta")) {
+			mapaEncuestasPropias.put(llave, (Encuesta) actividad);
+			
+		}
+		
+		else if (tipoActividad.equals("Tarea")) {
+			mapaTareasPropias.put(llave, (Tarea) actividad);
+			
+		}
+		
+		else if (tipoActividad.equals("Quiz")) {
+			mapaQuicesPropios.put(llave, (Quiz) actividad);
+			
+		}
+		
+		else if (tipoActividad.equals("Examen")) {
+			mapaExamenesPropios.put(llave, (Examen) actividad);
+			
+		}
+		
+		else if (tipoActividad.equals("Recurso")) {
+			mapaRecursosPropios.put(llave, (RevisarRecurso) actividad);
+			
+		}
+    	
+    	
     }
+    
+    
 
-    // Método para evaluar la respuesta de un estudiante
-    public void evaluarRespuesta(PreguntaAbierta pregunta, boolean esCorrecta) {
-        pregunta.setEsRespuestaCorrecta(esCorrecta);
-    }
-
-    public void agregarActividad(LearningPath path, Actividad actividad, boolean obligatoriedad) throws ModificarActividadesLearningPathException{
-        path.agregarActividad(actividad, obligatoriedad);
-    }
-
-    public void calificarTarea(Tarea tarea, String resultado) {
-        tarea.setResultado(resultado);
-    }
-
-    public void calificarExamen(Examen examen, String resultado) {
-        examen.setResultado(resultado);
-    }
 
 	public String getTipo() {
 		return tipo;
 	}
+	
+	
+
+	public Map<String, RevisarRecurso> getMapaRecursosPropios() {
+		return mapaRecursosPropios;
+	}
+
+	public Map<String, Tarea> getMapaTareasPropias() {
+		return mapaTareasPropias;
+	}
+
+	public Map<String, Examen> getMapaExamenesPropios() {
+		return mapaExamenesPropios;
+	}
+
+	public Map<String, Encuesta> getMapaEncuestasPropias() {
+		return mapaEncuestasPropias;
+	}
+
+	public Map<String, Quiz> getMapaQuicesPropios() {
+		return mapaQuicesPropios;
+	}
+
+	public Map<String, LearningPath> getLearningPathPropios() {
+		return learningPathPropios;
+	}
+
+	public Map<String, PreguntaAbierta> getPreguntasAbiertasPropias() {
+		return preguntasAbiertasPropias;
+	}
+
+	public Map<String, PreguntaSeleccionMultiple> getPreguntasSeleccionPropias() {
+		return preguntasSeleccionPropias;
+	}
+	
+	
 
 }

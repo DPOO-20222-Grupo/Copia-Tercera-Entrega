@@ -22,7 +22,7 @@ public abstract class SeguimientoActividad {
 	}
 	
 	
-	public void setEstado(String estado) {
+	protected void setEstado(String estado) {
 		this.estado = estado;
 	}
 
@@ -36,5 +36,6 @@ public abstract class SeguimientoActividad {
 		return estudianteSeguimiento;
 	}
 
-	}
+
+}
 	

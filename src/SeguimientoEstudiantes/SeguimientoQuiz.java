@@ -12,26 +12,31 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 	
 	private float nota;
 	private Map<PreguntaSeleccionMultiple, Integer> respuestas;
+	private int numPreguntas;
 	
 	
-	public SeguimientoQuiz (Actividad actividad, Estudiante estudiante) {
-		 super(actividad, estudiante);
+	public SeguimientoQuiz (Quiz quiz, Estudiante estudiante) {
+		 super(quiz, estudiante);
 		 this.nota = -1;
 		 this.respuestas = new HashMap<PreguntaSeleccionMultiple, Integer>();
+		 this.numPreguntas = quiz.getNumPreguntas();
 		 
-		 Quiz quiz = (Quiz) actividad;
-		 
-		 
-	
-		
+		 for (PreguntaSeleccionMultiple pregunta: quiz.getPreguntas()) {
+			 
+			 respuestas.put(pregunta, -1);
+			 
+		 }
 	}
-	
 	
 	
 	public float getNota() {
 		return nota;
 	}
 
+
+	public int getNumPreguntas() {
+		return numPreguntas;
+	}
 
 
 	private void setNota(float nota) {
@@ -45,13 +50,40 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 
 
 	public void agregarRespuestaPregunta (PreguntaSeleccionMultiple pregunta, int opcionEscogida) {
-		this.respuestas.put(pregunta, opcionEscogida);
+		this.respuestas.replace(pregunta, opcionEscogida);
 	}
 	
-	public void calcularNota () {
+	public float calcularNota () {
+		
+		Map<PreguntaSeleccionMultiple, Integer> respuestas = this.getRespuestas();
+		int numPreguntas = this.getNumPreguntas();
+		
+		float nota = 0;
+		
+		for (Map.Entry<PreguntaSeleccionMultiple, Integer> entry : respuestas.entrySet()) {
+			PreguntaSeleccionMultiple pregunta = entry.getKey();
+			int opcionEscogida = entry.getValue();
+			
+			if (pregunta.verificarRespuesta(opcionEscogida)== true) {
+				nota+=(1/numPreguntas);
+			}
+		
+			
+		}
+		
+		return nota;
 		
 		
 		
+	}
+	
+	public void actualizarNota() {
+		float nota = this.calcularNota();
+		this.setNota(nota);
+	}
+	
+	public void actualizarEstado() {
+		this.setEstado("Completado");
 	}
 
 

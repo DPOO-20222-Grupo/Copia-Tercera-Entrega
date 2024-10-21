@@ -18,7 +18,6 @@ public class PreguntaSeleccionMultiple extends Pregunta {
         this.opcion3 = opcion3;
         this.opcion4 = opcion4;
         this.opcionCorrecta = opcionCorrecta;
-        this.opcionEscogida = -1; // Inicialmente ninguna opción está escogida
         this.id = CONTADOR;
         CONTADOR+=1;
     }
@@ -63,18 +62,11 @@ public class PreguntaSeleccionMultiple extends Pregunta {
         this.opcionCorrecta = opcionCorrecta;
     }
 
-    public int getOpcionEscogida() {
-        return opcionEscogida;
-    }
-
-    public void setOpcionEscogida(int opcionEscogida) {
-        this.opcionEscogida = opcionEscogida;
-    }
     
     //Metodos adicionales 
     
-    public boolean verificarRespuesta() {
-        return this.opcionEscogida == this.opcionCorrecta;
+    public boolean verificarRespuesta(int opcionEscogida) {
+        return opcionEscogida == this.opcionCorrecta;
     }
     
     public String getTipo() {
@@ -85,7 +77,5 @@ public class PreguntaSeleccionMultiple extends Pregunta {
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
+
 }
