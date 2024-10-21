@@ -51,8 +51,6 @@ public class Aplicacion {
 	
 	}
 	
-	
-	
 	public Aplicacion (String archivoUsuarios, String archivoLP, String archivoPreguntas, String archivoActividades) {
 		this.mapaEstudiantes = PersistenciaUsuarios.cargarEstudiantes(archivoUsuarios);
 		this.mapaProfesores = PersistenciaUsuarios.cargarProfesor(archivoUsuarios);
@@ -65,7 +63,48 @@ public class Aplicacion {
 		this.mapaPreguntasAbiertas = PersistenciaPreguntas.cargarAbiertas(archivoPreguntas);
 		this.mapaPreguntasSeleccionMultiple = PersistenciaPreguntas.cargarCerradas(archivoPreguntas);
 	}
+
+	// Getters
 	
+	public HashMap<String, Estudiante> getMapaEstudiantes() {
+		return mapaEstudiantes;
+	}
+
+	public HashMap<String, Profesor> getMapaProfesores() {
+		return mapaProfesores;
+	}
+
+	public HashMap<String, LearningPath> getMapaLearningPaths() {
+		return mapaLearningPaths;
+	}
+
+	public HashMap<String, Tarea> getMapaTareas() {
+		return mapaTareas;
+	}
+
+	public HashMap<String, RevisarRecurso> getMapaRevisarRecurso() {
+		return mapaRevisarRecurso;
+	}
+	
+	public HashMap<String, Encuesta> getMapaEncuestas() {
+		return mapaEncuestas;
+	}
+	
+	public HashMap<String, Examen> getMapaExamenes() {
+		return mapaExamenes;
+	}
+
+	public HashMap<String, Quiz> getMapaQuices() {
+		return mapaQuices;
+	}
+
+	public HashMap<String, PreguntaAbierta> getMapaPreguntasAbiertas() {
+		return mapaPreguntasAbiertas;
+	}
+
+	public HashMap<String, PreguntaSeleccionMultiple> getMapaPreguntasSeleccionMultiple() {
+		return mapaPreguntasSeleccionMultiple;
+	}	
 	
 	//Registrar nuevas entradas a la aplicacion
 	
