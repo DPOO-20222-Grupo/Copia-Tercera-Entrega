@@ -11,6 +11,10 @@ import Actividades.Quiz;
 import Actividades.RevisarRecurso;
 import Actividades.Tarea;
 import LearningPath.LearningPath;
+import Persistencia_Datos.PersistenciaActividades;
+import Persistencia_Datos.PersistenciaLearningPaths;
+import Persistencia_Datos.PersistenciaPreguntas;
+import Persistencia_Datos.PersistenciaUsuarios;
 import Preguntas.Pregunta;
 import Preguntas.PreguntaAbierta;
 import Preguntas.PreguntaSeleccionMultiple;
@@ -182,7 +186,17 @@ public class Aplicacion {
 		
 	}
 	
-	
+	public void descargarDatos (HashMap<String, Examen> mapaExamenes, 
+			HashMap<String, Encuesta> mapaEncuestas, HashMap<String, Quiz> mapaQuices,
+			HashMap<String, RevisarRecurso> mapaRevisarRecurso, HashMap<String, Tarea> mapaTareas,
+			HashMap<String, Estudiante> mapaEstudiantes, HashMap<String, Profesor> profMap,
+			HashMap<String, PreguntaAbierta> abiertaMap, HashMap<String, PreguntaSeleccionMultiple> cerradaMap,
+			HashMap<String, LearningPath> mapaLearningPaths) {
+		PersistenciaActividades.persistirActividades(mapaExamenes, mapaEncuestas, mapaQuices, mapaRevisarRecurso, mapaTareas, "actividades.json");
+		PersistenciaUsuarios.persistirUsuarios(mapaEstudiantes, profMap, "usuarios.json");
+		PersistenciaPreguntas.persistirPreguntas(abiertaMap, cerradaMap, "preguntas.json");
+		PersistenciaLearningPaths.persistirLearningPaths(mapaLearningPaths, "lp.json");
+	}
 
 	}
 	
