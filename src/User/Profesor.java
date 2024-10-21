@@ -100,34 +100,6 @@ public class Profesor extends Usuario {
     
     
 
-<<<<<<< HEAD
-
-=======
-    // Método para evaluar la respuesta de un estudiante
-    public void evaluarRespuesta(PreguntaAbierta pregunta, boolean esCorrecta) {
-        pregunta.setEsRespuestaCorrecta(esCorrecta);
-    }
-
-    public void agregarActividad(LearningPath path, Actividad actividad, boolean obligatoriedad) throws ModificarActividadesLearningPathException{
-        path.agregarActividad(actividad, obligatoriedad);
-    }
-
-    public void calificarTarea(Tarea tarea, String resultado) {
-        tarea.setResultado(resultado);
-    }
-
-    public void calificarExamen(Examen examen, String resultado) {
-        examen.setResultado(resultado);
-    }
-    
->>>>>>> refs/remotes/origin/main
-	public String getTipo() {
-		return TIPO;
-	}
-	
-<<<<<<< HEAD
-	
-
 	public Map<String, RevisarRecurso> getMapaRecursosPropios() {
 		return mapaRecursosPropios;
 	}
@@ -159,9 +131,5 @@ public class Profesor extends Usuario {
 	public Map<String, PreguntaSeleccionMultiple> getPreguntasSeleccionPropias() {
 		return preguntasSeleccionPropias;
 	}
-	
-	
 
-=======
->>>>>>> refs/remotes/origin/main
 }
