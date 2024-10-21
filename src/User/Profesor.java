@@ -17,7 +17,7 @@ import Preguntas.PreguntaSeleccionMultiple;
 import exceptions.ModificarActividadesLearningPathException;
 
 public class Profesor extends Usuario {
-    private static String tipo = "Profesor";
+    private static String TIPO = "Profesor";
 	private String nombre;
 	private Map <String, RevisarRecurso> mapaRecursosPropios;
 	private Map <String, Tarea> mapaTareasPropias;
@@ -100,11 +100,32 @@ public class Profesor extends Usuario {
     
     
 
+<<<<<<< HEAD
 
+=======
+    // Método para evaluar la respuesta de un estudiante
+    public void evaluarRespuesta(PreguntaAbierta pregunta, boolean esCorrecta) {
+        pregunta.setEsRespuestaCorrecta(esCorrecta);
+    }
+
+    public void agregarActividad(LearningPath path, Actividad actividad, boolean obligatoriedad) throws ModificarActividadesLearningPathException{
+        path.agregarActividad(actividad, obligatoriedad);
+    }
+
+    public void calificarTarea(Tarea tarea, String resultado) {
+        tarea.setResultado(resultado);
+    }
+
+    public void calificarExamen(Examen examen, String resultado) {
+        examen.setResultado(resultado);
+    }
+    
+>>>>>>> refs/remotes/origin/main
 	public String getTipo() {
-		return tipo;
+		return TIPO;
 	}
 	
+<<<<<<< HEAD
 	
 
 	public Map<String, RevisarRecurso> getMapaRecursosPropios() {
@@ -141,4 +162,6 @@ public class Profesor extends Usuario {
 	
 	
 
+=======
+>>>>>>> refs/remotes/origin/main
 }

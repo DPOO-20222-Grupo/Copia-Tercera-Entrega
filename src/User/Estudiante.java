@@ -4,7 +4,7 @@ import Actividades.Actividad;
 import LearningPath.LearningPath;
 
 public class Estudiante extends Usuario {
-    private static String tipo = "Estudiante";
+    private static String TIPO = "Estudiante";
 	private String nombre;
 
     // Constructor
@@ -38,6 +38,6 @@ public class Estudiante extends Usuario {
     }
 
 	public static String getTipo() {
-		return tipo;
+		return TIPO;
 	}
 }

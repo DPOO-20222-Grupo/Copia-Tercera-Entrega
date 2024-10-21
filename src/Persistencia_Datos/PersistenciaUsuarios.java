@@ -36,23 +36,44 @@ public class PersistenciaUsuarios {
 		}
 	}
 	
-	public static void cargarUsuarios(String archivo) {
+	public static HashMap<String, Estudiante> cargarEstudiantes(String archivo) {
 		Gson gson = new Gson();
 		
-		HashMap<String, Estudiante> studentMap = new HashMap<>();
-		HashMap<String, Profesor> profMap = new HashMap<>();			
+		HashMap<String, Estudiante> studentMap = new HashMap<>();	
 		
 		try(FileReader reader = new FileReader(archivo)){
 			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
 			
 			for (Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
 				JsonObject userObject = entry.getValue().getAsJsonObject();
-				String tipo = userObject.get("tipo").getAsString();
+				String tipo = userObject.get("TIPO").getAsString();
 				
 				if("Estudiante".equals(tipo)) {
 					Estudiante estudiante = gson.fromJson(userObject, Estudiante.class);
 					studentMap.put(entry.getKey(), estudiante);
-				} else if ("Profesor".equals(tipo)) {
+				} 
+			}
+			
+		} catch(IOException e){
+			e.printStackTrace();			
+		}
+		
+		return studentMap;
+	}
+	
+	public static HashMap<String, Profesor> cargarProfesor(String archivo) {
+		Gson gson = new Gson();
+		
+		HashMap<String, Profesor> profMap = new HashMap<>();			
+		
+		try(FileReader reader = new FileReader(archivo)){
+			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+			
+			for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
+				JsonObject userObject = entry.getValue().getAsJsonObject();
+				String tipo = userObject.get("TIPO").getAsString();
+				
+				if("Profesor".equals(tipo)) {
 					Profesor profesor = gson.fromJson(userObject, Profesor.class);
 					profMap.put(entry.getKey(), profesor);
 				}
@@ -61,6 +82,8 @@ public class PersistenciaUsuarios {
 		} catch(IOException e){
 			e.printStackTrace();			
 		}
+		
+		return profMap;
 	}
 
 }
