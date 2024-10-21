@@ -46,11 +46,11 @@ public class PersistenciaPreguntas {
 			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
 			
 			for (Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-				JsonObject userObject = entry.getValue().getAsJsonObject();
-				String tipo = userObject.get("TIPO").getAsString();
+				JsonObject pregObject = entry.getValue().getAsJsonObject();
+				String tipo = pregObject.get("TIPO").getAsString();
 				
 				if("Abierta".equals(tipo)) {
-					PreguntaAbierta pregunta = gson.fromJson(userObject, PreguntaAbierta.class);
+					PreguntaAbierta pregunta = gson.fromJson(pregObject, PreguntaAbierta.class);
 					abiertaMap.put(entry.getKey(), pregunta);
 				} 
 			}
@@ -71,11 +71,11 @@ public class PersistenciaPreguntas {
 			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
 			
 			for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-				JsonObject userObject = entry.getValue().getAsJsonObject();
-				String tipo = userObject.get("TIPO").getAsString();
+				JsonObject pregObject = entry.getValue().getAsJsonObject();
+				String tipo = pregObject.get("TIPO").getAsString();
 				
 				if("Cerrada".equals(tipo)) {
-					PreguntaSeleccionMultiple pregunta = gson.fromJson(userObject, PreguntaSeleccionMultiple.class);
+					PreguntaSeleccionMultiple pregunta = gson.fromJson(pregObject, PreguntaSeleccionMultiple.class);
 					cerradaMap.put(entry.getKey(), pregunta);
 				}
 			}

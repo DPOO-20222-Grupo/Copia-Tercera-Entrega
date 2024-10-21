@@ -64,11 +64,11 @@ public class PersistenciaActividades {
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
 				
 				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject userObject = entry.getValue().getAsJsonObject();
-					String tipo = userObject.get("TIPO").getAsString();
+					JsonObject actObject = entry.getValue().getAsJsonObject();
+					String tipo = actObject.get("TIPO").getAsString();
 					
 					if("Examen".equals(tipo)) {
-						Examen examen = gson.fromJson(userObject, Examen.class);
+						Examen examen = gson.fromJson(actObject, Examen.class);
 						ExamenMap.put(entry.getKey(), examen);
 					}
 				}
@@ -89,11 +89,11 @@ public class PersistenciaActividades {
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
 				
 				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject userObject = entry.getValue().getAsJsonObject();
-					String tipo = userObject.get("TIPO").getAsString();
+					JsonObject actObject = entry.getValue().getAsJsonObject();
+					String tipo = actObject.get("TIPO").getAsString();
 					
 					if("Encuesta".equals(tipo)) {
-						Encuesta encuesta = gson.fromJson(userObject, Encuesta.class);
+						Encuesta encuesta = gson.fromJson(actObject, Encuesta.class);
 						EncuestaMap.put(entry.getKey(), encuesta);
 					}
 				}
@@ -114,11 +114,11 @@ public class PersistenciaActividades {
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
 				
 				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject userObject = entry.getValue().getAsJsonObject();
-					String tipo = userObject.get("TIPO").getAsString();
+					JsonObject actObject = entry.getValue().getAsJsonObject();
+					String tipo = actObject.get("TIPO").getAsString();
 					
 					if("Quiz".equals(tipo)) {
-						Quiz quiz = gson.fromJson(userObject, Quiz.class);
+						Quiz quiz = gson.fromJson(actObject, Quiz.class);
 						QuizMap.put(entry.getKey(), quiz);
 					}
 				}
@@ -139,11 +139,11 @@ public class PersistenciaActividades {
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
 				
 				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject userObject = entry.getValue().getAsJsonObject();
-					String tipo = userObject.get("TIPO").getAsString();
+					JsonObject actObject = entry.getValue().getAsJsonObject();
+					String tipo = actObject.get("TIPO").getAsString();
 					
 					if("Recurso".equals(tipo)) {
-						RevisarRecurso recurso = gson.fromJson(userObject, RevisarRecurso.class);
+						RevisarRecurso recurso = gson.fromJson(actObject, RevisarRecurso.class);
 						RecursosMap.put(entry.getKey(), recurso);
 					}
 				}
@@ -164,11 +164,11 @@ public class PersistenciaActividades {
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
 				
 				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject userObject = entry.getValue().getAsJsonObject();
-					String tipo = userObject.get("TIPO").getAsString();
+					JsonObject actObject = entry.getValue().getAsJsonObject();
+					String tipo = actObject.get("TIPO").getAsString();
 					
 					if("Tarea".equals(tipo)) {
-						Tarea tarea = gson.fromJson(userObject, Tarea.class);
+						Tarea tarea = gson.fromJson(actObject, Tarea.class);
 						TareaMap.put(entry.getKey(), tarea);
 					}
 				}
