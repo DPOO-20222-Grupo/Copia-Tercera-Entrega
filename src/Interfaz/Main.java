@@ -1,5 +1,9 @@
 package Interfaz;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import Actividades.Encuesta;
 import LearningPath.LearningPath;
 import User.Estudiante;
 import User.Profesor;
@@ -22,6 +26,17 @@ public class Main {
 		
 		aplicacion.registrarUsuario(prof1);
 		aplicacion.registrarUsuario(stud1);
+		
+		// Pruebas de Registro de Preguntas
+		
+		
+		List<String> objetivos = new ArrayList<String>();
+		objetivos.add("Objetivo 1");
+		objetivos.add("Objetivo 2");
+		
+		Encuesta q = new Encuesta("Autoevaluación", "Autoevaluación acitividad #1", objetivos,
+				"Bajo", 15, );
+		
 		
 		// Pruebas de Registro de LearningPaths
 		
