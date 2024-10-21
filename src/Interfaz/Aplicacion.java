@@ -38,7 +38,6 @@ public class Aplicacion {
 	private HashMap<String, PreguntaAbierta> mapaPreguntasAbiertas;
 	private HashMap<String, PreguntaSeleccionMultiple> mapaPreguntasSeleccionMultiple;
 	
-	
 	public Aplicacion () {
 		this.mapaEstudiantes = new HashMap<String, Estudiante>();
 		this.mapaProfesores = new HashMap<String,Profesor >();
@@ -51,6 +50,21 @@ public class Aplicacion {
 		this.mapaPreguntasAbiertas = new HashMap <String, PreguntaAbierta>();
 		this.mapaPreguntasSeleccionMultiple = new HashMap<String, PreguntaSeleccionMultiple>();
 	
+	}
+	
+	
+	
+	public Aplicacion (String archivoUsuarios, String archivoLP, String archivoPreguntas, String archivoActividades) {
+		this.mapaEstudiantes = PersistenciaUsuarios.cargarEstudiantes(archivoUsuarios);
+		this.mapaProfesores = PersistenciaUsuarios.cargarProfesor(archivoUsuarios);
+		this.mapaLearningPaths = PersistenciaLearningPaths.cargarLP(archivoLP);
+		this.mapaTareas = PersistenciaActividades.cargarTarea(archivoActividades);
+		this.mapaRevisarRecurso = PersistenciaActividades.cargarRecurso(archivoActividades);
+		this.mapaEncuestas = PersistenciaActividades.cargarEncuesta(archivoActividades);
+		this.mapaExamenes = PersistenciaActividades.cargarExamen(archivoActividades);
+		this.mapaQuices = PersistenciaActividades.cargarQuiz(archivoActividades);
+		this.mapaPreguntasAbiertas = PersistenciaPreguntas.cargarAbiertas(archivoPreguntas);
+		this.mapaPreguntasSeleccionMultiple = PersistenciaPreguntas.cargarCerradas(archivoPreguntas);
 	}
 	
 	
