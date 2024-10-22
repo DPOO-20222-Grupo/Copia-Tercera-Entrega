@@ -26,7 +26,7 @@ public abstract class Pregunta {
 
 	public abstract String getTipo();
 	
-	public abstract int getId();
+	protected abstract int getId();
 	
 	public String getIdPregunta () {
 		String titulo = this.getTitulo();

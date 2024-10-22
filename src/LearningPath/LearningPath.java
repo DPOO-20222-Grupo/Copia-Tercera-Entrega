@@ -13,7 +13,10 @@ import User.Profesor;
 import exceptions.ModificarActividadesLearningPathException;
 import exceptions.ModificarEstudianteLearningPathException;
 import exceptions.ModificarObjetivosException;
+<<<<<<< HEAD
+=======
 
+>>>>>>> refs/remotes/origin/main
 
 public class LearningPath {
     private String titulo;
@@ -33,8 +36,8 @@ public class LearningPath {
 
     // Constructor
     
-    public LearningPath(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, Profesor profesorCreador,
-    					List <Actividad> listaActividades, Map<String, Boolean> mapaObligatoriedad) 
+    public LearningPath(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, 
+    					Profesor profesorCreador,List <Actividad> listaActividades, Map<String, Boolean> mapaObligatoriedad) 
     {
     	this.titulo = titulo;
     	this.descripcion = descripcion;
@@ -86,7 +89,7 @@ public class LearningPath {
 		this.descripcion = descripcion;
 	}
 	
-	private void modificarDescripcion (String descripcion) {
+	public void modificarDescripcion (String descripcion) {
 		this.setDescripcion(descripcion);
 		this.actualizarVersion();
 		this.actualizarFechaUltimaModificacion();
