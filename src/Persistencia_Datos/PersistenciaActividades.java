@@ -18,15 +18,22 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class PersistenciaActividades {
+	
+		// Función de Descarga
 		
 		public static void persistirActividades(HashMap<String, Examen> ExamenMap, 
 				HashMap<String, Encuesta> EncuestaMap,HashMap<String, Quiz> QuizMap,
 				HashMap<String, RevisarRecurso> RevisarMap,HashMap<String, Tarea> TareaMap,
 				String archivo) {
 			
+			// Creación del Objeto Json y del Serializador
+			
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			JsonObject jsonObject = new JsonObject();
 				
+			// Recprrridpp de los HashMaps y conversión de sus entrys a
+			// objetos JSON.
+			
 			for(Entry<String, Encuesta> entry: EncuestaMap.entrySet()) {
 				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
 			}
@@ -46,6 +53,8 @@ public class PersistenciaActividades {
 			for(Entry<String, Tarea> entry: TareaMap.entrySet()) {
 				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
 			}
+			
+			// Serialización del Objeto JSON
 		
 			try (FileWriter writer = new FileWriter(archivo)){
 				gson.toJson(jsonObject, writer);
@@ -55,13 +64,20 @@ public class PersistenciaActividades {
 			}
 		}
 		
+		// Funciones de Carga
+		
 		public static HashMap<String, Examen> cargarExamen(String archivo) {
 			Gson gson = new Gson();
+			
+			// Creación de la Estructura: HashMap contenedor de exámenes
 			
 			HashMap<String, Examen> ExamenMap = new HashMap<>();			
 			
 			try(FileReader reader = new FileReader(archivo)){
-				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);	
+				
+				// Recorrido del Objeto JSON y sus entradas
+				// se utilizan condicionales, en caso de que la entrada sea de tipo Exámen se añade al mapa.
 				
 				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
 					JsonObject actObject = entry.getValue().getAsJsonObject();
@@ -83,7 +99,14 @@ public class PersistenciaActividades {
 		public static HashMap<String, Encuesta> cargarEncuesta(String archivo) {
 			Gson gson = new Gson();
 			
-			HashMap<String, Encuesta> EncuestaMap = new HashMap<>();			
+			// Creación de la estructura: HashMap contenedor de Encuesta
+			
+			HashMap<String, Encuesta> EncuestaMap = new HashMap<>();	
+			
+			// Lectura del Objeto JSON y sus entradas. 
+			// En caso de que la entrada sea del tipo esperado: "Encuesta", lo añade a la estructura principal: un HashMap
+			
+			
 			
 			try(FileReader reader = new FileReader(archivo)){
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			

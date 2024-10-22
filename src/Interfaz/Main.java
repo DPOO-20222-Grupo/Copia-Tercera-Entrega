@@ -1,7 +1,9 @@
 package Interfaz;
 
 import java.util.ArrayList;
+import java.t
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 
 import Actividades.Encuesta;
 import LearningPath.LearningPath;
@@ -33,6 +35,8 @@ public class Main {
 		List<String> objetivos = new ArrayList<String>();
 		objetivos.add("Objetivo 1");
 		objetivos.add("Objetivo 2");
+		String fecha = "2024-10-23";
+		Date date = formatter.parse(fecha);
 		
 		Encuesta q = new Encuesta("Autoevaluación", "Autoevaluación acitividad #1", objetivos,
 				"Bajo", 15, );
