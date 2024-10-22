@@ -12,6 +12,7 @@ public abstract class SeguimientoActividad {
 	private Actividad actividad;
 	private String estado;
 	private Estudiante estudianteSeguimiento;
+	private int tiempoTotal;
 	
 	
 	public SeguimientoActividad( Actividad pActividad, Estudiante pEstudiante) {
@@ -35,6 +36,18 @@ public abstract class SeguimientoActividad {
 	public Estudiante getEstudianteSeguimiento() {
 		return estudianteSeguimiento;
 	}
+
+
+	public int getTiempoTotal() {
+		return tiempoTotal;
+	}
+
+
+	public void setTiempoTotal(int tiempoTotal) {
+		this.tiempoTotal = tiempoTotal;
+	}
+	
+	
 
 
 }

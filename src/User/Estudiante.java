@@ -1,11 +1,15 @@
 package User;
 
+import java.util.Map;
+
 import Actividades.Actividad;
 import LearningPath.LearningPath;
+import SeguimientoEstudiantes.SeguimientoLearningPath;
 
 public class Estudiante extends Usuario {
     private static String TIPO = "Estudiante";
 	private String nombre;
+	private Map<String, SeguimientoLearningPath> learningPathsInscritos;
 
     // Constructor
     public Estudiante(String login, String password, String nombre) {
@@ -24,20 +28,8 @@ public class Estudiante extends Usuario {
     }
 
     // Métodos adicionales 
-    
-    public void inscribirEstudiante(LearningPath path) {
-        path.inscribirEstudiante(this);
-    }
 
-    public void completarActividad(Actividad actividad) {
-        actividad.completar();
-    }
-
-    public void dejarReseña(Actividad actividad, String reseña, float rating) {
-        actividad.dejarFeedback(reseña, rating);
-    }
-
-	public static String getTipo() {
+	public String getTipo() {
 		return TIPO;
 	}
 }

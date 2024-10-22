@@ -55,6 +55,14 @@ public class Profesor extends Usuario {
         this.nombre = nombre;
     }
     
+	public String getTipo() {
+		String tipo = this.TIPO;
+		return tipo;
+	}
+    
+    
+    
+    
 
     // Métodos adicionales
 
@@ -131,5 +139,7 @@ public class Profesor extends Usuario {
 	public Map<String, PreguntaSeleccionMultiple> getPreguntasSeleccionPropias() {
 		return preguntasSeleccionPropias;
 	}
+
+
 
 }
