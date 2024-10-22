@@ -238,6 +238,7 @@ public class Aplicacion {
 		
 	}
 	
+<<<<<<< HEAD
 	public void descargarDatos (HashMap<String, Examen> mapaExamenes, 
 			HashMap<String, Encuesta> mapaEncuestas, HashMap<String, Quiz> mapaQuices,
 			HashMap<String, RevisarRecurso> mapaRevisarRecurso, HashMap<String, Tarea> mapaTareas,
@@ -251,8 +252,14 @@ public class Aplicacion {
 	}
 
 	}
+=======
+	
+	// Requerimientos funcionales
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 	
 
+	
+}
 	
 	
 

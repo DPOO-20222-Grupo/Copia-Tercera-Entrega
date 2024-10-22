@@ -8,7 +8,7 @@ import Actividades.Actividad;
 import LearningPath.LearningPath;
 
 public class SeguimientoLearningPath {
-	private HashMap<Actividad, Boolean> actividadesCompletadas;
+	private HashMap<Actividad, SeguimientoActividad> mapaSeguimientoActividades;
 	private LearningPath learningPath;
     private float progreso;
     private float totalTiempo;
@@ -22,10 +22,11 @@ public class SeguimientoLearningPath {
         this.tasaExito = tasaExito;
         this.tasaFracaso = tasaFracaso;
         List<Actividad> actividadesLearningPath = learningPath.getActividades();
+        HashMap<Actividad, Boolean> actividadesCompletadas = new HashMap<>();
         
         for(Actividad actividad: actividadesLearningPath) {
         	
-        	actividadesCompletadas.put(actividad, false);
+			actividadesCompletadas.put(actividad, false);
         	
         }
         

@@ -13,6 +13,7 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 	private float nota;
 	private Map<PreguntaSeleccionMultiple, Integer> respuestas;
 	private int numPreguntas;
+	private String resultado;
 	
 	
 	public SeguimientoQuiz (Quiz quiz, Estudiante estudiante) {
@@ -46,7 +47,16 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 	public Map<PreguntaSeleccionMultiple, Integer> getRespuestas() {
 		return respuestas;
 	}
+	
 
+	public String getResultado() {
+		return resultado;
+	}
+
+
+	private void setResultado(String resultado) {
+		this.resultado = resultado;
+	}
 
 
 	public void agregarRespuestaPregunta (PreguntaSeleccionMultiple pregunta, int opcionEscogida) {
@@ -80,6 +90,16 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 	public void actualizarNota() {
 		float nota = this.calcularNota();
 		this.setNota(nota);
+		
+		Quiz quiz = (Quiz) this.getActividadSeguimiento();
+		
+		if (nota>=quiz.getCalificacionMinima()) {
+			this.setResultado("Exitoso");
+		}
+		
+		else {
+			this.setResultado("No Exitoso");
+		}
 	}
 	
 	public void actualizarEstado() {

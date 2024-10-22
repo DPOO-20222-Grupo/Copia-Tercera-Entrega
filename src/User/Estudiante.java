@@ -23,21 +23,7 @@ public class Estudiante extends Usuario {
         this.nombre = nombre;
     }
 
-    // Métodos adicionales 
-    
-    public void inscribirEstudiante(LearningPath path) {
-        path.inscribirEstudiante(this);
-    }
-
-    public void completarActividad(Actividad actividad) {
-        actividad.completar();
-    }
-
-    public void dejarReseña(Actividad actividad, String reseña, float rating) {
-        actividad.dejarFeedback(reseña, rating);
-    }
-
-	public static String getTipo() {
+	public String getTipo() {
 		return TIPO;
 	}
 }
