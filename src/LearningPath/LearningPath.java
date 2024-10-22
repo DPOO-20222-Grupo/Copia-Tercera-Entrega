@@ -13,10 +13,7 @@ import User.Profesor;
 import exceptions.ModificarActividadesLearningPathException;
 import exceptions.ModificarEstudianteLearningPathException;
 import exceptions.ModificarObjetivosException;
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/main
 
 public class LearningPath {
     private String titulo;

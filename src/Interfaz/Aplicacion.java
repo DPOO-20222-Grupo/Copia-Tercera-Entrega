@@ -1,21 +1,17 @@
 
 package Interfaz;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import java.util.HashMap; 
 import java.util.Map;
-=======
-=======
+
 import java.util.Date;
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
+
 import java.util.HashMap;
-<<<<<<< HEAD
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
-=======
+
 import java.util.List;
 import java.util.Map;
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
+
 
 import Actividades.Actividad;
 import Actividades.Encuesta;
@@ -267,9 +263,7 @@ public class Aplicacion {
 		}
 		
 	}
-<<<<<<< HEAD
-		
-=======
+
 	
 	
 	// Requerimientos funcionales
@@ -681,7 +675,6 @@ public class Aplicacion {
 	}
 
 	
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 }
 	
 	
