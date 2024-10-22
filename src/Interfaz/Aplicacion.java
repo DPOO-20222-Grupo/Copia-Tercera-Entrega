@@ -1,8 +1,12 @@
 
 package Interfaz;
 
+<<<<<<< HEAD
 import java.util.HashMap; 
 import java.util.Map;
+=======
+import java.util.HashMap;
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 
 import Actividades.Actividad;
 import Actividades.Encuesta;
@@ -11,6 +15,10 @@ import Actividades.Quiz;
 import Actividades.RevisarRecurso;
 import Actividades.Tarea;
 import LearningPath.LearningPath;
+import Persistencia_Datos.PersistenciaActividades;
+import Persistencia_Datos.PersistenciaLearningPaths;
+import Persistencia_Datos.PersistenciaPreguntas;
+import Persistencia_Datos.PersistenciaUsuarios;
 import Preguntas.Pregunta;
 import Preguntas.PreguntaAbierta;
 import Preguntas.PreguntaSeleccionMultiple;
@@ -34,7 +42,6 @@ public class Aplicacion {
 	private HashMap<String, PreguntaAbierta> mapaPreguntasAbiertas;
 	private HashMap<String, PreguntaSeleccionMultiple> mapaPreguntasSeleccionMultiple;
 	
-	
 	public Aplicacion () {
 		this.mapaEstudiantes = new HashMap<String, Estudiante>();
 		this.mapaProfesores = new HashMap<String,Profesor >();
@@ -49,6 +56,60 @@ public class Aplicacion {
 	
 	}
 	
+	public Aplicacion (String archivoUsuarios, String archivoLP, String archivoPreguntas, String archivoActividades) {
+		this.mapaEstudiantes = PersistenciaUsuarios.cargarEstudiantes(archivoUsuarios);
+		this.mapaProfesores = PersistenciaUsuarios.cargarProfesor(archivoUsuarios);
+		this.mapaLearningPaths = PersistenciaLearningPaths.cargarLP(archivoLP);
+		this.mapaTareas = PersistenciaActividades.cargarTarea(archivoActividades);
+		this.mapaRevisarRecurso = PersistenciaActividades.cargarRecurso(archivoActividades);
+		this.mapaEncuestas = PersistenciaActividades.cargarEncuesta(archivoActividades);
+		this.mapaExamenes = PersistenciaActividades.cargarExamen(archivoActividades);
+		this.mapaQuices = PersistenciaActividades.cargarQuiz(archivoActividades);
+		this.mapaPreguntasAbiertas = PersistenciaPreguntas.cargarAbiertas(archivoPreguntas);
+		this.mapaPreguntasSeleccionMultiple = PersistenciaPreguntas.cargarCerradas(archivoPreguntas);
+	}
+
+	// Getters
+	
+	public HashMap<String, Estudiante> getMapaEstudiantes() {
+		return mapaEstudiantes;
+	}
+
+	public HashMap<String, Profesor> getMapaProfesores() {
+		return mapaProfesores;
+	}
+
+	public HashMap<String, LearningPath> getMapaLearningPaths() {
+		return mapaLearningPaths;
+	}
+
+	public HashMap<String, Tarea> getMapaTareas() {
+		return mapaTareas;
+	}
+
+	public HashMap<String, RevisarRecurso> getMapaRevisarRecurso() {
+		return mapaRevisarRecurso;
+	}
+	
+	public HashMap<String, Encuesta> getMapaEncuestas() {
+		return mapaEncuestas;
+	}
+	
+	public HashMap<String, Examen> getMapaExamenes() {
+		return mapaExamenes;
+	}
+
+	public HashMap<String, Quiz> getMapaQuices() {
+		return mapaQuices;
+	}
+
+	public HashMap<String, PreguntaAbierta> getMapaPreguntasAbiertas() {
+		return mapaPreguntasAbiertas;
+	}
+
+	public HashMap<String, PreguntaSeleccionMultiple> getMapaPreguntasSeleccionMultiple() {
+		return mapaPreguntasSeleccionMultiple;
+	}	
 	
 	//Registrar nuevas entradas a la aplicacion
 	
@@ -181,7 +242,23 @@ public class Aplicacion {
 		}
 		
 	}
+<<<<<<< HEAD
 		
+=======
+	
+	public void descargarDatos (HashMap<String, Examen> mapaExamenes, 
+			HashMap<String, Encuesta> mapaEncuestas, HashMap<String, Quiz> mapaQuices,
+			HashMap<String, RevisarRecurso> mapaRevisarRecurso, HashMap<String, Tarea> mapaTareas,
+			HashMap<String, Estudiante> mapaEstudiantes, HashMap<String, Profesor> profMap,
+			HashMap<String, PreguntaAbierta> abiertaMap, HashMap<String, PreguntaSeleccionMultiple> cerradaMap,
+			HashMap<String, LearningPath> mapaLearningPaths) {
+		PersistenciaActividades.persistirActividades(mapaExamenes, mapaEncuestas, mapaQuices, mapaRevisarRecurso, mapaTareas, "actividades.json");
+		PersistenciaUsuarios.persistirUsuarios(mapaEstudiantes, profMap, "usuarios.json");
+		PersistenciaPreguntas.persistirPreguntas(abiertaMap, cerradaMap, "preguntas.json");
+		PersistenciaLearningPaths.persistirLearningPaths(mapaLearningPaths, "lp.json");
+	}
+	
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 }
 	
 	
