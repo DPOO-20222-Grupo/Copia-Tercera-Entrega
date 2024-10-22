@@ -1,7 +1,7 @@
 
 package Interfaz;
 
-import java.util.HashMap;
+import java.util.HashMap; 
 import java.util.Map;
 
 import Actividades.Actividad;
@@ -181,12 +181,7 @@ public class Aplicacion {
 		}
 		
 	}
-	
-	
-	// Requerimientos funcionales
-	
-
-	
+		
 }
 	
 	
