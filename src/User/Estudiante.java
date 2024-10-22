@@ -29,6 +29,7 @@ public class Estudiante extends Usuario {
 
     // Métodos adicionales 
 
+
 	public String getTipo() {
 		return TIPO;
 	}

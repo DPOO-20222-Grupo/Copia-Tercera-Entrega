@@ -1,6 +1,6 @@
 package LearningPath;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +13,10 @@ import User.Profesor;
 import exceptions.ModificarActividadesLearningPathException;
 import exceptions.ModificarEstudianteLearningPathException;
 import exceptions.ModificarObjetivosException;
+<<<<<<< HEAD
+=======
+
+>>>>>>> refs/remotes/origin/main
 
 public class LearningPath {
     private String titulo;
