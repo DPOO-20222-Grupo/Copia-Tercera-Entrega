@@ -29,8 +29,10 @@ import Preguntas.Pregunta;
 import Preguntas.PreguntaAbierta;
 import Preguntas.PreguntaSeleccionMultiple;
 import SeguimientoEstudiantes.SeguimientoActividad;
+import SeguimientoEstudiantes.SeguimientoEncuesta;
 import SeguimientoEstudiantes.SeguimientoExamen;
 import SeguimientoEstudiantes.SeguimientoLearningPath;
+import SeguimientoEstudiantes.SeguimientoQuiz;
 import SeguimientoEstudiantes.SeguimientoTarea;
 import User.Estudiante;
 import User.Profesor;
@@ -887,6 +889,36 @@ public class Aplicacion {
 		
 	}
 	
+	public void responderPreguntaExamen (Examen examen, Estudiante estudiante, LearningPath learningPath, PreguntaAbierta pregunta, String respuesta) {
+		
+		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		
+		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen);
+		
+		seguimientoExamen.registrarPregunta(pregunta, respuesta);
+		
+	}
+	
+	public void responderPreguntaEncuesta (Encuesta encuesta, Estudiante estudiante, LearningPath learningPath, PreguntaAbierta pregunta, String respuesta) {
+		
+		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		
+		SeguimientoEncuesta seguimientoEncuesta = (SeguimientoEncuesta) seguimientoEstudiante.getMapaSeguimientoActividades().get(encuesta);
+		
+		seguimientoEncuesta.registrarPregunta(pregunta, respuesta);
+		
+	}
+	
+	public void responderPreguntaQuiz (Quiz quiz, Estudiante estudiante, LearningPath learningPath, PreguntaSeleccionMultiple pregunta, int respuesta) {
+		
+		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		
+		SeguimientoQuiz seguimientoQuiz = (SeguimientoQuiz) seguimientoEstudiante.getMapaSeguimientoActividades().get(quiz);
+		
+		seguimientoQuiz.agregarRespuestaPregunta(pregunta, respuesta);
+		
+	}
+	
 	public void completarEncuestaRecurso (Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
@@ -929,8 +961,18 @@ public class Aplicacion {
 		
 	}
 	
+	public void calificarLearningPath (LearningPath learningPath, float rating) {
+		learningPath.actualizarRating(rating);
+	}
 	
-        
+	public void resenarActividad(Actividad actividad, String resena) {
+		actividad.agregarResena(resena);
+	}
+	
+	public void calificarActividad (Actividad actividad, float rating) {
+		actividad.actualizarRating(rating);
+	}
+	
 	
 
 
