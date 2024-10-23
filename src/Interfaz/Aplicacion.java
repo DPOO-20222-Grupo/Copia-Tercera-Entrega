@@ -72,7 +72,7 @@ public class Aplicacion {
 	
 	public Aplicacion (String archivoUsuarios, String archivoLP, String archivoPreguntas, String archivoActividades) {
 		this.mapaEstudiantes = PersistenciaUsuarios.cargarEstudiantes(archivoUsuarios);
-		this.mapaProfesores = PersistenciaUsuarios.cargarProfesor(archivoUsuarios);
+		this.mapaProfesores = PersistenciaUsuarios.cargarProfesores(archivoUsuarios);
 		this.mapaLearningPaths = PersistenciaLearningPaths.cargarLP(archivoLP);
 		this.mapaTareas = PersistenciaActividades.cargarTarea(archivoActividades);
 		this.mapaRevisarRecurso = PersistenciaActividades.cargarRecurso(archivoActividades);

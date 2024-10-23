@@ -22,7 +22,7 @@ public class PersistenciaLearningPaths {
 		JsonObject jsonObject = new JsonObject();
 			
 		for(Entry<String, LearningPath> entry: LPMap.entrySet()) {
-			jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+			jsonObject.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
 		}
 		
 		try (FileWriter writer = new FileWriter(archivo)){

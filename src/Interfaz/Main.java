@@ -34,10 +34,12 @@ public class Main extends Aplicacion {
 		// Pruebas de Registro de Usuarios
 		
 		Estudiante stud1 = new Estudiante("d.martinezf", "Banano123", "Diego Martinez");
+		Estudiante stud2 = new Estudiante("a.linares", "Banano123", "Andres Linares");
 		Profesor prof1 = new Profesor("l.munera", "Tristeza30", "Lina Munera");
 		
 		aplicacion.registrarUsuario(prof1);
 		aplicacion.registrarUsuario(stud1);
+		aplicacion.registrarUsuario(stud2);
 		
 		// Pruebas de Registro de Preguntas
 		
