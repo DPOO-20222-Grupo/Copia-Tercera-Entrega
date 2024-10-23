@@ -303,6 +303,7 @@ public class LearningPath {
 		
     public void inscribirEstudiante(Estudiante estudiante, SeguimientoLearningPath seguimiento) throws ModificarEstudianteLearningPathException {
         if (!estudiantesInscritos.containsKey(estudiante.getLogin())) {
+        	
             estudiantesInscritos.put(estudiante.getLogin(), seguimiento);
         }
         

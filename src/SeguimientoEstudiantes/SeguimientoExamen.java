@@ -11,7 +11,6 @@ public class SeguimientoExamen extends SeguimientoActividad{
 	
 	private float nota;
 	private Map<PreguntaAbierta, String> respuestas;
-	private String resultado;
 	
 	public SeguimientoExamen(Examen examen, Estudiante estudiante) {
 		super(examen, estudiante);
@@ -55,21 +54,15 @@ public class SeguimientoExamen extends SeguimientoActividad{
 		
 	}
 
-	public String getResultado() {
-		return resultado;
-	}
 
-	private void setResultado(String resultado) {
-		this.resultado = resultado;
-	}
 	
-	public void actualizarResultado(boolean esExitoso) {
+	public void actualizarEstado(boolean esExitoso) {
 		if (esExitoso) {
-			this.setResultado("Exitoso");
+			this.setEstado("Exitoso");
 		}
 		
 		else {
-			this.setResultado("No exitoso");
+			this.setEstado("No exitoso");
 		}
 		
 	}
