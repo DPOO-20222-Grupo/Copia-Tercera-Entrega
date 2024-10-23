@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
@@ -113,7 +112,6 @@ public class Main extends Aplicacion {
 		}
 		
 		}
-	
 	
 	public static void main(String[] args) {
 		correrApp();
