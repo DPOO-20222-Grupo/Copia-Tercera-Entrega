@@ -9,7 +9,7 @@ import exceptions.ModificarActividadesPreviasException;
 import exceptions.ModificarActividadesSeguimientoException;
 import exceptions.ModificarObjetivosException;
 
-public abstract class Actividad {
+public class Actividad {
     private String titulo;
     private String descripcion;
     private List<String> objetivos;
@@ -225,7 +225,11 @@ public abstract class Actividad {
         return actividadesSeguimiento;
     }
     
-    public abstract String getTipoActividad();
+    public String getTipoActividad() {
+    	String rta = "General";
+    	return rta;
+    	
+    }
 
     // Métodos Adicionales
 

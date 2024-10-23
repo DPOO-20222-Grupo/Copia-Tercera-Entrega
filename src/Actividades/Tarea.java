@@ -13,6 +13,7 @@ public class Tarea extends Actividad {
         super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
     }
     
+    @Override
     public String getTipoActividad () {
     	return TIPO;
     }

@@ -30,6 +30,7 @@ public class Examen extends Actividad {
         this.numPreguntas = numPreguntas;
     }
     
+    @Override
     public String getTipoActividad () {
     	return TIPO;
     }
