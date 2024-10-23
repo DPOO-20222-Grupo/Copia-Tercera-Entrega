@@ -39,6 +39,7 @@ public class SeguimientoLearningPath {
         
         for(Actividad actividad: actividadesLearningPath) {
         	
+<<<<<<< HEAD
         	String tipoActividad = actividad.getTipoActividad();
     		
     		if (tipoActividad.equals("Encuesta")) {
@@ -70,9 +71,9 @@ public class SeguimientoLearningPath {
     			mapaSeguimientoActividades.put(actividad, seguimiento);
     			
     		}
-
+=======
 			actividadesCompletadas.put(actividad, false);
-
+>>>>>>> refs/remotes/origin/main
         	
         }
         

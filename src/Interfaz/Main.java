@@ -1,8 +1,9 @@
 package Interfaz;
 
 import java.util.ArrayList;
-import java.t
+import java.util.Date;
 import java.util.List;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
 import Actividades.Encuesta;
@@ -10,14 +11,14 @@ import LearningPath.LearningPath;
 import User.Estudiante;
 import User.Profesor;
 
-public class Main {
+public class Main extends Aplicacion {
 	public static String archivoUsuarios = "usuarios.json";
 	public static String archivoLP = "lp.json";
 	public static String archivoPreguntas = "preguntas.json";
 	public static String archivoActividades = "actividades.json";
 	
-	
-	public static void main(String[] args) {
+	public static void correrApp() {
+		
 		
 		Aplicacion aplicacion = new Aplicacion();
 		
@@ -36,15 +37,14 @@ public class Main {
 		objetivos.add("Objetivo 1");
 		objetivos.add("Objetivo 2");
 		String fecha = "2024-10-23";
-		Date date = formatter.parse(fecha);
+		// Date date = formatter.parse(fecha);
 		
-		Encuesta q = new Encuesta("Autoevaluación", "Autoevaluación acitividad #1", objetivos,
-				"Bajo", 15, );
+		 // Encuesta q = new Encuesta("Autoevaluación", "Autoevaluación acitividad #1", objetivos, "Bajo", 15, );
 		
 		
 		// Pruebas de Registro de LearningPaths
 		
-		LearningPath lp = new LearningPath("Introducción a Listas", "Listas en Java"); 
+		// LearningPath lp = new LearningPath("Introducción a Listas", "Listas en Java"); 
 		
 		
 		// Descarga de los Datos en Archivos JSON
@@ -55,6 +55,13 @@ public class Main {
 		
 		// Carga de Archivos
 		Aplicacion aplicacion2 = new Aplicacion(archivoUsuarios, archivoLP, archivoPreguntas, archivoActividades); 
+		
+		}
+	
+	
+	public static void main(String[] args) {
+		correrApp();
+		
 	}
 	
 	
