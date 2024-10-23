@@ -218,7 +218,4 @@ public class Main extends Aplicacion {
 		correrApp();
 		
 	}
-	
-	
-	
 }
