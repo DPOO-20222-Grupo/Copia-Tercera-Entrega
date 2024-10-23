@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class ModificarObjetivosException extends Exception {
 	
 	private String objetivo;

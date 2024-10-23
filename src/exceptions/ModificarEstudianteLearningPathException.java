@@ -2,6 +2,7 @@ package exceptions;
 
 import user.Estudiante;
 
+@SuppressWarnings("serial")
 public class ModificarEstudianteLearningPathException extends Exception {
 	
 	private Estudiante estudiante;

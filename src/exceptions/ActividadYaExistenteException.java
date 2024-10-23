@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class ActividadYaExistenteException extends Exception{
 	private String titulo;
 	private String tipo;

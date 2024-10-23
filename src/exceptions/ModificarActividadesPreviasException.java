@@ -2,6 +2,7 @@ package exceptions;
 
 import actividades.Actividad;
 
+@SuppressWarnings("serial")
 public class ModificarActividadesPreviasException extends Exception{
 	
 	private Actividad actividad;
