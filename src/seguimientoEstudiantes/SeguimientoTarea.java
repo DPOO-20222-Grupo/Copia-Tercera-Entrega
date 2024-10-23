@@ -1,6 +1,5 @@
 package seguimientoEstudiantes;
 
-import actividades.Actividad;
 import actividades.Tarea;
 import user.Estudiante;
 

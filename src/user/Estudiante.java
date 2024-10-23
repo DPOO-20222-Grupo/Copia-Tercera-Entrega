@@ -2,8 +2,6 @@ package user;
 
 import java.util.Map;
 
-import actividades.Actividad;
-import learningPath.LearningPath;
 import seguimientoEstudiantes.SeguimientoLearningPath;
 
 public class Estudiante extends Usuario {

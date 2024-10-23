@@ -3,7 +3,6 @@ package seguimientoEstudiantes;
 import java.util.HashMap;
 import java.util.Map;
 
-import actividades.Actividad;
 import actividades.Quiz;
 import preguntas.PreguntaSeleccionMultiple;
 import user.Estudiante;

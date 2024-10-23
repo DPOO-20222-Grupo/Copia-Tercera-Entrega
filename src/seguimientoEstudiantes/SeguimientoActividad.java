@@ -1,10 +1,6 @@
 package seguimientoEstudiantes;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import actividades.Actividad;
-import preguntas.PreguntaAbierta;
 import user.Estudiante;
 
 public abstract class SeguimientoActividad {
