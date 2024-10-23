@@ -106,7 +106,7 @@ public class Main extends Aplicacion {
 		// Re-Carga de Archivos
 		Aplicacion aplicacion_recargada = new Aplicacion(archivoUsuarios, archivoLP, archivoPreguntas, archivoActividades);
 		
-		// Pruebas para que la Re-Carga está bien hecha
+		// Pruebas para asegurar que la Re-Carga está bien hecha
 		
 		Estudiante estudiante = aplicacion_recargada.getEstudiante("d.martinezf");
 		Profesor profesor = aplicacion_recargada.getProfesor("l.munera");
@@ -183,8 +183,31 @@ public class Main extends Aplicacion {
 				
 				);
 		
-		
-
+		LearningPath printLp = aplicacion_recargada.getLearningPath("Introducción a las Pruebas - l.munera");
+		SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+		String fechaFormateada = formatoFecha.format(printLp.getFechaCreacion());
+		String fechaMod = formatoFecha.format(printLp.getFechaUltimaModificacion());
+		System.out.println(
+				"\nLearning Path:\n"
+				+ String.format("Titulo: %s\n", printLp.getTitulo())
+				+ String.format("Version: %.2f\n", printLp.getVersion())
+				+ String.format("Descripción: %s\n", printLp.getDescripcion())
+				+ String.format("Duración (m):  %d\n", printLp.getDuracionMinutos())
+				+ String.format("Fecha de Creación: %s\n", fechaFormateada)
+				+ String.format("Fecha de Modificación: %s\n", fechaMod)
+				+ String.format("Login Profesor Creador: %s\n", printLp.getProfesorCreador().getLogin())
+				+ String.format("Nivel de Dificultad: %s\n", printLp.getNivelDificultad())
+				+ "Objetivos: \n" 
+				+ String.format("  * : %s\n", printLp.getObjetivos().get(0))
+				+ String.format("  * : %s\n", printLp.getObjetivos().get(1))
+				+ "Actividades: \n"
+				+ String.format("  * : %s\n", printLp.getActividades().get(0).getTitulo())
+				+ String.format("  * : %s\n", printLp.getActividades().get(1).getTitulo())
+				+ String.format("  * : %s\n", printLp.getActividades().get(2).getTitulo())
+				+ String.format("  * : %s\n", printLp.getActividades().get(3).getTitulo())
+				+ String.format("  * : %s\n", printLp.getActividades().get(4).getTitulo())
+				+ "\n"
+				);
 		} catch(ParseException e) {
 			System.out.println("Error al convertir la fecha: " + e.getMessage());
 		}
