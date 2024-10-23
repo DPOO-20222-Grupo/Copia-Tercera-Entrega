@@ -1,6 +1,11 @@
 package Interfaz;
 
+<<<<<<< HEAD
 import java.util.ArrayList;
+=======
+import java.util.ArrayList; 
+import java.t
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 import java.util.List;
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;

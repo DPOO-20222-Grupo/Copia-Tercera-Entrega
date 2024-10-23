@@ -78,6 +78,19 @@ public abstract class Actividad {
 		}
 		
 	}
+	
+	public void eliminarObjetivo(String objetivo) throws ModificarObjetivosException {
+		List<String> objetivos = this.getObjetivos();
+		if (!objetivos.contains(objetivo)) {
+			throw new ModificarObjetivosException(objetivo, "Eliminar", "Actividad");
+		}
+		
+		else {
+			objetivos.remove(objetivo);
+			this.setObjetivos(objetivos);
+		}
+		
+	}
     
 
     public String getNivelDificultad() {
@@ -108,10 +121,6 @@ public abstract class Actividad {
 
     public List<String> getResenas() {
         return resenas;
-    }
-
-    private void setResenas(List<String> resenas) {
-        this.resenas = resenas;
     }
     
     public void agregarResena(String resena) {
