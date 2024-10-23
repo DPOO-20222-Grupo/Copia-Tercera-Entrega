@@ -7,10 +7,7 @@ import java.util.Map;
 
 import java.util.Date;
 
-import java.util.HashMap;
-
 import java.util.List;
-import java.util.Map;
 
 import actividades.Actividad;
 import actividades.Encuesta;
@@ -28,7 +25,6 @@ import exceptions.ModificarObjetivosException;
 import exceptions.ModificarPreguntasAbiertasException;
 import exceptions.ModificarPreguntasQuizException;
 import exceptions.TipoInvalidoValorException;
-import exceptions.UsuarioYaExistenteException;
 import learningPath.LearningPath;
 import persistenciaDatos.PersistenciaActividades;
 import persistenciaDatos.PersistenciaLearningPaths;
