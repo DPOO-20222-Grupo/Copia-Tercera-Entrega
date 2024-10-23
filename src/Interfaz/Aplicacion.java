@@ -960,7 +960,6 @@ public class Aplicacion {
 		
 		
 	}
-<<<<<<< HEAD
 	
 	public void calificarLearningPath (LearningPath learningPath, float rating) {
 		learningPath.actualizarRating(rating);
@@ -973,11 +972,6 @@ public class Aplicacion {
 	public void calificarActividad (Actividad actividad, float rating) {
 		actividad.actualizarRating(rating);
 	}
-	
-	
-
-=======
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 
 	public void descargarDatos (HashMap<String, Examen> mapaExamenes, 
 			HashMap<String, Encuesta> mapaEncuestas, HashMap<String, Quiz> mapaQuices,
@@ -989,6 +983,66 @@ public class Aplicacion {
 		PersistenciaUsuarios.persistirUsuarios(mapaEstudiantes, profMap, "usuarios.json");
 		PersistenciaPreguntas.persistirPreguntas(abiertaMap, cerradaMap, "preguntas.json");
 		PersistenciaLearningPaths.persistirLearningPaths(mapaLearningPaths, "lp.json");
+	}
+	
+	public Estudiante getEstudiante (String login) {
+		
+		Estudiante estudiante = this.getMapaEstudiantes().get(login);
+		return estudiante;
+		
+	}
+	
+	public Profesor getProfesor (String login) {
+		Profesor profesor = this.getMapaProfesores().get(login);
+		return profesor;
+	}
+	
+	public Actividad getActividad (String id, String tipo) {
+		
+		if (tipo.equals("Examen")) {
+			Examen actividad = this.getMapaExamenes().get(id);
+			return actividad;
+		}
+		
+		else if (tipo.equals("Encuesta")) {
+			Encuesta actividad = this.getMapaEncuestas().get(id);
+			return actividad;
+		}
+		
+		else if (tipo.equals("Quiz")) {
+			Quiz actividad = this.getMapaQuices().get(id);
+			return actividad;
+		}
+		
+		else if (tipo.equals("Tarea")) {
+			Tarea actividad = this.getMapaTareas().get(id);
+			return actividad;
+		}
+		
+		else {
+			RevisarRecurso actividad = this.getMapaRevisarRecurso().get(id);
+			return actividad;
+		}
+		
+	}
+	
+	public LearningPath getLearningPath(String id) {
+		LearningPath learningPath = this.getMapaLearningPaths().get(id);
+		return learningPath;
+	}
+	
+	public Pregunta getPregunta (String id, String tipo) {
+		
+		if (tipo.equals("Abierta")) {
+			PreguntaAbierta pregunta = this.getMapaPreguntasAbiertas().get(id);
+			return pregunta;
+			
+		}
+		
+		else {
+			PreguntaSeleccionMultiple pregunta = this.getMapaPreguntasSeleccionMultiple().get(id);
+			return pregunta;
+		}
 	}
 
 	

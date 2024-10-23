@@ -24,6 +24,7 @@ public class Main extends Aplicacion {
 	public static String archivoLP = "lp.json";
 	public static String archivoPreguntas = "preguntas.json";
 	public static String archivoActividades = "actividades.json";
+
 	
 	public static void correrApp() {
 		try {
@@ -107,6 +108,83 @@ public class Main extends Aplicacion {
 		
 		// Pruebas para que la Re-Carga está bien hecha
 		
+		Estudiante estudiante = aplicacion_recargada.getEstudiante("d.martinezf");
+		Profesor profesor = aplicacion_recargada.getProfesor("l.munera");
+		
+		Quiz quiz = (Quiz) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Quiz1", "l.munera"), "Quiz");
+		
+		Examen examen = (Examen) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Parcial", "l.munera"), "Examen");
+
+		Tarea tarea = (Tarea) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Tarea1", "l.munera"), "Tarea");
+
+		RevisarRecurso revisarRecurso = (RevisarRecurso) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Ver video", "l.munera"), "RevisarRecurso");
+
+		Encuesta encuesta = (Encuesta) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Autoevaluación", "l.munera"), "Encuesta");
+
+		
+		System.out.println(
+				"\nEstudiante 1. \n"
+				+ String.format("Nombre: %s \n", estudiante.getNombre())
+				+ String.format("Login: %s \n", estudiante.getLogin() )
+				
+				);
+		
+		System.out.println(
+				"Profesor 1. \n"
+				+ String.format("Nombre: %s \n", profesor.getNombre())
+				+ String.format("Login: %s \n", profesor.getLogin() )
+				
+				);
+		
+		System.out.println(
+				"Actividades Registradas: \n"
+				+ String.format("1. %s \n", quiz.getTitulo())
+				+ String.format("--- Descripcion: %s \n",quiz.getDescripcion())
+				+ "--- Objetivos: \n"
+				+ String.format("     * : %s\n", quiz.getObjetivos().get(0))
+				+ String.format("     * : %s\n", quiz.getObjetivos().get(1))
+				+ String.format("--- Dificultad: %s \n",quiz.getNivelDificultad())
+				+ String.format("--- Duracion Estimada: %d minutos \n",quiz.getDuracionMinutos())
+				
+				
+				+ String.format("2. %s \n", examen.getTitulo())
+				+ String.format("--- Descripcion: %s \n",examen.getDescripcion())
+				+ "--- Objetivos: \n"
+				+ String.format("     * : %s\n", examen.getObjetivos().get(0))
+				+ String.format("     * : %s\n", examen.getObjetivos().get(1))
+				+ String.format("--- Dificultad: %s \n",examen.getNivelDificultad())
+				+ String.format("--- Duracion Estimada: %d minutos \n",examen.getDuracionMinutos())
+				
+				+ String.format("3. %s \n", tarea.getTitulo())
+				+ String.format("--- Descripcion: %s \n",tarea.getDescripcion())
+				+ "--- Objetivos:  \n"
+				+ String.format("     * : %s\n", tarea.getObjetivos().get(0))
+				+ String.format("     * : %s\n", tarea.getObjetivos().get(1))
+				+ String.format("--- Dificultad: %s \n",tarea.getNivelDificultad())
+				+ String.format("--- Duracion Estimada: %d minutos \n",tarea.getDuracionMinutos())
+				
+				+ String.format("4. %s \n", encuesta.getTitulo())
+				+ String.format("--- Descripcion: %s \n",encuesta.getDescripcion())
+				+ "--- Objetivos:  \n"
+				+ String.format("     * : %s\n", encuesta.getObjetivos().get(0))
+				+ String.format("     * : %s\n", encuesta.getObjetivos().get(1))
+				+ String.format("--- Dificultad: %s \n",encuesta.getNivelDificultad())
+				+ String.format("--- Duracion Estimada: %d minutos \n",encuesta.getDuracionMinutos())
+				
+				+ String.format("5. %s \n", revisarRecurso.getTitulo())
+				+ String.format("--- Descripcion: %s \n",revisarRecurso.getDescripcion())
+				+ "--- Objetivos: \n"
+				+ String.format("     * : %s\n", revisarRecurso.getObjetivos().get(0))
+				+ String.format("     * : %s\n", revisarRecurso.getObjetivos().get(1))
+				+ String.format("--- Dificultad: %s \n", revisarRecurso.getNivelDificultad())
+				+ String.format("--- Duracion Estimada: %d minutos \n", revisarRecurso.getDuracionMinutos())
+		
+				
+				
+				);
+		
+		
+
 		} catch(ParseException e) {
 			System.out.println("Error al convertir la fecha: " + e.getMessage());
 		}
