@@ -928,11 +928,6 @@ public class Aplicacion {
 		
 		
 	}
-	
-	
-        
-	
-
 
 	public void descargarDatos (HashMap<String, Examen> mapaExamenes, 
 			HashMap<String, Encuesta> mapaEncuestas, HashMap<String, Quiz> mapaQuices,

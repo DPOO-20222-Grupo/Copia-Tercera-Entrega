@@ -45,7 +45,7 @@ public class PersistenciaPreguntas {
 	public static HashMap<String, PreguntaAbierta> cargarAbiertas(String archivo) {
 		Gson gson = new Gson();
 		
-		HashMap<String, PreguntaAbierta> abiertaMap = new HashMap<>();	
+		HashMap<String, PreguntaAbierta> abiertaMap = new HashMap<String, PreguntaAbierta>();	
 		
 		try(FileReader reader = new FileReader(archivo)){
 			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
@@ -68,7 +68,7 @@ public class PersistenciaPreguntas {
 	public static HashMap<String, PreguntaSeleccionMultiple> cargarCerradas(String archivo) {
 		Gson gson = new Gson();
 		
-		HashMap<String, PreguntaSeleccionMultiple> cerradaMap = new HashMap<>();			
+		HashMap<String, PreguntaSeleccionMultiple> cerradaMap = new HashMap<String, PreguntaSeleccionMultiple>();			
 		
 		try(FileReader reader = new FileReader(archivo)){
 			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
