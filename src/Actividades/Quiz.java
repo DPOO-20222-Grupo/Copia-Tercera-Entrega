@@ -41,6 +41,7 @@ public class Quiz extends Actividad {
         this.calificacionMinima = calificacionMinima;
     }
     
+    @Override
     public String getTipoActividad() {
     	return TIPO;
     }

@@ -26,6 +26,7 @@ public class RevisarRecurso extends Actividad {
         this.tipoRecurso = tipoRecurso;
     }
     
+    @Override
     public String getTipoActividad() {
     	return TIPO;
     }

@@ -28,7 +28,8 @@ public class Encuesta extends Actividad {
     public void setNumPreguntas(int numPreguntas) {
         this.numPreguntas = numPreguntas;
     }
-
+    
+    @Override
 	public String getTipoActividad() {
 		return TIPO;
 	}

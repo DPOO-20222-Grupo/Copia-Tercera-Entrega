@@ -898,6 +898,37 @@ public class Aplicacion {
 		
 	}
 	
+	public boolean revisarActividadesPrevias(Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
+		
+		List<Actividad> prerrequisitos = actividad.getActividadesPrevias();
+		
+		String idLP = learningPath.getIdLearnginPath();
+		
+		SeguimientoLearningPath seguimiento = estudiante.getLearningPathsInscritos().get(idLP);
+		
+		Map<Actividad, SeguimientoActividad> seguimientoActividades = seguimiento.getMapaSeguimientoActividades();
+		
+		boolean cumplePrerrequisitos = true;
+		
+		for (Actividad actividadPrevia: prerrequisitos) {
+			
+			if (seguimientoActividades.containsKey(actividadPrevia)) {
+				SeguimientoActividad seguimientoActividadPrevia = seguimientoActividades.get(actividadPrevia);
+				String estado = seguimientoActividadPrevia.getEstado();
+				
+				if (estado.equals("Incompleto")) {
+					cumplePrerrequisitos = false;
+				}
+				
+			}
+			
+		}
+		
+		return cumplePrerrequisitos;
+		
+		
+	}
+	
 	
         
 	
