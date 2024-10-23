@@ -27,7 +27,7 @@ public class PersistenciaLearningPaths {
 		
 		try (FileWriter writer = new FileWriter(archivo)){
 			gson.toJson(jsonObject, writer);
-			System.out.printf("LearningPaths guardados correctamente en archivo JSON: '%s'.", archivo);
+			System.out.printf("LearningPaths guardados correctamente en archivo JSON: '%s'./n", archivo);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
