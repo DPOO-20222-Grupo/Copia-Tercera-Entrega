@@ -104,7 +104,7 @@ public class Main extends Aplicacion {
 				aplicacion.getMapaPreguntasSeleccionMultiple(), aplicacion.getMapaLearningPaths());
 		
 		// Carga de Archivos
-		Aplicacion aplicacion2 = new Aplicacion(archivoUsuarios, archivoLP, archivoPreguntas, archivoActividades); 
+		Aplicacion aplicacion_recargada = new Aplicacion(archivoUsuarios, archivoLP, archivoPreguntas, archivoActividades); 
 		
 		} catch(ParseException e) {
 			System.out.println("Error al convertir la fecha: " + e.getMessage());
