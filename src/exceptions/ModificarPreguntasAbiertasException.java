@@ -1,6 +1,6 @@
 package exceptions;
 
-import Preguntas.PreguntaAbierta;
+import preguntas.PreguntaAbierta;
 
 
 public class ModificarPreguntasAbiertasException extends Exception {

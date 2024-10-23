@@ -1,6 +1,6 @@
 package exceptions;
 
-import Preguntas.PreguntaSeleccionMultiple;
+import preguntas.PreguntaSeleccionMultiple;
 
 public class ModificarPreguntasQuizException extends Exception {
 	

@@ -1,6 +1,6 @@
 package exceptions;
 
-import User.Estudiante;
+import user.Estudiante;
 
 public class ModificarEstudianteLearningPathException extends Exception {
 	

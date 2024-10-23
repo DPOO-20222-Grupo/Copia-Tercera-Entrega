@@ -1,6 +1,6 @@
 package exceptions;
 
-import Actividades.Actividad;
+import actividades.Actividad;
 
 public class ModificarActividadesLearningPathException extends Exception{
 	
