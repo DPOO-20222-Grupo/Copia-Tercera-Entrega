@@ -48,7 +48,7 @@ public class PersistenciaUsuarios {
 
 		Gson gson = new Gson();
 		
-		HashMap<String, Estudiante> studentMap = new HashMap<>();	
+		HashMap<String, Estudiante> studentMap = new HashMap<String, Estudiante>();	
 		
 		try(FileReader reader = new FileReader(archivo)){
 			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
@@ -70,7 +70,7 @@ public class PersistenciaUsuarios {
 	public static HashMap<String, Profesor> cargarProfesores(String archivo) {
 		Gson gson = new Gson();
 		
-		HashMap<String, Profesor> profMap = new HashMap<>();	
+		HashMap<String, Profesor> profMap = new HashMap<String, Profesor>();	
 		
 		try(FileReader reader = new FileReader(archivo)){
 			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			

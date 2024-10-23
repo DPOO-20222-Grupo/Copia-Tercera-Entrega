@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
@@ -103,15 +102,16 @@ public class Main extends Aplicacion {
 				aplicacion.getMapaEstudiantes(), aplicacion.getMapaProfesores(), aplicacion.getMapaPreguntasAbiertas(),
 				aplicacion.getMapaPreguntasSeleccionMultiple(), aplicacion.getMapaLearningPaths());
 		
-		// Carga de Archivos
-		Aplicacion aplicacion_recargada = new Aplicacion(archivoUsuarios, archivoLP, archivoPreguntas, archivoActividades); 
+		// Re-Carga de Archivos
+		Aplicacion aplicacion_recargada = new Aplicacion(archivoUsuarios, archivoLP, archivoPreguntas, archivoActividades);
+		
+		// Pruebas para que la Re-Carga está bien hecha
 		
 		} catch(ParseException e) {
 			System.out.println("Error al convertir la fecha: " + e.getMessage());
 		}
 		
 		}
-	
 	
 	public static void main(String[] args) {
 		correrApp();

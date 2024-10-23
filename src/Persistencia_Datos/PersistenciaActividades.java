@@ -70,7 +70,7 @@ public class PersistenciaActividades {
 		public static HashMap<String, Examen> cargarExamen(String archivo) {
 			Gson gson = new Gson();
 			
-			HashMap<String, Examen> examenMap = new HashMap<>();			
+			HashMap<String, Examen> examenMap = new HashMap<String, Examen>();			
 			
 			try(FileReader reader = new FileReader(archivo)){
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);	
@@ -93,7 +93,7 @@ public class PersistenciaActividades {
 		public static HashMap<String, Encuesta> cargarEncuesta(String archivo) {
 			Gson gson = new Gson();
 			
-			HashMap<String, Encuesta> encuestaMap = new HashMap<>();			
+			HashMap<String, Encuesta> encuestaMap = new HashMap<String, Encuesta>();			
 			
 			try(FileReader reader = new FileReader(archivo)){
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);	
@@ -116,18 +116,16 @@ public class PersistenciaActividades {
 		public static HashMap<String, Quiz> cargarQuiz(String archivo) {
 			Gson gson = new Gson();
 			
-			HashMap<String, Quiz> QuizMap = new HashMap<>();			
+			HashMap<String, Quiz> quizMap = new HashMap<String, Quiz>();			
 			
 			try(FileReader reader = new FileReader(archivo)){
-				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);	
+				JsonObject quices = jsonObject.getAsJsonObject("Quices");
 				
-				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject actObject = entry.getValue().getAsJsonObject();
-					String tipo = actObject.get("TIPO").getAsString();
-					
-					if("Quiz".equals(tipo)) {
-						Quiz quiz = gson.fromJson(actObject, Quiz.class);
-						QuizMap.put(entry.getKey(), quiz);
+				if(quices != null) {
+					for (Entry<String, JsonElement> entry: quices.entrySet()) {
+						Quiz quiz = gson.fromJson(entry.getValue().getAsJsonObject(), Quiz.class);
+						quizMap.put(entry.getKey(), quiz);
 					}
 				}
 				
@@ -135,24 +133,22 @@ public class PersistenciaActividades {
 				e.printStackTrace();			
 			}
 			
-			return QuizMap;
+			return quizMap;
 		}
 		
 		public static HashMap<String, RevisarRecurso> cargarRecurso(String archivo) {
 			Gson gson = new Gson();
 			
-			HashMap<String, RevisarRecurso> RecursosMap = new HashMap<>();			
+			HashMap<String, RevisarRecurso> recursosMap = new HashMap<String, RevisarRecurso>();			
 			
 			try(FileReader reader = new FileReader(archivo)){
-				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);	
+				JsonObject recursos = jsonObject.getAsJsonObject("Revisar Recursos");
 				
-				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject actObject = entry.getValue().getAsJsonObject();
-					String tipo = actObject.get("TIPO").getAsString();
-					
-					if("Recurso".equals(tipo)) {
-						RevisarRecurso recurso = gson.fromJson(actObject, RevisarRecurso.class);
-						RecursosMap.put(entry.getKey(), recurso);
+				if(recursos != null) {
+					for (Entry<String, JsonElement> entry: recursos.entrySet()) {
+						RevisarRecurso recurso = gson.fromJson(entry.getValue().getAsJsonObject(), RevisarRecurso.class);
+						recursosMap.put(entry.getKey(), recurso);
 					}
 				}
 				
@@ -160,24 +156,22 @@ public class PersistenciaActividades {
 				e.printStackTrace();			
 			}
 			
-			return RecursosMap;
+			return recursosMap;
 		}
 		
 		public static HashMap<String, Tarea> cargarTarea(String archivo) {
 			Gson gson = new Gson();
 			
-			HashMap<String, Tarea> TareaMap = new HashMap<>();			
+			HashMap<String, Tarea> tareaMap = new HashMap<String, Tarea>();			
 			
 			try(FileReader reader = new FileReader(archivo)){
-				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);	
+				JsonObject tareas = jsonObject.getAsJsonObject("Tareas");
 				
-				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject actObject = entry.getValue().getAsJsonObject();
-					String tipo = actObject.get("TIPO").getAsString();
-					
-					if("Tarea".equals(tipo)) {
-						Tarea tarea = gson.fromJson(actObject, Tarea.class);
-						TareaMap.put(entry.getKey(), tarea);
+				if(tareas != null) {
+					for (Entry<String, JsonElement> entry: tareas.entrySet()) {
+						Tarea tarea = gson.fromJson(entry.getValue().getAsJsonObject(), Tarea.class);
+						tareaMap.put(entry.getKey(), tarea);
 					}
 				}
 				
@@ -185,7 +179,7 @@ public class PersistenciaActividades {
 				e.printStackTrace();			
 			}
 			
-			return TareaMap;
+			return tareaMap;
 		}
 	
 }

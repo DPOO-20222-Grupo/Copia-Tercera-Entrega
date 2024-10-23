@@ -27,7 +27,7 @@ public class PersistenciaLearningPaths {
 		
 		try (FileWriter writer = new FileWriter(archivo)){
 			gson.toJson(jsonObject, writer);
-			System.out.printf("LearningPaths guardados correctamente en archivo JSON: '%s'./n", archivo);
+			System.out.printf("LearningPaths guardados correctamente en archivo JSON: '%s'.\n", archivo);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -36,7 +36,7 @@ public class PersistenciaLearningPaths {
 	public static HashMap<String, LearningPath> cargarLP(String archivo) {
 		Gson gson = new Gson();
 		
-		HashMap<String, LearningPath> LPMap = new HashMap<>();			
+		HashMap<String, LearningPath> LPMap = new HashMap<String, LearningPath>();			
 		
 		try(FileReader reader = new FileReader(archivo)){
 			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			

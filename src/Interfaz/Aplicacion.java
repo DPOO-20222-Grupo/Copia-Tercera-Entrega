@@ -960,6 +960,7 @@ public class Aplicacion {
 		
 		
 	}
+<<<<<<< HEAD
 	
 	public void calificarLearningPath (LearningPath learningPath, float rating) {
 		learningPath.actualizarRating(rating);
@@ -975,6 +976,8 @@ public class Aplicacion {
 	
 	
 
+=======
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 
 	public void descargarDatos (HashMap<String, Examen> mapaExamenes, 
 			HashMap<String, Encuesta> mapaEncuestas, HashMap<String, Quiz> mapaQuices,
