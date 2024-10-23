@@ -47,6 +47,9 @@ public abstract class SeguimientoActividad {
 		this.tiempoTotal = tiempoTotal;
 	}
 	
+	public void actualizarEstadoCompletado () {
+		this.setEstado("Completada");
+	}
 	
 
 

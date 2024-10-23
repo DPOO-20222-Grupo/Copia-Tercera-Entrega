@@ -24,6 +24,10 @@ public abstract class Pregunta {
 		return titulo;
 	}
 
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
 	public abstract String getTipo();
 	
 	protected abstract int getId();

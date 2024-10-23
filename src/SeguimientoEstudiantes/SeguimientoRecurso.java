@@ -12,9 +12,6 @@ public class SeguimientoRecurso extends SeguimientoActividad {
 		this.recurso = recurso.getTipoRecurso();
 	}
 	
-	public void actualizarEstado() {
-		this.setEstado("Exitoso");
-	}
 
 	public String getRecurso() {
 		return recurso;
@@ -23,6 +20,7 @@ public class SeguimientoRecurso extends SeguimientoActividad {
 	public void setRecurso(String recurso) {
 		this.recurso = recurso;
 	}
+	
 	
 	
 

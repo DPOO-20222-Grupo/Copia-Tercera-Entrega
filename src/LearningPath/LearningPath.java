@@ -13,10 +13,7 @@ import User.Profesor;
 import exceptions.ModificarActividadesLearningPathException;
 import exceptions.ModificarEstudianteLearningPathException;
 import exceptions.ModificarObjetivosException;
-<<<<<<< HEAD
-=======
 
->>>>>>> refs/remotes/origin/main
 
 public class LearningPath {
     private String titulo;
@@ -306,6 +303,7 @@ public class LearningPath {
 		
     public void inscribirEstudiante(Estudiante estudiante, SeguimientoLearningPath seguimiento) throws ModificarEstudianteLearningPathException {
         if (!estudiantesInscritos.containsKey(estudiante.getLogin())) {
+        	
             estudiantesInscritos.put(estudiante.getLogin(), seguimiento);
         }
         

@@ -21,6 +21,10 @@ import Persistencia_Datos.PersistenciaUsuarios;
 import Preguntas.Pregunta;
 import Preguntas.PreguntaAbierta;
 import Preguntas.PreguntaSeleccionMultiple;
+import SeguimientoEstudiantes.SeguimientoActividad;
+import SeguimientoEstudiantes.SeguimientoExamen;
+import SeguimientoEstudiantes.SeguimientoLearningPath;
+import SeguimientoEstudiantes.SeguimientoTarea;
 import User.Estudiante;
 import User.Profesor;
 import User.Usuario;
@@ -29,6 +33,7 @@ import exceptions.LearningPathYaExistenteException;
 import exceptions.ModificarActividadesLearningPathException;
 import exceptions.ModificarActividadesPreviasException;
 import exceptions.ModificarActividadesSeguimientoException;
+import exceptions.ModificarEstudianteLearningPathException;
 import exceptions.ModificarObjetivosException;
 import exceptions.ModificarPreguntasAbiertasException;
 import exceptions.ModificarPreguntasQuizException;
@@ -650,6 +655,242 @@ public class Aplicacion {
 		
 		
 	}
+	
+	public void modificarTituloPregunta (Pregunta pregunta, String titulo, Profesor profesorCreador) {
+		
+		if (pregunta.getTipo().equals("Abierta")) {
+			String llave = pregunta.getIdPregunta();
+			this.getMapaPreguntasAbiertas().remove(llave);
+			profesorCreador.getPreguntasAbiertasPropias().remove(llave);
+			
+			pregunta.setTitulo(titulo);
+			
+			this.getMapaPreguntasAbiertas().put(llave, (PreguntaAbierta) pregunta);
+			profesorCreador.getPreguntasAbiertasPropias().put(llave, (PreguntaAbierta) pregunta);
+			
+		}
+		
+		else {
+			
+			String llave = pregunta.getIdPregunta();
+			this.getMapaPreguntasSeleccionMultiple().remove(llave);
+			profesorCreador.getPreguntasSeleccionPropias().remove(llave);
+			
+			pregunta.setTitulo(titulo);
+			
+			this.getMapaPreguntasSeleccionMultiple().put(llave, (PreguntaSeleccionMultiple) pregunta);
+			profesorCreador.getPreguntasSeleccionPropias().put(llave, (PreguntaSeleccionMultiple) pregunta);
+			
+			
+		}
+		
+		
+	}
+	
+	public void modificarEnunciadoPregunta(Pregunta pregunta, String enunciado) {
+		pregunta.setEnunciado(enunciado);
+		
+	}
+	
+	public void modificarOpcionesPreguntaSeleccion (PreguntaSeleccionMultiple pregunta, String nuevaOpcion, int opcionModificar) {
+		
+		if (opcionModificar == 1) {
+			pregunta.setOpcion1(nuevaOpcion);
+		}
+		
+		else if (opcionModificar == 2) {
+			pregunta.setOpcion2(nuevaOpcion);
+		}
+		
+		else if (opcionModificar == 3) {
+			pregunta.setOpcion3(nuevaOpcion);
+		}
+		
+		else if (opcionModificar == 4) {
+			pregunta.setOpcion4(nuevaOpcion);
+		}
+		
+	}
+	
+	public void modificarOpcionCorrectaPreguntaSeleccion (PreguntaSeleccionMultiple pregunta, int nuevaOpcion) {
+		pregunta.setOpcionCorrecta(nuevaOpcion);
+	}
+	
+	public void calificarExamen(Examen examen, Estudiante estudiante, LearningPath learningPath, float nota) {
+		
+		Map <String, SeguimientoLearningPath> mapaEstudiantes = learningPath.getEstudiantesInscritos();
+		
+		SeguimientoLearningPath seguimientoEstudiante = mapaEstudiantes.get(estudiante.getLogin());
+		
+		Map <Actividad, SeguimientoActividad> mapaSeguimientosActividades = seguimientoEstudiante.getMapaSeguimientoActividades();
+		
+		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) mapaSeguimientosActividades.get(examen);
+		
+		seguimientoExamen.setNota(nota);
+		seguimientoExamen.actualizarEstadoCompletado();	
+		
+	}
+	
+	public void calificarTarea(Tarea tarea, Estudiante estudiante, LearningPath learningPath, boolean esExitoso) {
+		
+		Map <String, SeguimientoLearningPath> mapaEstudiantes = learningPath.getEstudiantesInscritos();
+		
+		SeguimientoLearningPath seguimientoEstudiante = mapaEstudiantes.get(estudiante.getLogin());
+		
+		Map <Actividad, SeguimientoActividad> mapaSeguimientosActividades = seguimientoEstudiante.getMapaSeguimientoActividades();
+		
+		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) mapaSeguimientosActividades.get(tarea);
+		
+		seguimientoTarea.actualizarEstadoFinal(esExitoso);
+		
+		
+	}
+	
+	public void clonarActividad (Actividad actividadOriginal, Profesor profesorClonando) {
+			
+			String tipoActividad = actividadOriginal.getTipoActividad();
+			
+			if (tipoActividad.equals("Encuesta")) {
+				
+				Encuesta encuesta = (Encuesta) actividadOriginal;
+				
+				this.crearEncuesta(
+						encuesta.getTitulo(),
+						encuesta.getDescripcion(),
+						encuesta.getObjetivos(),
+						encuesta.getNivelDificultad(),
+						encuesta.getDuracionMinutos(), 
+						encuesta.getFechaLimite(), 
+						profesorClonando,
+						encuesta.getPreguntas()
+						);
+				
+				
+			}
+			
+			else if (tipoActividad.equals("Tarea")) {
+				
+				Tarea tareaOriginal = (Tarea) actividadOriginal;
+				
+				this.crearTarea(tareaOriginal.getTitulo(), 
+								tareaOriginal.getDescripcion(), 
+								tareaOriginal.getObjetivos(), 
+								tareaOriginal.getNivelDificultad(), 
+								tareaOriginal.getDuracionMinutos(), 
+								tareaOriginal.getFechaLimite(), 
+								profesorClonando);
+				
+				
+			}
+			
+			else if (tipoActividad.equals("Quiz")) {
+				
+				Quiz quizOriginal = (Quiz) actividadOriginal;
+				
+				this.crearQuiz(quizOriginal.getTitulo(), 
+							   quizOriginal.getDescripcion(), 
+							   quizOriginal.getObjetivos(), 
+							   quizOriginal.getNivelDificultad(), 
+							   quizOriginal.getDuracionMinutos(), 
+							   quizOriginal.getFechaLimite(), 
+							   profesorClonando, 
+							   quizOriginal.getCalificacionMinima(),
+							   quizOriginal.getPreguntas());
+				
+				
+				
+			}
+			
+			else if (tipoActividad.equals("Examen")) {
+				
+				Examen examen = (Examen) actividadOriginal;
+				
+				this.crearExamen(examen.getTitulo(), 
+								 examen.getDescripcion(), 
+								 examen.getObjetivos(), 
+								 examen.getNivelDificultad(), 
+								 examen.getDuracionMinutos(),
+								 examen.getFechaLimite(), 
+								 profesorClonando, 
+								 examen.getPreguntas());
+				
+			}
+			
+			else if (tipoActividad.equals("Recurso")) {
+				
+				RevisarRecurso recurso = (RevisarRecurso) actividadOriginal;
+				
+				this.crearRevisarRecurso(recurso.getTitulo(), 
+										 recurso.getDescripcion(), 
+										 recurso.getObjetivos(), 
+										 recurso.getNivelDificultad(), 
+										 recurso.getDuracionMinutos(), 
+										 recurso.getFechaLimite(), 
+										 recurso.getTipoRecurso(), 
+										 profesorClonando, 
+										 recurso.getEnlaceRecurso());
+				
+			}
+			
+		
+		
+	}
+	
+	
+	public void clonarLearningPath (LearningPath learningPathOriginal, Profesor profesorClonando) {
+		
+		this.crearLearningPath(learningPathOriginal.getTitulo(), 
+							   learningPathOriginal.getDescripcion(), 
+							   learningPathOriginal.getObjetivos(), 
+							   learningPathOriginal.getNivelDificultad(),
+							   profesorClonando, 
+							   learningPathOriginal.getActividades(), 
+							   learningPathOriginal.getMapaActividadesObligatorias());
+	}
+	
+	
+	public void inscribirEstudianteLearningPath (Estudiante estudiante, LearningPath learningPath) throws ModificarEstudianteLearningPathException {
+		
+		SeguimientoLearningPath seguimiento = new SeguimientoLearningPath(learningPath, estudiante);
+		
+		learningPath.inscribirEstudiante(estudiante, seguimiento);
+		
+		estudiante.agregarSeguimientoLearningPath(seguimiento);
+		
+	}
+	
+	public void enviarTarea (Tarea tarea, Estudiante estudiante, LearningPath learningPath) {
+		
+		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		
+		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) seguimientoEstudiante.getMapaSeguimientoActividades().get(tarea);
+		
+		seguimientoTarea.actualizarEstadoEnviado();
+		
+	}
+	
+	public void enviarExamen (Examen examen, Estudiante estudiante, LearningPath learningPath) {
+		
+		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		
+		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen);
+		
+		seguimientoExamen.actualizarEstadoEnviado();
+		
+	}
+	
+	public void completarEncuestaRecurso (Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
+		
+		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		
+		SeguimientoActividad seguimientoActividad = seguimientoEstudiante.getMapaSeguimientoActividades().get(actividad);
+		
+		seguimientoActividad.actualizarEstadoCompletado();
+		
+		
+	}
+	
+	
         
 	
 

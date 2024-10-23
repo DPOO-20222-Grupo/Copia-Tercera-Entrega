@@ -33,4 +33,17 @@ public class Estudiante extends Usuario {
 	public String getTipo() {
 		return TIPO;
 	}
+
+	public Map<String, SeguimientoLearningPath> getLearningPathsInscritos() {
+		return learningPathsInscritos;
+	}
+	
+	public void agregarSeguimientoLearningPath (SeguimientoLearningPath seguimiento) {
+		
+		String llave = seguimiento.getLearningPath().getIdLearnginPath();
+		
+		this.getLearningPathsInscritos().put(llave, seguimiento);
+		
+	}
+	
 }
