@@ -59,7 +59,6 @@ public class Aplicacion {
 	public Aplicacion () {
 		this.mapaEstudiantes = new HashMap<String, Estudiante>();
 		this.mapaProfesores = new HashMap<String,Profesor >();
-		this.mapaLearningPaths = new HashMap<String, LearningPath>();
 		this.mapaTareas = new HashMap <String, Tarea>();
 		this.mapaRevisarRecurso = new HashMap <String, RevisarRecurso>();
 		this.mapaEncuestas = new HashMap <String, Encuesta>();
@@ -67,6 +66,7 @@ public class Aplicacion {
 		this.mapaQuices = new HashMap <String, Quiz>();
 		this.mapaPreguntasAbiertas = new HashMap <String, PreguntaAbierta>();
 		this.mapaPreguntasSeleccionMultiple = new HashMap<String, PreguntaSeleccionMultiple>();
+		this.mapaLearningPaths = new HashMap<String, LearningPath>();
 	
 	}
 	

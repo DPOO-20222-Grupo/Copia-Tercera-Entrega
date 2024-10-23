@@ -1,0 +1,208 @@
+{
+  "Introducción a las Pruebas - l.munera": {
+    "titulo": "Introducción a las Pruebas",
+    "descripcion": "Pruebas",
+    "profesorCreador": {
+      "nombre": "Lina Munera",
+      "mapaRecursosPropios": {},
+      "mapaTareasPropias": {},
+      "mapaExamenesPropios": {},
+      "mapaEncuestasPropias": {},
+      "mapaQuicesPropios": {},
+      "learningPathPropios": {},
+      "preguntasAbiertasPropias": {},
+      "preguntasSeleccionPropias": {},
+      "login": "l.munera",
+      "password": "Tristeza30",
+      "isLoggedIn": false
+    },
+    "objetivos": [
+      "Objetivo 1",
+      "Objetivo 2"
+    ],
+    "nivelDificultad": "mid",
+    "duracionMinutos": 345,
+    "rating": 0.0,
+    "fechaCreacion": "Oct 22, 2024, 11:04:23 PM",
+    "fechaUltimaModificacion": "Oct 22, 2024, 11:04:23 PM",
+    "version": 1.0,
+    "estudiantesInscritos": {},
+    "actividades": [
+      {
+        "preguntas": [
+          {
+            "enunciado": "Ingrese su nombre: ",
+            "titulo": "Registro de Nombres",
+            "id": 1
+          }
+        ],
+        "numPreguntas": 1,
+        "titulo": "Autoevaluación",
+        "descripcion": "Autoevaluación acitividad #1",
+        "objetivos": [
+          "Objetivo 1",
+          "Objetivo 2"
+        ],
+        "nivelDificultad": "Bajo",
+        "profesorCreador": {
+          "nombre": "Lina Munera",
+          "mapaRecursosPropios": {},
+          "mapaTareasPropias": {},
+          "mapaExamenesPropios": {},
+          "mapaEncuestasPropias": {},
+          "mapaQuicesPropios": {},
+          "learningPathPropios": {},
+          "preguntasAbiertasPropias": {},
+          "preguntasSeleccionPropias": {},
+          "login": "l.munera",
+          "password": "Tristeza30",
+          "isLoggedIn": false
+        },
+        "duracionMinutos": 15,
+        "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+        "resenas": [],
+        "rating": 0.0,
+        "contadorRatings": 0,
+        "actividadesPrevias": [],
+        "actividadesSeguimiento": []
+      },
+      {
+        "numPreguntas": 1,
+        "preguntas": [
+          {
+            "enunciado": "Ingrese su nombre: ",
+            "titulo": "Registro de Nombres",
+            "id": 1
+          }
+        ],
+        "titulo": "Parcial",
+        "descripcion": "Examen Parcial",
+        "objetivos": [
+          "Objetivo 1",
+          "Objetivo 2"
+        ],
+        "nivelDificultad": "medio",
+        "profesorCreador": {
+          "nombre": "Lina Munera",
+          "mapaRecursosPropios": {},
+          "mapaTareasPropias": {},
+          "mapaExamenesPropios": {},
+          "mapaEncuestasPropias": {},
+          "mapaQuicesPropios": {},
+          "learningPathPropios": {},
+          "preguntasAbiertasPropias": {},
+          "preguntasSeleccionPropias": {},
+          "login": "l.munera",
+          "password": "Tristeza30",
+          "isLoggedIn": false
+        },
+        "duracionMinutos": 120,
+        "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+        "resenas": [],
+        "rating": 0.0,
+        "contadorRatings": 0,
+        "actividadesPrevias": [],
+        "actividadesSeguimiento": []
+      },
+      {
+        "tipoRecurso": "video",
+        "enlaceRecurso": "enlace",
+        "titulo": "Ver video",
+        "descripcion": "Ver video segunda guerra mundial",
+        "objetivos": [
+          "Objetivo 1",
+          "Objetivo 2"
+        ],
+        "nivelDificultad": "bajo",
+        "profesorCreador": {
+          "nombre": "Lina Munera",
+          "mapaRecursosPropios": {},
+          "mapaTareasPropias": {},
+          "mapaExamenesPropios": {},
+          "mapaEncuestasPropias": {},
+          "mapaQuicesPropios": {},
+          "learningPathPropios": {},
+          "preguntasAbiertasPropias": {},
+          "preguntasSeleccionPropias": {},
+          "login": "l.munera",
+          "password": "Tristeza30",
+          "isLoggedIn": false
+        },
+        "duracionMinutos": 45,
+        "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+        "resenas": [],
+        "rating": 0.0,
+        "contadorRatings": 0,
+        "actividadesPrevias": [],
+        "actividadesSeguimiento": []
+      },
+      {
+        "calificacionMinima": 3.5,
+        "preguntas": [],
+        "numPreguntas": 0,
+        "titulo": "Quiz1",
+        "descripcion": "Primer Quiz",
+        "objetivos": [
+          "Objetivo 1",
+          "Objetivo 2"
+        ],
+        "nivelDificultad": "bajo",
+        "profesorCreador": {
+          "nombre": "Lina Munera",
+          "mapaRecursosPropios": {},
+          "mapaTareasPropias": {},
+          "mapaExamenesPropios": {},
+          "mapaEncuestasPropias": {},
+          "mapaQuicesPropios": {},
+          "learningPathPropios": {},
+          "preguntasAbiertasPropias": {},
+          "preguntasSeleccionPropias": {},
+          "login": "l.munera",
+          "password": "Tristeza30",
+          "isLoggedIn": false
+        },
+        "duracionMinutos": 45,
+        "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+        "resenas": [],
+        "rating": 0.0,
+        "contadorRatings": 0,
+        "actividadesPrevias": [],
+        "actividadesSeguimiento": []
+      },
+      {
+        "titulo": "Tarea1",
+        "descripcion": "Tarea numero uno",
+        "objetivos": [
+          "Objetivo 1",
+          "Objetivo 2"
+        ],
+        "nivelDificultad": "bajo",
+        "profesorCreador": {
+          "nombre": "Lina Munera",
+          "mapaRecursosPropios": {},
+          "mapaTareasPropias": {},
+          "mapaExamenesPropios": {},
+          "mapaEncuestasPropias": {},
+          "mapaQuicesPropios": {},
+          "learningPathPropios": {},
+          "preguntasAbiertasPropias": {},
+          "preguntasSeleccionPropias": {},
+          "login": "l.munera",
+          "password": "Tristeza30",
+          "isLoggedIn": false
+        },
+        "duracionMinutos": 120,
+        "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+        "resenas": [],
+        "rating": 0.0,
+        "contadorRatings": 0,
+        "actividadesPrevias": [],
+        "actividadesSeguimiento": []
+      }
+    ],
+    "mapaActividadesObligatorias": {
+      "Actividad1": true
+    },
+    "contadorRatings": 0
+  }
+}

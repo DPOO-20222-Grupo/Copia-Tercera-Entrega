@@ -18,43 +18,46 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class PersistenciaActividades {
-	
-		// Función de Descarga
 		
 		public static void persistirActividades(HashMap<String, Examen> ExamenMap, 
 				HashMap<String, Encuesta> EncuestaMap,HashMap<String, Quiz> QuizMap,
 				HashMap<String, RevisarRecurso> RevisarMap,HashMap<String, Tarea> TareaMap,
 				String archivo) {
 			
-			// Creación del Objeto Json y del Serializador
-			
 			Gson gson = new GsonBuilder().setPrettyPrinting().create();
 			JsonObject jsonObject = new JsonObject();
+			JsonObject encuestas = new JsonObject();
+			JsonObject examenes = new JsonObject();
+			JsonObject quices = new JsonObject();
+			JsonObject recursos = new JsonObject();
+			JsonObject tareas = new JsonObject();
 				
-			// Recprrridpp de los HashMaps y conversión de sus entrys a
-			// objetos JSON.
 			
 			for(Entry<String, Encuesta> entry: EncuestaMap.entrySet()) {
-				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+				encuestas.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
 			}
 			
 			for(Entry<String, Examen> entry: ExamenMap.entrySet()) {
-				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+				examenes.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
 			}
 			
 			for(Entry<String, Quiz> entry: QuizMap.entrySet()) {
-				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+				quices.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
 			}
 			
 			for(Entry<String, RevisarRecurso> entry: RevisarMap.entrySet()) {
-				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+				recursos.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
 			}
 			
 			for(Entry<String, Tarea> entry: TareaMap.entrySet()) {
-				jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+				tareas.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
 			}
 			
-			// Serialización del Objeto JSON
+			jsonObject.add("Tareas", tareas);
+			jsonObject.add("Examenes", examenes);
+			jsonObject.add("Revisar Recursos", recursos);
+			jsonObject.add("Quices", quices);
+			jsonObject.add("Encuestas", encuestas);
 		
 			try (FileWriter writer = new FileWriter(archivo)){
 				gson.toJson(jsonObject, writer);
@@ -64,28 +67,19 @@ public class PersistenciaActividades {
 			}
 		}
 		
-		// Funciones de Carga
-		
 		public static HashMap<String, Examen> cargarExamen(String archivo) {
 			Gson gson = new Gson();
 			
-			// Creación de la Estructura: HashMap contenedor de exámenes
-			
-			HashMap<String, Examen> ExamenMap = new HashMap<>();			
+			HashMap<String, Examen> examenMap = new HashMap<>();			
 			
 			try(FileReader reader = new FileReader(archivo)){
 				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);	
+				JsonObject examenes = jsonObject.getAsJsonObject("Examenes");
 				
-				// Recorrido del Objeto JSON y sus entradas
-				// se utilizan condicionales, en caso de que la entrada sea de tipo Exámen se añade al mapa.
-				
-				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject actObject = entry.getValue().getAsJsonObject();
-					String tipo = actObject.get("TIPO").getAsString();
-					
-					if("Examen".equals(tipo)) {
-						Examen examen = gson.fromJson(actObject, Examen.class);
-						ExamenMap.put(entry.getKey(), examen);
+				if(examenes != null) {
+					for (Entry<String, JsonElement> entry: examenes.entrySet()) {
+						Examen examen = gson.fromJson(entry.getValue().getAsJsonObject(), Examen.class);
+						examenMap.put(entry.getKey(), examen);
 					}
 				}
 				
@@ -93,31 +87,22 @@ public class PersistenciaActividades {
 				e.printStackTrace();			
 			}
 			
-			return ExamenMap;
+			return examenMap;
 		}
 		
 		public static HashMap<String, Encuesta> cargarEncuesta(String archivo) {
 			Gson gson = new Gson();
 			
-			// Creación de la estructura: HashMap contenedor de Encuesta
-			
-			HashMap<String, Encuesta> EncuestaMap = new HashMap<>();	
-			
-			// Lectura del Objeto JSON y sus entradas. 
-			// En caso de que la entrada sea del tipo esperado: "Encuesta", lo añade a la estructura principal: un HashMap
-			
-			
+			HashMap<String, Encuesta> encuestaMap = new HashMap<>();			
 			
 			try(FileReader reader = new FileReader(archivo)){
-				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);			
+				JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);	
+				JsonObject encuestas = jsonObject.getAsJsonObject("Encuestas");
 				
-				for (Entry<String, JsonElement> entry: jsonObject.entrySet()) {
-					JsonObject actObject = entry.getValue().getAsJsonObject();
-					String tipo = actObject.get("TIPO").getAsString();
-					
-					if("Encuesta".equals(tipo)) {
-						Encuesta encuesta = gson.fromJson(actObject, Encuesta.class);
-						EncuestaMap.put(entry.getKey(), encuesta);
+				if(encuestas != null) {
+					for (Entry<String, JsonElement> entry: encuestas.entrySet()) {
+						Encuesta encuesta = gson.fromJson(entry.getValue().getAsJsonObject(), Encuesta.class);
+						encuestaMap.put(entry.getKey(), encuesta);
 					}
 				}
 				
@@ -125,7 +110,7 @@ public class PersistenciaActividades {
 				e.printStackTrace();			
 			}
 			
-			return EncuestaMap;
+			return encuestaMap;
 		}
 		
 		public static HashMap<String, Quiz> cargarQuiz(String archivo) {
