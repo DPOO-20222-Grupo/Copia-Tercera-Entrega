@@ -314,7 +314,7 @@ public class LearningPath {
 
 	public void eliminarEstudiante(Estudiante estudiante) throws ModificarEstudianteLearningPathException {
 		if (estudiantesInscritos.containsKey(estudiante.getLogin())) {
-			estudiantesInscritos.remove(estudiante);
+			estudiantesInscritos.remove(estudiante.getLogin());
         
 		}
 		
