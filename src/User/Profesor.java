@@ -16,7 +16,7 @@ import Preguntas.PreguntaAbierta;
 import Preguntas.PreguntaSeleccionMultiple;
 import exceptions.ModificarActividadesLearningPathException;
 
-public abstract class Profesor extends Usuario {
+public class Profesor extends Usuario {
     private static String TIPO = "Profesor";
 	private String nombre;
 	private Map <String, RevisarRecurso> mapaRecursosPropios;
