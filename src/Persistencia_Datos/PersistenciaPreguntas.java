@@ -31,7 +31,7 @@ public class PersistenciaPreguntas {
 		
 		try (FileWriter writer = new FileWriter(archivo)){
 			gson.toJson(jsonObject, writer);
-			System.out.printf("Preguntas guardadas correctamente en archivo JSON: '%s'.", archivo);
+			System.out.printf("Preguntas guardadas correctamente en archivo JSON: '%s'.\n", archivo);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

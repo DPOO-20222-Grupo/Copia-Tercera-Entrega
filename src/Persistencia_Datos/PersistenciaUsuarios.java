@@ -19,18 +19,23 @@ public class PersistenciaUsuarios {
 	public static void persistirUsuarios(HashMap<String, Estudiante> studentMap, HashMap<String, Profesor> profMap, String archivo) {
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		JsonObject jsonObject = new JsonObject();
+		JsonObject estudiantes = new JsonObject();
+		JsonObject profesores = new JsonObject();
 		
 		for(Entry<String, Estudiante> entry: studentMap.entrySet()) {
-			jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+			estudiantes.add(archivo, gson.toJsonTree(entry.getValue()));
 		}
 		
 		for(Entry<String, Profesor> entry: profMap.entrySet()) {
-			jsonObject.add(archivo, gson.toJsonTree(entry.getValue()));
+			profesores.add(archivo, gson.toJsonTree(entry.getValue()));
 		}
+		
+		jsonObject.add("estudiantes", estudiantes);
+		jsonObject.add("profesores", profesores);
 		
 		try (FileWriter writer = new FileWriter(archivo)){
 			gson.toJson(jsonObject, writer);
-			System.out.printf("Usuarios guardados correctamente en archivo JSON: '%s'.", archivo);
+			System.out.printf("Usuarios guardados correctamente en archivo JSON: '%s'.\n", archivo);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
