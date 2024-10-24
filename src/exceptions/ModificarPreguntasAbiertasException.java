@@ -2,7 +2,7 @@ package exceptions;
 
 import preguntas.PreguntaAbierta;
 
-
+@SuppressWarnings("serial")
 public class ModificarPreguntasAbiertasException extends Exception {
 	
 	private PreguntaAbierta pregunta;

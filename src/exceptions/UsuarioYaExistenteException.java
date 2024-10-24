@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class UsuarioYaExistenteException extends Exception{
 
 	private String login;

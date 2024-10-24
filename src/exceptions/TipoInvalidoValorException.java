@@ -1,5 +1,6 @@
 package exceptions;
 
+@SuppressWarnings("serial")
 public class TipoInvalidoValorException extends Exception {
 	
 	private String tipoEsperado;
