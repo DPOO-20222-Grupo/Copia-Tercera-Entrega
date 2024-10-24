@@ -19,7 +19,7 @@ import preguntas.PreguntaSeleccionMultiple;
 import user.Estudiante;
 import user.Profesor;
 
-public class Main extends Aplicacion {
+public class Main {
 	public static String archivoUsuarios = "usuarios.json";
 	public static String archivoLP = "lp.json";
 	public static String archivoPreguntas = "preguntas.json";
