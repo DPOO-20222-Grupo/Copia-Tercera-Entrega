@@ -11,10 +11,10 @@ public abstract class SeguimientoActividad {
 	private int tiempoTotal;
 	
 	
-	public SeguimientoActividad( Actividad pActividad, Estudiante pEstudiante) {
+	public SeguimientoActividad( Actividad actividad, Estudiante estudiante) {
 		
-		this.actividad = pActividad;
-		this.estudianteSeguimiento = pEstudiante;
+		this.actividad = actividad;
+		this.estudianteSeguimiento = estudiante;
 		this.estado = "Incompleta";
 	}
 	
