@@ -1,14 +1,15 @@
 package exceptions;
 
+import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
 
 @SuppressWarnings("serial")
 public class ModificarPreguntasQuizException extends Exception {
 	
-	private PreguntaSeleccionMultiple pregunta;
+	private PreguntaCerrada pregunta;
 	private String accion;
 	
-	public ModificarPreguntasQuizException(PreguntaSeleccionMultiple pregunta, String accion) {
+	public ModificarPreguntasQuizException(PreguntaCerrada pregunta, String accion) {
 		super();
 		this.pregunta = pregunta;
 		this.accion = accion;

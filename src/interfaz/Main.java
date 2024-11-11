@@ -15,6 +15,7 @@ import actividades.RevisarRecurso;
 import actividades.Tarea;
 import learningPath.LearningPath;
 import preguntas.PreguntaAbierta;
+import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
 import user.Estudiante;
 import user.Profesor;
@@ -54,7 +55,7 @@ public class Main {
 		
 		List<PreguntaAbierta> preguntasAbiertas = new ArrayList<PreguntaAbierta>();
 		preguntasAbiertas.add(pregAbierta);
-		List<PreguntaSeleccionMultiple> preguntasCerradas = new ArrayList<PreguntaSeleccionMultiple>();
+		List<PreguntaCerrada> preguntasCerradas = new ArrayList<PreguntaCerrada>();
 		List<String> objetivos = new ArrayList<String>();
 		objetivos.add("Objetivo 1");
 		objetivos.add("Objetivo 2");

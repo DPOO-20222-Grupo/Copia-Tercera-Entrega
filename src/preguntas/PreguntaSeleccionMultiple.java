@@ -1,6 +1,6 @@
 package preguntas;
 
-public class PreguntaSeleccionMultiple extends Pregunta {
+public class PreguntaSeleccionMultiple extends PreguntaCerrada {
 	private static int CONTADOR = 1;
 	private static String TIPO = "Cerrada";
     private String opcion1;
@@ -11,12 +11,11 @@ public class PreguntaSeleccionMultiple extends Pregunta {
 
     // Constructor
     public PreguntaSeleccionMultiple(String enunciado, String titulo, String opcion1, String opcion2, String opcion3, String opcion4, int opcionCorrecta) {
-        super(enunciado, titulo);
+        super(enunciado, titulo, opcionCorrecta);
         this.opcion1 = opcion1;
         this.opcion2 = opcion2;
         this.opcion3 = opcion3;
         this.opcion4 = opcion4;
-        this.opcionCorrecta = opcionCorrecta;
         this.id = CONTADOR;
         CONTADOR+=1;
     }
@@ -53,20 +52,9 @@ public class PreguntaSeleccionMultiple extends Pregunta {
         this.opcion4 = opcion4;
     }
 
-    public int getOpcionCorrecta() {
-        return opcionCorrecta;
-    }
-
-    public void setOpcionCorrecta(int opcionCorrecta) {
-        this.opcionCorrecta = opcionCorrecta;
-    }
-
     
     //Metodos adicionales 
-    
-    public boolean verificarRespuesta(int opcionEscogida) {
-        return opcionEscogida == this.opcionCorrecta;
-    }
+   
     
     public String getTipo() {
 		return TIPO;
