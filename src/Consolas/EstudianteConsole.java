@@ -2,6 +2,7 @@ package Consolas;
 
 import java.util.Scanner;
 
+import interfaz.Aplicacion;
 import learningPath.LearningPath;
 import seguimientoEstudiantes.SeguimientoLearningPath;
 import user.Estudiante;
@@ -11,7 +12,7 @@ import java.util.Map;
 
 public class EstudianteConsole {
    
-	private static Map<String, Estudiante> estudiantes = new HashMap<>();
+	private static Aplicacion aplicacion = new Aplicacion();  
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -23,7 +24,7 @@ public class EstudianteConsole {
         System.out.print("Ingrese su contraseña: ");
         String password = scanner.nextLine();
 
-        Estudiante estudiante = estudiantes.get(login);
+        Estudiante estudiante = aplicacion.getMapaEstudiantes().get(login); 
         if (estudiante != null && estudiante.login(login, password)) {
             System.out.println("Autenticación exitosa. Bienvenido, " + estudiante.getNombre());
             mostrarMenuEstudiante(estudiante);
@@ -79,12 +80,11 @@ public class EstudianteConsole {
         });
     }
 
-    // Métodos para cargar y guardar datos en archivos (simulación)
     private static void cargarDatos() {
-        // Implementar la carga de datos desde archivo
+    	
     }
 
     private static void guardarDatos() {
-        // Implementar la persistencia de datos en archivo
+
     }
 }

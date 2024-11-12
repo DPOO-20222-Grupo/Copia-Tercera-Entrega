@@ -1,21 +1,20 @@
 package Consolas;
 
-import java.util.Scanner;
+import java.util.Scanner; 
 
 import actividades.Actividad;
+import interfaz.Aplicacion;
 import learningPath.LearningPath;
 import user.Profesor;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ProfesorConsole {
     
-	private static Map<String, Profesor> profesores = new HashMap<>();
+	private static Aplicacion aplicacion = new Aplicacion();  
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -27,7 +26,7 @@ public class ProfesorConsole {
         System.out.print("Ingrese su contraseña: ");
         String password = scanner.nextLine();
 
-        Profesor profesor = profesores.get(login);
+        Profesor profesor = aplicacion.getMapaProfesores().get(login); 
         if (profesor != null && profesor.login(login, password)) {
             System.out.println("Autenticación exitosa. Bienvenido, Profesor " + profesor.getNombre());
             mostrarMenuProfesor(profesor);
@@ -142,12 +141,11 @@ public class ProfesorConsole {
         
     }
 
-    // Métodos para cargar y guardar datos en archivos (simulación)
     private static void cargarDatos() {
-        // Aquí se podría implementar la carga de datos de un archivo
+        
     }
 
     private static void guardarDatos() {
-        // Aquí se podría implementar la persistencia de datos en un archivo
+
     }
 }
