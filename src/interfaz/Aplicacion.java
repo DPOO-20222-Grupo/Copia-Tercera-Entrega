@@ -32,6 +32,8 @@ import persistenciaDatos.PersistenciaPreguntas;
 import persistenciaDatos.PersistenciaUsuarios;
 import preguntas.Pregunta;
 import preguntas.PreguntaAbierta;
+import preguntas.PreguntaBoolean;
+import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
 import seguimientoEstudiantes.SeguimientoActividad;
 import seguimientoEstudiantes.SeguimientoEncuesta;
@@ -55,6 +57,7 @@ public class Aplicacion {
 	private HashMap<String, Quiz> mapaQuices;
 	private HashMap<String, PreguntaAbierta> mapaPreguntasAbiertas;
 	private HashMap<String, PreguntaSeleccionMultiple> mapaPreguntasSeleccionMultiple;
+	private HashMap<String, PreguntaBoolean> mapaPreguntasBoolean;
 	
 	
 	public Aplicacion () {
@@ -68,6 +71,7 @@ public class Aplicacion {
 		this.mapaPreguntasAbiertas = new HashMap <String, PreguntaAbierta>();
 		this.mapaPreguntasSeleccionMultiple = new HashMap<String, PreguntaSeleccionMultiple>();
 		this.mapaLearningPaths = new HashMap<String, LearningPath>();
+		this.mapaPreguntasBoolean = new HashMap<String, PreguntaBoolean>();
 	
 	}
 	
@@ -128,13 +132,16 @@ public class Aplicacion {
 	public HashMap<String, PreguntaSeleccionMultiple> getMapaPreguntasSeleccionMultiple() {
 		return mapaPreguntasSeleccionMultiple;
 	}
+	
+	public HashMap<String, PreguntaBoolean> getMapaPreguntasBoolean() {
+		return mapaPreguntasBoolean;
+	}
 
-
-
+	
 	//Registrar nuevas entradas a la aplicacion
 
 
-
+	//Usuarios
 	public void registrarUsuario(Usuario nuevoUsuario) {
 		if (nuevoUsuario.getTipo().equals("Estudiante")) { 
 				mapaEstudiantes.put(nuevoUsuario.getLogin(), (Estudiante) nuevoUsuario);
@@ -145,7 +152,7 @@ public class Aplicacion {
 			}
 
 	}
-	
+	//LearningPaths
 	public void registrarLearningPath (LearningPath pLearningPath) {
 
 		String llave = pLearningPath.getIdLearnginPath();
@@ -153,7 +160,7 @@ public class Aplicacion {
 		mapaLearningPaths.put(llave, pLearningPath);
 		
 	}
-	
+	//Actividades
 	public  void registrarActividad(Actividad actividad) {
 		
 		String llave = actividad.getIdActividad();
@@ -199,10 +206,14 @@ public class Aplicacion {
 			
 		}
 		
-		else {
+		else if (tipo.equals("Cerrada")){
 			
 			mapaPreguntasSeleccionMultiple.put(llave, (PreguntaSeleccionMultiple) pregunta);
 			
+		}
+		
+		else {
+			mapaPreguntasBoolean.put(tipo, (PreguntaBoolean) pregunta);
 		}
 		
 	
@@ -278,19 +289,20 @@ public class Aplicacion {
 		profesorCreador.registrarLearningPath(nuevoLearningPath);
 		
 	}
-	
+	//Crear usuario y registrarlo
 	public void crearEstudiante(String login, String password, String nombre) {
 		Estudiante nuevoEstudiante = new Estudiante (login, password, nombre);
 		this.registrarUsuario(nuevoEstudiante);
 		
 	}
-	
+	//Crear profesor y registrarlo
 	public void crearProfesor(String login, String password, String nombre) {
 		Profesor nuevoProfesor = new Profesor(login, password, nombre);
 		this.registrarUsuario(nuevoProfesor);
 		
 	}
-	
+	//Crear cada tipo de actividad y registrarla en base de datos central y en registros del profesor
+	//Revisar recurso
 	public void crearRevisarRecurso(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos, 
     						Date fechaLimite, String tipoRecurso, Profesor profesorCreador, String enlaceRecurso) {
 		RevisarRecurso nuevoRecurso = new RevisarRecurso(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, 
@@ -299,7 +311,7 @@ public class Aplicacion {
 		profesorCreador.registrarActividad(nuevoRecurso);
 		
 	}
-	
+	//Tarea
 	public void crearTarea (String titulo, String descripcion, List<String> objetivos, String nivelDificultad, 
 							int duracionMinutos, Date fechaLimite,  Profesor profesorCreador) 
 	
@@ -310,15 +322,16 @@ public class Aplicacion {
 		
 	}
 	
+	//Quiz
 	public void crearQuiz (String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos,
-    		Date fechaLimite, Profesor profesorCreador, float calificacionMinima, List<PreguntaSeleccionMultiple> preguntas) {
+    		Date fechaLimite, Profesor profesorCreador, float calificacionMinima, List<PreguntaCerrada> preguntas) {
 		
 		Quiz nuevoQuiz = new Quiz (titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador, calificacionMinima, preguntas);
 		this.registrarActividad(nuevoQuiz);
 		profesorCreador.registrarActividad(nuevoQuiz);
 		
 	}
-	
+		//Examen
 	public void crearExamen (String titulo, String descripcion, List<String> objetivos, String nivelDificultad, 
     		int duracionMinutos, Date fechaLimite, Profesor profesorCreador, List<PreguntaAbierta> preguntas) 
 	
@@ -330,7 +343,7 @@ public class Aplicacion {
 		profesorCreador.registrarActividad(nuevoExamen);
 		
 	}
-	
+		//Encuesta
 	public void crearEncuesta (String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos, 
 								Date fechaLimite,  Profesor profesorCreador, List<PreguntaAbierta> preguntas)
 	{
@@ -340,6 +353,16 @@ public class Aplicacion {
 		profesorCreador.registrarActividad(nuevaEncuesta);
 	}
 	
+	//
+	/**
+	 * Metodo para modificar los atributos de tipo "String" de un LearningPath
+	 * @param learningPath learningPath a modificar
+	 * @param atributoModificar nombre del atributo a modificar
+	 * @param valor Nuevo valor para el atributo
+	 * @param accion Parametro para modificar objetivos, ya sea agregar o eliminar
+	 * @throws TipoInvalidoValorException
+	 * @throws ModificarObjetivosException
+	 */
 	public void modificarAtributosStringLearningPath(LearningPath learningPath, String atributoModificar, String valor, String accion)
 				throws TipoInvalidoValorException, ModificarObjetivosException
 	{
@@ -389,6 +412,14 @@ public class Aplicacion {
 		
 	}
 	
+	/**
+	 * Metodo para modificar las actividades de un Learning Path 
+	 * @param learningPath Learning Path a modificar
+	 * @param actividad  Actividad que se quiere modificar
+	 * @param obligatoriedad Si la actividad se va a agregar, determina si es obligatoria o no en el LP
+	 * @param accion Agregar o eliminar del LP
+	 * @throws ModificarActividadesLearningPathException
+	 */
 	public void modificarActividadesLearningPath (LearningPath learningPath, Actividad actividad, boolean obligatoriedad, String accion) 
 			throws ModificarActividadesLearningPathException
 	
@@ -417,6 +448,11 @@ public class Aplicacion {
 		
 	
 	
+	/**
+	 * Metodo para modificar el titulo de cualquier tipo de actividad 
+	 * @param actividad Actividad a modificar
+	 * @param titulo Nuevo titulo para la actividad
+	 */
 	public void modificarTituloActividad (Actividad actividad, String titulo) {
 		
 		String tipoActividad = actividad.getTipoActividad();
@@ -509,6 +545,15 @@ public class Aplicacion {
 	}
 
 	
+	/**
+	 * Metodo para modificar los atributos de tipo "String" de una actividad
+	 * @param actividad Actividad a modificar
+	 * @param valor Nuevo valor para el atributo
+	 * @param atributo Nombre del atributo a modificar
+	 * @param accion Agregar o eliminar, unicamente para objetivos
+	 * @throws ModificarObjetivosException Lanza excepcion si, al agregar (eliminar) un objetivo, el objetivo ya se encontraba  a
+	 * (no se encontraba) en la lista de objetivos.
+	 */
 	public void modificarAtributosStringActividad (Actividad actividad, String valor, String atributo, String accion) 
 			throws ModificarObjetivosException {
 		
@@ -535,17 +580,26 @@ public class Aplicacion {
 		
 	}
 	
+	
+	//Metodos para modificar la fecha limite de la actividad y su duracion
 	public void modificarFechaLimiteActividad (Actividad actividad, Date fecha) {
-		
 		actividad.setFechaLimite(fecha);
-		
 	}
 	
 	public void modificarDuracionActividad (Actividad actividad, int duracion) {
-		
 		actividad.setDuracionMinutos(duracion);
 	}
 	
+	
+	/** Metodo para modificar las actividades previas o de seguimiento de una actividad
+	 * @param actividadPrincipal Actividad a modificar sus actividades de seguimiento o previas
+	 * @param actividadOperacion Actividad previa o de seguimiento que se quiere modificar
+	 * @param tipo Indica si es previa o de seguimiento
+	 * @param accion Indica si se quiere agregar o eliminar
+	 * tira excepciones si la actividad a agregar (eliminar) ya se encontraba (no se encontraba) en la lista correspondiente
+	 * @throws ModificarActividadesPreviasException 
+	 * @throws ModificarActividadesSeguimientoException
+	 */
 	public void modificarSeguimientoPrevioActividad (Actividad actividadPrincipal, Actividad actividadOperacion, String tipo, String accion)
 				throws ModificarActividadesPreviasException, ModificarActividadesSeguimientoException
 	{
@@ -577,7 +631,14 @@ public class Aplicacion {
 		
 	}
 	
+	//Funciones para modificar los atributos particulares de cada tipo de actividad 
 	
+	
+	/**
+	 * @param recurso Recurso a modificar
+	 * @param valor Nuevo valor del atributo
+	 * @param atributo Nombre del atributo a modificar.
+	 */
 	public void modificarRecurso (RevisarRecurso recurso, String valor, String atributo) {
 		
 		if (atributo.equals("Tipo")) {
@@ -591,6 +652,13 @@ public class Aplicacion {
 		
 	}
 	
+	/**
+	 * Permite modificar las preguntas de una encuesta o de un examen
+	 * @param actividad Actividad que se quiere modificar
+	 * @param pregunta Pregunta que se va a agregar o eliminar
+	 * @param accion Indica si se debe agregar o eliminar la pregunta
+	 * @throws ModificarPreguntasAbiertasException
+	 */
 	public void modificarPreguntasExamenEncuesta (Actividad actividad, PreguntaAbierta pregunta, String accion)
 	throws ModificarPreguntasAbiertasException
 	
@@ -623,7 +691,14 @@ public class Aplicacion {
 	}
 
 	
-	public void modificarPreguntasQuiz(Quiz quiz, PreguntaSeleccionMultiple pregunta, String accion)
+	/**
+	 * Permite modificar las preguntas de un quiz
+	 * @param quiz Quiz a modificar
+	 * @param pregunta Pregunta a agregar o eliminar 
+	 * @param accion Indica si se debe agregar o eliminar la pregunta
+	 * @throws ModificarPreguntasQuizException
+	 */
+	public void modificarPreguntasQuiz(Quiz quiz, PreguntaCerrada pregunta, String accion)
 	throws ModificarPreguntasQuizException
 	
 	{
@@ -631,22 +706,25 @@ public class Aplicacion {
 			quiz.agregarPregunta(pregunta);
 		}
 		
-		else {
+		else if (accion.equals("Eliminar")){
 			quiz.eliminarPregunta(pregunta);
 		}
 		
 		
 	}
 	
+	//Permite modificar Calificacion Minima quiz
 	public void modificarCalificacionMinimaQuiz (Quiz quiz, float nuevaCalificacion) {
 		quiz.setCalificacionMinima(nuevaCalificacion);
 	}
+	
+	//Metodos para crear cada tipo de pregunta
 	
 	public void crearPreguntaAbierta(String enunciado, String titulo, Profesor profesorCreador) {
 		PreguntaAbierta pregunta = new PreguntaAbierta (enunciado, titulo);
 		String llave = pregunta.getIdPregunta();
 		this.getMapaPreguntasAbiertas().put(llave, pregunta);
-		profesorCreador.getPreguntasAbiertasPropias().put(llave, pregunta);
+		profesorCreador.registrarPregunta(pregunta);
 	}
 	
 	public void crearPreguntaSeleccion (String  enunciado, String titulo, String opcion1, String opcion2, String opcion3, String opcion4, int opcionCorrecta, Profesor profesorCreador) {
@@ -655,15 +733,25 @@ public class Aplicacion {
 		String llave = pregunta.getIdPregunta();
 		
 		this.getMapaPreguntasSeleccionMultiple().put(llave, pregunta);
-		profesorCreador.getPreguntasSeleccionPropias().put(llave, pregunta);
-		
+		profesorCreador.registrarPregunta(pregunta);
 		
 	}
 	
+	public void crearPreguntaBoolean(String enunciado, String titulo, int opcionCorrecta, Profesor profesorCreador) {
+		PreguntaBoolean pregunta = new PreguntaBoolean(enunciado, titulo, opcionCorrecta);
+		String llave = pregunta.getIdPregunta();
+		
+		this.getMapaPreguntasBoolean().put(llave, pregunta);
+		profesorCreador.registrarPregunta(pregunta);
+	}
+	
+	//permite modificar el titulo de una pregunta
 	public void modificarTituloPregunta (Pregunta pregunta, String titulo, Profesor profesorCreador) {
 		
-		if (pregunta.getTipo().equals("Abierta")) {
-			String llave = pregunta.getIdPregunta();
+		String tipoPregunta = pregunta.getTipo();
+		String llave = pregunta.getIdPregunta();
+		
+		if (tipoPregunta.equals("Abierta")) {
 			this.getMapaPreguntasAbiertas().remove(llave);
 			profesorCreador.getPreguntasAbiertasPropias().remove(llave);
 			
@@ -674,9 +762,7 @@ public class Aplicacion {
 			
 		}
 		
-		else {
-			
-			String llave = pregunta.getIdPregunta();
+		else if (tipoPregunta.equals("Cerrada")){
 			this.getMapaPreguntasSeleccionMultiple().remove(llave);
 			profesorCreador.getPreguntasSeleccionPropias().remove(llave);
 			
@@ -688,14 +774,35 @@ public class Aplicacion {
 			
 		}
 		
+		else {
+			
+			this.getMapaPreguntasBoolean().remove(llave);
+			profesorCreador.getPreguntasBooleanPropias().remove(llave);
+			
+			pregunta.setTitulo(titulo);
+			
+			this.registrarPregunta(pregunta);
+			profesorCreador.registrarPregunta(pregunta);
+			
+			
+		}
+		
 		
 	}
 	
+	//Permite modificar el enunciado de una pregunta
 	public void modificarEnunciadoPregunta(Pregunta pregunta, String enunciado) {
 		pregunta.setEnunciado(enunciado);
 		
 	}
 	
+	
+	/**
+	 * Permite modificar una de las opciones de una pregunta de Seleccion Multiple
+	 * @param pregunta Pregunta a modificar
+	 * @param nuevaOpcion Nuevo enunciado para la opcion a modificar
+	 * @param opcionModificar Numero de la opcion a modificar
+	 */
 	public void modificarOpcionesPreguntaSeleccion (PreguntaSeleccionMultiple pregunta, String nuevaOpcion, int opcionModificar) {
 		
 		if (opcionModificar == 1) {
@@ -715,10 +822,13 @@ public class Aplicacion {
 		}
 		
 	}
-	
-	public void modificarOpcionCorrectaPreguntaSeleccion (PreguntaSeleccionMultiple pregunta, int nuevaOpcion) {
+	//Permite modificar la respuesta correcta de preguntas cerradas
+	public void modificarOpcionCorrectaPreguntaCerrada (PreguntaCerrada pregunta, int nuevaOpcion) {
 		pregunta.setOpcionCorrecta(nuevaOpcion);
 	}
+	
+	
+	//Metodos que permiten a profesores calificar actividades de estudiantes en un learning path 
 	
 	public void calificarExamen(Examen examen, Estudiante estudiante, LearningPath learningPath, float nota) {
 		
@@ -750,6 +860,11 @@ public class Aplicacion {
 		
 	}
 	
+	/**
+	 * Permite a un profesor clonar una actividad de otro profesor para poder editarla
+	 * @param actividadOriginal Actividad original que se quiere duplicar
+	 * @param profesorClonando Profesor que esta clonando la actividad
+	 */
 	public void clonarActividad (Actividad actividadOriginal, Profesor profesorClonando) {
 			
 			String tipoActividad = actividadOriginal.getTipoActividad();
@@ -840,7 +955,7 @@ public class Aplicacion {
 		
 	}
 	
-	
+	//Permite duplicar un learning Path de otro profesor
 	public void clonarLearningPath (LearningPath learningPathOriginal, Profesor profesorClonando) {
 		
 		this.crearLearningPath(learningPathOriginal.getTitulo(), 
@@ -852,7 +967,7 @@ public class Aplicacion {
 							   learningPathOriginal.getMapaActividadesObligatorias());
 	}
 	
-	
+	//Permite inscribir un estudiante a un learning path
 	public void inscribirEstudianteLearningPath (Estudiante estudiante, LearningPath learningPath) throws ModificarEstudianteLearningPathException {
 		
 		SeguimientoLearningPath seguimiento = new SeguimientoLearningPath(learningPath, estudiante);
@@ -863,6 +978,7 @@ public class Aplicacion {
 		
 	}
 	
+	//Permite a un estudiante enviar una tarea
 	public void enviarTarea (Tarea tarea, Estudiante estudiante, LearningPath learningPath) {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
@@ -872,7 +988,7 @@ public class Aplicacion {
 		seguimientoTarea.actualizarEstadoEnviado();
 		
 	}
-	
+	//Permite actualizar el estado de un examen a enviado
 	public void enviarExamen (Examen examen, Estudiante estudiante, LearningPath learningPath) {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
@@ -882,7 +998,7 @@ public class Aplicacion {
 		seguimientoExamen.actualizarEstadoEnviado();
 		
 	}
-	
+	//Permite a un estudiante registrar su respuesta a una pregunta de un examen de un learning path
 	public void responderPreguntaExamen (Examen examen, Estudiante estudiante, LearningPath learningPath, PreguntaAbierta pregunta, String respuesta) {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
@@ -893,6 +1009,7 @@ public class Aplicacion {
 		
 	}
 	
+	//Permite a un estudiante registrar su respuesta a una pregunta de una encuesta
 	public void responderPreguntaEncuesta (Encuesta encuesta, Estudiante estudiante, LearningPath learningPath, PreguntaAbierta pregunta, String respuesta) {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
@@ -903,6 +1020,8 @@ public class Aplicacion {
 		
 	}
 	
+	//Permite a un estudiante registrar su respuesta a una pregunta de un quiz
+	
 	public void responderPreguntaQuiz (Quiz quiz, Estudiante estudiante, LearningPath learningPath, PreguntaSeleccionMultiple pregunta, int respuesta) {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
@@ -912,6 +1031,8 @@ public class Aplicacion {
 		seguimientoQuiz.agregarRespuestaPregunta(pregunta, respuesta);
 		
 	}
+	
+	//Permite registrar que se completo una encuesta o recurso
 	
 	public void completarEncuestaRecurso (Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
 		
@@ -924,6 +1045,14 @@ public class Aplicacion {
 		
 	}
 	
+	/**
+	 * Permite saber si un estudiante cumple con los prerrequisitos recomendados de una actividad
+	 * Se revisan las actividades previas de una actividad que tambien estan en el learning Path dado
+	 * @param actividad Actividad para la que se quieren revisar los prerrequisitos
+	 * @param estudiante Estudiante que quiere realizar "actividad"
+	 * @param learningPath Learning Path en el que se encuentra "actividad"
+	 * @return
+	 */
 	public boolean revisarActividadesPrevias(Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
 		
 		List<Actividad> prerrequisitos = actividad.getActividadesPrevias();
@@ -955,6 +1084,7 @@ public class Aplicacion {
 		
 	}
 	
+	//Funciones que permiten a los usuarios calificar LearningPath y Actividades y resenar actividades
 	public void calificarLearningPath (LearningPath learningPath, float rating) {
 		learningPath.actualizarRating(rating);
 	}
@@ -966,7 +1096,8 @@ public class Aplicacion {
 	public void calificarActividad (Actividad actividad, float rating) {
 		actividad.actualizarRating(rating);
 	}
-
+	
+	//Funcion que permite descargar los datos de la aplicacion a un archivo JSON
 	public void descargarDatos (HashMap<String, Examen> mapaExamenes, 
 			HashMap<String, Encuesta> mapaEncuestas, HashMap<String, Quiz> mapaQuices,
 			HashMap<String, RevisarRecurso> mapaRevisarRecurso, HashMap<String, Tarea> mapaTareas,
@@ -979,18 +1110,19 @@ public class Aplicacion {
 		PersistenciaLearningPaths.persistirLearningPaths(mapaLearningPaths, "lp.json");
 	}
 	
+	
+	//Funciones para acceder a usuarios dado su login
 	public Estudiante getEstudiante (String login) {
-		
 		Estudiante estudiante = this.getMapaEstudiantes().get(login);
 		return estudiante;
-		
 	}
-	
+
 	public Profesor getProfesor (String login) {
 		Profesor profesor = this.getMapaProfesores().get(login);
 		return profesor;
 	}
 	
+	//Permite acceder a una actividad dado su identificador y su tipo
 	public Actividad getActividad (String id, String tipo) {
 		
 		if (tipo.equals("Examen")) {
@@ -1020,11 +1152,13 @@ public class Aplicacion {
 		
 	}
 	
+	//Permite acceder a un learning path dado su identificador
 	public LearningPath getLearningPath(String id) {
 		LearningPath learningPath = this.getMapaLearningPaths().get(id);
 		return learningPath;
 	}
 	
+	//Permite acceder a una pregunta dado su identificador
 	public Pregunta getPregunta (String id, String tipo) {
 		
 		if (tipo.equals("Abierta")) {
@@ -1033,8 +1167,13 @@ public class Aplicacion {
 			
 		}
 		
-		else {
+		else if (tipo.equals("Cerrada")){
 			PreguntaSeleccionMultiple pregunta = this.getMapaPreguntasSeleccionMultiple().get(id);
+			return pregunta;
+		}
+		
+		else {
+			PreguntaBoolean pregunta = this.getMapaPreguntasBoolean().get(id);
 			return pregunta;
 		}
 	}

@@ -4,18 +4,19 @@ import java.util.Date;
 import java.util.List;
 
 import exceptions.ModificarPreguntasQuizException;
+import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
 import user.Profesor;
 
 public class Quiz extends Actividad {
 	private static String TIPO = "Quiz";
     private float calificacionMinima;
-    private List<PreguntaSeleccionMultiple> preguntas;
+    private List<PreguntaCerrada> preguntas;
     private int numPreguntas;
 
     // Constructor
     public Quiz(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos,
-    		Date fechaLimite, Profesor profesorCreador, float calificacionMinima, List<PreguntaSeleccionMultiple> preguntas) 
+    		Date fechaLimite, Profesor profesorCreador, float calificacionMinima, List<PreguntaCerrada> preguntas) 
     
     {
         super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
@@ -46,11 +47,11 @@ public class Quiz extends Actividad {
     	return TIPO;
     }
 
-	public List<PreguntaSeleccionMultiple> getPreguntas() {
+	public List<PreguntaCerrada> getPreguntas() {
 		return preguntas;
 	}
 	
-	public void agregarPregunta(PreguntaSeleccionMultiple pregunta) throws ModificarPreguntasQuizException {
+	public void agregarPregunta(PreguntaCerrada pregunta) throws ModificarPreguntasQuizException {
 		
 		if (preguntas.contains(pregunta)) {
 			
@@ -64,7 +65,7 @@ public class Quiz extends Actividad {
 		
 	}
 	
-	public void eliminarPregunta(PreguntaSeleccionMultiple pregunta) throws ModificarPreguntasQuizException {
+	public void eliminarPregunta(PreguntaCerrada pregunta) throws ModificarPreguntasQuizException {
 		
 		if (!preguntas.contains(pregunta)) {
 			

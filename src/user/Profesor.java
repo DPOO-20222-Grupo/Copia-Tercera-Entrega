@@ -13,7 +13,9 @@ import actividades.RevisarRecurso;
 import actividades.Tarea;
 import exceptions.ModificarActividadesLearningPathException;
 import learningPath.LearningPath;
+import preguntas.Pregunta;
 import preguntas.PreguntaAbierta;
+import preguntas.PreguntaBoolean;
 import preguntas.PreguntaSeleccionMultiple;
 
 public class Profesor extends Usuario {
@@ -27,6 +29,7 @@ public class Profesor extends Usuario {
 	private Map <String, LearningPath> learningPathPropios;
 	private Map <String, PreguntaAbierta> preguntasAbiertasPropias;
 	private Map <String, PreguntaSeleccionMultiple> preguntasSeleccionPropias;
+	private Map <String, PreguntaBoolean> preguntasBooleanPropias;
 	
 	
     // Constructor
@@ -41,6 +44,7 @@ public class Profesor extends Usuario {
         this.learningPathPropios = new HashMap<String, LearningPath>();
         this.preguntasSeleccionPropias = new HashMap <String, PreguntaSeleccionMultiple>();
         this.preguntasAbiertasPropias = new HashMap < String, PreguntaAbierta>();
+        this.preguntasBooleanPropias = new HashMap <String, PreguntaBoolean>();
         
         
     }
@@ -102,6 +106,23 @@ public class Profesor extends Usuario {
     	
     }
     
+    public void registrarPregunta(Pregunta pregunta) {
+    	String llave = pregunta.getIdPregunta();
+    	
+    	String tipoPregunta = pregunta.getTipo();
+    	
+    	if (tipoPregunta.equals("Cerrada")) {
+    		preguntasSeleccionPropias.put(llave, (PreguntaSeleccionMultiple) pregunta);
+    	}
+    	else if(tipoPregunta.equals("Abierta")) {
+    		preguntasAbiertasPropias.put(llave, (PreguntaAbierta) pregunta);   		
+    	} 	
+    	else {
+    		preguntasBooleanPropias.put(llave, (PreguntaBoolean) pregunta);
+    	}
+    	
+    }
+    
     
 
 	public Map<String, RevisarRecurso> getMapaRecursosPropios() {
@@ -135,5 +156,11 @@ public class Profesor extends Usuario {
 	public Map<String, PreguntaSeleccionMultiple> getPreguntasSeleccionPropias() {
 		return preguntasSeleccionPropias;
 	}
+
+	public Map<String, PreguntaBoolean> getPreguntasBooleanPropias() {
+		return preguntasBooleanPropias;
+	}
+	
+	
 
 }
