@@ -14,11 +14,11 @@ import java.util.List;
 
 public class ProfesorConsole {
     
-	private static Aplicacion aplicacion = new Aplicacion();  
+	private static Aplicacion aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");  
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        cargarDatos();
+        //cargarDatos();
         
         System.out.println("== Sistema de Profesores ==");
         System.out.print("Ingrese su login: ");
@@ -34,7 +34,7 @@ public class ProfesorConsole {
             System.out.println("Credenciales incorrectas.");
         }
         
-        guardarDatos();
+        //guardarDatos();
     }
 
     private static void mostrarMenuProfesor(Profesor profesor) {
@@ -142,7 +142,7 @@ public class ProfesorConsole {
     }
 
     private static void cargarDatos() {
-        
+ 
     }
 
     private static void guardarDatos() {
