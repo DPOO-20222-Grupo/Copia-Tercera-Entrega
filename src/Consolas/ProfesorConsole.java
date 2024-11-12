@@ -18,7 +18,6 @@ public class ProfesorConsole {
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        //cargarDatos();
         
         System.out.println("== Sistema de Profesores ==");
         System.out.print("Ingrese su login: ");
@@ -34,7 +33,6 @@ public class ProfesorConsole {
             System.out.println("Credenciales incorrectas.");
         }
         
-        //guardarDatos();
     }
 
     private static void mostrarMenuProfesor(Profesor profesor) {
@@ -124,8 +122,6 @@ public class ProfesorConsole {
         String dificultad = scanner.nextLine();
         
         
-        
-        
         LearningPath lp = new LearningPath(titulo, descripcion, objetivos, dificultad, profesor, null, null); 
         profesor.registrarLearningPath(lp);
         System.out.println("Learning Path creado exitosamente.");
@@ -141,11 +137,4 @@ public class ProfesorConsole {
         
     }
 
-    private static void cargarDatos() {
- 
-    }
-
-    private static void guardarDatos() {
-
-    }
 }
