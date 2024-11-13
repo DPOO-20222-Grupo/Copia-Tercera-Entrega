@@ -12,6 +12,7 @@
       "learningPathPropios": {},
       "preguntasAbiertasPropias": {},
       "preguntasSeleccionPropias": {},
+      "preguntasBooleanPropias": {},
       "login": "l.munera",
       "password": "Tristeza30",
       "isLoggedIn": false
@@ -23,8 +24,8 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
-    "fechaCreacion": "Oct 29, 2024, 5:51:09 PM",
-    "fechaUltimaModificacion": "Oct 29, 2024, 5:51:09 PM",
+    "fechaCreacion": "Nov 12, 2024, 12:55:10 PM",
+    "fechaUltimaModificacion": "Nov 12, 2024, 12:55:10 PM",
     "version": 1.0,
     "estudiantesInscritos": {},
     "actividades": [
@@ -54,6 +55,7 @@
           "learningPathPropios": {},
           "preguntasAbiertasPropias": {},
           "preguntasSeleccionPropias": {},
+          "preguntasBooleanPropias": {},
           "login": "l.munera",
           "password": "Tristeza30",
           "isLoggedIn": false
@@ -92,6 +94,7 @@
           "learningPathPropios": {},
           "preguntasAbiertasPropias": {},
           "preguntasSeleccionPropias": {},
+          "preguntasBooleanPropias": {},
           "login": "l.munera",
           "password": "Tristeza30",
           "isLoggedIn": false
@@ -124,6 +127,7 @@
           "learningPathPropios": {},
           "preguntasAbiertasPropias": {},
           "preguntasSeleccionPropias": {},
+          "preguntasBooleanPropias": {},
           "login": "l.munera",
           "password": "Tristeza30",
           "isLoggedIn": false
@@ -157,6 +161,7 @@
           "learningPathPropios": {},
           "preguntasAbiertasPropias": {},
           "preguntasSeleccionPropias": {},
+          "preguntasBooleanPropias": {},
           "login": "l.munera",
           "password": "Tristeza30",
           "isLoggedIn": false
@@ -187,6 +192,7 @@
           "learningPathPropios": {},
           "preguntasAbiertasPropias": {},
           "preguntasSeleccionPropias": {},
+          "preguntasBooleanPropias": {},
           "login": "l.munera",
           "password": "Tristeza30",
           "isLoggedIn": false

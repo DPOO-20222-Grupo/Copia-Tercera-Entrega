@@ -21,7 +21,7 @@ public class LearningPath {
     private List<String> objetivos;
     private String nivelDificultad;
     private int duracionMinutos;
-    private float rating;
+    private double rating;
     private Date fechaCreacion;
     private Date fechaUltimaModificacion;
     private double version;
@@ -161,18 +161,18 @@ public class LearningPath {
 	}
 	
 	//Rating
-	public float getRating() {
+	public double getRating() {
 		return rating;
 	}
 
 
-	private void setRating(float rating) {
+	private void setRating(double rating) {
 		this.rating = rating;
 	}
 	
-	public void actualizarRating(float nuevoRating) {
+	public void actualizarRating(double nuevoRating) {
 		int numRatings = this.getContadorRatings();
-		float ratingActual = this.getRating();
+		double ratingActual = this.getRating();
 		
 		if (numRatings == 0) {
 			this.actualizarContadorRatings();
@@ -181,7 +181,7 @@ public class LearningPath {
 		
 		else {
 			int numRatingsActualizado = numRatings+1;
-			float ratingActualizado = ratingActual*(numRatings/numRatingsActualizado)+ nuevoRating*(1/numRatingsActualizado);
+			double ratingActualizado = ratingActual*(numRatings/numRatingsActualizado)+ nuevoRating*(1/numRatingsActualizado);
 			this.actualizarContadorRatings();
 			this.setRating(ratingActualizado);
 		}
