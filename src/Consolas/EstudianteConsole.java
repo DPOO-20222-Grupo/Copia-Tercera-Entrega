@@ -1,6 +1,8 @@
 package Consolas;
 
-import java.util.Scanner; 
+import java.util.Scanner;
+
+import actividades.Actividad;
 import actividades.Encuesta;
 import actividades.Examen;
 import actividades.Quiz;
@@ -45,7 +47,7 @@ public class EstudianteConsole {
             System.out.println("4. Responder Pregunta de Examen");
             System.out.println("5. Responder Pregunta de Encuesta");
             System.out.println("6. Responder Pregunta de Quiz");
-            System.out.println("7. Completar Encuesta Recurso");
+            System.out.println("7. Rgistar que se completo una encuesta o recurso");
             System.out.println("8. Ver Learning Paths Inscritos");
             System.out.println("9. Cerrar sesión");
             System.out.print("Seleccione una opción: ");
@@ -71,7 +73,7 @@ public class EstudianteConsole {
                 	responderPreguntaQuiz();
                 	break;
                 case 7:
-                	responderPreguntaQuiz();
+                	completarEncuestaRecurso(estudiante);
                 	break;
                 case 8:
                     verLearningPaths(estudiante);
@@ -86,7 +88,7 @@ public class EstudianteConsole {
         } while (estudiante.isLoggedIn());
     }
     
-    private static void inscribirLearningPath() {
+	private static void inscribirLearningPath() {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
@@ -234,6 +236,35 @@ public class EstudianteConsole {
             System.out.println("Error al registrar la respuesta: " + e.getMessage());
         }
     }
+    
+    public static void completarEncuestaRecurso(Estudiante estudiante) {
+        
+        System.out.print("Ingrese el ID de la actividad (encuesta o recurso): ");
+        String idActividad = scanner.nextLine();
+        System.out.print("Ingrese el tipo de la actividad (encuesta o recurso): ");
+        String tipo = scanner.nextLine();
+        
+        Actividad actividad = aplicacion.getActividad(idActividad,tipo);
+        if (actividad == null) {
+            System.out.println("Actividad no encontrada.");
+            return;
+        }
+        
+        System.out.print("Ingrese el id del LearningPath al que pertenece la actividad: ");
+        String idLearningPath = scanner.nextLine();
+        
+
+        LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
+        if (learningPath == null) {
+            System.out.println("LearningPath no encontrado.");
+            return;
+        }
+        
+        aplicacion.completarEncuestaRecurso(actividad, estudiante, learningPath);
+        
+        System.out.println("Actividad completada exitosamente.");
+    }
+
 
      private static void verLearningPaths(Estudiante estudiante) {
         System.out.println("== Learning Paths Inscritos ==");
