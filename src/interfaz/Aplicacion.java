@@ -910,7 +910,7 @@ public class Aplicacion {
 	
 	//Permite a un estudiante registrar su respuesta a una pregunta de un quiz
 	
-	public void responderPreguntaQuiz (Quiz quiz, Estudiante estudiante, LearningPath learningPath, PreguntaSeleccionMultiple pregunta, int respuesta) {
+	public void responderPreguntaQuiz (Quiz quiz, Estudiante estudiante, LearningPath learningPath, PreguntaCerrada pregunta, int respuesta) {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
 		
