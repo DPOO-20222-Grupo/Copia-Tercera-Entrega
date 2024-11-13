@@ -1,8 +1,6 @@
 package Consolas;
 
 import java.util.Scanner;
-
-import actividades.Actividad;
 import actividades.Encuesta;
 import actividades.Examen;
 import actividades.Quiz;
@@ -12,7 +10,6 @@ import interfaz.Aplicacion;
 import learningPath.LearningPath;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaSeleccionMultiple;
-import seguimientoEstudiantes.SeguimientoLearningPath;
 import user.Estudiante;
 
 public class EstudianteConsole {
@@ -56,7 +53,7 @@ public class EstudianteConsole {
 
             switch (opcion) {
                 case 1:
-                    inscribirLearningPath(estudiante);
+                    inscribirLearningPath();
                     break;
                 case 2:
                 	enviarTarea();
@@ -74,7 +71,7 @@ public class EstudianteConsole {
                 	responderPreguntaQuiz();
                 	break;
                 case 7:
-                	completarEncuestaRecurso();
+                	responderPreguntaQuiz();
                 	break;
                 case 8:
                     verLearningPaths(estudiante);
@@ -110,15 +107,15 @@ public class EstudianteConsole {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
-        System.out.print("Ingrese el título del Learning Path: ");
-        String tituloLearningPath = scanner.nextLine();
+        System.out.print("Ingrese el id del Learning Path: ");
+        String idLearningPath = scanner.nextLine();
 
         System.out.print("Ingrese el título de la tarea: ");
         String tituloTarea = scanner.nextLine();
 
         try {
             Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
-            LearningPath learningPath = aplicacion.getLearningPath(tituloLearningPath);
+            LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
             Tarea tarea = aplicacion.getMapaTareas().get(tituloTarea);
             
             aplicacion.enviarTarea(tarea, estudiante, learningPath);
@@ -132,16 +129,16 @@ public class EstudianteConsole {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
-        System.out.print("Ingrese el título del Learning Path: ");
-        String tituloLearningPath = scanner.nextLine();
+        System.out.print("Ingrese el id del Learning Path: ");
+        String idLearningPath = scanner.nextLine();
 
         System.out.print("Ingrese el título del examen: ");
         String tituloExamen = scanner.nextLine();
 
         try {
-            Estudiante estudiante = aplicacion.obtenerEstudiantePorLogin(loginEstudiante);
-            LearningPath learningPath = aplicacion.obtenerLearningPathPorTitulo(tituloLearningPath);
-            Examen examen = learningPath.obtenerExamenPorTitulo(tituloExamen);
+            Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
+            LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
+            Examen examen = aplicacion.getMapaExamenes().get(tituloExamen);
             
             aplicacion.enviarExamen(examen, estudiante, learningPath);
             System.out.println("Examen enviado exitosamente.");
@@ -154,23 +151,23 @@ public class EstudianteConsole {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
-        System.out.print("Ingrese el título del Learning Path: ");
+        System.out.print("Ingrese el id del Learning Path: ");
         String tituloLearningPath = scanner.nextLine();
 
-        System.out.print("Ingrese el título del examen: ");
-        String tituloExamen = scanner.nextLine();
+        System.out.print("Ingrese el id del examen: ");
+        String idExamen = scanner.nextLine();
 
-        System.out.print("Ingrese el texto de la pregunta: ");
-        String textoPregunta = scanner.nextLine();
+        System.out.print("Ingrese el id de la pregunta: ");
+        String idPregunta = scanner.nextLine();
 
         System.out.print("Ingrese la respuesta: ");
         String respuesta = scanner.nextLine();
 
         try {
-            Estudiante estudiante = aplicacion.obtenerEstudiantePorLogin(loginEstudiante);
-            LearningPath learningPath = aplicacion.obtenerLearningPathPorTitulo(tituloLearningPath);
-            Examen examen = learningPath.obtenerExamenPorTitulo(tituloExamen);
-            PreguntaAbierta pregunta = examen.obtenerPreguntaPorTexto(textoPregunta);
+            Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
+            LearningPath learningPath = aplicacion.getLearningPath(tituloLearningPath);
+            Examen examen = aplicacion.getMapaExamenes().get(idExamen);
+            PreguntaAbierta pregunta = aplicacion.getMapaPreguntasAbiertas().get(idPregunta);
             
             aplicacion.responderPreguntaExamen(examen, estudiante, learningPath, pregunta, respuesta);
             System.out.println("Respuesta registrada exitosamente.");
@@ -183,23 +180,23 @@ public class EstudianteConsole {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
-        System.out.print("Ingrese el título del Learning Path: ");
-        String tituloLearningPath = scanner.nextLine();
+        System.out.print("Ingrese el id del Learning Path: ");
+        String idLearningPath = scanner.nextLine();
 
-        System.out.print("Ingrese el título de la encuesta: ");
-        String tituloEncuesta = scanner.nextLine();
+        System.out.print("Ingrese el id de la encuesta: ");
+        String idEncuesta = scanner.nextLine();
 
-        System.out.print("Ingrese el texto de la pregunta: ");
-        String textoPregunta = scanner.nextLine();
+        System.out.print("Ingrese el id de la pregunta: ");
+        String idPregunta = scanner.nextLine();
 
         System.out.print("Ingrese la respuesta: ");
         String respuesta = scanner.nextLine();
 
         try {
-            Estudiante estudiante = aplicacion.obtenerEstudiantePorLogin(loginEstudiante);
-            LearningPath learningPath = aplicacion.obtenerLearningPathPorTitulo(tituloLearningPath);
-            Encuesta encuesta = learningPath.obtenerEncuestaPorTitulo(tituloEncuesta);
-            PreguntaAbierta pregunta = encuesta.obtenerPreguntaPorTexto(textoPregunta);
+            Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
+            LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
+            Encuesta encuesta = aplicacion.getMapaEncuestas().get(idEncuesta);
+            PreguntaAbierta pregunta = aplicacion.getMapaPreguntasAbiertas().get(idPregunta);
             
             aplicacion.responderPreguntaEncuesta(encuesta, estudiante, learningPath, pregunta, respuesta);
             System.out.println("Respuesta registrada exitosamente.");
@@ -212,24 +209,24 @@ public class EstudianteConsole {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
-        System.out.print("Ingrese el título del Learning Path: ");
-        String tituloLearningPath = scanner.nextLine();
+        System.out.print("Ingrese el id del Learning Path: ");
+        String idLearningPath = scanner.nextLine();
 
-        System.out.print("Ingrese el título del quiz: ");
-        String tituloQuiz = scanner.nextLine();
+        System.out.print("Ingrese el id del quiz: ");
+        String idQuiz = scanner.nextLine();
 
-        System.out.print("Ingrese el texto de la pregunta: ");
-        String textoPregunta = scanner.nextLine();
+        System.out.print("Ingrese el id de la pregunta: ");
+        String idPregunta = scanner.nextLine();
 
         System.out.print("Ingrese la respuesta (número de opción): ");
         int respuesta = scanner.nextInt();
         scanner.nextLine();  
 
         try {
-            Estudiante estudiante = aplicacion.obtenerEstudiantePorLogin(loginEstudiante);
-            LearningPath learningPath = aplicacion.obtenerLearningPathPorTitulo(tituloLearningPath);
-            Quiz quiz = learningPath.obtenerQuizPorTitulo(tituloQuiz);
-            PreguntaSeleccionMultiple pregunta = quiz.obtenerPreguntaPorTexto(textoPregunta);
+            Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
+            LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
+            Quiz quiz = aplicacion.getMapaQuices().get(idQuiz);
+            PreguntaSeleccionMultiple pregunta = aplicacion.getMapaPreguntasSeleccionMultiple().get(idPregunta);
             
             aplicacion.responderPreguntaQuiz(quiz, estudiante, learningPath, pregunta, respuesta);
             System.out.println("Respuesta registrada exitosamente.");
@@ -238,30 +235,7 @@ public class EstudianteConsole {
         }
     }
 
-    private static void completarEncuestaRecurso() {
-        System.out.print("Ingrese el login del estudiante: ");
-        String loginEstudiante = scanner.nextLine();
-
-        System.out.print("Ingrese el título del Learning Path: ");
-        String tituloLearningPath = scanner.nextLine();
-
-        System.out.print("Ingrese el título de la actividad (encuesta o recurso): ");
-        String tituloActividad = scanner.nextLine();
-
-        try {
-            Estudiante estudiante = aplicacion.obtenerEstudiantePorLogin(loginEstudiante);
-            LearningPath learningPath = aplicacion.obtenerLearningPathPorTitulo(tituloLearningPath);
-            Actividad actividad = learningPath.obtenerActividadPorTitulo(tituloActividad);
-            
-            aplicacion.completarEncuestaRecurso(actividad, estudiante, learningPath);
-            System.out.println("Actividad completada exitosamente.");
-        } catch (Exception e) {
-            System.out.println("Error al completar la actividad: " + e.getMessage());
-        }
-    }
-
-
-    private static void verLearningPaths(Estudiante estudiante) {
+     private static void verLearningPaths(Estudiante estudiante) {
         System.out.println("== Learning Paths Inscritos ==");
         estudiante.getLearningPathsInscritos().forEach((id, seguimiento) -> {
             System.out.println("Learning Path: " + id);
