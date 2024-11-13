@@ -1,6 +1,6 @@
 package Consolas;
 
-import java.util.Scanner;  
+import java.util.Scanner;   
 
 import actividades.Actividad;
 import actividades.Examen;
@@ -45,7 +45,7 @@ public class ProfesorConsole {
         
     }
 
-    private static void mostrarMenuProfesor(Profesor profesor) {
+    public static void mostrarMenuProfesor(Profesor profesor) {
         int opcion;
         do {
             System.out.println("\n== Menú Profesor ==");
@@ -465,9 +465,9 @@ public class ProfesorConsole {
 	        
 	        int opcion = Integer.parseInt(scanner.nextLine());
 	        
-	        String atributoModificar = "";
-	        String valor = "";
-	        String accion = "";
+	        String atributoModificar = null;
+	        String valor = null;
+	        String accion = null;
 	        Date fecha = null;
 	        Integer duracion = null;
 
@@ -521,8 +521,11 @@ public class ProfesorConsole {
 	        }
 
 	        try {
+	        	
 	            aplicacion.modificarActividad(actividad, valor, atributoModificar, accion, fecha, duracion);
-	            System.out.println("Atributo modificado exitosamente.");
+	            System.out.println("Atributo modificado exitosamente.");          
+	            
+	            
 	        } catch (ModificarObjetivosException e) {
 	            System.out.println("Error al modificar el atributo: " + e.getMessage());
 	        }

@@ -433,7 +433,8 @@ public class Aplicacion {
 	                mapaEncuestas.remove(idActividad);
 	                profesor.getMapaEncuestasPropias().remove(idActividad);
 	                actividad.setTitulo(valor);
-	                mapaEncuestas.put(idActividad, (Encuesta) actividad);
+	                String idNuevo = actividad.getIdActividad();
+	                mapaEncuestas.put(idNuevo, (Encuesta) actividad);
 	                profesor.getMapaEncuestasPropias().put(idActividad, (Encuesta) actividad);
 	                break;
 	                
@@ -443,7 +444,8 @@ public class Aplicacion {
 	                profesor.getMapaTareasPropias().remove(idActividad);
 	                actividad.setTitulo(valor);
 	                mapaTareas.put(idActividad, (Tarea) actividad);
-	                profesor.getMapaTareasPropias().put(idActividad, (Tarea) actividad);
+	                String idNuevo1 = actividad.getIdActividad();
+	                profesor.getMapaTareasPropias().put(idNuevo1, (Tarea) actividad);
 	                break;
 	                
 	            case "Quiz":
@@ -452,7 +454,8 @@ public class Aplicacion {
 	                profesor.getMapaQuicesPropios().remove(idActividad);
 	                actividad.setTitulo(valor);
 	                mapaQuices.put(idActividad, (Quiz) actividad);
-	                profesor.getMapaQuicesPropios().put(idActividad, (Quiz) actividad);
+	                String idNuevo2 = actividad.getIdActividad();
+	                profesor.getMapaQuicesPropios().put(idNuevo2, (Quiz) actividad);
 	                break;
 	                
 	            case "Examen":
@@ -461,7 +464,8 @@ public class Aplicacion {
 	                profesor.getMapaExamenesPropios().remove(idActividad);
 	                actividad.setTitulo(valor);
 	                mapaExamenes.put(idActividad, (Examen) actividad);
-	                profesor.getMapaExamenesPropios().put(idActividad, (Examen) actividad);
+	                String idNuevo3 = actividad.getIdActividad();
+	                profesor.getMapaExamenesPropios().put(idNuevo3, (Examen) actividad);
 	                break;
 	                
 	            case "Recurso":
@@ -470,7 +474,8 @@ public class Aplicacion {
 	                profesor.getMapaRecursosPropios().remove(idActividad);
 	                actividad.setTitulo(valor);
 	                mapaRecursos.put(idActividad, (RevisarRecurso) actividad);
-	                profesor.getMapaRecursosPropios().put(idActividad, (RevisarRecurso) actividad);
+	                String idNuevo4 = actividad.getIdActividad();
+	                profesor.getMapaRecursosPropios().put(idNuevo4, (RevisarRecurso) actividad);
 	                break;
 	        }
 	    } 
@@ -494,7 +499,7 @@ public class Aplicacion {
 	    else if (atributo.equals("Duracion")) {
 	        actividad.setDuracionMinutos(duracion);
 	    }    
-	}
+	} 
 	
 	/** Metodo para modificar las actividades previas o de seguimiento de una actividad
 	 * @param actividadPrincipal Actividad a modificar sus actividades de seguimiento o previas

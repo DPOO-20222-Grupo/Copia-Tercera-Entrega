@@ -1,6 +1,6 @@
 package Consolas;
 
-import java.util.Scanner;
+import java.util.Scanner; 
 import actividades.Encuesta;
 import actividades.Examen;
 import actividades.Quiz;
@@ -35,7 +35,7 @@ public class EstudianteConsole {
         
     }
 
-    private static void mostrarMenuEstudiante(Estudiante estudiante) {
+    public static void mostrarMenuEstudiante(Estudiante estudiante) {
         int opcion;
         do {
             System.out.println("\n== Menú Estudiante ==");
