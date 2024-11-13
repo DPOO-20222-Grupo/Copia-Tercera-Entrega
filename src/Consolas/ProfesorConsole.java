@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProfesorConsole {
     
@@ -54,7 +55,7 @@ public class ProfesorConsole {
             System.out.println("3. Crear un quiz");
             System.out.println("4. Crear un examen");
             System.out.println("5. Crear una encuesta");
-            System.out.println("6. Registrar un Learning Path");
+            System.out.println("6. Crear un Learning Path");
             System.out.println("7. Clonar Actividad");
             System.out.println("8. Clonar Learning Path");
             System.out.println("9. Modificar Learning Path");
@@ -84,7 +85,7 @@ public class ProfesorConsole {
                 	crearEncuesta(profesor);
                 	break;
                 case 6:
-                    registrarLearningPath(profesor);
+                    CrearLearningPath(profesor);
                     break;
                 case 7:
                 	clonarActividad();
@@ -338,7 +339,7 @@ public class ProfesorConsole {
 	    System.out.println("Encuesta registrada exitosamente.");
 	}
 
-    private static void registrarLearningPath(Profesor profesor) {
+    private static void CrearLearningPath(Profesor profesor) {
     	
     	System.out.print("Ingrese el titulo del learning path: ");
         String titulo = scanner.nextLine();
@@ -356,11 +357,35 @@ public class ProfesorConsole {
         System.out.print("Ingrese el nivel de dificultad de la actividad: ");
         String dificultad = scanner.nextLine();
         
-        LearningPath lp = new LearningPath(titulo, descripcion, objetivos, dificultad, profesor, null, null); 
-        aplicacion.registrarLearningPath(lp);
-        System.out.println("Learning Path creado exitosamente.");
-    }
+        List<Actividad> actividades = new ArrayList<>();
+        String continuar;
+        do {
+            System.out.print("Ingrese el ID de la actividad: ");
+            String idActividad = scanner.nextLine();
+            System.out.print("Ingrese el tipo de la actividad: ");
+            String tipo = scanner.nextLine();
+            Actividad actividad = aplicacion.getActividad(idActividad, tipo); 
+            if (actividad != null) {
+                actividades.add(actividad);
+            } else {
+                System.out.println("Actividad no encontrada. Intente nuevamente.");
+            }
 
+            System.out.print("¿Desea agregar otra actividad? (si/no): ");
+            continuar = scanner.nextLine();
+        } while (continuar.equalsIgnoreCase("si"));
+
+        Map<String, Boolean> mapaObligatoriedad = new HashMap<>();
+        for (Actividad actividad : actividades) {
+            System.out.print("¿La actividad '" + actividad.getTitulo() + "' es obligatoria? (true/false): ");
+            String esObligatoria = scanner.nextLine();
+            mapaObligatoriedad.put(actividad.getTitulo(), esObligatoria.equalsIgnoreCase("true"));
+        }
+
+        aplicacion.crearLearningPath(titulo, descripcion, objetivos, dificultad, profesor, actividades, mapaObligatoriedad);
+        System.out.println("Learning Path creado exitosamente.");
+    }    
+        
 	private static void clonarActividad() {
 		
 		System.out.print("Ingrese el id de la actividad que desea clonar: ");
