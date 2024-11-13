@@ -1,22 +1,18 @@
 package Consolas;
 
-import java.util.Scanner;
+import java.util.Scanner;  
 
 import interfaz.Aplicacion;
 import learningPath.LearningPath;
 import seguimientoEstudiantes.SeguimientoLearningPath;
 import user.Estudiante;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class EstudianteConsole {
    
-	private static Aplicacion aplicacion = new Aplicacion();  
+	private static Aplicacion aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");  
     private static Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
-        cargarDatos();
         
         System.out.println("== Sistema de Estudiantes ==");
         System.out.print("Ingrese su login: ");
@@ -32,7 +28,6 @@ public class EstudianteConsole {
             System.out.println("Credenciales incorrectas.");
         }
         
-        guardarDatos();
     }
 
     private static void mostrarMenuEstudiante(Estudiante estudiante) {
@@ -76,15 +71,7 @@ public class EstudianteConsole {
         System.out.println("== Learning Paths Inscritos ==");
         estudiante.getLearningPathsInscritos().forEach((id, seguimiento) -> {
             System.out.println("Learning Path: " + id);
-            // Mostrar progreso u otros datos relacionados
         });
     }
 
-    private static void cargarDatos() {
-    	
-    }
-
-    private static void guardarDatos() {
-
-    }
 }

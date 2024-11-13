@@ -88,9 +88,6 @@ public class Aplicacion {
 		this.mapaPreguntasSeleccionMultiple = PersistenciaPreguntas.cargarCerradas(archivoPreguntas);
 	}
 
-	// Getters
-
-
 	//Getters y Setters estructuras
 	
 	public HashMap<String, Estudiante> getMapaEstudiantes() {
@@ -445,151 +442,94 @@ public class Aplicacion {
 	}
 	
 	
-		
-	
-	
 	/**
-	 * Metodo para modificar el titulo de cualquier tipo de actividad 
-	 * @param actividad Actividad a modificar
-	 * @param titulo Nuevo titulo para la actividad
-	 */
-	public void modificarTituloActividad (Actividad actividad, String titulo) {
-		
-		String tipoActividad = actividad.getTipoActividad();
-		
-		if (tipoActividad.equals("Encuesta")) {
-			Profesor profesor = actividad.getProfesorCreador();
-			String idActividad = actividad.getIdActividad();
-			
-			HashMap<String, Encuesta> mapaGlobal = this.getMapaEncuestas();
-			
-			mapaGlobal.remove(idActividad);
-			profesor.getMapaEncuestasPropias().remove(idActividad);
-			
-			actividad.setTitulo(titulo);
-			
-			mapaGlobal.put(idActividad, (Encuesta) actividad);
-			profesor.getMapaEncuestasPropias().put(idActividad, (Encuesta) actividad);
-			
-		}
-		
-		else if (tipoActividad.equals("Tarea")) {
-			
-			Profesor profesor = actividad.getProfesorCreador();
-			String idActividad = actividad.getIdActividad();
-			
-			HashMap<String, Tarea> mapaGlobal = this.getMapaTareas();
-			
-			mapaGlobal.remove(idActividad);
-			profesor.getMapaTareasPropias().remove(idActividad);
-			
-			actividad.setTitulo(titulo);
-			
-			mapaGlobal.put(idActividad, (Tarea) actividad);
-			profesor.getMapaTareasPropias().put(idActividad, (Tarea) actividad);
-			
-		}
-		
-		else if (tipoActividad.equals("Quiz")) {
-			
-			Profesor profesor = actividad.getProfesorCreador();
-			String idActividad = actividad.getIdActividad();
-			
-			HashMap<String, Quiz> mapaGlobal = this.getMapaQuices();
-			
-			mapaGlobal.remove(idActividad);
-			profesor.getMapaQuicesPropios().remove(idActividad);
-			
-			actividad.setTitulo(titulo);
-			
-			mapaGlobal.put(idActividad, (Quiz) actividad);
-			profesor.getMapaQuicesPropios().put(idActividad, (Quiz) actividad);
-			
-		}
-		
-		else if (tipoActividad.equals("Examen")) {
-			
-			Profesor profesor = actividad.getProfesorCreador();
-			String idActividad = actividad.getIdActividad();
-			
-			HashMap<String, Examen> mapaGlobal = this.getMapaExamenes();
-			
-			mapaGlobal.remove(idActividad);
-			profesor.getMapaExamenesPropios().remove(idActividad);
-			
-			actividad.setTitulo(titulo);
-			
-			mapaGlobal.put(idActividad, (Examen) actividad);
-			profesor.getMapaExamenesPropios().put(idActividad, (Examen) actividad);
-			
-		}
-		
-		else if (tipoActividad.equals("Recurso")) {
-			
-			Profesor profesor = actividad.getProfesorCreador();
-			String idActividad = actividad.getIdActividad();
-			
-			HashMap<String, RevisarRecurso> mapaGlobal = this.getMapaRevisarRecurso();
-			
-			mapaGlobal.remove(idActividad);
-			profesor.getMapaRecursosPropios().remove(idActividad);
-			
-			actividad.setTitulo(titulo);
-			
-			mapaGlobal.put(idActividad, (RevisarRecurso) actividad);
-			profesor.getMapaRecursosPropios().put(idActividad, (RevisarRecurso) actividad);
-			
-		}
-		
-		
-	}
-
-	
-	/**
-	 * Metodo para modificar los atributos de tipo "String" de una actividad
+	 * Metodo para modificar los atributos de una actividad
+	 * 
 	 * @param actividad Actividad a modificar
 	 * @param valor Nuevo valor para el atributo
 	 * @param atributo Nombre del atributo a modificar
-	 * @param accion Agregar o eliminar, unicamente para objetivos
-	 * @throws ModificarObjetivosException Lanza excepcion si, al agregar (eliminar) un objetivo, el objetivo ya se encontraba  a
+	 * @param accion Agregar o eliminar, unicamente para objetivos (puede ser null si no aplica)
+	 * @param fecha Nuevo valor para fecha (puede ser null si no aplica)
+	 * @param duracion Nuevo valor para duracion (puede ser null si no aplica)
+	 * @throws ModificarObjetivosException Lanza excepcion si, al agregar (eliminar) un objetivo, el objetivo ya se encontraba a
 	 * (no se encontraba) en la lista de objetivos.
 	 */
-	public void modificarAtributosStringActividad (Actividad actividad, String valor, String atributo, String accion) 
-			throws ModificarObjetivosException {
-		
-		if (atributo.equals("Descripcion")) {
-			actividad.setDescripcion(valor);
-		}
-		
-		else if (atributo.equals("Dificultad")) {
-			actividad.setNivelDificultad(valor);
-		}
-		
-		else if (atributo.equals("Objetivos")) {
-			if (accion.equals("Agregar")) {
-				
-				actividad.agregarObjetivo((String) valor);
-				
-			}
-			
-			else {
-				actividad.eliminarObjetivo((String) valor);
-			}
-			
-		}
-		
+	public void modificarActividad(Actividad actividad, String valor, String atributo, String accion, Date fecha, Integer duracion)
+	        throws ModificarObjetivosException {
+
+	    if (atributo.equals("Titulo")) {
+	        String tipoActividad = actividad.getTipoActividad();
+	        Profesor profesor = actividad.getProfesorCreador();
+	        String idActividad = actividad.getIdActividad();
+
+	        switch (tipoActividad) {
+	            case "Encuesta":
+	                HashMap<String, Encuesta> mapaEncuestas = this.getMapaEncuestas();
+	                mapaEncuestas.remove(idActividad);
+	                profesor.getMapaEncuestasPropias().remove(idActividad);
+	                actividad.setTitulo(valor);
+	                mapaEncuestas.put(idActividad, (Encuesta) actividad);
+	                profesor.getMapaEncuestasPropias().put(idActividad, (Encuesta) actividad);
+	                break;
+	                
+	            case "Tarea":
+	                HashMap<String, Tarea> mapaTareas = this.getMapaTareas();
+	                mapaTareas.remove(idActividad);
+	                profesor.getMapaTareasPropias().remove(idActividad);
+	                actividad.setTitulo(valor);
+	                mapaTareas.put(idActividad, (Tarea) actividad);
+	                profesor.getMapaTareasPropias().put(idActividad, (Tarea) actividad);
+	                break;
+	                
+	            case "Quiz":
+	                HashMap<String, Quiz> mapaQuices = this.getMapaQuices();
+	                mapaQuices.remove(idActividad);
+	                profesor.getMapaQuicesPropios().remove(idActividad);
+	                actividad.setTitulo(valor);
+	                mapaQuices.put(idActividad, (Quiz) actividad);
+	                profesor.getMapaQuicesPropios().put(idActividad, (Quiz) actividad);
+	                break;
+	                
+	            case "Examen":
+	                HashMap<String, Examen> mapaExamenes = this.getMapaExamenes();
+	                mapaExamenes.remove(idActividad);
+	                profesor.getMapaExamenesPropios().remove(idActividad);
+	                actividad.setTitulo(valor);
+	                mapaExamenes.put(idActividad, (Examen) actividad);
+	                profesor.getMapaExamenesPropios().put(idActividad, (Examen) actividad);
+	                break;
+	                
+	            case "Recurso":
+	                HashMap<String, RevisarRecurso> mapaRecursos = this.getMapaRevisarRecurso();
+	                mapaRecursos.remove(idActividad);
+	                profesor.getMapaRecursosPropios().remove(idActividad);
+	                actividad.setTitulo(valor);
+	                mapaRecursos.put(idActividad, (RevisarRecurso) actividad);
+	                profesor.getMapaRecursosPropios().put(idActividad, (RevisarRecurso) actividad);
+	                break;
+	        }
+	    } 
+	    
+	    else if (atributo.equals("Descripcion")) {
+	        actividad.setDescripcion(valor);
+	    } 
+	    else if (atributo.equals("Dificultad")) {
+	        actividad.setNivelDificultad(valor);
+	    } 
+	    else if (atributo.equals("Objetivos")) {
+	        if (accion.equals("Agregar")) {
+	            actividad.agregarObjetivo(valor);
+	        } else {
+	            actividad.eliminarObjetivo(valor);
+	        }
+	    }
+	    else if (atributo.equals("Fecha Limite")) {
+	        actividad.setFechaLimite(fecha);
+	    } 
+	    else if (atributo.equals("Duracion")) {
+	        actividad.setDuracionMinutos(duracion);
+	    }    
 	}
-	
-	
-	//Metodos para modificar la fecha limite de la actividad y su duracion
-	public void modificarFechaLimiteActividad (Actividad actividad, Date fecha) {
-		actividad.setFechaLimite(fecha);
-	}
-	
-	public void modificarDuracionActividad (Actividad actividad, int duracion) {
-		actividad.setDuracionMinutos(duracion);
-	}
-	
 	
 	/** Metodo para modificar las actividades previas o de seguimiento de una actividad
 	 * @param actividadPrincipal Actividad a modificar sus actividades de seguimiento o previas
