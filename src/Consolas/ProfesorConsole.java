@@ -3,10 +3,7 @@ package Consolas;
 import java.util.Scanner;  
 
 import actividades.Actividad;
-import actividades.Encuesta;
 import actividades.Examen;
-import actividades.Quiz;
-import actividades.RevisarRecurso;
 import actividades.Tarea;
 import exceptions.ModificarObjetivosException;
 import exceptions.TipoInvalidoValorException;
@@ -16,6 +13,7 @@ import preguntas.PreguntaAbierta;
 import user.Estudiante;
 import user.Profesor;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -440,102 +438,89 @@ public class ProfesorConsole {
 	}
 	
 	private static void modificarActividad(Profesor profesor) {
+	    System.out.print("Ingrese el ID de la actividad a modificar: ");
+	    String idActividad = scanner.nextLine();
+	    System.out.print("Ingrese el tipo de la actividad a modificar: ");
+	    String tipo = scanner.nextLine();
+	    Actividad actividad = aplicacion.getActividad(idActividad, tipo);
 
-        System.out.println("Ingrese el ID de la actividad a modificar:");
-        String idActividad = scanner.nextLine();
-        
-        System.out.println("Ingrese el tipo de la actividad a modificar:");
-        String tipo = scanner.nextLine();
+	    if (actividad != null) {
+	        System.out.println("Seleccione el atributo a modificar:");
+	        System.out.println("1. Titulo");
+	        System.out.println("2. Descripcion");
+	        System.out.println("3. Dificultad");
+	        System.out.println("4. Objetivos");
+	        System.out.println("5. Fecha Limite");
+	        System.out.println("6. Duracion");
+	        
+	        int opcion = Integer.parseInt(scanner.nextLine());
+	        
+	        String atributoModificar = "";
+	        String valor = "";
+	        String accion = "";
+	        Date fecha = null;
+	        Integer duracion = null;
 
-        System.out.println("¿Qué atributo desea modificar? (Titulo, Descripcion, Dificultad, Objetivos):");
-        String atributo = scanner.nextLine();
+	        switch (opcion) {
+	            case 1:
+	                atributoModificar = "Titulo";
+	                System.out.print("Ingrese el nuevo titulo: ");
+	                valor = scanner.nextLine();
+	                break;
+	                
+	            case 2:
+	                atributoModificar = "Descripcion";
+	                System.out.print("Ingrese la nueva descripcion: ");
+	                valor = scanner.nextLine();
+	                break;
+	                
+	            case 3:
+	                atributoModificar = "Dificultad";
+	                System.out.print("Ingrese la nueva dificultad: ");
+	                valor = scanner.nextLine();
+	                break;
+	                
+	            case 4:
+	                atributoModificar = "Objetivos";
+	                System.out.print("Seleccione la acción (Agregar/Eliminar): ");
+	                accion = scanner.nextLine();
+	                System.out.print("Ingrese el objetivo: ");
+	                valor = scanner.nextLine();
+	                break;
 
-        System.out.println("Ingrese el nuevo valor para " + atributo + ":");
-        String valor = scanner.nextLine();
+	            case 5:
+	                atributoModificar = "Fecha Limite";
+	                System.out.print("Ingrese la nueva fecha limite (yyyy-MM-dd): ");
+	                try {
+	                    fecha = new SimpleDateFormat("yyyy-MM-dd").parse(scanner.nextLine());
+	                } catch (ParseException e) {
+	                    System.out.println("Formato de fecha incorrecto.");
+	                    return;
+	                }
+	                break;
 
-        String accion = null;
-        if (atributo.equals("Objetivos")) {
-            System.out.println("¿Desea Agregar o Eliminar el objetivo? (Ingrese 'Agregar' o 'Eliminar'):");
-            accion = scanner.nextLine();
-        }
+	            case 6:
+	                atributoModificar = "Duracion";
+	                System.out.print("Ingrese la nueva duración en minutos: ");
+	                duracion = Integer.parseInt(scanner.nextLine());
+	                break;
+	                
+	            default:
+	                System.out.println("Opción no válida.");
+	                return;
+	        }
 
-        Actividad actividad = aplicacion.getActividad(idActividad, tipo);
-        if (actividad != null) {            
-            try {
-                if (atributo.equals("Titulo")) {
-                    switch (tipo) {
-                        case "Encuesta":
-                            HashMap<String, Encuesta> mapaEncuesta = aplicacion.getMapaEncuestas();
-                            mapaEncuesta.remove(idActividad);
-                            actividad.setTitulo(valor);
-                            mapaEncuesta.put(idActividad, (Encuesta) actividad);
-                            System.out.println("El título de la actividad ha sido actualizado.");
-                            break;
-                        case "Tarea":
-                        	HashMap<String, Tarea> mapaTareas = aplicacion.getMapaTareas();
-                        	mapaTareas.remove(idActividad);
-                            actividad.setTitulo(valor);
-                            mapaTareas.put(idActividad, (Tarea) actividad);
-                            System.out.println("El título de la actividad ha sido actualizado.");
-                            break;
-                        case "Quiz":
-                        	HashMap<String, Quiz> mapaQuiz = aplicacion.getMapaQuices();
-                        	mapaQuiz.remove(idActividad);
-                            actividad.setTitulo(valor);
-                            mapaQuiz.put(idActividad, (Quiz) actividad);
-                            System.out.println("El título de la actividad ha sido actualizado.");
-                            break;
-                        case "Examen":
-                        	HashMap<String, Examen> mapaExamenes = aplicacion.getMapaExamenes();
-                        	mapaExamenes.remove(idActividad);
-                            actividad.setTitulo(valor);
-                            mapaExamenes.put(idActividad, (Examen) actividad);
-                            System.out.println("El título de la actividad ha sido actualizado.");
-                            break;
-                        case "Recurso":
-                        	HashMap<String, RevisarRecurso> mapaRecursos = aplicacion.getMapaRevisarRecurso();
-                        	mapaRecursos.remove(idActividad);
-                            actividad.setTitulo(valor);
-                            mapaRecursos.put(idActividad, (RevisarRecurso) actividad);
-                            System.out.println("El título de la actividad ha sido actualizado.");
-                            break;
-                        default:
-                            System.out.println("Tipo de actividad no reconocido.");
-                            return;
-                    }
+	        try {
+	            aplicacion.modificarActividad(actividad, valor, atributoModificar, accion, fecha, duracion);
+	            System.out.println("Atributo modificado exitosamente.");
+	        } catch (ModificarObjetivosException e) {
+	            System.out.println("Error al modificar el atributo: " + e.getMessage());
+	        }
+	    } else {
+	        System.out.println("Actividad no encontrada.");
+	    }
+	}
 
-                } else {
-                    switch (atributo) {
-                        case "Descripcion":
-                            actividad.setDescripcion(valor);
-                            System.out.println("La descripción de la actividad ha sido actualizada.");
-                            break;
-                        case "Dificultad":
-                            actividad.setNivelDificultad(valor);
-                            System.out.println("La dificultad de la actividad ha sido actualizada.");
-                            break;
-                        case "Objetivos":
-                            if ("Agregar".equalsIgnoreCase(accion)) {
-                                actividad.agregarObjetivo(valor);
-                                System.out.println("Objetivo agregado a la actividad.");
-                            } else if ("Eliminar".equalsIgnoreCase(accion)) {
-                                actividad.eliminarObjetivo(valor);
-                                System.out.println("Objetivo eliminado de la actividad.");
-                            } else {
-                                System.out.println("Acción no válida para objetivos.");
-                            }
-                            break;
-                        default:
-                            System.out.println("Atributo no reconocido.");
-                    }
-                }
-            } catch (ModificarObjetivosException e) {
-                System.out.println("Error al modificar objetivos: " + e.getMessage());
-            }
-        } else {
-            System.out.println("Actividad no encontrada con el ID proporcionado.");
-        }
-    }
 	
 	private static void calificarActividad(Profesor profesor) {
 

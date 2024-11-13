@@ -443,17 +443,18 @@ public class Aplicacion {
 	
 	
 	/**
-	 * Metodo para modificar los atributos de una actividad, incluyendo el titulo
-	 * y otros atributos de tipo "String" como descripcion, dificultad y objetivos.
+	 * Metodo para modificar los atributos de una actividad
 	 * 
 	 * @param actividad Actividad a modificar
 	 * @param valor Nuevo valor para el atributo
 	 * @param atributo Nombre del atributo a modificar
 	 * @param accion Agregar o eliminar, unicamente para objetivos (puede ser null si no aplica)
+	 * @param fecha Nuevo valor para fecha (puede ser null si no aplica)
+	 * @param duracion Nuevo valor para duracion (puede ser null si no aplica)
 	 * @throws ModificarObjetivosException Lanza excepcion si, al agregar (eliminar) un objetivo, el objetivo ya se encontraba a
 	 * (no se encontraba) en la lista de objetivos.
 	 */
-	public void modificarActividad(Actividad actividad, String valor, String atributo, String accion)
+	public void modificarActividad(Actividad actividad, String valor, String atributo, String accion, Date fecha, Integer duracion)
 	        throws ModificarObjetivosException {
 
 	    if (atributo.equals("Titulo")) {
@@ -522,19 +523,13 @@ public class Aplicacion {
 	            actividad.eliminarObjetivo(valor);
 	        }
 	    }
+	    else if (atributo.equals("Fecha Limite")) {
+	        actividad.setFechaLimite(fecha);
+	    } 
+	    else if (atributo.equals("Duracion")) {
+	        actividad.setDuracionMinutos(duracion);
+	    }    
 	}
-
-	
-	
-	//Metodos para modificar la fecha limite de la actividad y su duracion
-	public void modificarFechaLimiteActividad (Actividad actividad, Date fecha) {
-		actividad.setFechaLimite(fecha);
-	}
-	
-	public void modificarDuracionActividad (Actividad actividad, int duracion) {
-		actividad.setDuracionMinutos(duracion);
-	}
-	
 	
 	/** Metodo para modificar las actividades previas o de seguimiento de una actividad
 	 * @param actividadPrincipal Actividad a modificar sus actividades de seguimiento o previas
