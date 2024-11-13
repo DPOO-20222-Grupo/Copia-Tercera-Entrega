@@ -1,14 +1,11 @@
 package Consolas;
 
-import java.util.Scanner;
+import java.util.Scanner;  
 
 import interfaz.Aplicacion;
 import learningPath.LearningPath;
 import seguimientoEstudiantes.SeguimientoLearningPath;
 import user.Estudiante;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class EstudianteConsole {
    

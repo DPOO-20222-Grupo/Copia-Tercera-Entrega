@@ -2,7 +2,6 @@ package preguntas;
 
 public abstract class PreguntaCerrada extends Pregunta {
 	
-	
 	private int opcionCorrecta;
 	
 	
@@ -31,8 +30,6 @@ public abstract class PreguntaCerrada extends Pregunta {
 		return rta;
 		
 	}
-	
-	
 	
 	
 }
