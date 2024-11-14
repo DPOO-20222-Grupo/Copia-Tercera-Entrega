@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.text.ParseException;
 
 import actividades.Actividad;
@@ -14,6 +15,7 @@ import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
 import learningPath.LearningPath;
+import persistenciaDatos.LocalDateTimeAdapter;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
@@ -185,9 +187,11 @@ public class Main {
 				);
 		
 		LearningPath printLp = aplicacion_recargada.getLearningPath("Introducción a las Pruebas - l.munera");
-		SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-		String fechaFormateada = formatoFecha.format(printLp.getFechaCreacion());
-		String fechaMod = formatoFecha.format(printLp.getFechaUltimaModificacion());
+		LocalDateTime fechaCreacion = printLp.getFechaCreacion();
+		LocalDateTime fechaModificacion = printLp.getFechaUltimaModificacion();
+		String fechaFormateada = String.format("%d/%d/%d", fechaCreacion.getDayOfMonth(), fechaCreacion.getMonthValue(), fechaCreacion.getYear() );
+		String fechaMod = String.format("%1$d/%2$d/%3$d", fechaModificacion.getDayOfMonth(), fechaModificacion.getMonthValue(), fechaModificacion.getYear() );
+		
 		System.out.println(
 				"\nLearning Path:\n"
 				+ String.format("Titulo: %s\n", printLp.getTitulo())

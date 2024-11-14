@@ -3,6 +3,7 @@ package persistenciaDatos;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -18,7 +19,9 @@ import preguntas.PreguntaSeleccionMultiple;
 public class PersistenciaPreguntas {
 	
 	public static void persistirPreguntas(HashMap<String, PreguntaAbierta> abiertaMap, HashMap<String, PreguntaSeleccionMultiple> cerradaMap, String archivo) {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Gson gson = new GsonBuilder().setPrettyPrinting()
+				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.create();
 		JsonObject jsonObject = new JsonObject();
 		JsonObject pAbiertas = new JsonObject();
 		JsonObject pCerradas = new JsonObject();
@@ -43,7 +46,9 @@ public class PersistenciaPreguntas {
 	}
 	
 	public static HashMap<String, PreguntaAbierta> cargarAbiertas(String archivo) {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.create();
 		
 		HashMap<String, PreguntaAbierta> abiertaMap = new HashMap<String, PreguntaAbierta>();	
 		
@@ -66,7 +71,9 @@ public class PersistenciaPreguntas {
 	}
 	
 	public static HashMap<String, PreguntaSeleccionMultiple> cargarCerradas(String archivo) {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.create();
 		
 		HashMap<String, PreguntaSeleccionMultiple> cerradaMap = new HashMap<String, PreguntaSeleccionMultiple>();			
 		

@@ -14,8 +14,11 @@ import actividades.Tarea;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map.Entry;
+
 
 public class PersistenciaActividades {
 		
@@ -23,14 +26,20 @@ public class PersistenciaActividades {
 				HashMap<String, Encuesta> EncuestaMap,HashMap<String, Quiz> QuizMap,
 				HashMap<String, RevisarRecurso> RevisarMap,HashMap<String, Tarea> TareaMap,
 				String archivo) {
-			
-			Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+			Gson gson = new GsonBuilder().setPrettyPrinting()
+					
+					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+					.create();
+					
 			JsonObject jsonObject = new JsonObject();
 			JsonObject encuestas = new JsonObject();
 			JsonObject examenes = new JsonObject();
 			JsonObject quices = new JsonObject();
 			JsonObject recursos = new JsonObject();
 			JsonObject tareas = new JsonObject();
+			
+				
 				
 			
 			for(Entry<String, Encuesta> entry: EncuestaMap.entrySet()) {
@@ -68,7 +77,10 @@ public class PersistenciaActividades {
 		}
 		
 		public static HashMap<String, Examen> cargarExamen(String archivo) {
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder()
+					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+					.create();
+					
 			
 			HashMap<String, Examen> examenMap = new HashMap<String, Examen>();			
 			
@@ -91,7 +103,9 @@ public class PersistenciaActividades {
 		}
 		
 		public static HashMap<String, Encuesta> cargarEncuesta(String archivo) {
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder()
+					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+					.create();
 			
 			HashMap<String, Encuesta> encuestaMap = new HashMap<String, Encuesta>();			
 			
@@ -114,7 +128,9 @@ public class PersistenciaActividades {
 		}
 		
 		public static HashMap<String, Quiz> cargarQuiz(String archivo) {
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder()
+					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+					.create();
 			
 			HashMap<String, Quiz> quizMap = new HashMap<String, Quiz>();			
 			
@@ -137,7 +153,9 @@ public class PersistenciaActividades {
 		}
 		
 		public static HashMap<String, RevisarRecurso> cargarRecurso(String archivo) {
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder()
+					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+					.create();
 			
 			HashMap<String, RevisarRecurso> recursosMap = new HashMap<String, RevisarRecurso>();			
 			
@@ -160,7 +178,9 @@ public class PersistenciaActividades {
 		}
 		
 		public static HashMap<String, Tarea> cargarTarea(String archivo) {
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder()
+					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+					.create();
 			
 			HashMap<String, Tarea> tareaMap = new HashMap<String, Tarea>();			
 			
