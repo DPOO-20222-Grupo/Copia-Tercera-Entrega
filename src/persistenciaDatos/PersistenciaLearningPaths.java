@@ -3,6 +3,7 @@ package persistenciaDatos;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -18,7 +19,9 @@ public class PersistenciaLearningPaths {
 	public static void persistirLearningPaths(HashMap<String, LearningPath> LPMap,
 			String archivo) {
 		
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Gson gson = new GsonBuilder().setPrettyPrinting()
+				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.create();
 		JsonObject jsonObject = new JsonObject();
 			
 		for(Entry<String, LearningPath> entry: LPMap.entrySet()) {
@@ -34,7 +37,9 @@ public class PersistenciaLearningPaths {
 	}
 	
 	public static HashMap<String, LearningPath> cargarLP(String archivo) {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.create();
 		
 		HashMap<String, LearningPath> LPMap = new HashMap<String, LearningPath>();			
 		

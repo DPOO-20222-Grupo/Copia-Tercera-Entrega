@@ -7,6 +7,7 @@ import actividades.Examen;
 import actividades.Tarea;
 import exceptions.ActividadYaExistenteException;
 import exceptions.LearningPathYaExistenteException;
+import exceptions.ModificarActividadesLearningPathException;
 import exceptions.ModificarObjetivosException;
 import exceptions.TipoInvalidoValorException;
 import interfaz.Aplicacion;
@@ -427,8 +428,95 @@ public class ProfesorConsole {
 	        System.out.println("2. Descripcion");
 	        System.out.println("3. Dificultad");
 	        System.out.println("4. Objetivos");
+	        System.out.println("5. Actvidades");
 	        int opcion = Integer.parseInt(scanner.nextLine());
 	        
+	        if (opcion == 5) {
+	        	System.out.print("Ingrese el ID de la actividad a modificar: ");
+	        	String idActividad = scanner.nextLine();
+	        	
+	        	System.out.print("Ingrese el tipo de la actividad a modificar: ");
+	        	String tipoActividad = scanner.nextLine();
+	        	
+	        	Actividad actividad = aplicacion.getActividad(idActividad, tipoActividad);
+	        	
+	        	if (actividad != null) {
+	        		
+	        		System.out.println("Seleccione la accion que desea realizar:");
+	    	        System.out.println("1. Agregar");
+	    	        System.out.println("2. Eliminar");
+	    	        System.out.println("3. Modificar obligatoriedad");
+	    	        int opcionActividad = Integer.parseInt(scanner.nextLine());
+	    	        
+	    	        String accion;
+	    	        
+	    	        switch (opcionActividad) {
+	    	        
+	    	        case 1: 
+	    	        	accion = "Agregar";
+	    	        	boolean obligatoriedad;
+	    	        	System.out.println("Indique si la actividad será obligatoria o no:");
+	    	        	System.out.println("1. Obligatoria");
+		    	        System.out.println("2. No obligatoria");
+		    	        int opcionObligatoriedad = Integer.parseInt(scanner.nextLine());
+		    	        
+		    	        if (opcionObligatoriedad == 1) {
+		    	        	obligatoriedad = true;
+		    	        }
+		    	        else if (opcionObligatoriedad == 2) {
+		    	        	obligatoriedad = false;
+		    	        }
+		    	        
+		    	        else {
+		    	        	System.out.println("Opción no válida.");
+			                return;
+		    	        }
+		    	        
+		    	        try {
+		    	        aplicacion.modificarActividadesLearningPath(learningPath, actividad, obligatoriedad, accion);
+		    	        }
+		    	        
+		    	        catch (ModificarActividadesLearningPathException e) {
+		    	        	System.out.println("Error al modificar el atributo: " + e.getMessage());
+		    	        }
+		    	        
+	    	        case 2:
+	    	        	accion = "Eliminar";
+		    	        
+	    	        	try {
+	    	        		aplicacion.modificarActividadesLearningPath(learningPath, actividad, false, accion);
+	    	        	}
+	    	        	
+	    	        	catch (ModificarActividadesLearningPathException e){
+		    	        	System.out.println("Error al modificar el atributo: " + e.getMessage());
+		    	        }
+	    	        	
+	    	        case 3:
+	    	        	
+	    	        	accion = "Obligatoriedad";
+	    	        	try {
+	    	        		aplicacion.modificarActividadesLearningPath(learningPath, actividad, false, accion);
+	    	        	}
+	    	        	
+	    	        	catch (ModificarActividadesLearningPathException e){
+		    	        	System.out.println("Error al modificar el atributo: " + e.getMessage());
+	    	        	
+	    	        	}
+	    	        }
+	    	        
+	        		
+	        	}
+	        	else {
+	        		System.out.println("Actividad no encontrada en la base de datos");
+	                return;
+	        		
+	        	}
+	        	
+	        	
+            	
+            	
+	        }
+	        else {
 	        String atributoModificar = "";
 	        String valor = "";
 	        String accion = "";
@@ -456,6 +544,7 @@ public class ProfesorConsole {
 	                System.out.print("Ingrese el objetivo: ");
 	                valor = scanner.nextLine();
 	                break;
+
 	            default:
 	                System.out.println("Opción no válida.");
 	                return;
@@ -466,6 +555,8 @@ public class ProfesorConsole {
 	            System.out.println("Atributo modificado exitosamente.");
 	        } catch (TipoInvalidoValorException | ModificarObjetivosException e) {
 	            System.out.println("Error al modificar el atributo: " + e.getMessage());
+	        }
+	        
 	        }
 	    } else {
 	        System.out.println("Learning Path no encontrado.");

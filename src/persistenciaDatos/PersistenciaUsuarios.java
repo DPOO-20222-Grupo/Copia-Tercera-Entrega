@@ -11,6 +11,7 @@ import user.Profesor;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -18,7 +19,9 @@ import java.util.Map.Entry;
 public class PersistenciaUsuarios {
 	
 	public static void persistirUsuarios(HashMap<String, Estudiante> studentMap, HashMap<String, Profesor> profMap, String archivo) {
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Gson gson = new GsonBuilder().setPrettyPrinting()
+				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.create();
 		
 		JsonObject jsonObject = new JsonObject();
 		JsonObject estudiantes = new JsonObject();
@@ -47,7 +50,9 @@ public class PersistenciaUsuarios {
 	
 	public static HashMap<String, Estudiante> cargarEstudiantes(String archivo) {
 
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.create();
 		
 		HashMap<String, Estudiante> studentMap = new HashMap<String, Estudiante>();	
 		
@@ -69,7 +74,9 @@ public class PersistenciaUsuarios {
 	}
 	
 	public static HashMap<String, Profesor> cargarProfesores(String archivo) {
-		Gson gson = new Gson();
+		Gson gson = new GsonBuilder()
+				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.create();
 		
 		HashMap<String, Profesor> profMap = new HashMap<String, Profesor>();	
 		
