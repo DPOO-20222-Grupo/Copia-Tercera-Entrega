@@ -1,6 +1,5 @@
 package Consolas;
 
-import user.Estudiante;
 import java.util.Scanner;
 import interfaz.Aplicacion; 
 
@@ -23,7 +22,7 @@ public class RegistroConsole {
             System.out.println("\n== Menú Registro ==");
             System.out.println("1. Inscribirse como profesor");
             System.out.println("2. Inscribirse como estudiante");
-            System.out.println("3. Cerrar sesión");
+            System.out.println("3. Cerrar registro");
             System.out.print("Seleccione una opción: ");
             opcion = Integer.parseInt(scanner.nextLine());
 
@@ -51,6 +50,8 @@ public class RegistroConsole {
         System.out.print("Ingrese su nombre completo: ");
         String nombre = scanner.nextLine();
         aplicacion.crearProfesor(login, password, nombre);
+        
+        ProfesorConsole.mostrarMenuProfesor(aplicacion.getMapaProfesores().get(login));
 		
 	}
 
@@ -62,6 +63,8 @@ public class RegistroConsole {
         System.out.print("Ingrese su nombre completo: ");
         String nombre = scanner.nextLine();
         aplicacion.crearEstudiante(login, password, nombre);
+        
+        EstudianteConsole.mostrarMenuEstudiante(aplicacion.getMapaEstudiantes().get(login));
         	
 	}
 

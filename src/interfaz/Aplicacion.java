@@ -1,4 +1,3 @@
-
 package interfaz;
 
 
@@ -137,56 +136,48 @@ public class Aplicacion {
 	
 	//Registrar nuevas entradas a la aplicacion
 
-
 	//Usuarios
+	
 	public void registrarUsuario(Usuario nuevoUsuario) {
 		if (nuevoUsuario.getTipo().equals("Estudiante")) { 
 				mapaEstudiantes.put(nuevoUsuario.getLogin(), (Estudiante) nuevoUsuario);
 			}
-		
 		else {
 				mapaProfesores.put(nuevoUsuario.getLogin(), (Profesor) nuevoUsuario);
 			}
-
 	}
+	
 	//LearningPaths
+	
 	public void registrarLearningPath (LearningPath pLearningPath) {
-
 		String llave = pLearningPath.getIdLearnginPath();
-		
 		mapaLearningPaths.put(llave, pLearningPath);
-		
 	}
+	
 	//Actividades
+	
 	public  void registrarActividad(Actividad actividad) {
-		
 		String llave = actividad.getIdActividad();
-		
 		String tipoActividad = actividad.getTipoActividad();
 		
 		if (tipoActividad.equals("Encuesta")) {
-			mapaEncuestas.put(llave, (Encuesta) actividad);
-			
+			mapaEncuestas.put(llave, (Encuesta) actividad);	
 		}
 		
 		else if (tipoActividad.equals("Tarea")) {
-			mapaTareas.put(llave, (Tarea) actividad);
-			
+			mapaTareas.put(llave, (Tarea) actividad);	
 		}
 		
 		else if (tipoActividad.equals("Quiz")) {
 			mapaQuices.put(llave, (Quiz) actividad);
-			
 		}
 		
 		else if (tipoActividad.equals("Examen")) {
-			mapaExamenes.put(llave, (Examen) actividad);
-			
+			mapaExamenes.put(llave, (Examen) actividad);	
 		}
 		
 		else if (tipoActividad.equals("Recurso")) {
 			mapaRevisarRecurso.put(llave, (RevisarRecurso) actividad);
-			
 		}
 		
 	}
@@ -194,32 +185,23 @@ public class Aplicacion {
 	public void registrarPregunta (Pregunta pregunta) {
 		
 		String llave =  pregunta.getIdPregunta();
-		
 		String tipo = pregunta.getTipo();
 		
 		if (tipo.equals("Abierta")) {
-			
 			mapaPreguntasAbiertas.put(llave, (PreguntaAbierta) pregunta);
-			
 		}
 		
 		else if (tipo.equals("Cerrada")){
-			
 			mapaPreguntasSeleccionMultiple.put(llave, (PreguntaSeleccionMultiple) pregunta);
-			
 		}
 		
 		else {
 			mapaPreguntasBoolean.put(tipo, (PreguntaBoolean) pregunta);
 		}
-		
-	
 	}
 	
 	public String generarLlaveLearningsActividades (String titulo, String login) {
-		
 		String llave = titulo + " - " + login;
-		
 		return llave;
 	}
 		
@@ -266,15 +248,11 @@ public class Aplicacion {
 	public void revisarLearningPathRepetido (String titulo, String login) throws LearningPathYaExistenteException {
 		
 		String llave = generarLlaveLearningsActividades(titulo, login);
-		
 		if (mapaLearningPaths.containsKey(llave)) {
 			throw new LearningPathYaExistenteException(titulo);
 		}
-		
 	}
 
-	
-	
 	// Requerimientos funcionales
 	
 	//Crear Learning Paths y registrarlos correctamente
@@ -350,7 +328,6 @@ public class Aplicacion {
 		profesorCreador.registrarActividad(nuevaEncuesta);
 	}
 	
-	//
 	/**
 	 * Metodo para modificar los atributos de tipo "String" de un LearningPath
 	 * @param learningPath learningPath a modificar
@@ -381,32 +358,22 @@ public class Aplicacion {
 			}
 		
 		else if (atributoModificar.equals("Descripcion")) {
-			
 				 learningPath.modificarDescripcion(valor);
-			
 		}
 		
 		else if (atributoModificar.equals("Dificultad")) {
-			
 				 learningPath.actualizarDificultad((String) valor);
-
 		}
 		
 		
 		else if (atributoModificar.equals("Objetivos")) {
-			
-				
 				if (accion.equals("Agregar")) {
-					
 					learningPath.agregarObjetivo((String) valor);
-					
 				}
-				
 				else {
 					learningPath.eliminarObjetivo((String) valor);
 				}
 		}
-		
 	}
 	
 	/**
@@ -423,9 +390,7 @@ public class Aplicacion {
 	{
 		
 		if (accion.equals("Agregar")) {
-			
 			learningPath.agregarActividad(actividad, obligatoriedad);
-			
 		}
 		
 		else if (accion.equals("Obligatoriedad")) {
@@ -468,7 +433,8 @@ public class Aplicacion {
 	                mapaEncuestas.remove(idActividad);
 	                profesor.getMapaEncuestasPropias().remove(idActividad);
 	                actividad.setTitulo(valor);
-	                mapaEncuestas.put(idActividad, (Encuesta) actividad);
+	                String idNuevo = actividad.getIdActividad();
+	                mapaEncuestas.put(idNuevo, (Encuesta) actividad);
 	                profesor.getMapaEncuestasPropias().put(idActividad, (Encuesta) actividad);
 	                break;
 	                
@@ -478,7 +444,8 @@ public class Aplicacion {
 	                profesor.getMapaTareasPropias().remove(idActividad);
 	                actividad.setTitulo(valor);
 	                mapaTareas.put(idActividad, (Tarea) actividad);
-	                profesor.getMapaTareasPropias().put(idActividad, (Tarea) actividad);
+	                String idNuevo1 = actividad.getIdActividad();
+	                profesor.getMapaTareasPropias().put(idNuevo1, (Tarea) actividad);
 	                break;
 	                
 	            case "Quiz":
@@ -487,7 +454,8 @@ public class Aplicacion {
 	                profesor.getMapaQuicesPropios().remove(idActividad);
 	                actividad.setTitulo(valor);
 	                mapaQuices.put(idActividad, (Quiz) actividad);
-	                profesor.getMapaQuicesPropios().put(idActividad, (Quiz) actividad);
+	                String idNuevo2 = actividad.getIdActividad();
+	                profesor.getMapaQuicesPropios().put(idNuevo2, (Quiz) actividad);
 	                break;
 	                
 	            case "Examen":
@@ -496,7 +464,8 @@ public class Aplicacion {
 	                profesor.getMapaExamenesPropios().remove(idActividad);
 	                actividad.setTitulo(valor);
 	                mapaExamenes.put(idActividad, (Examen) actividad);
-	                profesor.getMapaExamenesPropios().put(idActividad, (Examen) actividad);
+	                String idNuevo3 = actividad.getIdActividad();
+	                profesor.getMapaExamenesPropios().put(idNuevo3, (Examen) actividad);
 	                break;
 	                
 	            case "Recurso":
@@ -505,7 +474,8 @@ public class Aplicacion {
 	                profesor.getMapaRecursosPropios().remove(idActividad);
 	                actividad.setTitulo(valor);
 	                mapaRecursos.put(idActividad, (RevisarRecurso) actividad);
-	                profesor.getMapaRecursosPropios().put(idActividad, (RevisarRecurso) actividad);
+	                String idNuevo4 = actividad.getIdActividad();
+	                profesor.getMapaRecursosPropios().put(idNuevo4, (RevisarRecurso) actividad);
 	                break;
 	        }
 	    } 
@@ -529,7 +499,7 @@ public class Aplicacion {
 	    else if (atributo.equals("Duracion")) {
 	        actividad.setDuracionMinutos(duracion);
 	    }    
-	}
+	} 
 	
 	/** Metodo para modificar las actividades previas o de seguimiento de una actividad
 	 * @param actividadPrincipal Actividad a modificar sus actividades de seguimiento o previas
@@ -582,14 +552,11 @@ public class Aplicacion {
 	public void modificarRecurso (RevisarRecurso recurso, String valor, String atributo) {
 		
 		if (atributo.equals("Tipo")) {
-			
 			recurso.setTipoRecurso(valor);
 		}
-		
 		else {
 			recurso.setEnlaceRecurso(valor);
 		}
-		
 	}
 	
 	/**
@@ -711,7 +678,6 @@ public class Aplicacion {
 			this.getMapaPreguntasSeleccionMultiple().put(llave, (PreguntaSeleccionMultiple) pregunta);
 			profesorCreador.getPreguntasSeleccionPropias().put(llave, (PreguntaSeleccionMultiple) pregunta);
 			
-			
 		}
 		
 		else {
@@ -724,10 +690,7 @@ public class Aplicacion {
 			this.registrarPregunta(pregunta);
 			profesorCreador.registrarPregunta(pregunta);
 			
-			
 		}
-		
-		
 	}
 	
 	//Permite modificar el enunciado de una pregunta
@@ -823,8 +786,6 @@ public class Aplicacion {
 						profesorClonando,
 						encuesta.getPreguntas()
 						);
-				
-				
 			}
 			
 			else if (tipoActividad.equals("Tarea")) {
@@ -838,8 +799,6 @@ public class Aplicacion {
 								tareaOriginal.getDuracionMinutos(), 
 								tareaOriginal.getFechaLimite(), 
 								profesorClonando);
-				
-				
 			}
 			
 			else if (tipoActividad.equals("Quiz")) {
@@ -854,10 +813,7 @@ public class Aplicacion {
 							   quizOriginal.getFechaLimite(), 
 							   profesorClonando, 
 							   quizOriginal.getCalificacionMinima(),
-							   quizOriginal.getPreguntas());
-				
-				
-				
+							   quizOriginal.getPreguntas());	
 			}
 			
 			else if (tipoActividad.equals("Examen")) {
@@ -890,9 +846,6 @@ public class Aplicacion {
 										 recurso.getEnlaceRecurso());
 				
 			}
-			
-		
-		
 	}
 	
 	//Permite duplicar un learning Path de otro profesor

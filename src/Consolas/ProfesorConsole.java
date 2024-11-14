@@ -1,10 +1,12 @@
 package Consolas;
 
-import java.util.Scanner;  
+import java.util.Scanner;   
 
 import actividades.Actividad;
 import actividades.Examen;
 import actividades.Tarea;
+import exceptions.ActividadYaExistenteException;
+import exceptions.LearningPathYaExistenteException;
 import exceptions.ModificarObjetivosException;
 import exceptions.TipoInvalidoValorException;
 import interfaz.Aplicacion;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ProfesorConsole {
     
@@ -43,7 +46,7 @@ public class ProfesorConsole {
         
     }
 
-    private static void mostrarMenuProfesor(Profesor profesor) {
+    public static void mostrarMenuProfesor(Profesor profesor) {
         int opcion;
         do {
             System.out.println("\n== Menú Profesor ==");
@@ -52,14 +55,16 @@ public class ProfesorConsole {
             System.out.println("3. Crear un quiz");
             System.out.println("4. Crear un examen");
             System.out.println("5. Crear una encuesta");
-            System.out.println("6. Registrar un Learning Path");
+            System.out.println("6. Crear un Learning Path");
             System.out.println("7. Clonar Actividad");
             System.out.println("8. Clonar Learning Path");
             System.out.println("9. Modificar Learning Path");
             System.out.println("10. Modificar Actividad");
             System.out.println("11. Calificar Actividad");
-            System.out.println("12. Ver mis actividades");
-            System.out.println("13. Cerrar sesión");
+            System.out.println("12. Revisar si una actividad ya existe");
+            System.out.println("13. Revisar si un Learning Path ya existe");
+            System.out.println("14. Ver mis actividades");
+            System.out.println("15. Cerrar sesión");
             System.out.print("Seleccione una opción: ");
             opcion = Integer.parseInt(scanner.nextLine());
 
@@ -80,7 +85,7 @@ public class ProfesorConsole {
                 	crearEncuesta(profesor);
                 	break;
                 case 6:
-                    registrarLearningPath(profesor);
+                    CrearLearningPath(profesor);
                     break;
                 case 7:
                 	clonarActividad();
@@ -98,9 +103,15 @@ public class ProfesorConsole {
                 	calificarActividad(profesor);
                 	break;
                 case 12:
-                    verActividades(profesor);
+                    revisarActividadRepetida();
                     break;
                 case 13:
+                	revisarLearningPathRepetido();
+                	break;
+                case 14:
+                	verActividades(profesor);
+                	break;
+                case 15:
                     profesor.logout();
                     System.out.println("Sesión cerrada.");
                     break;
@@ -328,7 +339,7 @@ public class ProfesorConsole {
 	    System.out.println("Encuesta registrada exitosamente.");
 	}
 
-    private static void registrarLearningPath(Profesor profesor) {
+    private static void CrearLearningPath(Profesor profesor) {
     	
     	System.out.print("Ingrese el titulo del learning path: ");
         String titulo = scanner.nextLine();
@@ -346,11 +357,35 @@ public class ProfesorConsole {
         System.out.print("Ingrese el nivel de dificultad de la actividad: ");
         String dificultad = scanner.nextLine();
         
-        LearningPath lp = new LearningPath(titulo, descripcion, objetivos, dificultad, profesor, null, null); 
-        aplicacion.registrarLearningPath(lp);
-        System.out.println("Learning Path creado exitosamente.");
-    }
+        List<Actividad> actividades = new ArrayList<>();
+        String continuar;
+        do {
+            System.out.print("Ingrese el ID de la actividad: ");
+            String idActividad = scanner.nextLine();
+            System.out.print("Ingrese el tipo de la actividad: ");
+            String tipo = scanner.nextLine();
+            Actividad actividad = aplicacion.getActividad(idActividad, tipo); 
+            if (actividad != null) {
+                actividades.add(actividad);
+            } else {
+                System.out.println("Actividad no encontrada. Intente nuevamente.");
+            }
 
+            System.out.print("¿Desea agregar otra actividad? (si/no): ");
+            continuar = scanner.nextLine();
+        } while (continuar.equalsIgnoreCase("si"));
+
+        Map<String, Boolean> mapaObligatoriedad = new HashMap<>();
+        for (Actividad actividad : actividades) {
+            System.out.print("¿La actividad '" + actividad.getTitulo() + "' es obligatoria? (true/false): ");
+            String esObligatoria = scanner.nextLine();
+            mapaObligatoriedad.put(actividad.getTitulo(), esObligatoria.equalsIgnoreCase("true"));
+        }
+
+        aplicacion.crearLearningPath(titulo, descripcion, objetivos, dificultad, profesor, actividades, mapaObligatoriedad);
+        System.out.println("Learning Path creado exitosamente.");
+    }    
+        
 	private static void clonarActividad() {
 		
 		System.out.print("Ingrese el id de la actividad que desea clonar: ");
@@ -455,9 +490,9 @@ public class ProfesorConsole {
 	        
 	        int opcion = Integer.parseInt(scanner.nextLine());
 	        
-	        String atributoModificar = "";
-	        String valor = "";
-	        String accion = "";
+	        String atributoModificar = null;
+	        String valor = null;
+	        String accion = null;
 	        Date fecha = null;
 	        Integer duracion = null;
 
@@ -511,8 +546,11 @@ public class ProfesorConsole {
 	        }
 
 	        try {
+	        	
 	            aplicacion.modificarActividad(actividad, valor, atributoModificar, accion, fecha, duracion);
-	            System.out.println("Atributo modificado exitosamente.");
+	            System.out.println("Atributo modificado exitosamente.");          
+	            
+	            
 	        } catch (ModificarObjetivosException e) {
 	            System.out.println("Error al modificar el atributo: " + e.getMessage());
 	        }
@@ -562,8 +600,68 @@ public class ProfesorConsole {
         
     }
 	
-	
+	private static void revisarActividadRepetida() {
+	    System.out.print("Ingrese el título de la actividad: ");
+	    String titulo = scanner.nextLine();
 
+	    System.out.print("Ingrese el login del profesor: ");
+	    String login = scanner.nextLine();
+
+	    System.out.println("Seleccione el tipo de actividad:");
+	    System.out.println("1. Tarea");
+	    System.out.println("2. Quiz");
+	    System.out.println("3. Recurso");
+	    System.out.println("4. Examen");
+	    System.out.println("5. Encuesta");
+	    int tipoOpcion = Integer.parseInt(scanner.nextLine());
+	    String tipo = "";
+
+	    switch (tipoOpcion) {
+	        case 1:
+	            tipo = "Tarea";
+	            break;
+	        case 2:
+	            tipo = "Quiz";
+	            break;
+	        case 3:
+	            tipo = "Recurso";
+	            break;
+	        case 4:
+	            tipo = "Examen";
+	            break;
+	        case 5:
+	            tipo = "Encuesta";
+	            break;
+	        default:
+	            System.out.println("Opción no válida.");
+	            return;
+	    }
+
+	    try {
+	        aplicacion.revisarActividadRepetida(titulo, login, tipo);
+	        System.out.println("La actividad no existe, puede ser creada.");
+	    } catch (ActividadYaExistenteException e) {
+	        System.out.println("Error: La actividad '" + titulo + "' de tipo '" + tipo + "' ya existe.");
+	    }
+	}
+	
+	private static void revisarLearningPathRepetido() {
+		System.out.print("Ingrese el título de la actividad: ");
+	    String titulo = scanner.nextLine();
+
+	    System.out.print("Ingrese el login del profesor: ");
+	    String login = scanner.nextLine();
+
+	    try {
+	        aplicacion.revisarLearningPathRepetido(titulo, login);
+	        System.out.println("El learning Path no existe, puede ser creado.");
+	    } catch (LearningPathYaExistenteException e) {
+	        System.out.println("Error: El learning Path " + titulo + "ya existe.");
+	    }
+		
+	}
+
+	
     private static void verActividades(Profesor profesor) {
         System.out.println("== Mis Actividades ==");
         profesor.getMapaRecursosPropios().forEach((id, recurso) -> System.out.println("Recurso: " + id));
