@@ -1,11 +1,14 @@
 package Test;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -14,13 +17,19 @@ import org.junit.jupiter.api.Test;
 
 import actividades.Actividad;
 import actividades.RevisarRecurso;
+import actividades.Tarea;
+import exceptions.ModificarActividadesLearningPathException;
+import exceptions.ModificarEstudianteLearningPathException;
 import exceptions.ModificarObjetivosException;
 import learningPath.LearningPath;
+import seguimientoEstudiantes.SeguimientoLearningPath;
+import user.Estudiante;
 import user.Profesor;
 
 public class LearningPathTest {
 
 	private LearningPath learningPath;
+	private RevisarRecurso actOriginal;
 	
 	
 	@BeforeEach
@@ -36,6 +45,7 @@ public class LearningPathTest {
 		objLearningPath.add("Objetivo 1 LP");
 		
 		HashMap<String, Boolean> mapaAct = new HashMap<String, Boolean>();
+		mapaAct.put(act1.getIdActividad(), false);
 		
 		ArrayList<Actividad> listActividades = new ArrayList<Actividad>();
 		
@@ -44,7 +54,13 @@ public class LearningPathTest {
 		LearningPath nuevoLP = new LearningPath("LP prueba", "Esto es una prueba de LP", objLearningPath, "Medio", prof, listActividades, mapaAct);
 		
 		this.learningPath = nuevoLP;
+		this.actOriginal = act1;
 		
+	}
+	
+	@Test
+	public void idTest() {
+		assertEquals("LP prueba - s.munozm234", learningPath.getIdLearnginPath(), "ID creado incorrectamente");
 	}
 	
 	@Test
@@ -55,6 +71,11 @@ public class LearningPathTest {
 		
 		assertEquals("Nuevo Titulo", learningPath.getTitulo(), "Titulo modificado incorrectamente");
 		assertEquals(1.1, learningPath.getVersion(), "Version actualizada incorrectamente");
+		
+		LocalDateTime fechaHoy = LocalDateTime.now();
+		assertEquals(fechaHoy.getDayOfMonth(), learningPath.getFechaUltimaModificacion().getDayOfMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getMonth(), learningPath.getFechaUltimaModificacion().getMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getYear(), learningPath.getFechaUltimaModificacion().getYear(), "Fecha de modificacion actualizada incorrectamente");
 		
 	}
 	
@@ -67,7 +88,12 @@ public class LearningPathTest {
 		assertEquals("Nueva Descripcion", learningPath.getDescripcion(), "Descripcion modificada incorrectamente");
 		assertEquals(1.1, learningPath.getVersion(), "Version actualizada incorrectamente");
 		
-		Date fechaHoy = new Date();
+		LocalDateTime fechaHoy = LocalDateTime.now();
+		assertEquals(fechaHoy.getDayOfMonth(), learningPath.getFechaUltimaModificacion().getDayOfMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getMonth(), learningPath.getFechaUltimaModificacion().getMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getYear(), learningPath.getFechaUltimaModificacion().getYear(), "Fecha de modificacion actualizada incorrectamente");
+		
+		
 		
 		
 	}
@@ -84,6 +110,10 @@ public class LearningPathTest {
 		assertEquals(2, learningPath.getObjetivos().size(), "Lista de objetivos modificada incorrectamente");
 		assertEquals("Nuevo Obj", learningPath.getObjetivos().get(1), "Lista de objetivos modificada incorrectamente" );
 		assertEquals(1.1, learningPath.getVersion(), "Version actualizada incorrectamente");
+		LocalDateTime fechaHoy = LocalDateTime.now();
+		assertEquals(fechaHoy.getDayOfMonth(), learningPath.getFechaUltimaModificacion().getDayOfMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getMonth(), learningPath.getFechaUltimaModificacion().getMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getYear(), learningPath.getFechaUltimaModificacion().getYear(), "Fecha de modificacion actualizada incorrectamente");
 		
 		//Manejo de excepcion
 		String objOriginal = "Objetivo 1 LP";
@@ -110,6 +140,10 @@ public class LearningPathTest {
 		assertEquals(0, learningPath.getObjetivos().size(), "Lista de objetivos modificada incorrectamente");
 		assertEquals(1.1, learningPath.getVersion(), "Version actualizada incorrectamente");
 		
+		LocalDateTime fechaHoy = LocalDateTime.now();
+		assertEquals(fechaHoy.getDayOfMonth(), learningPath.getFechaUltimaModificacion().getDayOfMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getMonth(), learningPath.getFechaUltimaModificacion().getMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getYear(), learningPath.getFechaUltimaModificacion().getYear(), "Fecha de modificacion actualizada incorrectamente");
 		//Manejo de Excepcion
 		
 		assertThrows(ModificarObjetivosException.class, () -> learningPath.eliminarObjetivo("Objetivo 1 LP"));
@@ -134,8 +168,12 @@ public class LearningPathTest {
 		assertEquals("Bajo", learningPath.getNivelDificultad(), "Dificultad actualizada incorrectamente");
 		assertEquals(1.1, learningPath.getVersion(), "Version actualizada incorrectamente");
 		
+		LocalDateTime fechaHoy = LocalDateTime.now();
+		assertEquals(fechaHoy.getDayOfMonth(), learningPath.getFechaUltimaModificacion().getDayOfMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getMonth(), learningPath.getFechaUltimaModificacion().getMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getYear(), learningPath.getFechaUltimaModificacion().getYear(), "Fecha de modificacion actualizada incorrectamente");
 	}
-	
+	@Test
 	public void actualizarRatingTest() {
 		
 		assertEquals(0, learningPath.getRating(), "Rating actualizado incorrectamente");
@@ -144,9 +182,135 @@ public class LearningPathTest {
 		
 		assertEquals(4.8, learningPath.getRating(), "Rating actualizado incorrectamente");
 		
-		learningPath.actualizarRating(0);
+		learningPath.actualizarRating(5);
 		
-		assertEquals(2.4, learningPath.getRating(), "Rating actualizado incorrectamente");
+		assertEquals(2, learningPath.getContadorRatings());
+		assertEquals(4.9, learningPath.getRating(), "Rating actualizado incorrectamente");
+		LocalDateTime fechaHoy = LocalDateTime.now();
+		assertEquals(fechaHoy.getDayOfMonth(), learningPath.getFechaUltimaModificacion().getDayOfMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getMonth(), learningPath.getFechaUltimaModificacion().getMonth(), "Fecha de modificacion actualizada incorrectamente");
+		assertEquals(fechaHoy.getYear(), learningPath.getFechaUltimaModificacion().getYear(), "Fecha de modificacion actualizada incorrectamente");
+		assertTrue(fechaHoy.isAfter(learningPath.getFechaCreacion()), "Fecha de modificacion actualizada incorrectamente");
+	}
+	
+	@Test
+	
+	public void agregarActividadTest() throws ModificarActividadesLearningPathException {
+		
+		Profesor prof = learningPath.getProfesorCreador();
+		Date fecha = new Date();
+		ArrayList<String> objActividad = new ArrayList<String>();
+		objActividad.add("Objetivo Actividad Nueva");
+		
+		Tarea nuevaActividad = new Tarea("Actividad Prueba 2", "Esto es una prueba", objActividad, "Bajo", 20, fecha, prof);
+		
+		assertEquals(20, learningPath.getDuracionMinutos());
+		
+		learningPath.agregarActividad(nuevaActividad, false);
+		
+		assertEquals(2, learningPath.getActividades().size(), "Lista de actividades actualizada incorrectamente");
+		assertEquals(40, learningPath.getDuracionMinutos(), "Lista de actividades actualizada incorrectamente");
+		assertEquals(nuevaActividad, learningPath.getActividades().get(1), "Actividad incluida incorrectamente");
+		assertEquals(2, learningPath.getMapaActividadesObligatorias().size(), "Mapa de obligatoriedad actualizado incorrectamente");
+		assertFalse(learningPath.getMapaActividadesObligatorias().get(nuevaActividad.getIdActividad()), "Mapa de obligatoriedad actualizado incorrectamente");
+		
+		assertEquals(1.1, learningPath.getVersion(), "Version Actualizada Incorrectamente");
+		
+		try {
+			
+			learningPath.agregarActividad(nuevaActividad, false);
+			fail("Debe haber excepcion de agregar una actividad que ya existe");
+		}
+		
+		catch (ModificarActividadesLearningPathException e) {
+			
+			assertEquals("La actividad 'Actividad Prueba 2' del profesor Santiago (s.munozm234) ya se encuentra en el Learning Path",
+					e.getMessage(), "Excepcion manejada incorrectamente");
+			
+		}
+		
+	}
+	
+	@Test
+	
+	public void eliminarActividadTest() throws ModificarActividadesLearningPathException {
+		
+		learningPath.eliminarActividad(actOriginal);
+		
+		assertEquals(0, learningPath.getActividades().size(), "Lista de actividades modificada incorrectamente");
+		assertEquals(0, learningPath.getDuracionMinutos(),"Lista de actividades modificada incorrectamente" );
+		assertEquals(0, learningPath.getMapaActividadesObligatorias().size(), "Mapa de obligatoriedad actualizado incorrectamente");
+		
+		try {
+			learningPath.eliminarActividad(actOriginal);
+			fail("Debe haber excepcion de eliminar una actividad que no existe");
+		}
+		
+		catch (ModificarActividadesLearningPathException e){
+			assertEquals("La actividad 'Actividad Prueba' del profesor Santiago (s.munozm234) no se encuentra en el Learning Path",
+					e.getMessage(), "Excepcion manejada incorrectamente");
+		}
+		
+	}
+	
+	@Test
+	
+	public void modificarActividadObligatoriaTest() {
+		
+		learningPath.modificarObligatoriedadActividad(actOriginal);
+		
+		assertTrue(learningPath.getMapaActividadesObligatorias().get(actOriginal.getIdActividad()), "Obligatoriedad actualizada incorrectamente");
+		
+	}
+	
+	@Test 
+	public void inscribirEstudianteTest() throws ModificarEstudianteLearningPathException {
+		
+		Estudiante nuevoEstudiante = new Estudiante("c.espinosag", "BibliotecaEconomia", "Cesar");
+		
+		SeguimientoLearningPath seguimientoEstudiante = new SeguimientoLearningPath(learningPath, nuevoEstudiante);
+		
+		learningPath.inscribirEstudiante(nuevoEstudiante, seguimientoEstudiante);
+		
+		assertEquals(1, learningPath.getEstudiantesInscritos().size(), "Mapa de estudiantes inscritos actualizado incorrectamente");
+		assertEquals(seguimientoEstudiante, learningPath.getEstudiantesInscritos().get(nuevoEstudiante.getLogin()), "Mapa de estudiantes inscritos actualizado incorrectamente");
+		
+		
+		try {
+			learningPath.inscribirEstudiante(nuevoEstudiante, seguimientoEstudiante);
+			fail("Debe haber excepcion para inscribir un estudiante ya inscrito");
+		}
+		catch(ModificarEstudianteLearningPathException e) {
+			assertEquals("El estudiante Cesar (c.espinosag) ya se encuentra inscrito en el Learning Path", e.getMessage(), "Excepcion manejada incorrectamente");
+			
+		}
+		
+		
+	}
+	
+	
+	@Test
+	public void eliminarEstudianteTest() throws ModificarEstudianteLearningPathException {
+		
+		Estudiante nuevoEstudiante = new Estudiante("c.espinosag", "BibliotecaEconomia", "Cesar");
+		
+		SeguimientoLearningPath seguimientoEstudiante = new SeguimientoLearningPath(learningPath, nuevoEstudiante);
+		
+		learningPath.inscribirEstudiante(nuevoEstudiante, seguimientoEstudiante);
+		
+		learningPath.eliminarEstudiante(nuevoEstudiante);
+		
+		assertEquals(0, learningPath.getEstudiantesInscritos().size(),"Mapa de estudiantes inscritos actualizado incorrectamente" );
+		
+		try {
+			learningPath.eliminarEstudiante(nuevoEstudiante);
+			fail("Deberia haber excepcion para eliminar un estudiante que no esta inscrito en el Learning Path");
+		}
+		catch (ModificarEstudianteLearningPathException e) {
+			assertEquals("El estudiante Cesar (c.espinosag) no se encuentra inscrito en el Learning Path", e.getMessage(), "Excepcion manejada incorrectamente");
+		}
+		
+		
 	}
 	
 	

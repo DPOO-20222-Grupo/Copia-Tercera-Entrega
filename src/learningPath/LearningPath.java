@@ -1,5 +1,7 @@
 package learningPath;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -22,8 +24,8 @@ public class LearningPath {
     private String nivelDificultad;
     private int duracionMinutos;
     private double rating;
-    private Date fechaCreacion;
-    private Date fechaUltimaModificacion;
+    private LocalDateTime fechaCreacion;
+    private LocalDateTime fechaUltimaModificacion;
     private double version;
     private Map <String, SeguimientoLearningPath> estudiantesInscritos;
     private List<Actividad> actividades;
@@ -46,7 +48,7 @@ public class LearningPath {
     	this.duracionMinutos = calcularDuracionTotalLista (listaActividades);
     	
     	this.rating = 0;
-    	this.fechaCreacion = new Date();
+    	this.fechaCreacion = LocalDateTime.now();
     	this.fechaUltimaModificacion = fechaCreacion;
     	this.version = 1;
     	
@@ -171,17 +173,17 @@ public class LearningPath {
 	}
 	
 	public void actualizarRating(double nuevoRating) {
-		int numRatings = this.getContadorRatings();
-		double ratingActual = this.getRating();
+		int numRatings = getContadorRatings();
+		double ratingActual = getRating();
 		
 		if (numRatings == 0) {
-			this.actualizarContadorRatings();
-			this.setRating(nuevoRating);
+			actualizarContadorRatings();
+			setRating(nuevoRating);
 		}
 		
 		else {
-			int numRatingsActualizado = numRatings+1;
-			double ratingActualizado = ratingActual*(numRatings/numRatingsActualizado)+ nuevoRating*(1/numRatingsActualizado);
+			double numRatingsActualizado = numRatings+1;
+			double ratingActualizado = ratingActual*((numRatings)/(numRatingsActualizado))+ nuevoRating*(1/numRatingsActualizado);
 			this.actualizarContadorRatings();
 			this.setRating(ratingActualizado);
 		}
@@ -190,17 +192,17 @@ public class LearningPath {
 	}
 
 
-	public Date getFechaUltimaModificacion() {
+	public LocalDateTime getFechaUltimaModificacion() {
 		return fechaUltimaModificacion;
 	}
 
 
-	private void setFechaUltimaModificacion(Date fechaUltimaModificacion) {
+	private void setFechaUltimaModificacion(LocalDateTime fechaUltimaModificacion) {
 		this.fechaUltimaModificacion = fechaUltimaModificacion;
 	}
 	
 	private void actualizarFechaUltimaModificacion() {
-		Date fechaAhora = new Date();
+		LocalDateTime fechaAhora = LocalDateTime.now();
 		this.setFechaUltimaModificacion(fechaAhora);
 	}
 
@@ -224,7 +226,7 @@ public class LearningPath {
 	}
 	
 	//Fecha Creacion
-	public Date getFechaCreacion() {
+	public LocalDateTime getFechaCreacion() {
 		return fechaCreacion;
 	}
 	
@@ -291,7 +293,7 @@ public class LearningPath {
 	}
 	
 	private void actualizarContadorRatings() {
-		this.setContadorRatings(this.getContadorRatings()+1);
+		setContadorRatings(contadorRatings+1);
 	}
 	
 	//Estudiantes Inscritos
