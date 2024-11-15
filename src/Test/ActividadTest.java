@@ -16,7 +16,7 @@ import exceptions.ModificarActividadesSeguimientoException;
 import exceptions.ModificarObjetivosException;
 import user.Profesor;
 
-class ActividadesTest {
+class ActividadTest {
 	
 	private Tarea tarea1;
 	private Tarea tarea2;
