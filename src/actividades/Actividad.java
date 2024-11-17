@@ -148,6 +148,7 @@ public class Actividad {
     		int numRatingsActualizado = numRatings+1;
     		double ratingActual = this.getRating();
     		
+
     		double ratingActualizado = ratingActual*((double) numRatings/numRatingsActualizado)+ nuevoRating*(1.0/numRatingsActualizado);
     		
     		this.setRating(ratingActualizado);

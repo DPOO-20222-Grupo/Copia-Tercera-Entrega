@@ -1,22 +1,21 @@
 package actividades;
 
-import java.util.Date;
+import java.util.Date; 
 import java.util.List;
 
 import exceptions.ModificarPreguntasQuizException;
 import preguntas.PreguntaCerrada;
-import preguntas.PreguntaSeleccionMultiple;
 import user.Profesor;
 
 public class Quiz extends Actividad {
 	private static String TIPO = "Quiz";
-    private float calificacionMinima;
+    private double calificacionMinima;
     private List<PreguntaCerrada> preguntas;
     private int numPreguntas;
 
     // Constructor
     public Quiz(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos,
-    		Date fechaLimite, Profesor profesorCreador, float calificacionMinima, List<PreguntaCerrada> preguntas) 
+    		Date fechaLimite, Profesor profesorCreador, double calificacionMinima, List<PreguntaCerrada> preguntas) 
     
     {
         super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
@@ -25,20 +24,15 @@ public class Quiz extends Actividad {
         this.numPreguntas = preguntas.size();
     }
     
-    
-    
-    
-    
-
     public int getNumPreguntas() {
 		return numPreguntas;
 	}
 
-	public float getCalificacionMinima() {
+	public double getCalificacionMinima() {
         return calificacionMinima;
     }
 
-    public void setCalificacionMinima(float calificacionMinima) {
+    public void setCalificacionMinima(double calificacionMinima) {
         this.calificacionMinima = calificacionMinima;
     }
     
