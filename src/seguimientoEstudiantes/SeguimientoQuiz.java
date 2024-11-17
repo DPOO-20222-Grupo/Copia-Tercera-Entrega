@@ -5,12 +5,11 @@ import java.util.Map;
 
 import actividades.Quiz;
 import preguntas.PreguntaCerrada;
-import preguntas.PreguntaSeleccionMultiple;
 import user.Estudiante;
 
 public class SeguimientoQuiz extends SeguimientoActividad{
 	
-	private float nota;
+	private double nota;
 	private Map<PreguntaCerrada, Integer> respuestas;
 	private int numPreguntas;
 	
@@ -28,7 +27,7 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 	}
 	
 	
-	public float getNota() {
+	public double getNota() {
 		return nota;
 	}
 
@@ -38,7 +37,7 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 	}
 
 
-	private void setNota(float nota) {
+	private void setNota(double nota) {
 		this.nota = nota;
 	}
 	
@@ -52,7 +51,7 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 		this.respuestas.replace(pregunta, opcionEscogida);
 	}
 	
-	public float calcularNota () {
+	public double calcularNota () {
 		
 		Map<PreguntaCerrada, Integer> respuestas = this.getRespuestas();
 		int numPreguntas = this.getNumPreguntas();
@@ -64,7 +63,7 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 			int opcionEscogida = entry.getValue();
 			
 			if (pregunta.verificarOpcionCorrecta(opcionEscogida)== true) {
-				nota+=(1/numPreguntas);
+				nota+=(1.0f/numPreguntas);
 			}
 		
 			
@@ -77,7 +76,7 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 	}
 	
 	public void actualizarNota() {
-		float nota = this.calcularNota();
+		double nota = this.calcularNota();
 		this.setNota(nota);
 		
 		Quiz quiz = (Quiz) this.getActividadSeguimiento();
@@ -89,16 +88,6 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 		else {
 			this.setEstado("No Exitoso");
 		}
-	}
-
-
-
-
-	
-	
-	
-	
-	
-	
+	}	
 
 }
