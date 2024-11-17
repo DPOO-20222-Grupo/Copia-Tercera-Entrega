@@ -148,11 +148,8 @@ public class Actividad {
     		int numRatingsActualizado = numRatings+1;
     		double ratingActual = this.getRating();
     		
-<<<<<<< HEAD
-    		double ratingActualizado = ratingActual*(numRatings/numRatingsActualizado)+ nuevoRating*(1/numRatingsActualizado);
-=======
+
     		double ratingActualizado = ratingActual*((double) numRatings/numRatingsActualizado)+ nuevoRating*(1.0/numRatingsActualizado);
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
     		
     		this.setRating(ratingActualizado);
     		this.setContadorRatings(numRatings+1);
