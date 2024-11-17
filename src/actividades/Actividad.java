@@ -32,7 +32,7 @@ public class Actividad {
         this.profesorCreador = profesorCreador;
         this.duracionMinutos = duracionMinutos;
         this.fechaLimite = fechaLimite;
-        this.rating = 0.0f; 
+        this.rating = 0.0d	; 
         this.resenas = new ArrayList<String>(); 
         this.contadorRatings = 0;
         this.actividadesPrevias = new ArrayList<Actividad>(); 
@@ -140,7 +140,7 @@ public class Actividad {
     	int numRatings = this.getContadorRatings();
     	
     	if (numRatings == 0) {
-    		this.setRating(numRatings);
+    		this.setRating(nuevoRating);
     		this.setContadorRatings(numRatings+1);
     	}
     	
@@ -148,9 +148,14 @@ public class Actividad {
     		int numRatingsActualizado = numRatings+1;
     		double ratingActual = this.getRating();
     		
+<<<<<<< HEAD
     		double ratingActualizado = ratingActual*(numRatings/numRatingsActualizado)+ nuevoRating*(1/numRatingsActualizado);
+=======
+    		double ratingActualizado = ratingActual*((double) numRatings/numRatingsActualizado)+ nuevoRating*(1.0/numRatingsActualizado);
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
     		
     		this.setRating(ratingActualizado);
+    		this.setContadorRatings(numRatings+1);
     	}
     	
     	
@@ -200,8 +205,8 @@ public class Actividad {
     }
     
 	public void agregarActividadSeguimiento(Actividad actividad) throws ModificarActividadesSeguimientoException {
-        if (!actividadesPrevias.contains(actividad)) {
-            actividadesPrevias.add(actividad);
+        if (!actividadesSeguimiento.contains(actividad)) {
+            actividadesSeguimiento.add(actividad);
         }
         else {
         	throw new ModificarActividadesSeguimientoException(actividad, "Agregar");
@@ -210,8 +215,8 @@ public class Actividad {
 	
 
     public void eliminarActividadSeguimiento(Actividad actividad) throws ModificarActividadesSeguimientoException {
-    	if (actividadesPrevias.contains(actividad)) {
-    		actividadesPrevias.remove(actividad);
+    	if (actividadesSeguimiento.contains(actividad)) {
+    		actividadesSeguimiento.remove(actividad);
     	}
         
     	else {
