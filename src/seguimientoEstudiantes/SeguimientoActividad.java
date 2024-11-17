@@ -7,14 +7,16 @@ public abstract class SeguimientoActividad {
 
 	private Actividad actividad;
 	private String estado;
-	private Estudiante estudianteSeguimiento;
+	private String loginEstudianteSeguimiento;
+	private String nombreEstudianteSeguimiento;
 	private int tiempoTotal;
 	
 	
 	public SeguimientoActividad( Actividad actividad, Estudiante estudiante) {
 		
 		this.actividad = actividad;
-		this.estudianteSeguimiento = estudiante;
+		this.loginEstudianteSeguimiento = estudiante.getLogin();
+		this.nombreEstudianteSeguimiento = estudiante.getNombre();
 		this.estado = "Incompleta";
 	}
 	
@@ -29,8 +31,11 @@ public abstract class SeguimientoActividad {
 	public String getEstado() {
 		return estado;
 	}
-	public Estudiante getEstudianteSeguimiento() {
-		return estudianteSeguimiento;
+	public String getLoginEstudianteSeguimiento() {
+		return loginEstudianteSeguimiento;
+	}
+	public String getNombreEstudianteSeguimiento() {
+		return nombreEstudianteSeguimiento;
 	}
 
 

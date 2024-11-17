@@ -1,5 +1,6 @@
 package user;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import seguimientoEstudiantes.SeguimientoLearningPath;
@@ -13,6 +14,7 @@ public class Estudiante extends Usuario {
     public Estudiante(String login, String password, String nombre) {
         super(login, password);
         this.nombre = nombre;
+        this.learningPathsInscritos = new HashMap<String, SeguimientoLearningPath>();
     }
     
     // Getter and Setter
@@ -38,9 +40,9 @@ public class Estudiante extends Usuario {
 	
 	public void agregarSeguimientoLearningPath (SeguimientoLearningPath seguimiento) {
 		
-		String llave = seguimiento.getLearningPath().getIdLearnginPath();
+		String llave = seguimiento.getIdLearningPath();
 		
-		this.getLearningPathsInscritos().put(llave, seguimiento);
+		learningPathsInscritos.put(llave, seguimiento);
 		
 	}
 	

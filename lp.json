@@ -2,6 +2,8 @@
   "Introducción a las Pruebas - l.munera": {
     "titulo": "Introducción a las Pruebas",
     "descripcion": "Pruebas",
+    "loginProfesorCreador": "l.munera",
+    "nombreProfesorCreador": "Lina Munera",
     "objetivos": [
       "Objetivo 1",
       "Objetivo 2"
@@ -9,10 +11,21 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
-    "fechaCreacion": "2024-11-16T21:41:54.579821",
-    "fechaUltimaModificacion": "2024-11-16T21:41:54.579821",
+    "fechaCreacion": "2024-11-17T12:06:08.361158",
+    "fechaUltimaModificacion": "2024-11-17T12:06:08.361158",
     "version": 1.0,
-    "estudiantesInscritos": {},
+    "estudiantesInscritos": {
+      "d.martinezf": {
+        "mapaSeguimientoActividades": {},
+        "loginEstudiante": "d.martinezf",
+        "nombreEstudiante": "Diego Martinez",
+        "idLearningPath": "Introducción a las Pruebas - l.munera",
+        "progreso": 0.0,
+        "totalTiempo": 0,
+        "tasaExito": 0.0,
+        "tasaFracaso": 0.0
+      }
+    },
     "actividades": [
       {
         "titulo": "Autoevaluación",
@@ -22,6 +35,8 @@
           "Objetivo 2"
         ],
         "nivelDificultad": "Bajo",
+        "loginProfesorCreador": "l.munera",
+        "nombreProfesorCreador": "Lina Munera",
         "duracionMinutos": 15,
         "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
         "resenas": [],
@@ -38,6 +53,8 @@
           "Objetivo 2"
         ],
         "nivelDificultad": "medio",
+        "loginProfesorCreador": "l.munera",
+        "nombreProfesorCreador": "Lina Munera",
         "duracionMinutos": 120,
         "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
         "resenas": [],
@@ -54,22 +71,8 @@
           "Objetivo 2"
         ],
         "nivelDificultad": "bajo",
-        "duracionMinutos": 45,
-        "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-        "resenas": [],
-        "rating": 0.0,
-        "contadorRatings": 0,
-        "actividadesPrevias": [],
-        "actividadesSeguimiento": []
-      },
-      {
-        "titulo": "Quiz1",
-        "descripcion": "Primer Quiz",
-        "objetivos": [
-          "Objetivo 1",
-          "Objetivo 2"
-        ],
-        "nivelDificultad": "bajo",
+        "loginProfesorCreador": "l.munera",
+        "nombreProfesorCreador": "Lina Munera",
         "duracionMinutos": 45,
         "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
         "resenas": [],
@@ -86,7 +89,27 @@
           "Objetivo 2"
         ],
         "nivelDificultad": "bajo",
+        "loginProfesorCreador": "l.munera",
+        "nombreProfesorCreador": "Lina Munera",
         "duracionMinutos": 120,
+        "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+        "resenas": [],
+        "rating": 0.0,
+        "contadorRatings": 0,
+        "actividadesPrevias": [],
+        "actividadesSeguimiento": []
+      },
+      {
+        "titulo": "Quiz1",
+        "descripcion": "Primer Quiz",
+        "objetivos": [
+          "Objetivo 1",
+          "Objetivo 2"
+        ],
+        "nivelDificultad": "bajo",
+        "loginProfesorCreador": "l.munera",
+        "nombreProfesorCreador": "Lina Munera",
+        "duracionMinutos": 45,
         "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
         "resenas": [],
         "rating": 0.0,

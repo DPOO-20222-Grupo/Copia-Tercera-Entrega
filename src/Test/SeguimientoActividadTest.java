@@ -52,7 +52,8 @@ class SeguimientoActividadTest {
 	
 	@Test
 	void testGetEstudianteSeguimiento() {
-		assertEquals(estudiante, seg.getEstudianteSeguimiento());
+		assertEquals(estudiante.getNombre(), seg.getNombreEstudianteSeguimiento());
+		assertEquals(estudiante.getLogin(), seg.getLoginEstudianteSeguimiento());
 	}
 	
 	@Test

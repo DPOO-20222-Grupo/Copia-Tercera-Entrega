@@ -15,8 +15,9 @@ import user.Estudiante;
 public class SeguimientoLearningPath {
 	
 	private HashMap<Actividad, SeguimientoActividad> mapaSeguimientoActividades;
-	private Estudiante estudiante;
-	private LearningPath learningPath;
+	private String loginEstudiante;
+	private String nombreEstudiante;
+	private String idLearningPath;
     private float progreso; //proporcion de actividades completadas
     private int totalTiempo;
     private float tasaExito;
@@ -28,8 +29,9 @@ public class SeguimientoLearningPath {
         this.totalTiempo = 0;
         this.tasaExito = 0;
         this.tasaFracaso = 0;
-        this.learningPath = learningPath;
-        this.estudiante = estudiante;
+        this.idLearningPath = learningPath.getIdLearnginPath();
+        this.loginEstudiante = estudiante.getLogin();
+        this.nombreEstudiante = estudiante.getNombre();
         
         this.mapaSeguimientoActividades = new HashMap<Actividad, SeguimientoActividad>();
         
@@ -112,12 +114,15 @@ public class SeguimientoLearningPath {
  		return mapaSeguimientoActividades;
  	}
 
- 	public Estudiante getEstudiante() {
- 		return estudiante;
+ 	public String getLoginEstudiante() {
+ 		return loginEstudiante;
+ 	}
+ 	public String getNombreEstudiante() {
+ 		return nombreEstudiante;
  	}
 
- 	public LearningPath getLearningPath() {
- 		return learningPath;
+ 	public String getIdLearningPath() {
+ 		return idLearningPath;
  	}
 
     

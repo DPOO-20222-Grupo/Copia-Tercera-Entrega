@@ -30,6 +30,7 @@ public class LearningPathTest {
 
 	private LearningPath learningPath;
 	private RevisarRecurso actOriginal;
+	private Profesor profesor;
 	
 	
 	@BeforeEach
@@ -39,6 +40,7 @@ public class LearningPathTest {
 		objActividad.add("Objetivo 1");
 		Date fecha = new Date();
 		Profesor prof = new Profesor("s.munozm234", "prueba1", "Santiago");
+		
 		RevisarRecurso act1 = new RevisarRecurso("Actividad Prueba", "Esto es una prueba", objActividad, "Bajo", 20, fecha,"pdf", prof, "Enlace Prueba");
 		
 		ArrayList<String> objLearningPath = new ArrayList<String>();
@@ -55,6 +57,7 @@ public class LearningPathTest {
 		
 		this.learningPath = nuevoLP;
 		this.actOriginal = act1;
+		this.profesor = prof;
 		
 	}
 	
@@ -197,12 +200,12 @@ public class LearningPathTest {
 	
 	public void agregarActividadTest() throws ModificarActividadesLearningPathException {
 		
-		Profesor prof = learningPath.getProfesorCreador();
+		
 		Date fecha = new Date();
 		ArrayList<String> objActividad = new ArrayList<String>();
 		objActividad.add("Objetivo Actividad Nueva");
 		
-		Tarea nuevaActividad = new Tarea("Actividad Prueba 2", "Esto es una prueba", objActividad, "Bajo", 20, fecha, prof);
+		Tarea nuevaActividad = new Tarea("Actividad Prueba 2", "Esto es una prueba", objActividad, "Bajo", 20, fecha, profesor);
 		
 		assertEquals(20, learningPath.getDuracionMinutos());
 		

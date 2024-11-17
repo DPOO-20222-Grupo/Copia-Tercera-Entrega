@@ -57,7 +57,7 @@ public class EstudianteConsole {
 
             switch (opcion) {
                 case 1:
-                    inscribirLearningPath();
+                    inscribirLearningPath(estudiante);
                     break;
                 case 2:
                 	enviarTarea();
@@ -95,15 +95,12 @@ public class EstudianteConsole {
         } while (estudiante.isLoggedIn());
     }
     
-	private static void inscribirLearningPath() {
-        System.out.print("Ingrese el login del estudiante: ");
-        String loginEstudiante = scanner.nextLine();
+	private static void inscribirLearningPath(Estudiante estudiante) {
 
         System.out.print("Ingrese el id del Learning Path: ");
         String idLearningPath = scanner.nextLine();
 
         try {
-            Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
             LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
             aplicacion.inscribirEstudianteLearningPath(estudiante, learningPath);
             System.out.println("Estudiante inscrito en el Learning Path exitosamente.");

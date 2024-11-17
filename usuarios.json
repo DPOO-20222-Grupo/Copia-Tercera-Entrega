@@ -2,12 +2,25 @@
   "estudiantes": {
     "d.martinezf": {
       "nombre": "Diego Martinez",
+      "learningPathsInscritos": {
+        "Introducción a las Pruebas - l.munera": {
+          "mapaSeguimientoActividades": {},
+          "loginEstudiante": "d.martinezf",
+          "nombreEstudiante": "Diego Martinez",
+          "idLearningPath": "Introducción a las Pruebas - l.munera",
+          "progreso": 0.0,
+          "totalTiempo": 0,
+          "tasaExito": 0.0,
+          "tasaFracaso": 0.0
+        }
+      },
       "login": "d.martinezf",
       "password": "Banano123",
       "isLoggedIn": false
     },
     "a.linares": {
       "nombre": "Andres Linares",
+      "learningPathsInscritos": {},
       "login": "a.linares",
       "password": "Banano123",
       "isLoggedIn": false
@@ -16,21 +29,26 @@
   "profesores": {
     "l.munera": {
       "nombre": "Lina Munera",
-      "mapaRecursosPropios": {
-        "hola - l.munera": {
-          "tipoRecurso": "pdf",
-          "enlaceRecurso": "no me falles",
-          "titulo": "hola",
-          "descripcion": "porfa",
+      "mapaRecursosPropios": {},
+      "mapaTareasPropias": {},
+      "mapaExamenesPropios": {},
+      "mapaEncuestasPropias": {},
+      "mapaQuicesPropios": {
+        "Quiz1 - l.munera": {
+          "calificacionMinima": 3.5,
+          "preguntas": [],
+          "numPreguntas": 0,
+          "titulo": "Quiz1",
+          "descripcion": "Primer Quiz",
           "objetivos": [
-            "1",
-            "1"
+            "Objetivo 1",
+            "Objetivo 2"
           ],
           "nivelDificultad": "bajo",
           "loginProfesorCreador": "l.munera",
           "nombreProfesorCreador": "Lina Munera",
-          "duracionMinutos": 20,
-          "fechaLimite": "Oct 10, 2025, 12:00:00 AM",
+          "duracionMinutos": 45,
+          "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
           "resenas": [],
           "rating": 0.0,
           "contadorRatings": 0,
@@ -38,10 +56,6 @@
           "actividadesSeguimiento": []
         }
       },
-      "mapaTareasPropias": {},
-      "mapaExamenesPropios": {},
-      "mapaEncuestasPropias": {},
-      "mapaQuicesPropios": {},
       "learningPathPropios": {},
       "preguntasAbiertasPropias": {},
       "preguntasSeleccionPropias": {},

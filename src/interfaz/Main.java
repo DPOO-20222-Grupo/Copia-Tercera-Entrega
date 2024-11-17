@@ -69,6 +69,8 @@ public class Main {
 				 prof1, preguntasAbiertas);
 		aplicacion.crearQuiz("Quiz1", "Primer Quiz", objetivos, "bajo", 45, date, prof1, (float) 3.5, preguntasCerradas);
 		
+		Quiz qu = (Quiz) aplicacion.getActividad("Quiz1 - l.munera", "Quiz");
+		
 		Tarea ta = new Tarea("Tarea1", "Tarea numero uno", objetivos, "bajo", 120, date, prof1);
 		
 		Examen ex = new Examen("Parcial", "Examen Parcial", objetivos, "medio", 120, date, prof1, preguntasAbiertas);
@@ -77,7 +79,7 @@ public class Main {
 				date, "video", prof1, "enlace");
 		
 		aplicacion.registrarActividad(en);
-		//aplicacion.registrarActividad(qu);
+		aplicacion.registrarActividad(qu);
 		aplicacion.registrarActividad(ta);
 		aplicacion.registrarActividad(ex);
 		aplicacion.registrarActividad(rr);
@@ -89,6 +91,8 @@ public class Main {
 		actividades.add(ex);
 		actividades.add(rr);
 		actividades.add(ta);
+		actividades.add(qu);
+		
 		
 		HashMap<String, Boolean> mapaObligatorio = new HashMap<String, Boolean>();
 		
@@ -196,7 +200,7 @@ public class Main {
 				+ String.format("Duración (m):  %d\n", printLp.getDuracionMinutos())
 				+ String.format("Fecha de Creación: %s\n", fechaFormateada)
 				+ String.format("Fecha de Modificación: %s\n", fechaMod)
-				+ String.format("Login Profesor Creador: %s\n", printLp.getProfesorCreador().getLogin())
+				+ String.format("Login Profesor Creador: %s\n", printLp.getLoginProfesorCreador())
 				+ String.format("Nivel de Dificultad: %s\n", printLp.getNivelDificultad())
 				+ "Objetivos: \n" 
 				+ String.format("  * : %s\n", printLp.getObjetivos().get(0))
