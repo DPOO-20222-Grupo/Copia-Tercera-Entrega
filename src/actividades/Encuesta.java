@@ -25,7 +25,7 @@ public class Encuesta extends Actividad {
         return numPreguntas;
     }
 
-    public void setNumPreguntas(int numPreguntas) {
+    private void setNumPreguntas(int numPreguntas) {
         this.numPreguntas = numPreguntas;
     }
     
@@ -49,6 +49,7 @@ public class Encuesta extends Actividad {
 		
 		else {
 			this.getPreguntas().add(pregunta);
+			this.setNumPreguntas(numPreguntas+1);
 		}
 		
 	}
@@ -63,6 +64,7 @@ public class Encuesta extends Actividad {
 		
 		else {
 			this.getPreguntas().remove(pregunta);
+			this.setNumPreguntas(numPreguntas-1);
 		}
 		
 	}

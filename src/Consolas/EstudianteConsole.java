@@ -11,7 +11,7 @@ import exceptions.ModificarEstudianteLearningPathException;
 import interfaz.Aplicacion;
 import learningPath.LearningPath;
 import preguntas.PreguntaAbierta;
-import preguntas.PreguntaSeleccionMultiple;
+import preguntas.PreguntaCerrada;
 import user.Estudiante;
 
 public class EstudianteConsole {
@@ -154,8 +154,8 @@ public class EstudianteConsole {
         } catch (Exception e) {
             System.out.println("Error al enviar el examen: " + e.getMessage());
         }
-    }
-
+    }   
+    
     private static void responderPreguntaExamen() {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
@@ -166,24 +166,28 @@ public class EstudianteConsole {
         System.out.print("Ingrese el id del examen: ");
         String idExamen = scanner.nextLine();
 
-        System.out.print("Ingrese el id de la pregunta: ");
-        String idPregunta = scanner.nextLine();
-
-        System.out.print("Ingrese la respuesta: ");
-        String respuesta = scanner.nextLine();
-
         try {
+            // Obtén los objetos necesarios
             Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
             LearningPath learningPath = aplicacion.getLearningPath(tituloLearningPath);
             Examen examen = aplicacion.getMapaExamenes().get(idExamen);
-            PreguntaAbierta pregunta = aplicacion.getMapaPreguntasAbiertas().get(idPregunta);
-            
-            aplicacion.responderPreguntaExamen(examen, estudiante, learningPath, pregunta, respuesta);
-            System.out.println("Respuesta registrada exitosamente.");
+
+            // Recorre todas las preguntas del examen
+            for (PreguntaAbierta pregunta : examen.getPreguntas()) {
+                // Muestra la pregunta y solicita la respuesta
+                System.out.println("Pregunta: " + pregunta.getEnunciado());
+                System.out.print("Ingrese la respuesta: ");
+                String respuesta = scanner.nextLine();
+
+                // Registra la respuesta
+                aplicacion.responderPreguntaExamen(examen, estudiante, learningPath, pregunta, respuesta);
+                System.out.println("Respuesta registrada exitosamente.\n");
+            }
         } catch (Exception e) {
             System.out.println("Error al registrar la respuesta: " + e.getMessage());
         }
     }
+
 
     private static void responderPreguntaEncuesta() {
         System.out.print("Ingrese el login del estudiante: ");
@@ -195,24 +199,28 @@ public class EstudianteConsole {
         System.out.print("Ingrese el id de la encuesta: ");
         String idEncuesta = scanner.nextLine();
 
-        System.out.print("Ingrese el id de la pregunta: ");
-        String idPregunta = scanner.nextLine();
-
-        System.out.print("Ingrese la respuesta: ");
-        String respuesta = scanner.nextLine();
-
         try {
+            // Obtén los objetos necesarios
             Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
             LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
             Encuesta encuesta = aplicacion.getMapaEncuestas().get(idEncuesta);
-            PreguntaAbierta pregunta = aplicacion.getMapaPreguntasAbiertas().get(idPregunta);
-            
-            aplicacion.responderPreguntaEncuesta(encuesta, estudiante, learningPath, pregunta, respuesta);
-            System.out.println("Respuesta registrada exitosamente.");
+
+            // Recorre todas las preguntas de la encuesta
+            for (PreguntaAbierta pregunta : encuesta.getPreguntas()) {
+                // Muestra la pregunta y solicita la respuesta
+                System.out.println("Pregunta: " + pregunta.getEnunciado());
+                System.out.print("Ingrese la respuesta: ");
+                String respuesta = scanner.nextLine();
+
+                // Registra la respuesta
+                aplicacion.responderPreguntaEncuesta(encuesta, estudiante, learningPath, pregunta, respuesta);
+                System.out.println("Respuesta registrada exitosamente.\n");
+            }
         } catch (Exception e) {
             System.out.println("Error al registrar la respuesta: " + e.getMessage());
         }
     }
+
 
     private static void responderPreguntaQuiz() {
         System.out.print("Ingrese el login del estudiante: ");
@@ -224,25 +232,29 @@ public class EstudianteConsole {
         System.out.print("Ingrese el id del quiz: ");
         String idQuiz = scanner.nextLine();
 
-        System.out.print("Ingrese el id de la pregunta: ");
-        String idPregunta = scanner.nextLine();
-
-        System.out.print("Ingrese la respuesta (número de opción): ");
-        int respuesta = scanner.nextInt();
-        scanner.nextLine();  
-
         try {
             Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
             LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
             Quiz quiz = aplicacion.getMapaQuices().get(idQuiz);
-            PreguntaSeleccionMultiple pregunta = aplicacion.getMapaPreguntasSeleccionMultiple().get(idPregunta);
-            
-            aplicacion.responderPreguntaQuiz(quiz, estudiante, learningPath, pregunta, respuesta);
-            System.out.println("Respuesta registrada exitosamente.");
+
+            // Recorrer las preguntas del quiz
+            for (PreguntaCerrada pregunta : quiz.getPreguntas()) {
+                System.out.println("Pregunta: " + pregunta.getEnunciado());
+                
+                System.out.print("Ingrese el número de opción (1-4): ");
+                int respuesta = scanner.nextInt();
+                scanner.nextLine();  
+
+                aplicacion.responderPreguntaQuiz(quiz, estudiante, learningPath, pregunta, respuesta);
+            }
+
+            System.out.println("Respuestas registradas exitosamente.");
+
         } catch (Exception e) {
-            System.out.println("Error al registrar la respuesta: " + e.getMessage());
+            System.out.println("Error al registrar las respuestas: " + e.getMessage());
         }
     }
+
     
     public static void completarEncuestaRecurso(Estudiante estudiante) {
         

@@ -80,12 +80,12 @@ class ActividadTest {
 		assertEquals(objetivos, tarea1.getObjetivos());
 		
 		tarea1.agregarObjetivo("Objetivo 2");
-		assertEquals("Objetivo 2", tarea1.getObjetivos().getLast());
+		assertTrue(tarea1.getObjetivos().contains("Objetivo 2" ));
 		
 		assertThrows(ModificarObjetivosException.class, () -> tarea1.agregarObjetivo("Objetivo 2"));
 		
 		tarea1.eliminarObjetivo("Objetivo 2");
-		assertEquals("Aprender ASM", tarea1.getObjetivos().getLast());
+		assertFalse(tarea1.getObjetivos().contains("Objetivo 2"));
 		
 		assertThrows(ModificarObjetivosException.class, () -> tarea1.eliminarObjetivo("Objetivo 2"));
 		

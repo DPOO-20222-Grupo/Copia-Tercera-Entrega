@@ -3,7 +3,6 @@ package Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,16 +25,12 @@ class QuizTest {
 	void setUp() {
 		pregunta1 = new PreguntaSeleccionMultiple("Enunciado1", "Titulo1", "opcion1", "opcion2", "opcion3", "opcion4", 2);
 		pregunta2 = new PreguntaBoolean("Enunciado2", "Titulo2", 1);		
-		Profesor profesor = new Profesor("c.espinosag", "password", "Cesar Espinosa");
+		Profesor profesor = new Profesor("login", "password", "nombre");
 		List<PreguntaCerrada> preguntas = new ArrayList<PreguntaCerrada>();
 		List<String> objetivos = new ArrayList<String>();
 		preguntas.add(pregunta1);
-		Calendar calendario = Calendar.getInstance();
-		calendario.set(Calendar.YEAR, 2000);
-		calendario.set(Calendar.MONTH, Calendar.DECEMBER);
-		calendario.set(Calendar.DAY_OF_MONTH, 2);
 		
-		Date fecha = calendario.getTime();
+		Date fecha = new Date();
 		
 		quiz1 = new Quiz("Quiz1", "Primer quiz del curso.", objetivos, "Bajo", 120, fecha, profesor, 3.0f, preguntas);
 	}

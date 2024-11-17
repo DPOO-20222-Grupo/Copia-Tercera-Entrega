@@ -14,6 +14,8 @@ public class PreguntaAbierta extends Pregunta {
     }
     
     // Getters and Setters
+    
+    
 
 	
 	public String getTipo() {

@@ -197,8 +197,7 @@ public class ProfesorConsole {
         }
     }
 	
-	private static void crearTarea(Profesor profesor) {
-	        
+	private static void crearTarea(Profesor profesor) {        
 	    	System.out.print("Ingrese el titulo de la tarea: ");
 	        String titulo = scanner.nextLine();
 	        
@@ -243,234 +242,368 @@ public class ProfesorConsole {
 	    }
 	
 	private static void crearQuiz(Profesor profesor) {
+
 	    
-		System.out.print("Ingrese el titulo del quiz: ");
+		System.out.print("Ingrese el titulo de la tarea: ");
 	    String titulo = scanner.nextLine();
-	    
-	    System.out.print("Ingrese la descripcion del quiz: ");
-	    String descripcion = scanner.nextLine();
-	    
-	    try {
-	    	
-	    	aplicacion.revisarActividadRepetida(titulo, titulo, "Quiz");
-		    System.out.print("Ingrese los objetivos del quiz (separados por comas): ");
-		    String objetivosInput = scanner.nextLine();
-		    List<String> objetivos = new ArrayList<>();
-		    for (String objetivo : objetivosInput.split(",")) {
-		        objetivos.add(objetivo.trim());
-		    }
-		    
-		    System.out.print("Ingrese el nivel de dificultad del quiz: ");
-		    String dificultad = scanner.nextLine();
-		    
-		    System.out.print("Ingrese la duracion en minutos del quiz: ");
-		    int duracion = Integer.parseInt(scanner.nextLine());
-		    
-		    System.out.print("Ingrese la fecha limite del quiz (formato: dd/MM/yyyy): ");
-		    String fechaInput = scanner.nextLine();
-		    Date fechaLimite = null;
-		    try {
-		        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		        fechaLimite = sdf.parse(fechaInput); 
-		    } catch (Exception e) {
-		        System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
-		        fechaLimite = new Date(); 
-		    }
-		    
-		    System.out.print("Ingrese la calificacion minima del quiz: ");
-		    float calificacionMinima = Float.parseFloat(scanner.nextLine());
-		    
-		    
-		    
-		    
-		    aplicacion.crearQuiz(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, calificacionMinima, null);
-		    System.out.println("Quiz registrado exitosamente.");
+	    if (titulo.isEmpty()) {
+	        System.out.println("El título de la tarea no puede estar vacío.");
+	        return; 
 	    }
-	    catch (ActividadYaExistenteException e) {
-        	System.out.println(e.getMessage());
-        }
+	    
+	    System.out.print("Ingrese la descripcion de la tarea: ");
+	    String descripcion = scanner.nextLine();
+
+	    if (descripcion.isEmpty()) {
+	        System.out.println("La descripción de la tarea no puede estar vacía.");
+	        return; 
+	    }
+
+	    System.out.print("Ingrese los objetivos de la tarea (separados por comas): ");
+	    String objetivosInput = scanner.nextLine();
+	    List<String> objetivos = new ArrayList<>();
+	    if (objetivosInput.isEmpty()) {
+	        System.out.println("Los objetivos no pueden estar vacíos.");
+	        return; 
+	    }
+	    for (String objetivo : objetivosInput.split(",")) {
+	        objetivos.add(objetivo.trim());
+	    }
+
+	    System.out.print("Ingrese el nivel de dificultad de la tarea: ");
+	    String dificultad = scanner.nextLine();
+	    if (dificultad.isEmpty()) {
+	        System.out.println("El nivel de dificultad no puede estar vacío.");
+	        return; 
+	    }
+
+	    System.out.print("Ingrese la duracion en minutos de la tarea: ");
+	    int duracion = 0;
+	    try {
+	        duracion = Integer.parseInt(scanner.nextLine());
+	        if (duracion <= 0) {
+	            System.out.println("La duración debe ser un número positivo.");
+	            return; 
+	        }
+	    } catch (NumberFormatException e) {
+	        System.out.println("La duración debe ser un número entero.");
+	        return; 
+	    }
+
+	    System.out.print("Ingrese la fecha limite de la tarea (formato: dd/MM/yyyy): ");
+	    String fechaInput = scanner.nextLine();
+	    Date fechaLimite = null;
+	    try {
+	        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	        fechaLimite = sdf.parse(fechaInput);
+	        if (fechaLimite.before(new Date())) {
+	            System.out.println("La fecha límite no puede ser una fecha pasada.");
+	            return; 
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
+	        fechaLimite = new Date();
+	    }
+
+	    aplicacion.crearTarea(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor);
+	    System.out.println("Tarea registrada exitosamente.");
 	}
 	
 	private static void crearExamen(Profesor profesor) {
-	    
-		System.out.print("Ingrese el titulo del examen: ");
+
+	    System.out.print("Ingrese el titulo del examen: ");
 	    String titulo = scanner.nextLine();
-	    
+	    if (titulo.isEmpty()) {
+	        System.out.println("El título del examen no puede estar vacío.");
+	        return; 
+	    }
+
 	    System.out.print("Ingrese la descripcion del examen: ");
 	    String descripcion = scanner.nextLine();
-	    
-	    try {
-		    
-	    	aplicacion.revisarActividadRepetida(titulo, titulo, "Examen");
-	    	
-	    	System.out.print("Ingrese los objetivos del examen (separados por comas): ");
-		    String objetivosInput = scanner.nextLine();
-		    List<String> objetivos = new ArrayList<>();
-		    for (String objetivo : objetivosInput.split(",")) {
-		        objetivos.add(objetivo.trim());
-		    }
-		    
-		    System.out.print("Ingrese el nivel de dificultad del examen: ");
-		    String dificultad = scanner.nextLine();
-		    
-		    System.out.print("Ingrese la duracion en minutos del examen: ");
-		    int duracion = Integer.parseInt(scanner.nextLine());
-		    
-		    System.out.print("Ingrese la fecha limite del examen (formato: dd/MM/yyyy): ");
-		    String fechaInput = scanner.nextLine();
-		    Date fechaLimite = null;
-		    try {
-		        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		        fechaLimite = sdf.parse(fechaInput); 
-		    } catch (Exception e) {
-		        System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
-		        fechaLimite = new Date(); 
-		    }
-		    
-		    List<PreguntaAbierta> preguntas = new ArrayList<>();
-		    System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado', separadas por ';': ");
-		    String preguntasInput = scanner.nextLine();
-		    
-		    for (String preguntaData : preguntasInput.split(";")) {
-		        String[] partes = preguntaData.split("\\|");
-		        String tituloPregunta = partes[0].trim();
-		        String enunciado = partes[1].trim();
-		        
-		        PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
-		        preguntas.add(pregunta);
-		    }
-		    
-		    aplicacion.crearExamen(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
-		    System.out.println("Examen registrado exitosamente.");
+	    if (descripcion.isEmpty()) {
+	        System.out.println("La descripción del examen no puede estar vacía.");
+	        return; 
 	    }
-	    
-	    catch (ActividadYaExistenteException e) {
-        	System.out.println(e.getMessage());
-        }
-		    
-	}
-	
-	private static void crearEncuesta(Profesor profesor) {
-	    
-		System.out.print("Ingrese el titulo de la encuesta: ");
-	    String titulo = scanner.nextLine();
-	    
-	    System.out.print("Ingrese la descripcion de la encuesta: ");
-	    String descripcion = scanner.nextLine();
-	    
-	    
-	    try {
-	    	
-	    	aplicacion.revisarActividadRepetida(titulo, titulo, "Encuesta");
-	    
-		    System.out.print("Ingrese los objetivos de la encuesta (separados por comas): ");
-		    String objetivosInput = scanner.nextLine();
-		    List<String> objetivos = new ArrayList<>();
-		    for (String objetivo : objetivosInput.split(",")) {
-		        objetivos.add(objetivo.trim());
-		    }
-		    
-		    System.out.print("Ingrese el nivel de dificultad de la encuesta: ");
-		    String dificultad = scanner.nextLine();
-		    
-		    System.out.print("Ingrese la duracion en minutos de la encuesta: ");
-		    int duracion = Integer.parseInt(scanner.nextLine());
-		    
-		    System.out.print("Ingrese la fecha limite de la encuesta (formato: dd/MM/yyyy): ");
-		    String fechaInput = scanner.nextLine();
-		    Date fechaLimite = null;
-		    try {
-		        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		        fechaLimite = sdf.parse(fechaInput); 
-		    } catch (Exception e) {
-		        System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
-		        fechaLimite = new Date(); 
-		    }
-		    
-		    List<PreguntaAbierta> preguntas = new ArrayList<>();
-		    System.out.println("Ingrese las preguntas de la encuesta en el formato 'título|enunciado', separadas por ';': ");
-		    String preguntasInput = scanner.nextLine();
-		    
-		    for (String preguntaData : preguntasInput.split(";")) {
-		        String[] partes = preguntaData.split("\\|");
-		        String tituloPregunta = partes[0].trim();
-		        String enunciado = partes[1].trim();
-		        
-		        PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
-		        preguntas.add(pregunta);
-		    }
-		
-		    aplicacion.crearEncuesta(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
-		    System.out.println("Encuesta registrada exitosamente.");
-	    
+
+	    System.out.print("Ingrese los objetivos del examen (separados por comas): ");
+	    String objetivosInput = scanner.nextLine();
+	    List<String> objetivos = new ArrayList<>();
+	    if (objetivosInput.isEmpty()) {
+	        System.out.println("Los objetivos no pueden estar vacíos.");
+	        return;
 	    }
-	    
-	    catch (ActividadYaExistenteException e) {
-        	System.out.println(e.getMessage());
-        }
+	    for (String objetivo : objetivosInput.split(",")) {
+	        objetivos.add(objetivo.trim());
+	    }
+
+	    System.out.print("Ingrese el nivel de dificultad del examen: ");
+	    String dificultad = scanner.nextLine();
+	    if (dificultad.isEmpty()) {
+	        System.out.println("El nivel de dificultad no puede estar vacío.");
+	        return; 
+	    }
+
+	    System.out.print("Ingrese la duracion en minutos del examen: ");
+	    int duracion = 0;
+	    try {
+	        duracion = Integer.parseInt(scanner.nextLine());
+	        if (duracion <= 0) {
+	            System.out.println("La duración debe ser un número positivo.");
+	            return;
+	        }
+	    } catch (NumberFormatException e) {
+	        System.out.println("La duración debe ser un número entero.");
+	        return; 
+	    }
+
+	    System.out.print("Ingrese la fecha limite del examen (formato: dd/MM/yyyy): ");
+	    String fechaInput = scanner.nextLine();
+	    Date fechaLimite = null;
+	    try {
+	        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	        fechaLimite = sdf.parse(fechaInput);
+	        if (fechaLimite.before(new Date())) {
+	            System.out.println("La fecha límite no puede ser una fecha pasada.");
+	            return; 
+	        }
+	    } catch (Exception e) {
+	        System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
+	        fechaLimite = new Date();
+	    }
+
+	    List<PreguntaAbierta> preguntas = new ArrayList<>();
+	    System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado', separadas por ';': ");
+	    String preguntasInput = scanner.nextLine();
+	    if (preguntasInput.isEmpty()) {
+	        System.out.println("Las preguntas no pueden estar vacías.");
+	        return; 
+	    }
+	    for (String preguntaData : preguntasInput.split(";")) {
+	        String[] partes = preguntaData.split("\\|");
+	        if (partes.length != 2) {
+	            System.out.println("Formato de pregunta inválido. Asegúrese de usar 'título|enunciado'.");
+	            return; 
+	        }
+	        String tituloPregunta = partes[0].trim();
+	        String enunciado = partes[1].trim();
+
+	        if (tituloPregunta.isEmpty() || enunciado.isEmpty()) {
+	            System.out.println("El título y el enunciado de cada pregunta no pueden estar vacíos.");
+	            return; 
+	        }
+
+	        PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
+	        preguntas.add(pregunta);
+	    }
+
+	    aplicacion.crearExamen(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
+	    System.out.println("Examen registrado exitosamente.");
 	}
 
-    private static void CrearLearningPath(Profesor profesor) {
-    	
-    	System.out.print("Ingrese el titulo del learning path: ");
-        String titulo = scanner.nextLine();
-        
-        System.out.print("Ingrese la descripcion del learning path: ");
-        String descripcion = scanner.nextLine();
-        
-        try {
-        
-	        aplicacion.revisarLearningPathRepetido(titulo, descripcion);
-        	System.out.print("Ingrese los objetivos del learning path (separados por comas): ");
-	        String objetivosInput = scanner.nextLine();
-	        List<String> objetivos = new ArrayList<>();
-	        for (String objetivo : objetivosInput.split(",")) {
-	            objetivos.add(objetivo.trim());
+	private static void crearEncuesta(Profesor profesor) {
+
+	    System.out.print("Ingrese el titulo de la encuesta: ");
+	    String titulo = scanner.nextLine();
+	    if (titulo.isEmpty()) {
+	        System.out.println("El título de la encuesta no puede estar vacío.");
+	        return; 
+	    }
+
+	
+	    System.out.print("Ingrese la descripcion de la encuesta: ");
+	    String descripcion = scanner.nextLine();
+	    if (descripcion.isEmpty()) {
+	        System.out.println("La descripción de la encuesta no puede estar vacía.");
+	        return; 
+	    }
+
+	    System.out.print("Ingrese los objetivos de la encuesta (separados por comas): ");
+	    String objetivosInput = scanner.nextLine();
+	    List<String> objetivos = new ArrayList<>();
+	    if (objetivosInput.isEmpty()) {
+	        System.out.println("Los objetivos no pueden estar vacíos.");
+	        return; 
+	    }
+	    for (String objetivo : objetivosInput.split(",")) {
+	        objetivos.add(objetivo.trim());
+	    }
+
+	    System.out.print("Ingrese el nivel de dificultad de la encuesta: ");
+	    String dificultad = scanner.nextLine();
+	    if (dificultad.isEmpty()) {
+	        System.out.println("El nivel de dificultad no puede estar vacío.");
+	        return; 
+	    }
+
+
+	    System.out.print("Ingrese la duracion en minutos de la encuesta: ");
+	    int duracion = 0;
+	    try {
+	        duracion = Integer.parseInt(scanner.nextLine());
+	        if (duracion <= 0) {
+	            System.out.println("La duración debe ser un número positivo.");
+	            return; 
 	        }
-	        
-	        System.out.print("Ingrese el nivel de dificultad de la actividad: ");
-	        String dificultad = scanner.nextLine();
-	        
-	        List<Actividad> actividades = new ArrayList<>();
-	        String continuar;
-	        do {
-	            System.out.print("Ingrese el ID de la actividad: ");
-	            String idActividad = scanner.nextLine();
-	            System.out.print("Ingrese el tipo de la actividad: ");
-	            String tipo = scanner.nextLine();
-	            Actividad actividad = aplicacion.getActividad(idActividad, tipo); 
-	            if (actividad != null) {
-	                actividades.add(actividad);
-	            } else {
-	                System.out.println("Actividad no encontrada. Intente nuevamente.");
-	            }
-	
-	            System.out.print("¿Desea agregar otra actividad? (si/no): ");
-	            continuar = scanner.nextLine();
-	        } while (continuar.equalsIgnoreCase("si"));
-	
-	        Map<String, Boolean> mapaObligatoriedad = new HashMap<>();
-	        for (Actividad actividad : actividades) {
-	            System.out.print("¿La actividad '" + actividad.getTitulo() + "' es obligatoria? (true/false): ");
-	            String esObligatoria = scanner.nextLine();
-	            mapaObligatoriedad.put(actividad.getTitulo(), esObligatoria.equalsIgnoreCase("true"));
+	    } catch (NumberFormatException e) {
+	        System.out.println("La duración debe ser un número entero.");
+	        return; 
+	    }
+
+	    System.out.print("Ingrese la fecha limite de la encuesta (formato: dd/MM/yyyy): ");
+	    String fechaInput = scanner.nextLine();
+	    Date fechaLimite = null;
+	    try {
+	        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	        fechaLimite = sdf.parse(fechaInput);
+	        if (fechaLimite.before(new Date())) {
+	            System.out.println("La fecha límite no puede ser una fecha pasada.");
+	            return; 
 	        }
-	
-	        aplicacion.crearLearningPath(titulo, descripcion, objetivos, dificultad, profesor, actividades, mapaObligatoriedad);
-	        System.out.println("Learning Path creado exitosamente.");
-        }
+	    } catch (Exception e) {
+	        System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
+	        fechaLimite = new Date();
+	    }
+
+	    List<PreguntaAbierta> preguntas = new ArrayList<>();
+	    System.out.println("Ingrese las preguntas de la encuesta en el formato 'título|enunciado', separadas por ';': ");
+	    String preguntasInput = scanner.nextLine();
+	    if (preguntasInput.isEmpty()) {
+	        System.out.println("Las preguntas no pueden estar vacías.");
+	        return; 
+	    }
+	    for (String preguntaData : preguntasInput.split(";")) {
+	        String[] partes = preguntaData.split("\\|");
+	        if (partes.length != 2) {
+	            System.out.println("Formato de pregunta inválido. Asegúrese de usar 'título|enunciado'.");
+	            return; 
+	        }
+	        String tituloPregunta = partes[0].trim();
+	        String enunciado = partes[1].trim();
+
+	        if (tituloPregunta.isEmpty() || enunciado.isEmpty()) {
+	            System.out.println("El título y el enunciado de cada pregunta no pueden estar vacíos.");
+	            return;
+	        }
+
+	        PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
+	        preguntas.add(pregunta);
+	    }
+
+	    aplicacion.crearEncuesta(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
+	    System.out.println("Encuesta registrada exitosamente.");
+	}
+
+
+	private static void CrearLearningPath(Profesor profesor) {
+	    
+	    System.out.print("Ingrese el titulo del learning path: ");
+	    String titulo = scanner.nextLine();
+	    if (titulo.isEmpty()) {
+	        System.out.println("El título del learning path no puede estar vacío.");
+	        return; 
+	    }
+
+	    System.out.print("Ingrese la descripcion del learning path: ");
+	    String descripcion = scanner.nextLine();
+	    if (descripcion.isEmpty()) {
+	        System.out.println("La descripción del learning path no puede estar vacía.");
+	        return; 
+	    }
+
+	    System.out.print("Ingrese los objetivos del learning path (separados por comas): ");
+	    String objetivosInput = scanner.nextLine();
+	    List<String> objetivos = new ArrayList<>();
+	    if (objetivosInput.isEmpty()) {
+	        System.out.println("Los objetivos no pueden estar vacíos.");
+	        return; 
+	    }
+	    for (String objetivo : objetivosInput.split(",")) {
+	        objetivos.add(objetivo.trim());
+	    }
+
+	    System.out.print("Ingrese el nivel de dificultad de la actividad: ");
+	    String dificultad = scanner.nextLine();
+	    if (dificultad.isEmpty()) {
+	        System.out.println("El nivel de dificultad no puede estar vacío.");
+	        return; 
+	    }
+
+	    List<Actividad> actividades = new ArrayList<>();
+	    String continuar;
+	    do {
+	        System.out.print("Ingrese el ID de la actividad: ");
+	        String idActividad = scanner.nextLine();
+	        if (idActividad.isEmpty()) {
+	            System.out.println("El ID de la actividad no puede estar vacío.");
+	            return; 
+	        }
+
+	        System.out.print("Ingrese el tipo de la actividad: ");
+	        String tipo = scanner.nextLine();
+	        if (tipo.isEmpty()) {
+	            System.out.println("El tipo de la actividad no puede estar vacío.");
+	            return; 
+	        }
+
+	        Actividad actividad = aplicacion.getActividad(idActividad, tipo);
+	        if (actividad != null) {
+	            actividades.add(actividad);
+	        } else {
+	            System.out.println("Actividad no encontrada. Intente nuevamente.");
+	        }
+
+	        System.out.print("¿Desea agregar otra actividad? (si/no): ");
+	        continuar = scanner.nextLine();
+	    } while (continuar.equalsIgnoreCase("si"));
+
+	    Map<String, Boolean> mapaObligatoriedad = new HashMap<>();
+	    for (Actividad actividad : actividades) {
+	        System.out.print("¿La actividad '" + actividad.getTitulo() + "' es obligatoria? (true/false): ");
+	        String esObligatoria = scanner.nextLine();
+	        if (!esObligatoria.equalsIgnoreCase("true") && !esObligatoria.equalsIgnoreCase("false")) {
+	            System.out.println("La respuesta debe ser 'true' o 'false'.");
+	            return; 
+	        }
+	        mapaObligatoriedad.put(actividad.getTitulo(), esObligatoria.equalsIgnoreCase("true"));
+	    }
+
+	    aplicacion.crearLearningPath(titulo, descripcion, objetivos, dificultad, profesor, actividades, mapaObligatoriedad);
+	    System.out.println("Learning Path creado exitosamente.");
+	}
+    
+    private static void clonarActividad(Profesor profesor) {
         
-        catch(LearningPathYaExistenteException e) {
-        	System.out.println(e.getMessage());
+        System.out.print("Ingrese el id de la actividad que desea clonar: ");
+        String id = scanner.nextLine();
+        if (id.isEmpty()) {
+            System.out.println("El ID de la actividad no puede estar vacío.");
+            return; 
         }
+
+        System.out.print("Ingrese el tipo de la actividad que desea clonar: ");
+        String tipo = scanner.nextLine();
+        if (tipo.isEmpty()) {
+            System.out.println("El tipo de la actividad no puede estar vacío.");
+            return; 
+        }
+
+        Actividad actividadOriginal = aplicacion.getActividad(id, tipo);
+        if (actividadOriginal == null) {
+            System.out.println("No se encontró una actividad con el ID y tipo proporcionados.");
+            return; 
+        }
+
+        aplicacion.clonarActividad(actividadOriginal, actividadOriginal.getProfesorCreador());
+        System.out.println("Actividad clonada exitosamente.");
     }
+
     
     private static void crearPregunta(Profesor profesor) {
     	System.out.print("Ingrese el titulo que le desea dar a la pregunta: ");
         String titulo = scanner.nextLine();
         System.out.print("Ingrese el enunciado de la pregunta: ");
         String enunciado = scanner.nextLine();
-        
+
         int tipo = 0;
         while (tipo > 3 && tipo <1) {
         	
@@ -520,183 +653,221 @@ public class ProfesorConsole {
     	
     	
     }
-        
-	private static void clonarActividad(Profesor profesor) {
-		
-		String msjTitulo = "Ingrese el título de la actividad que desea clonar: ";
-		String msjProfesor= "Ingrese el login del profesor creador de la actividad que desea clonar: ";
-		String msjTipo = ("Ingrese el tipo de la actividad que desea clonar: ");
-		
-		Actividad actividadOriginal = getActividad(msjTitulo, msjProfesor, msjTipo, false, null);
-		
-		if (actividadOriginal != null) {
-			aplicacion.clonarActividad(actividadOriginal, profesor);
-		}
-		
-		else {
-			System.out.println("Actividad no encontrada");
-		}
-		
-	}
-	
+        	
 	private static void clonarLearningPath(Profesor profesor) {
-		
-		String msjTitulo = "Ingrese el título del Learning Path a modificar: ";
-	    LearningPath learningPathOriginal = getLearningPath(msjTitulo, "", true, profesor);
+
+	    System.out.print("Ingrese el ID del Learning Path que desea clonar: ");
+	    String idLearningPathOriginal = scanner.nextLine();
+	    if (idLearningPathOriginal.isEmpty()) {
+	        System.out.println("El ID del Learning Path no puede estar vacío.");
+	        return; 
+	    }
+
+	    HashMap<String, LearningPath> mapaLearningPaths = aplicacion.getMapaLearningPaths(); 
+	    LearningPath learningPathOriginal = mapaLearningPaths.get(idLearningPathOriginal);
 	    
 	    if (learningPathOriginal == null) {
 	        System.out.println("Learning Path no encontrado. Verifique el ID e intente de nuevo.");
-	        return;
+	        return; 
 	    }
+<<<<<<< HEAD
 	    
 	    aplicacion.clonarLearningPath(learningPathOriginal, profesor);
+=======
+
+	    aplicacion.clonarLearningPath(learningPathOriginal, learningPathOriginal.getProfesorCreador());
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 	    System.out.println("Learning Path clonado con éxito para el profesor: " + profesor.getNombre());
 	}
+
 	
 	private static void modificarLearningPath(Profesor profesor) {
-	    String msjTitulo = "Ingrese el título del Learning Path a modificar: ";
-	    LearningPath learningPath = getLearningPath(msjTitulo, "", true, profesor);
+	    System.out.print("Ingrese el ID del Learning Path a modificar: ");
+	    String idLP = scanner.nextLine();
+	    if (idLP.isEmpty()) {
+	        System.out.println("El ID del Learning Path no puede estar vacío.");
+	        return; 
+	    }
 
+	    // Obtener el Learning Path
+	    LearningPath learningPath = profesor.getLearningPathPropios().get(idLP);
+	    
 	    if (learningPath != null) {
+
 	        System.out.println("Seleccione el atributo a modificar:");
 	        System.out.println("1. Titulo");
 	        System.out.println("2. Descripcion");
 	        System.out.println("3. Dificultad");
 	        System.out.println("4. Objetivos");
-	        System.out.println("5. Actvidades");
-	        int opcion = Integer.parseInt(scanner.nextLine());
+	        System.out.println("5. Actividades");
+	        
+	        int opcion = 0;
+	        try {
+	            opcion = Integer.parseInt(scanner.nextLine());
+	        } catch (NumberFormatException e) {
+	            System.out.println("Opción no válida. Debe ingresar un número.");
+	            return;
+	        }
 	        
 	        if (opcion == 5) {
-	        	System.out.print("Ingrese el ID de la actividad a modificar: ");
-	        	String idActividad = scanner.nextLine();
-	        	
-	        	System.out.print("Ingrese el tipo de la actividad a modificar: ");
-	        	String tipoActividad = scanner.nextLine();
-	        	
-	        	Actividad actividad = aplicacion.getActividad(idActividad, tipoActividad);
-	        	
-	        	if (actividad != null) {
-	        		
-	        		System.out.println("Seleccione la accion que desea realizar:");
-	    	        System.out.println("1. Agregar");
-	    	        System.out.println("2. Eliminar");
-	    	        System.out.println("3. Modificar obligatoriedad");
-	    	        int opcionActividad = Integer.parseInt(scanner.nextLine());
-	    	        
-	    	        String accion;
-	    	        
-	    	        switch (opcionActividad) {
-	    	        
-	    	        case 1: 
-	    	        	accion = "Agregar";
-	    	        	boolean obligatoriedad;
-	    	        	System.out.println("Indique si la actividad será obligatoria o no:");
-	    	        	System.out.println("1. Obligatoria");
-		    	        System.out.println("2. No obligatoria");
-		    	        int opcionObligatoriedad = Integer.parseInt(scanner.nextLine());
-		    	        
-		    	        if (opcionObligatoriedad == 1) {
-		    	        	obligatoriedad = true;
-		    	        }
-		    	        else if (opcionObligatoriedad == 2) {
-		    	        	obligatoriedad = false;
-		    	        }
-		    	        
-		    	        else {
-		    	        	System.out.println("Opción no válida.");
-			                return;
-		    	        }
-		    	        
-		    	        try {
-		    	        aplicacion.modificarActividadesLearningPath(learningPath, actividad, obligatoriedad, accion);
-		    	        }
-		    	        
-		    	        catch (ModificarActividadesLearningPathException e) {
-		    	        	System.out.println("Error al modificar el atributo: " + e.getMessage());
-		    	        }
-		    	        
-	    	        case 2:
-	    	        	accion = "Eliminar";
-		    	        
-	    	        	try {
-	    	        		aplicacion.modificarActividadesLearningPath(learningPath, actividad, false, accion);
-	    	        	}
-	    	        	
-	    	        	catch (ModificarActividadesLearningPathException e){
-		    	        	System.out.println("Error al modificar el atributo: " + e.getMessage());
-		    	        }
-	    	        	
-	    	        case 3:
-	    	        	
-	    	        	accion = "Obligatoriedad";
-	    	        	try {
-	    	        		aplicacion.modificarActividadesLearningPath(learningPath, actividad, false, accion);
-	    	        	}
-	    	        	
-	    	        	catch (ModificarActividadesLearningPathException e){
-		    	        	System.out.println("Error al modificar el atributo: " + e.getMessage());
-	    	        	
-	    	        	}
-	    	        }
-	    	        
-	        		
-	        	}
-	        	else {
-	        		System.out.println("Actividad no encontrada en la base de datos");
+	    
+	            System.out.print("Ingrese el ID de la actividad a modificar: ");
+	            String idActividad = scanner.nextLine();
+	            if (idActividad.isEmpty()) {
+	                System.out.println("El ID de la actividad no puede estar vacío.");
+	                return; 
+	            }
+
+	            System.out.print("Ingrese el tipo de la actividad a modificar: ");
+	            String tipoActividad = scanner.nextLine();
+	            if (tipoActividad.isEmpty()) {
+	                System.out.println("El tipo de actividad no puede estar vacío.");
+	                return; 
+	            }
+
+	            Actividad actividad = aplicacion.getActividad(idActividad, tipoActividad);
+	            
+	            if (actividad != null) {
+	                System.out.println("Seleccione la acción que desea realizar:");
+	                System.out.println("1. Agregar");
+	                System.out.println("2. Eliminar");
+	                System.out.println("3. Modificar obligatoriedad");
+	                
+	                int opcionActividad = 0;
+	                try {
+	                    opcionActividad = Integer.parseInt(scanner.nextLine());
+	                } catch (NumberFormatException e) {
+	                    System.out.println("Opción no válida. Debe ingresar un número.");
+	                    return;
+	                }
+
+	                String accion = "";
+	                switch (opcionActividad) {
+	                    case 1:
+	                        accion = "Agregar";
+	                        boolean obligatoriedad;
+	                        System.out.println("Indique si la actividad será obligatoria o no:");
+	                        System.out.println("1. Obligatoria");
+	                        System.out.println("2. No obligatoria");
+	                        int opcionObligatoriedad = 0;
+	                        try {
+	                            opcionObligatoriedad = Integer.parseInt(scanner.nextLine());
+	                        } catch (NumberFormatException e) {
+	                            System.out.println("Opción no válida. Debe ingresar un número.");
+	                            return;
+	                        }
+
+	                        if (opcionObligatoriedad == 1) {
+	                            obligatoriedad = true;
+	                        } else if (opcionObligatoriedad == 2) {
+	                            obligatoriedad = false;
+	                        } else {
+	                            System.out.println("Opción no válida.");
+	                            return;
+	                        }
+
+	                        try {
+	                            aplicacion.modificarActividadesLearningPath(learningPath, actividad, obligatoriedad, accion);
+	                        } catch (ModificarActividadesLearningPathException e) {
+	                            System.out.println("Error al modificar el atributo: " + e.getMessage());
+	                        }
+	                        break;
+
+	                    case 2:
+	                        accion = "Eliminar";
+	                        try {
+	                            aplicacion.modificarActividadesLearningPath(learningPath, actividad, false, accion);
+	                        } catch (ModificarActividadesLearningPathException e) {
+	                            System.out.println("Error al modificar el atributo: " + e.getMessage());
+	                        }
+	                        break;
+
+	                    case 3:
+	                        accion = "Obligatoriedad";
+	                        try {
+	                            aplicacion.modificarActividadesLearningPath(learningPath, actividad, false, accion);
+	                        } catch (ModificarActividadesLearningPathException e) {
+	                            System.out.println("Error al modificar el atributo: " + e.getMessage());
+	                        }
+	                        break;
+
+	                    default:
+	                        System.out.println("Opción no válida.");
+	                        return;
+	                }
+
+	            } else {
+	                System.out.println("Actividad no encontrada en la base de datos");
 	                return;
-	        		
-	        	}
-	        	
-	        	
-            	
-            	
-	        }
-	        else {
-	        String atributoModificar = "";
-	        String valor = "";
-	        String accion = "";
+	            }
 
-	        switch (opcion) {
-	            case 1:
-	                atributoModificar = "Titulo";
-	                System.out.print("Ingrese el nuevo titulo: ");
-	                valor = scanner.nextLine();
-	                break;
-	            case 2:
-	                atributoModificar = "Descripcion";
-	                System.out.print("Ingrese la nueva descripcion: ");
-	                valor = scanner.nextLine();
-	                break;
-	            case 3:
-	                atributoModificar = "Dificultad";
-	                System.out.print("Ingrese la nueva dificultad: ");
-	                valor = scanner.nextLine();
-	                break;
-	            case 4:
-	                atributoModificar = "Objetivos";
-	                System.out.print("Seleccione la acción (Agregar/Eliminar): ");
-	                accion = scanner.nextLine();
-	                System.out.print("Ingrese el objetivo: ");
-	                valor = scanner.nextLine();
-	                break;
+	        } else {
+	            String atributoModificar = "";
+	            String valor = "";
+	            String accion = "";
 
-	            default:
-	                System.out.println("Opción no válida.");
-	                return;
-	        }
+	            switch (opcion) {
+	                case 1:
+	                    atributoModificar = "Titulo";
+	                    System.out.print("Ingrese el nuevo titulo: ");
+	                    valor = scanner.nextLine();
+	                    if (valor.isEmpty()) {
+	                        System.out.println("El título no puede estar vacío.");
+	                        return;
+	                    }
+	                    break;
+	                case 2:
+	                    atributoModificar = "Descripcion";
+	                    System.out.print("Ingrese la nueva descripcion: ");
+	                    valor = scanner.nextLine();
+	                    if (valor.isEmpty()) {
+	                        System.out.println("La descripción no puede estar vacía.");
+	                        return;
+	                    }
+	                    break;
+	                case 3:
+	                    atributoModificar = "Dificultad";
+	                    System.out.print("Ingrese la nueva dificultad: ");
+	                    valor = scanner.nextLine();
+	                    if (valor.isEmpty()) {
+	                        System.out.println("La dificultad no puede estar vacía.");
+	                        return;
+	                    }
+	                    break;
+	                case 4:
+	                    atributoModificar = "Objetivos";
+	                    System.out.print("Seleccione la acción (Agregar/Eliminar): ");
+	                    accion = scanner.nextLine();
+	                    if (accion.isEmpty()) {
+	                        System.out.println("La acción no puede estar vacía.");
+	                        return;
+	                    }
+	                    System.out.print("Ingrese el objetivo: ");
+	                    valor = scanner.nextLine();
+	                    if (valor.isEmpty()) {
+	                        System.out.println("El objetivo no puede estar vacío.");
+	                        return;
+	                    }
+	                    break;
 
-	        try {
-	            aplicacion.modificarAtributosStringLearningPath(learningPath, atributoModificar, valor, accion);
-	            System.out.println("Atributo modificado exitosamente.");
-	        } catch (TipoInvalidoValorException | ModificarObjetivosException e) {
-	            System.out.println("Error al modificar el atributo: " + e.getMessage());
-	        }
-	        
+	                default:
+	                    System.out.println("Opción no válida.");
+	                    return;
+	            }
+
+	            try {
+	                aplicacion.modificarAtributosStringLearningPath(learningPath, atributoModificar, valor, accion);
+	                System.out.println("Atributo modificado exitosamente.");
+	            } catch (TipoInvalidoValorException | ModificarObjetivosException e) {
+	                System.out.println("Error al modificar el atributo: " + e.getMessage());
+	            }
+
 	        }
 	    } else {
 	        System.out.println("Learning Path no encontrado.");
 	    }
 	}
+
 	
 	private static void modificarActividad(Profesor profesor) {
 	    String msjTitulo = "Ingrese el título de la actividad a modificar: ";
@@ -1004,12 +1175,7 @@ public class ProfesorConsole {
 		    else {
 		    	return;
 		    }
-			
-			
-			
-			
-		
-		
+	
 	}
 
 	private static void modificarPregunta (Profesor profesor) {
