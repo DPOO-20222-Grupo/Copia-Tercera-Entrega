@@ -549,7 +549,7 @@ public class ProfesorConsole {
 	        return;
 	    }
 	    
-	    aplicacion.clonarLearningPath(learningPathOriginal, learningPathOriginal.getProfesorCreador());
+	    aplicacion.clonarLearningPath(learningPathOriginal, profesor);
 	    System.out.println("Learning Path clonado con éxito para el profesor: " + profesor.getNombre());
 	}
 	

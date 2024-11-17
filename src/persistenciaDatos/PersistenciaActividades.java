@@ -14,7 +14,6 @@ import actividades.Tarea;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -28,7 +27,6 @@ public class PersistenciaActividades {
 				String archivo) {
 
 			Gson gson = new GsonBuilder().setPrettyPrinting()
-					
 					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 					.create();
 					

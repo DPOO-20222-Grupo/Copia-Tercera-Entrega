@@ -14,7 +14,8 @@ public class Actividad {
     private String descripcion;
     private List<String> objetivos;
     private String nivelDificultad;
-    private Profesor profesorCreador;
+    private String loginProfesorCreador;
+    private String nombreProfesorCreador;
     private int duracionMinutos;
     private Date fechaLimite;
     private List<String> resenas; 
@@ -29,7 +30,8 @@ public class Actividad {
         this.descripcion = descripcion;
         this.objetivos = objetivos;
         this.nivelDificultad = nivelDificultad;
-        this.profesorCreador = profesorCreador;
+        this.loginProfesorCreador = profesorCreador.getLogin();
+        this.nombreProfesorCreador = profesorCreador.getNombre();
         this.duracionMinutos = duracionMinutos;
         this.fechaLimite = fechaLimite;
         this.rating = 0.0d	; 
@@ -160,9 +162,13 @@ public class Actividad {
     
     
     
-    public Profesor getProfesorCreador() {
- 		return profesorCreador;
+    public String getLoginProfesorCreador() {
+ 		return loginProfesorCreador;
  	}
+    
+    public String getNombreProfesorCreador() {
+    	return nombreProfesorCreador;
+    }
     
     public int getContadorRatings() {
 		return contadorRatings;
@@ -239,7 +245,7 @@ public class Actividad {
     
     public String getIdActividad() {
     	String titulo = this.getTitulo();
-    	String loginProfesor = this.getProfesorCreador().getLogin();
+    	String loginProfesor = getLoginProfesorCreador();
     	
     	String id = titulo + " - " + loginProfesor;
     	

@@ -67,7 +67,7 @@ public class Main {
 		
 		Encuesta en = new Encuesta("Autoevaluación", "Autoevaluación acitividad #1", objetivos, "Bajo", 15, date,
 				 prof1, preguntasAbiertas);
-		Quiz qu = new Quiz("Quiz1", "Primer Quiz", objetivos, "bajo", 45, date, prof1, (float) 3.5, preguntasCerradas);
+		aplicacion.crearQuiz("Quiz1", "Primer Quiz", objetivos, "bajo", 45, date, prof1, (float) 3.5, preguntasCerradas);
 		
 		Tarea ta = new Tarea("Tarea1", "Tarea numero uno", objetivos, "bajo", 120, date, prof1);
 		
@@ -77,7 +77,7 @@ public class Main {
 				date, "video", prof1, "enlace");
 		
 		aplicacion.registrarActividad(en);
-		aplicacion.registrarActividad(qu);
+		//aplicacion.registrarActividad(qu);
 		aplicacion.registrarActividad(ta);
 		aplicacion.registrarActividad(ex);
 		aplicacion.registrarActividad(rr);
@@ -88,7 +88,6 @@ public class Main {
 		actividades.add(en);
 		actividades.add(ex);
 		actividades.add(rr);
-		actividades.add(qu);
 		actividades.add(ta);
 		
 		HashMap<String, Boolean> mapaObligatorio = new HashMap<String, Boolean>();
@@ -117,7 +116,7 @@ public class Main {
 
 		Tarea tarea = (Tarea) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Tarea1", "l.munera"), "Tarea");
 
-		RevisarRecurso revisarRecurso = (RevisarRecurso) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Ver video", "l.munera"), "RevisarRecurso");
+		RevisarRecurso revisarRecurso = (RevisarRecurso) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Ver video", "l.munera"), "Recurso");
 
 		Encuesta encuesta = (Encuesta) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Autoevaluación", "l.munera"), "Encuesta");
 

@@ -17,7 +17,8 @@ import user.Profesor;
 public class LearningPath {
     private String titulo;
     private String descripcion;
-    private Profesor profesorCreador;
+    private String loginProfesorCreador;
+    private String nombreProfesorCreador;
     private List<String> objetivos;
     private String nivelDificultad;
     private int duracionMinutos;
@@ -39,7 +40,8 @@ public class LearningPath {
     	this.descripcion = descripcion;
     	this.objetivos = objetivos;
     	this.nivelDificultad = nivelDificultad;
-    	this.profesorCreador = profesorCreador;
+    	this.loginProfesorCreador = profesorCreador.getLogin();
+    	this.nombreProfesorCreador = profesorCreador.getNombre();
     	this.actividades = listaActividades;
     	this.mapaActividadesObligatorias = mapaObligatoriedad;
     	
@@ -219,8 +221,12 @@ public class LearningPath {
 	}
 	
 	//Profesor Creador
-	public Profesor getProfesorCreador() {
-		return profesorCreador;
+	public String getLoginProfesorCreador() {
+		return loginProfesorCreador;
+	}
+	
+	public String getNombreProfesorCreador() {
+		return nombreProfesorCreador;
 	}
 	
 	//Fecha Creacion
@@ -334,7 +340,7 @@ public class LearningPath {
     
     public String getIdLearnginPath () {
     	String titulo = this.getTitulo();
-    	String loginProfesor = this.getProfesorCreador().getLogin();
+    	String loginProfesor = this.getLoginProfesorCreador();
     	
     	String id = titulo + " - " + loginProfesor;
     	

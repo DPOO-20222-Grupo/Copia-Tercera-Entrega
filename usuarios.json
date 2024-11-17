@@ -16,7 +16,28 @@
   "profesores": {
     "l.munera": {
       "nombre": "Lina Munera",
-      "mapaRecursosPropios": {},
+      "mapaRecursosPropios": {
+        "hola - l.munera": {
+          "tipoRecurso": "pdf",
+          "enlaceRecurso": "no me falles",
+          "titulo": "hola",
+          "descripcion": "porfa",
+          "objetivos": [
+            "1",
+            "1"
+          ],
+          "nivelDificultad": "bajo",
+          "loginProfesorCreador": "l.munera",
+          "nombreProfesorCreador": "Lina Munera",
+          "duracionMinutos": 20,
+          "fechaLimite": "Oct 10, 2025, 12:00:00 AM",
+          "resenas": [],
+          "rating": 0.0,
+          "contadorRatings": 0,
+          "actividadesPrevias": [],
+          "actividadesSeguimiento": []
+        }
+      },
       "mapaTareasPropias": {},
       "mapaExamenesPropios": {},
       "mapaEncuestasPropias": {},

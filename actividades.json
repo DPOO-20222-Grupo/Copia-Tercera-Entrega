@@ -8,21 +8,6 @@
         "Objetivo 2"
       ],
       "nivelDificultad": "bajo",
-      "profesorCreador": {
-        "nombre": "Lina Munera",
-        "mapaRecursosPropios": {},
-        "mapaTareasPropias": {},
-        "mapaExamenesPropios": {},
-        "mapaEncuestasPropias": {},
-        "mapaQuicesPropios": {},
-        "learningPathPropios": {},
-        "preguntasAbiertasPropias": {},
-        "preguntasSeleccionPropias": {},
-        "preguntasBooleanPropias": {},
-        "login": "l.munera",
-        "password": "Tristeza30",
-        "isLoggedIn": false
-      },
       "duracionMinutos": 120,
       "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
       "resenas": [],
@@ -49,21 +34,6 @@
         "Objetivo 2"
       ],
       "nivelDificultad": "medio",
-      "profesorCreador": {
-        "nombre": "Lina Munera",
-        "mapaRecursosPropios": {},
-        "mapaTareasPropias": {},
-        "mapaExamenesPropios": {},
-        "mapaEncuestasPropias": {},
-        "mapaQuicesPropios": {},
-        "learningPathPropios": {},
-        "preguntasAbiertasPropias": {},
-        "preguntasSeleccionPropias": {},
-        "preguntasBooleanPropias": {},
-        "login": "l.munera",
-        "password": "Tristeza30",
-        "isLoggedIn": false
-      },
       "duracionMinutos": 120,
       "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
       "resenas": [],
@@ -74,6 +44,26 @@
     }
   },
   "Revisar Recursos": {
+    "hola - l.munera": {
+      "tipoRecurso": "pdf",
+      "enlaceRecurso": "no me falles",
+      "titulo": "hola",
+      "descripcion": "porfa",
+      "objetivos": [
+        "1",
+        "1"
+      ],
+      "nivelDificultad": "bajo",
+      "loginProfesorCreador": "l.munera",
+      "nombreProfesorCreador": "Lina Munera",
+      "duracionMinutos": 20,
+      "fechaLimite": "Oct 10, 2025, 12:00:00 AM",
+      "resenas": [],
+      "rating": 0.0,
+      "contadorRatings": 0,
+      "actividadesPrevias": [],
+      "actividadesSeguimiento": []
+    },
     "Ver video - l.munera": {
       "tipoRecurso": "video",
       "enlaceRecurso": "enlace",
@@ -84,21 +74,6 @@
         "Objetivo 2"
       ],
       "nivelDificultad": "bajo",
-      "profesorCreador": {
-        "nombre": "Lina Munera",
-        "mapaRecursosPropios": {},
-        "mapaTareasPropias": {},
-        "mapaExamenesPropios": {},
-        "mapaEncuestasPropias": {},
-        "mapaQuicesPropios": {},
-        "learningPathPropios": {},
-        "preguntasAbiertasPropias": {},
-        "preguntasSeleccionPropias": {},
-        "preguntasBooleanPropias": {},
-        "login": "l.munera",
-        "password": "Tristeza30",
-        "isLoggedIn": false
-      },
       "duracionMinutos": 45,
       "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
       "resenas": [],
@@ -120,21 +95,6 @@
         "Objetivo 2"
       ],
       "nivelDificultad": "bajo",
-      "profesorCreador": {
-        "nombre": "Lina Munera",
-        "mapaRecursosPropios": {},
-        "mapaTareasPropias": {},
-        "mapaExamenesPropios": {},
-        "mapaEncuestasPropias": {},
-        "mapaQuicesPropios": {},
-        "learningPathPropios": {},
-        "preguntasAbiertasPropias": {},
-        "preguntasSeleccionPropias": {},
-        "preguntasBooleanPropias": {},
-        "login": "l.munera",
-        "password": "Tristeza30",
-        "isLoggedIn": false
-      },
       "duracionMinutos": 45,
       "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
       "resenas": [],
@@ -161,21 +121,6 @@
         "Objetivo 2"
       ],
       "nivelDificultad": "Bajo",
-      "profesorCreador": {
-        "nombre": "Lina Munera",
-        "mapaRecursosPropios": {},
-        "mapaTareasPropias": {},
-        "mapaExamenesPropios": {},
-        "mapaEncuestasPropias": {},
-        "mapaQuicesPropios": {},
-        "learningPathPropios": {},
-        "preguntasAbiertasPropias": {},
-        "preguntasSeleccionPropias": {},
-        "preguntasBooleanPropias": {},
-        "login": "l.munera",
-        "password": "Tristeza30",
-        "isLoggedIn": false
-      },
       "duracionMinutos": 15,
       "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
       "resenas": [],

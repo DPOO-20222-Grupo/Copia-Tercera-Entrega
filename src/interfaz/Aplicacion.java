@@ -344,7 +344,8 @@ public class Aplicacion {
 		
 		if (atributoModificar.equals("Titulo")) {
 			
-				Profesor profesor = learningPath.getProfesorCreador();
+				String idProfesor = learningPath.getLoginProfesorCreador();
+				Profesor profesor = this.getProfesor(idProfesor);
 				String idLP = learningPath.getIdLearnginPath();
 				HashMap<String, LearningPath> mapaGlobal = this.getMapaLearningPaths();
 				
@@ -424,8 +425,9 @@ public class Aplicacion {
 
 	    if (atributo.equals("Titulo")) {
 	        String tipoActividad = actividad.getTipoActividad();
-	        Profesor profesor = actividad.getProfesorCreador();
+	        String idProfesor = actividad.getLoginProfesorCreador();
 	        String idActividad = actividad.getIdActividad();
+	        Profesor profesor = getProfesor(idProfesor);
 
 	        switch (tipoActividad) {
 	            case "Encuesta":
