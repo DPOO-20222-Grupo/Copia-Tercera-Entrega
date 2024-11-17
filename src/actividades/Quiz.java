@@ -5,7 +5,6 @@ import java.util.List;
 
 import exceptions.ModificarPreguntasQuizException;
 import preguntas.PreguntaCerrada;
-import preguntas.PreguntaSeleccionMultiple;
 import user.Profesor;
 
 public class Quiz extends Actividad {
@@ -25,11 +24,6 @@ public class Quiz extends Actividad {
         this.numPreguntas = preguntas.size();
     }
     
-    
-    
-    
-    
-
     public int getNumPreguntas() {
 		return numPreguntas;
 	}
