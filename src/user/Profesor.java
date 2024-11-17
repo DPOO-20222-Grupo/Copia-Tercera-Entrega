@@ -1,8 +1,6 @@
 package user;
 
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import actividades.Actividad;
@@ -11,7 +9,6 @@ import actividades.Examen;
 import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
-import exceptions.ModificarActividadesLearningPathException;
 import learningPath.LearningPath;
 import preguntas.Pregunta;
 import preguntas.PreguntaAbierta;
