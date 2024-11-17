@@ -101,10 +101,7 @@ public class Main {
 		aplicacion.registrarLearningPath(lp);		
 		
 		// Descarga de los Datos en Archivos JSON
-		aplicacion.descargarDatos(aplicacion.getMapaExamenes(), aplicacion.getMapaEncuestas(),
-				aplicacion.getMapaQuices(), aplicacion.getMapaRevisarRecurso(), aplicacion.getMapaTareas(),
-				aplicacion.getMapaEstudiantes(), aplicacion.getMapaProfesores(), aplicacion.getMapaPreguntasAbiertas(),
-				aplicacion.getMapaPreguntasSeleccionMultiple(), aplicacion.getMapaLearningPaths());
+		aplicacion.descargarDatos();
 		
 		// Re-Carga de Archivos
 		Aplicacion aplicacion_recargada = new Aplicacion(archivoUsuarios, archivoLP, archivoPreguntas, archivoActividades);

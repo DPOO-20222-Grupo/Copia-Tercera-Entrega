@@ -299,7 +299,7 @@ public class Aplicacion {
 	
 	//Quiz
 	public void crearQuiz (String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos,
-    		Date fechaLimite, Profesor profesorCreador, float calificacionMinima, List<PreguntaCerrada> preguntas) {
+    		Date fechaLimite, Profesor profesorCreador, double calificacionMinima, List<PreguntaCerrada> preguntas) {
 		
 		Quiz nuevoQuiz = new Quiz (titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador, calificacionMinima, preguntas);
 		this.registrarActividad(nuevoQuiz);
@@ -510,13 +510,13 @@ public class Aplicacion {
 	 * @throws ModificarActividadesPreviasException 
 	 * @throws ModificarActividadesSeguimientoException
 	 */
-	public void modificarSeguimientoPrevioActividad (Actividad actividadPrincipal, Actividad actividadOperacion, String tipo, String accion)
+	public void modificarSeguimientoPrevioActividad (Actividad actividadPrincipal, Actividad actividadOperacion, String tipo, int accion)
 				throws ModificarActividadesPreviasException, ModificarActividadesSeguimientoException
 	{
 		
 		if (tipo.equals("Previa")) {
 			
-			if (accion.equals("Agregar")) {
+			if (accion == 1) {
 				
 				actividadPrincipal.agregarActividadPrevia(actividadOperacion);
 			}
@@ -529,7 +529,7 @@ public class Aplicacion {
 		
 		else {
 			
-			if (accion.equals("Agregar")) {
+			if (accion == 1) {
 				actividadPrincipal.agregarActividadSeguimiento(actividadOperacion);
 			}
 			
@@ -621,7 +621,7 @@ public class Aplicacion {
 	}
 	
 	//Permite modificar Calificacion Minima quiz
-	public void modificarCalificacionMinimaQuiz (Quiz quiz, float nuevaCalificacion) {
+	public void modificarCalificacionMinimaQuiz (Quiz quiz, double nuevaCalificacion) {
 		quiz.setCalificacionMinima(nuevaCalificacion);
 	}
 	
@@ -978,7 +978,7 @@ public class Aplicacion {
 	}
 	
 	//Funciones que permiten a los usuarios calificar LearningPath y Actividades y resenar actividades
-	public void calificarLearningPath (LearningPath learningPath, float rating) {
+	public void calificarLearningPath (LearningPath learningPath, double rating) {
 		learningPath.actualizarRating(rating);
 	}
 	
@@ -986,20 +986,15 @@ public class Aplicacion {
 		actividad.agregarResena(resena);
 	}
 	
-	public void calificarActividad (Actividad actividad, float rating) {
+	public void calificarActividad (Actividad actividad, double rating) {
 		actividad.actualizarRating(rating);
 	}
 	
 	//Funcion que permite descargar los datos de la aplicacion a un archivo JSON
-	public void descargarDatos (HashMap<String, Examen> mapaExamenes, 
-			HashMap<String, Encuesta> mapaEncuestas, HashMap<String, Quiz> mapaQuices,
-			HashMap<String, RevisarRecurso> mapaRevisarRecurso, HashMap<String, Tarea> mapaTareas,
-			HashMap<String, Estudiante> mapaEstudiantes, HashMap<String, Profesor> profMap,
-			HashMap<String, PreguntaAbierta> abiertaMap, HashMap<String, PreguntaSeleccionMultiple> cerradaMap,
-			HashMap<String, LearningPath> mapaLearningPaths) {
+	public void descargarDatos () {
 		PersistenciaActividades.persistirActividades(mapaExamenes, mapaEncuestas, mapaQuices, mapaRevisarRecurso, mapaTareas, "actividades.json");
-		PersistenciaUsuarios.persistirUsuarios(mapaEstudiantes, profMap, "usuarios.json");
-		PersistenciaPreguntas.persistirPreguntas(abiertaMap, cerradaMap, "preguntas.json");
+		PersistenciaUsuarios.persistirUsuarios(mapaEstudiantes, mapaProfesores, "usuarios.json");
+		PersistenciaPreguntas.persistirPreguntas(mapaPreguntasAbiertas, mapaPreguntasSeleccionMultiple, "preguntas.json");
 		PersistenciaLearningPaths.persistirLearningPaths(mapaLearningPaths, "lp.json");
 	}
 	
@@ -1038,9 +1033,13 @@ public class Aplicacion {
 			return actividad;
 		}
 		
-		else {
+		else if (tipo.equals("Recurso")) {
 			RevisarRecurso actividad = this.getMapaRevisarRecurso().get(id);
 			return actividad;
+		}
+		
+		else {
+			return null;
 		}
 		
 	}
@@ -1065,9 +1064,13 @@ public class Aplicacion {
 			return pregunta;
 		}
 		
-		else {
+		else if (tipo.equals("Verdadero o Falso")){
 			PreguntaBoolean pregunta = this.getMapaPreguntasBoolean().get(id);
 			return pregunta;
+		}
+		
+		else {
+			return null;
 		}
 	}
 

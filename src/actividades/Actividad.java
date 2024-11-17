@@ -18,7 +18,7 @@ public class Actividad {
     private int duracionMinutos;
     private Date fechaLimite;
     private List<String> resenas; 
-    private float rating; 
+    private double rating; 
     private int contadorRatings; 
     private List<Actividad> actividadesPrevias;
     private List<Actividad> actividadesSeguimiento;
@@ -127,15 +127,15 @@ public class Actividad {
     	this.getResenas().add(resena);
     }
 
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
 
-    private void setRating(float rating) {
+    private void setRating(double rating) {
         this.rating = rating;
     }
     
-    public void actualizarRating (float nuevoRating) {
+    public void actualizarRating (double nuevoRating) {
     	
     	int numRatings = this.getContadorRatings();
     	
@@ -146,9 +146,9 @@ public class Actividad {
     	
     	else {
     		int numRatingsActualizado = numRatings+1;
-    		float ratingActual = this.getRating();
+    		double ratingActual = this.getRating();
     		
-    		float ratingActualizado = ratingActual*(numRatings/numRatingsActualizado)+ nuevoRating*(1/numRatingsActualizado);
+    		double ratingActualizado = ratingActual*(numRatings/numRatingsActualizado)+ nuevoRating*(1/numRatingsActualizado);
     		
     		this.setRating(ratingActualizado);
     	}

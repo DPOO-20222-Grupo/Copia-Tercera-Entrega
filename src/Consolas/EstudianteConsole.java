@@ -49,7 +49,9 @@ public class EstudianteConsole {
             System.out.println("6. Responder Pregunta de Quiz");
             System.out.println("7. Rgistar que se completo una encuesta o recurso");
             System.out.println("8. Ver Learning Paths Inscritos");
-            System.out.println("9. Cerrar sesión");
+            System.out.println("9. Reseñar o calificar una actividad");
+            System.out.println("10. Calificar un Learning Path");
+            System.out.println("11. Cerrar sesión");
             System.out.print("Seleccione una opción: ");
             opcion = Integer.parseInt(scanner.nextLine());
 
@@ -79,8 +81,13 @@ public class EstudianteConsole {
                     verLearningPaths(estudiante);
                     break;
                 case 9:
+                	calificarResenarActividad();
+                case 10:
+                	calificarLearningPath();
+                case 11:
                     estudiante.logout();
                     System.out.println("Sesión cerrada.");
+                    aplicacion.descargarDatos();
                     break;
                 default:
                     System.out.println("Opción no válida.");
@@ -272,5 +279,59 @@ public class EstudianteConsole {
             System.out.println("Learning Path: " + id);
         });
     }
+    
+     private static void calificarResenarActividad() {
+     	System.out.println("Indique el ID de la actividad que desea reseñar o calificar: ");
+     	String idActividad = scanner.nextLine();
+     	System.out.println("Indique el tipo de la actividad: ");
+     	String tipo = scanner.nextLine();
+     	
+     	Actividad actividad = aplicacion.getActividad(idActividad, tipo);
+     	
+     	if (actividad != null) {
+     		
+     		System.out.println("Seleccione la acción que desea realizar: ");
+     		System.out.println("1. Reseñar");
+     		System.out.println("2. Calificar");
+     		System.out.println("Opción escogida: ");
+     		
+     		int opcion = Integer.parseInt(scanner.nextLine());
+     		
+     		if (opcion == 1) {
+     			System.out.println("Ingrese la reseña que desea dejar a la actividad:\n");
+     			String resena = scanner.nextLine();
+     			aplicacion.resenarActividad(actividad, resena);
+     		}
+     		else if (opcion == 2) {
+     			System.out.println("Ingrese la calificación que desea dejar a la actividad: ");
+     			double calificacion = Double.parseDouble(scanner.nextLine());
+     			aplicacion.calificarActividad(actividad, calificacion);
+     		}
+     		
+     		else {
+     			System.out.println("Opción invalida");
+     			return;
+     		}
+     	}
+     	
+     	else {
+     		System.out.println("Actividad no encontrada");
+     		return;
+     	}
+     }
+     
+     private static void calificarLearningPath() {
+     	System.out.println("Indique el ID del Learning Path que desea calificar: ");
+     	String idLP = scanner.nextLine();
+     	
+     	LearningPath learningPath = aplicacion.getLearningPath(idLP);
+     	
+     	if (learningPath != null) {
+     		System.out.println("Ingrese la calificación que desea dejar al Learning Path: ");
+ 			double calificacion = Double.parseDouble(scanner.nextLine());
+ 			aplicacion.calificarLearningPath(learningPath, calificacion);
+     	}
+     }
+     
 
 }
