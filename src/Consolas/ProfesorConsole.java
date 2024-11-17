@@ -593,7 +593,7 @@ public class ProfesorConsole {
             return; 
         }
 
-        aplicacion.clonarActividad(actividadOriginal, actividadOriginal.getProfesorCreador());
+        aplicacion.clonarActividad(actividadOriginal,profesor);
         System.out.println("Actividad clonada exitosamente.");
     }
 
@@ -670,13 +670,12 @@ public class ProfesorConsole {
 	        System.out.println("Learning Path no encontrado. Verifique el ID e intente de nuevo.");
 	        return; 
 	    }
-<<<<<<< HEAD
+
 	    
 	    aplicacion.clonarLearningPath(learningPathOriginal, profesor);
-=======
 
-	    aplicacion.clonarLearningPath(learningPathOriginal, learningPathOriginal.getProfesorCreador());
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
+
+	    aplicacion.clonarLearningPath(learningPathOriginal, profesor);
 	    System.out.println("Learning Path clonado con éxito para el profesor: " + profesor.getNombre());
 	}
 
