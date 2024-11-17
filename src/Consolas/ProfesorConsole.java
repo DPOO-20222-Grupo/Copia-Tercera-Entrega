@@ -141,7 +141,7 @@ public class ProfesorConsole {
                 default:
                     System.out.println("Opción no válida.");
             }
-        } while (profesor.isLoggedIn());
+        } while (opcion!=19);
     }
 
 	private static void crearRevisarRecurso(Profesor profesor) {

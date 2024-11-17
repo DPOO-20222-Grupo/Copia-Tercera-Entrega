@@ -92,7 +92,7 @@ public class EstudianteConsole {
                 default:
                     System.out.println("Opción no válida.");
             }
-        } while (estudiante.isLoggedIn());
+        } while (opcion!= 11);
     }
     
 	private static void inscribirLearningPath(Estudiante estudiante) {

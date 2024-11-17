@@ -50,6 +50,7 @@ public class RegistroConsole {
         System.out.print("Ingrese su nombre completo: ");
         String nombre = scanner.nextLine();
         aplicacion.crearProfesor(login, password, nombre);
+        aplicacion.descargarDatos();
         
         ProfesorConsole.mostrarMenuProfesor(aplicacion.getMapaProfesores().get(login));
 		
@@ -63,6 +64,7 @@ public class RegistroConsole {
         System.out.print("Ingrese su nombre completo: ");
         String nombre = scanner.nextLine();
         aplicacion.crearEstudiante(login, password, nombre);
+        aplicacion.descargarDatos();
         
         EstudianteConsole.mostrarMenuEstudiante(aplicacion.getMapaEstudiantes().get(login));
         	

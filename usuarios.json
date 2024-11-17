@@ -1,5 +1,19 @@
 {
   "estudiantes": {
+    "david2005": {
+      "nombre": "David Velasquez",
+      "learningPathsInscritos": {},
+      "login": "david2005",
+      "password": "2005",
+      "isLoggedIn": false
+    },
+    "Nhora": {
+      "nombre": "Nhora Parra",
+      "learningPathsInscritos": {},
+      "login": "Nhora",
+      "password": "123",
+      "isLoggedIn": false
+    },
     "d.martinezf": {
       "nombre": "Diego Martinez",
       "learningPathsInscritos": {

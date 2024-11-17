@@ -24,6 +24,16 @@
         "totalTiempo": 0,
         "tasaExito": 0.0,
         "tasaFracaso": 0.0
+      },
+      "Nhora": {
+        "mapaSeguimientoActividades": {},
+        "loginEstudiante": "Nhora",
+        "nombreEstudiante": "Nhora Parra",
+        "idLearningPath": "Introducción a las Pruebas - l.munera",
+        "progreso": 0.0,
+        "totalTiempo": 0,
+        "tasaExito": 0.0,
+        "tasaFracaso": 0.0
       }
     },
     "actividades": [
