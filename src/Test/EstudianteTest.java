@@ -5,16 +5,18 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seguimientoEstudiantes.SeguimientoLearningPath;
 import user.Estudiante;
 
 class EstudianteTest {
 
 	private Estudiante estudiante;
-	private 
+	private SeguimientoLearningPath seg;
 	
 	@BeforeEach
 	void SetUp() {
 		estudiante = new Estudiante("login", "password", "nombre");
+		seg = new SeguimientoLearningPath()
 	}
 	
 	@Test
