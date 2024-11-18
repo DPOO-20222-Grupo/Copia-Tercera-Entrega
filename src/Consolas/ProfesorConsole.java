@@ -144,59 +144,126 @@ public class ProfesorConsole {
         } while (opcion!=19);
     }
 
-	private static void crearRevisarRecurso(Profesor profesor) {
-        
-    	System.out.print("Ingrese el titulo del recurso: ");
-        String titulo = scanner.nextLine();
-        
-        System.out.print("Ingrese la descripcion del recurso: ");
-        String descripcion = scanner.nextLine();
-        
+    private static void crearRevisarRecurso(Profesor profesor) {
+
+        System.out.print("Ingrese el título del recurso: ");
+        String titulo;
+        do {
+            titulo = scanner.nextLine().trim();
+            if (titulo.isEmpty()) {
+                System.out.println("Error: El título no puede estar vacío.");
+                System.out.print("Ingrese el título del recurso: ");
+            }
+        } while (titulo.isEmpty());
+
+        System.out.print("Ingrese la descripción del recurso: ");
+        String descripcion;
+        do {
+            descripcion = scanner.nextLine().trim();
+            if (descripcion.isEmpty()) {
+                System.out.println("Error: La descripción no puede estar vacía.");
+                System.out.print("Ingrese la descripción del recurso: ");
+            }
+        } while (descripcion.isEmpty());
+
         try {
-        
-        aplicacion.revisarActividadRepetida(titulo, profesor.getLogin(), "Recurso");
-        
-        
+            aplicacion.revisarActividadRepetida(titulo, profesor.getLogin(), "Recurso");
+        } catch (ActividadYaExistenteException e) {
+            System.out.println("Error: " + e.getMessage());
+            return;
+        }
+
         System.out.print("Ingrese los objetivos de revisar el recurso (separados por comas): ");
-        String objetivosInput = scanner.nextLine();
         List<String> objetivos = new ArrayList<>();
-        for (String objetivo : objetivosInput.split(",")) {
-            objetivos.add(objetivo.trim());
+        while (objetivos.isEmpty()) {
+            String objetivosInput = scanner.nextLine().trim();
+            if (objetivosInput.isEmpty()) {
+                System.out.println("Error: Debe ingresar al menos un objetivo.");
+                System.out.print("Ingrese los objetivos de revisar el recurso (separados por comas): ");
+                continue;
+            }
+            for (String objetivo : objetivosInput.split(",")) {
+                String objetivoLimpio = objetivo.trim();
+                if (!objetivoLimpio.isEmpty()) {
+                    objetivos.add(objetivoLimpio);
+                }
+            }
+            if (objetivos.isEmpty()) {
+                System.out.println("Error: Ningún objetivo válido fue ingresado.");
+            }
         }
-        
+
         System.out.print("Ingrese el nivel de dificultad del recurso a revisar: ");
-        String dificultad = scanner.nextLine();
-        
-        System.out.print("Ingrese la duracion en minutos que le tomara al estudiante revisar el recurso: ");
-        int duracion = Integer.parseInt(scanner.nextLine());
-        
-        System.out.print("Ingrese la fecha limite para revisar el recurso (formato: dd/MM/yyyy): ");
-        String fechaInput = scanner.nextLine();
-        Date fechaLimite = null;
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            fechaLimite = sdf.parse(fechaInput); 
-        } catch (Exception e) {
-            System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
-            fechaLimite = new Date(); 
+        String dificultad;
+        do {
+            dificultad = scanner.nextLine().trim();
+            if (dificultad.isEmpty()) {
+                System.out.println("Error: La dificultad no puede estar vacía.");
+                System.out.print("Ingrese el nivel de dificultad del recurso a revisar: ");
+            }
+        } while (dificultad.isEmpty());
+
+        System.out.print("Ingrese la duración en minutos que le tomará al estudiante revisar el recurso: ");
+        int duracion = -1;
+        while (duracion <= 0) {
+            try {
+                String duracionInput = scanner.nextLine().trim();
+                if (duracionInput.isEmpty()) {
+                    throw new NumberFormatException("Duración vacía.");
+                }
+                duracion = Integer.parseInt(duracionInput);
+                if (duracion <= 0) {
+                    System.out.println("Error: La duración debe ser un número positivo.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Debe ingresar un número válido.");
+                System.out.print("Ingrese la duración en minutos que le tomará al estudiante revisar el recurso: ");
+            }
         }
-        
+
+        System.out.print("Ingrese la fecha límite para revisar el recurso (formato: dd/MM/yyyy): ");
+        Date fechaLimite = null;
+        while (fechaLimite == null) {
+            String fechaInput = scanner.nextLine().trim();
+            if (fechaInput.isEmpty()) {
+                System.out.println("Error: La fecha no puede estar vacía.");
+                System.out.print("Ingrese la fecha límite para revisar el recurso (formato: dd/MM/yyyy): ");
+                continue;
+            }
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                sdf.setLenient(false);
+                fechaLimite = sdf.parse(fechaInput);
+            } catch (Exception e) {
+                System.out.println("Error: Formato de fecha incorrecto. Intente nuevamente.");
+                System.out.print("Ingrese la fecha límite para revisar el recurso (formato: dd/MM/yyyy): ");
+            }
+        }
+
         System.out.print("Ingrese el tipo de recurso: ");
-        String tipoRecurso = scanner.nextLine();
-        
+        String tipoRecurso;
+        do {
+            tipoRecurso = scanner.nextLine().trim();
+            if (tipoRecurso.isEmpty()) {
+                System.out.println("Error: El tipo de recurso no puede estar vacío.");
+                System.out.print("Ingrese el tipo de recurso: ");
+            }
+        } while (tipoRecurso.isEmpty());
+
         System.out.print("Ingrese el enlace del recurso: ");
-        String enlace = scanner.nextLine();
+        String enlace;
+        do {
+            enlace = scanner.nextLine().trim();
+            if (enlace.isEmpty()) {
+                System.out.println("Error: El enlace no puede estar vacío.");
+                System.out.print("Ingrese el enlace del recurso: ");
+            }
+        } while (enlace.isEmpty());
 
         aplicacion.crearRevisarRecurso(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, tipoRecurso, profesor, enlace);
         System.out.println("Actividad de revisar recurso creada exitosamente.");
-        
-        }
-        
-        catch (ActividadYaExistenteException e) {
-        	System.out.println(e.getMessage());
-        }
     }
-	
+
 	private static void crearTarea(Profesor profesor) {        
 	    	System.out.print("Ingrese el titulo de la tarea: ");
 	        String titulo = scanner.nextLine();
