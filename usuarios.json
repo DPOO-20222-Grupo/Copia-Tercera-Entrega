@@ -1,12 +1,5 @@
 {
   "estudiantes": {
-    "david2005": {
-      "nombre": "David Velasquez",
-      "learningPathsInscritos": {},
-      "login": "david2005",
-      "password": "2005",
-      "isLoggedIn": false
-    },
     "d.martinezf": {
       "nombre": "Diego Martinez",
       "learningPathsInscritos": {},
@@ -21,12 +14,39 @@
           "mapaSeguimientoActividades": {
             "Quiz1 - l.munera": {
               "nota": -1.0,
-              "respuestas": {},
-              "numPreguntas": 0,
+              "preguntas": {
+                "1 - Colores": {
+                  "opcion1": "Azul",
+                  "opcion2": "Rojo",
+                  "opcion3": "Amarillo",
+                  "opcion4": "Negro",
+                  "opcionCorrecta": 4,
+                  "enunciado": "¿Qué color no es primario?",
+                  "titulo": "Colores",
+                  "id": 1,
+                  "tipoSeguimiento": "PreguntaSeleccionMultiple"
+                }
+              },
+              "respuestas": {
+                "1 - Colores": -1
+              },
+              "numPreguntas": 1,
               "actividad": {
                 "calificacionMinima": 3.5,
-                "preguntas": [],
-                "numPreguntas": 0,
+                "preguntas": [
+                  {
+                    "opcion1": "Azul",
+                    "opcion2": "Rojo",
+                    "opcion3": "Amarillo",
+                    "opcion4": "Negro",
+                    "opcionCorrecta": 4,
+                    "enunciado": "¿Qué color no es primario?",
+                    "titulo": "Colores",
+                    "id": 1,
+                    "tipoSeguimiento": "PreguntaSeleccionMultiple"
+                  }
+                ],
+                "numPreguntas": 1,
                 "tipo": "Quiz",
                 "titulo": "Quiz1",
                 "descripcion": "Primer Quiz",
@@ -212,8 +232,20 @@
       "mapaQuicesPropios": {
         "Quiz1 - l.munera": {
           "calificacionMinima": 3.5,
-          "preguntas": [],
-          "numPreguntas": 0,
+          "preguntas": [
+            {
+              "opcion1": "Azul",
+              "opcion2": "Rojo",
+              "opcion3": "Amarillo",
+              "opcion4": "Negro",
+              "opcionCorrecta": 4,
+              "enunciado": "¿Qué color no es primario?",
+              "titulo": "Colores",
+              "id": 1,
+              "tipoSeguimiento": "PreguntaSeleccionMultiple"
+            }
+          ],
+          "numPreguntas": 1,
           "tipo": "Quiz",
           "titulo": "Quiz1",
           "descripcion": "Primer Quiz",

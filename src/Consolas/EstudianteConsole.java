@@ -58,32 +58,42 @@ public class EstudianteConsole {
             switch (opcion) {
                 case 1:
                     inscribirLearningPath(estudiante);
+                    aplicacion.descargarDatos();
                     break;
                 case 2:
                 	enviarTarea();
+                	aplicacion.descargarDatos();
                 	break;
                 case 3:
                 	enviarExamen();
+                	aplicacion.descargarDatos();
                 	break;
                 case 4:
                 	responderPreguntaExamen();
+                	aplicacion.descargarDatos();
                 	break;
                 case 5:
                 	responderPreguntaEncuesta();
+                	aplicacion.descargarDatos();
                 	break;
                 case 6:
                 	responderPreguntaQuiz();
+                	aplicacion.descargarDatos();
                 	break;
                 case 7:
                 	completarEncuestaRecurso(estudiante);
+                	aplicacion.descargarDatos();
                 	break;
                 case 8:
                     verLearningPaths(estudiante);
+                    aplicacion.descargarDatos();
                     break;
                 case 9:
                 	calificarResenarActividad();
+                	aplicacion.descargarDatos();
                 case 10:
                 	calificarLearningPath();
+                	aplicacion.descargarDatos();
                 case 11:
                     estudiante.logout();
                     System.out.println("Sesión cerrada.");
@@ -232,7 +242,7 @@ public class EstudianteConsole {
         try {
             Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
             LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
-            Quiz quiz = aplicacion.getMapaQuices().get(idQuiz);
+            Quiz quiz = (Quiz) aplicacion.getActividad(idQuiz, "Quiz");
 
             // Recorrer las preguntas del quiz
             for (PreguntaCerrada pregunta : quiz.getPreguntas()) {

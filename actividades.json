@@ -75,8 +75,20 @@
   "Quices": {
     "Quiz1 - l.munera": {
       "calificacionMinima": 3.5,
-      "preguntas": [],
-      "numPreguntas": 0,
+      "preguntas": [
+        {
+          "opcion1": "Azul",
+          "opcion2": "Rojo",
+          "opcion3": "Amarillo",
+          "opcion4": "Negro",
+          "opcionCorrecta": 4,
+          "enunciado": "¿Qué color no es primario?",
+          "titulo": "Colores",
+          "id": 1,
+          "tipoSeguimiento": "PreguntaSeleccionMultiple"
+        }
+      ],
+      "numPreguntas": 1,
       "tipo": "Quiz",
       "titulo": "Quiz1",
       "descripcion": "Primer Quiz",

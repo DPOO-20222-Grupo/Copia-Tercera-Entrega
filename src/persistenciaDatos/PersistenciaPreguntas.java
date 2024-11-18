@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaBoolean;
+import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
 
 public class PersistenciaPreguntas {
@@ -22,6 +23,8 @@ public class PersistenciaPreguntas {
 	public static void persistirPreguntas(HashMap<String, PreguntaAbierta> abiertaMap, HashMap<String, PreguntaSeleccionMultiple> smMap, HashMap<String, PreguntaBoolean> bMap, String archivo) {
 		Gson gson = new GsonBuilder().setPrettyPrinting()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
+				
 				.create();
 		JsonObject jsonObject = new JsonObject();
 		JsonObject pAbiertas = new JsonObject();
@@ -56,6 +59,7 @@ public class PersistenciaPreguntas {
 	public static HashMap<String, PreguntaAbierta> cargarAbiertas(String archivo) {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 				.create();
 		
 		HashMap<String, PreguntaAbierta> abiertaMap = new HashMap<String, PreguntaAbierta>();	
@@ -81,6 +85,7 @@ public class PersistenciaPreguntas {
 	public static HashMap<String, PreguntaSeleccionMultiple> cargarSM(String archivo) {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 				.create();
 		
 		HashMap<String, PreguntaSeleccionMultiple> smMap = new HashMap<String, PreguntaSeleccionMultiple>();			
@@ -106,6 +111,7 @@ public class PersistenciaPreguntas {
 	public static HashMap<String, PreguntaBoolean> cargarBooleanas(String archivo) {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 				.create();
 		
 		HashMap<String, PreguntaBoolean> boolMap = new HashMap<String, PreguntaBoolean>();			

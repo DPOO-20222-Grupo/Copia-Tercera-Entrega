@@ -32,9 +32,11 @@ public class RegistroConsole {
                     break;
                 case 2:
                     registroEstudiante();
+                    aplicacion.descargarDatos();
                     break;
                 case 3:
                     System.out.println("Sesión cerrada.");
+                    aplicacion.descargarDatos();
                     break;
                 default:
                     System.out.println("Opción no válida.");
@@ -71,8 +73,8 @@ public class RegistroConsole {
         } while (nombre.isEmpty());
 
         aplicacion.crearProfesor(login, password, nombre);
-        aplicacion.descargarDatos();
         ProfesorConsole.mostrarMenuProfesor(aplicacion.getMapaProfesores().get(login));
+        
     }
 
     private static void registroEstudiante() {
@@ -104,7 +106,7 @@ public class RegistroConsole {
         } while (nombre.isEmpty());
 
         aplicacion.crearEstudiante(login, password, nombre);
-        aplicacion.descargarDatos();
         EstudianteConsole.mostrarMenuEstudiante(aplicacion.getMapaEstudiantes().get(login));
+        
     }
 }

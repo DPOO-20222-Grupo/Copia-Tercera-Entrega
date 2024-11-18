@@ -58,6 +58,7 @@ public class Main {
 		List<PreguntaAbierta> preguntasAbiertas = new ArrayList<PreguntaAbierta>();
 		preguntasAbiertas.add(pregAbierta);
 		List<PreguntaCerrada> preguntasCerradas = new ArrayList<PreguntaCerrada>();
+		preguntasCerradas.add(pregCerrada);
 		List<String> objetivos = new ArrayList<String>();
 		objetivos.add("Objetivo 1");
 		objetivos.add("Objetivo 2");

@@ -19,6 +19,7 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 		 super(quiz, estudiante);
 		 this.nota = -1;
 		 this.respuestas = new HashMap<String, Integer>();
+		 this.preguntas = new HashMap<String, PreguntaCerrada>();
 		 this.numPreguntas = quiz.getNumPreguntas();
 		 
 		 for (PreguntaCerrada pregunta: quiz.getPreguntas()) {

@@ -11,6 +11,7 @@ import actividades.Examen;
 import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
+import preguntas.PreguntaCerrada;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -30,6 +31,7 @@ public class PersistenciaActividades {
 			Gson gson = new GsonBuilder().setPrettyPrinting()
 					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 					.registerTypeAdapter(Actividad.class, new ActividadAdapter())
+					.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 					.create();
 					
 			JsonObject jsonObject = new JsonObject();
@@ -80,6 +82,7 @@ public class PersistenciaActividades {
 			Gson gson = new GsonBuilder()
 					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 					.registerTypeAdapter(Actividad.class, new ActividadAdapter())
+					.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 					.create();
 					
 			
@@ -107,6 +110,7 @@ public class PersistenciaActividades {
 			Gson gson = new GsonBuilder()
 					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 					.registerTypeAdapter(Actividad.class, new ActividadAdapter())
+					.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 					.create();
 			
 			HashMap<String, Encuesta> encuestaMap = new HashMap<String, Encuesta>();			
@@ -133,6 +137,7 @@ public class PersistenciaActividades {
 			Gson gson = new GsonBuilder()
 					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 					.registerTypeAdapter(Actividad.class, new ActividadAdapter())
+					.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 					.create();
 			
 			HashMap<String, Quiz> quizMap = new HashMap<String, Quiz>();			
@@ -159,6 +164,7 @@ public class PersistenciaActividades {
 			Gson gson = new GsonBuilder()
 					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 					.registerTypeAdapter(Actividad.class, new ActividadAdapter())
+					.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 					.create();
 			
 			HashMap<String, RevisarRecurso> recursosMap = new HashMap<String, RevisarRecurso>();			
@@ -185,6 +191,7 @@ public class PersistenciaActividades {
 			Gson gson = new GsonBuilder()
 					.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 					.registerTypeAdapter(Actividad.class, new ActividadAdapter())
+					.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 					.create();
 			
 			HashMap<String, Tarea> tareaMap = new HashMap<String, Tarea>();			
