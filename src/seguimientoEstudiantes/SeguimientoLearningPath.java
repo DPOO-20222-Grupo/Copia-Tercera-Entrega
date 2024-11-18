@@ -14,7 +14,7 @@ import user.Estudiante;
 
 public class SeguimientoLearningPath {
 	
-	private HashMap<Actividad, SeguimientoActividad> mapaSeguimientoActividades;
+	private HashMap<String, SeguimientoActividad> mapaSeguimientoActividades;
 	private String loginEstudiante;
 	private String nombreEstudiante;
 	private String idLearningPath;
@@ -33,47 +33,49 @@ public class SeguimientoLearningPath {
         this.loginEstudiante = estudiante.getLogin();
         this.nombreEstudiante = estudiante.getNombre();
         
-        this.mapaSeguimientoActividades = new HashMap<Actividad, SeguimientoActividad>();
+        HashMap<String, SeguimientoActividad> seguimientoActividades = new HashMap<String, SeguimientoActividad>();
         
         List<Actividad> actividadesLearningPath = learningPath.getActividades();
-        HashMap<Actividad, Boolean> actividadesCompletadas = new HashMap<>();
         
         for(Actividad actividad: actividadesLearningPath) {
         	String tipoActividad = actividad.getTipoActividad();
+
     		
     		if (tipoActividad.equals("Encuesta")) {
+
     			SeguimientoEncuesta seguimiento = new SeguimientoEncuesta((Encuesta) actividad, estudiante );
-    			mapaSeguimientoActividades.put(actividad, seguimiento);
+    			seguimientoActividades.put(actividad.getIdActividad(), seguimiento);
     			
     		}
     		
     		else if (tipoActividad.equals("Tarea")) {
     			SeguimientoTarea seguimiento = new SeguimientoTarea((Tarea) actividad, estudiante );
-    			mapaSeguimientoActividades.put(actividad, seguimiento);
+    			seguimientoActividades.put(actividad.getIdActividad(), seguimiento);
     			
     		}
     		
     		else if (tipoActividad.equals("Quiz")) {
     			SeguimientoQuiz seguimiento = new SeguimientoQuiz((Quiz) actividad, estudiante );
-    			mapaSeguimientoActividades.put(actividad, seguimiento);
+    			seguimientoActividades.put(actividad.getIdActividad(), seguimiento);
     			
     		}
     		
     		else if (tipoActividad.equals("Examen")) {
     			SeguimientoExamen seguimiento = new SeguimientoExamen((Examen) actividad, estudiante );
-    			mapaSeguimientoActividades.put(actividad, seguimiento);
+    			seguimientoActividades.put(actividad.getIdActividad(), seguimiento);
     			
     		}
     		
     		else if (tipoActividad.equals("Recurso")) {
     			SeguimientoRecurso seguimiento = new SeguimientoRecurso((RevisarRecurso) actividad, estudiante );
-    			mapaSeguimientoActividades.put(actividad, seguimiento);
+    			seguimientoActividades.put(actividad.getIdActividad(), seguimiento);
     			
     		}
 
-			actividadesCompletadas.put(actividad, false);
-        }
 
+			
+        }
+        	this.mapaSeguimientoActividades = seguimientoActividades;
         
     
     }
@@ -110,7 +112,7 @@ public class SeguimientoLearningPath {
         this.tasaFracaso = tasaFracaso;
     }
     
-    public HashMap<Actividad, SeguimientoActividad> getMapaSeguimientoActividades() {
+    public HashMap<String, SeguimientoActividad> getMapaSeguimientoActividades() {
  		return mapaSeguimientoActividades;
  	}
 

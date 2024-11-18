@@ -1,26 +1,178 @@
 {
   "estudiantes": {
-    "david2005": {
-      "nombre": "David Velasquez",
-      "learningPathsInscritos": {},
-      "login": "david2005",
-      "password": "2005",
-      "isLoggedIn": false
-    },
-    "Nhora": {
-      "nombre": "Nhora Parra",
-      "learningPathsInscritos": {},
-      "login": "Nhora",
-      "password": "123",
-      "isLoggedIn": false
-    },
     "d.martinezf": {
       "nombre": "Diego Martinez",
+      "learningPathsInscritos": {},
+      "login": "d.martinezf",
+      "password": "Banano123",
+      "isLoggedIn": false
+    },
+    "a.linares": {
+      "nombre": "Andres Linares",
       "learningPathsInscritos": {
         "Introducción a las Pruebas - l.munera": {
-          "mapaSeguimientoActividades": {},
-          "loginEstudiante": "d.martinezf",
-          "nombreEstudiante": "Diego Martinez",
+          "mapaSeguimientoActividades": {
+            "Quiz1 - l.munera": {
+              "nota": -1.0,
+              "respuestas": {},
+              "numPreguntas": 0,
+              "actividad": {
+                "calificacionMinima": 3.5,
+                "preguntas": [],
+                "numPreguntas": 0,
+                "tipo": "Quiz",
+                "titulo": "Quiz1",
+                "descripcion": "Primer Quiz",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "bajo",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 45,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": []
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "a.linares",
+              "nombreEstudianteSeguimiento": "Andres Linares",
+              "tiempoTotal": 0
+            },
+            "Parcial - l.munera": {
+              "nota": -1.0,
+              "respuestas": {
+                "preguntas.PreguntaAbierta@64bf3bbf": ""
+              },
+              "actividad": {
+                "numPreguntas": 1,
+                "preguntas": [
+                  {
+                    "enunciado": "Ingrese su nombre: ",
+                    "titulo": "Registro de Nombres",
+                    "id": 1
+                  }
+                ],
+                "tipo": "Examen",
+                "titulo": "Parcial",
+                "descripcion": "Examen Parcial",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "medio",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 120,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": []
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "a.linares",
+              "nombreEstudianteSeguimiento": "Andres Linares",
+              "tiempoTotal": 0
+            },
+            "Autoevaluación - l.munera": {
+              "respuestas": {
+                "preguntas.PreguntaAbierta@64bf3bbf": ""
+              },
+              "actividad": {
+                "preguntas": [
+                  {
+                    "enunciado": "Ingrese su nombre: ",
+                    "titulo": "Registro de Nombres",
+                    "id": 1
+                  }
+                ],
+                "numPreguntas": 1,
+                "tipo": "Encuesta",
+                "titulo": "Autoevaluación",
+                "descripcion": "Autoevaluación acitividad #1",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "Bajo",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 15,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": []
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "a.linares",
+              "nombreEstudianteSeguimiento": "Andres Linares",
+              "tiempoTotal": 0
+            },
+            "Ver video - l.munera": {
+              "recurso": "video",
+              "actividad": {
+                "tipoRecurso": "video",
+                "enlaceRecurso": "enlace",
+                "tipo": "Recurso",
+                "titulo": "Ver video",
+                "descripcion": "Ver video segunda guerra mundial",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "bajo",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 45,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": []
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "a.linares",
+              "nombreEstudianteSeguimiento": "Andres Linares",
+              "tiempoTotal": 0
+            },
+            "Tarea1 - l.munera": {
+              "metodoEnvio": "",
+              "actividad": {
+                "tipo": "Tarea",
+                "titulo": "Tarea1",
+                "descripcion": "Tarea numero uno",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "bajo",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 120,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": []
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "a.linares",
+              "nombreEstudianteSeguimiento": "Andres Linares",
+              "tiempoTotal": 0
+            }
+          },
+          "loginEstudiante": "a.linares",
+          "nombreEstudiante": "Andres Linares",
           "idLearningPath": "Introducción a las Pruebas - l.munera",
           "progreso": 0.0,
           "totalTiempo": 0,
@@ -28,13 +180,6 @@
           "tasaFracaso": 0.0
         }
       },
-      "login": "d.martinezf",
-      "password": "Banano123",
-      "isLoggedIn": false
-    },
-    "a.linares": {
-      "nombre": "Andres Linares",
-      "learningPathsInscritos": {},
       "login": "a.linares",
       "password": "Banano123",
       "isLoggedIn": false
@@ -52,6 +197,7 @@
           "calificacionMinima": 3.5,
           "preguntas": [],
           "numPreguntas": 0,
+          "tipo": "Quiz",
           "titulo": "Quiz1",
           "descripcion": "Primer Quiz",
           "objetivos": [

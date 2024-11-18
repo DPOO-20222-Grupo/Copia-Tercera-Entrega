@@ -16,7 +16,7 @@ public class Encuesta extends Actividad {
     // Constructor
     public Encuesta(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, 
     				int duracionMinutos, Date fechaLimite,  Profesor profesorCreador, List<PreguntaAbierta> preguntas) {
-        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
+        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador, TIPO);
         this.preguntas = preguntas;
         this.numPreguntas = preguntas.size();
     }

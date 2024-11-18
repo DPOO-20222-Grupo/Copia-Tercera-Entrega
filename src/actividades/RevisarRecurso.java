@@ -13,7 +13,7 @@ public class RevisarRecurso extends Actividad {
     // Constructor
     public RevisarRecurso(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos, 
     						Date fechaLimite, String tipoRecurso, Profesor profesorCreador, String enlaceRecurso) {
-        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
+        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador, TIPO);
         this.tipoRecurso = tipoRecurso;
         this.enlaceRecurso = enlaceRecurso;
     }

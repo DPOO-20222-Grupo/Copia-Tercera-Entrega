@@ -1,6 +1,7 @@
 {
   "Tareas": {
     "Tarea1 - l.munera": {
+      "tipo": "Tarea",
       "titulo": "Tarea1",
       "descripcion": "Tarea numero uno",
       "objetivos": [
@@ -29,6 +30,7 @@
           "id": 1
         }
       ],
+      "tipo": "Examen",
       "titulo": "Parcial",
       "descripcion": "Examen Parcial",
       "objetivos": [
@@ -51,6 +53,7 @@
     "Ver video - l.munera": {
       "tipoRecurso": "video",
       "enlaceRecurso": "enlace",
+      "tipo": "Recurso",
       "titulo": "Ver video",
       "descripcion": "Ver video segunda guerra mundial",
       "objetivos": [
@@ -74,6 +77,7 @@
       "calificacionMinima": 3.5,
       "preguntas": [],
       "numPreguntas": 0,
+      "tipo": "Quiz",
       "titulo": "Quiz1",
       "descripcion": "Primer Quiz",
       "objetivos": [
@@ -102,6 +106,7 @@
         }
       ],
       "numPreguntas": 1,
+      "tipo": "Encuesta",
       "titulo": "Autoevaluación",
       "descripcion": "Autoevaluación acitividad #1",
       "objetivos": [

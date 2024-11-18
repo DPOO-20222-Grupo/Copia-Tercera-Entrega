@@ -144,7 +144,7 @@ public class EstudianteConsole {
         try {
             Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
             LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
-            Examen examen = aplicacion.getMapaExamenes().get(tituloExamen);
+            Examen examen = (Examen) aplicacion.getActividad(tituloExamen, "Examen");
             
             aplicacion.enviarExamen(examen, estudiante, learningPath);
             System.out.println("Examen enviado exitosamente.");
@@ -167,7 +167,7 @@ public class EstudianteConsole {
             // Obtén los objetos necesarios
             Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
             LearningPath learningPath = aplicacion.getLearningPath(tituloLearningPath);
-            Examen examen = aplicacion.getMapaExamenes().get(idExamen);
+            Examen examen = (Examen) aplicacion.getActividad(idExamen, "Examen");
 
             // Recorre todas las preguntas del examen
             for (PreguntaAbierta pregunta : examen.getPreguntas()) {
