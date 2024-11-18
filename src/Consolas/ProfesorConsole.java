@@ -57,7 +57,7 @@ public class ProfesorConsole {
     }
 
     public static void mostrarMenuProfesor(Profesor profesor) {
-        int opcion;
+        int opcion = -1; 
         do {
             System.out.println("\n== Menú Profesor ==");
             System.out.println("1. Crear una actividad para revisar un recurso");
@@ -80,69 +80,86 @@ public class ProfesorConsole {
             System.out.println("18. Calificar un Learning Path");
             System.out.println("19. Cerrar sesión");
             System.out.print("Seleccione una opción: ");
-            opcion = Integer.parseInt(scanner.nextLine());
+            
+            try {
+                opcion = Integer.parseInt(scanner.nextLine()); 
 
-            switch (opcion) {
-                case 1:
-                    crearRevisarRecurso(profesor);
-                    break;
-                case 2:
-                	crearTarea(profesor);
-                	break;
-                case 3:
-                	crearQuiz(profesor);
-                	break;
-                case 4:
-                	crearExamen(profesor);
-                	break;
-                case 5:
-                	crearEncuesta(profesor);
-                	break;
-                case 6:
-                    CrearLearningPath(profesor);
-                    break;
-                case 7:
-                	crearPregunta(profesor);
-                case 8:
-                	clonarActividad(profesor);
-                	break;
-                case 9:
-                	clonarLearningPath(profesor);
-                	break;
-                case 10:
-                	modificarLearningPath(profesor);
-                	break;
-                case 11:
-                	modificarActividad(profesor);
-                	break;
-                case 12:
-                	calificarActividad(profesor);
-                	break;
-                case 13:
-                	modificarPregunta(profesor);
-                case 14:
-                    revisarActividadRepetida();
-                    break;
-                case 15:
-                	revisarLearningPathRepetido();
-                	break;
-                case 16:
-                	verActividades(profesor);
-                	break;
-                case 17:
-                	calificarResenarActividad();
-                case 18: 
-                	calificarLearningPath();
-                case 19:
-                    profesor.logout();
-                    System.out.println("Sesión cerrada.");
-                    aplicacion.descargarDatos();
-                    break;
-                default:
-                    System.out.println("Opción no válida.");
+                if (opcion < 1 || opcion > 19) {
+                    System.out.println("Opción no válida. Por favor, seleccione una opción entre 1 y 19.");
+                    continue;
+                }
+
+                switch (opcion) {
+                    case 1:
+                        crearRevisarRecurso(profesor);
+                        break;
+                    case 2:
+                        crearTarea(profesor);
+                        break;
+                    case 3:
+                        crearQuiz(profesor);
+                        break;
+                    case 4:
+                        crearExamen(profesor);
+                        break;
+                    case 5:
+                        crearEncuesta(profesor);
+                        break;
+                    case 6:
+                        crearLearningPath(profesor);
+                        break;
+                    case 7:
+                        crearPregunta(profesor);
+                        break;
+                    case 8:
+                        clonarActividad(profesor);
+                        break;
+                    case 9:
+                        clonarLearningPath(profesor);
+                        break;
+                    case 10:
+                        modificarLearningPath(profesor);
+                        break;
+                    case 11:
+                        modificarActividad(profesor);
+                        break;
+                    case 12:
+                        calificarActividad(profesor);
+                        break;
+                    case 13:
+                        modificarPregunta(profesor);
+                        break;
+                    case 14:
+                        revisarActividadRepetida();
+                        break;
+                    case 15:
+                        revisarLearningPathRepetido();
+                        break;
+                    case 16:
+                        verActividades(profesor);
+                        break;
+                    case 17:
+                        calificarResenarActividad();
+                        break;
+                    case 18:
+                        calificarLearningPath();
+                        break;
+                    case 19:
+                        profesor.logout();
+                        System.out.println("Sesión cerrada.");
+                        break;
+                }
+
+                aplicacion.descargarDatos(); 
+
+            } catch (NumberFormatException e) {
+                
+                System.out.println("Entrada no válida. Por favor, ingrese un número.");
             }
-        } while (opcion!=19);
+
+        } while (opcion != 19); 
     }
+
 
     private static void crearRevisarRecurso(Profesor profesor) {
 
@@ -561,7 +578,7 @@ public class ProfesorConsole {
 	}
 
 
-	private static void CrearLearningPath(Profesor profesor) {
+	private static void crearLearningPath(Profesor profesor) {
 	    
 	    System.out.print("Ingrese el titulo del learning path: ");
 	    String titulo = scanner.nextLine();
