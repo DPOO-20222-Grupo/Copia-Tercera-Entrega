@@ -1313,9 +1313,9 @@ public class ProfesorConsole {
         Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
 
         if (tipoActividad.equalsIgnoreCase("Examen")) {
-            System.out.println("Ingrese el nombre del examen: ");
-            String nombreExamen = scanner.nextLine();
-            Examen examen = aplicacion.getMapaExamenes().get(nombreExamen);
+            System.out.println("Ingrese el id del examen: ");
+            String idExamen = scanner.nextLine();
+            Examen examen = aplicacion.getMapaExamenes().get(idExamen);
 
             System.out.println("Ingrese la nota del examen: ");
             float nota = scanner.nextFloat();
@@ -1380,7 +1380,7 @@ public class ProfesorConsole {
 	        aplicacion.revisarActividadRepetida(titulo, login, tipo);
 	        System.out.println("La actividad no existe, puede ser creada.");
 	    } catch (ActividadYaExistenteException e) {
-	        System.out.println("Error: La actividad '" + titulo + "' de tipo '" + tipo + "' ya existe.");
+	        System.out.println("La actividad '" + titulo + "' de tipo '" + tipo + "' ya existe.");
 	    }
 	}
 	
@@ -1395,7 +1395,7 @@ public class ProfesorConsole {
 	        aplicacion.revisarLearningPathRepetido(titulo, login);
 	        System.out.println("El learning Path no existe, puede ser creado.");
 	    } catch (LearningPathYaExistenteException e) {
-	        System.out.println("Error: El learning Path " + titulo + "ya existe.");
+	        System.out.println("El learning Path " + titulo + "ya existe.");
 	    }
 		
 	}
