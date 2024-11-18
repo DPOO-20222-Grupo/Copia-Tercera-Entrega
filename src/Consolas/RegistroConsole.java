@@ -17,29 +17,34 @@ public class RegistroConsole {
     }
 
     private static void mostrarMenuRegistro() {
-        int opcion;
+        int opcion = -1; 
         do {
             System.out.println("\n== Menú Registro ==");
             System.out.println("1. Inscribirse como profesor");
             System.out.println("2. Inscribirse como estudiante");
             System.out.println("3. Cerrar registro");
             System.out.print("Seleccione una opción: ");
-            opcion = Integer.parseInt(scanner.nextLine());
-
-            switch (opcion) {
-                case 1:
-                    registroProfesor();
-                    break;
-                case 2:
-                    registroEstudiante();
-                    aplicacion.descargarDatos();
-                    break;
-                case 3:
-                    System.out.println("Sesión cerrada.");
-                    aplicacion.descargarDatos();
-                    break;
-                default:
-                    System.out.println("Opción no válida.");
+            
+            try {
+                opcion = Integer.parseInt(scanner.nextLine()); 
+                
+                switch (opcion) {
+                    case 1:
+                        registroProfesor();
+                        break;
+                    case 2:
+                        registroEstudiante();
+                        aplicacion.descargarDatos();
+                        break;
+                    case 3:
+                        System.out.println("Sesión cerrada.");
+                        aplicacion.descargarDatos();
+                        break;
+                    default:
+                        System.out.println("Opción no válida. Por favor, seleccione una opción entre 1 y 3.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada no válida. Por favor, ingrese un número.");
             }
         } while (opcion != 3);
     }
