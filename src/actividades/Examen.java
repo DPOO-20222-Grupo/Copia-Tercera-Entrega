@@ -17,7 +17,7 @@ public class Examen extends Actividad {
     public Examen(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, 
     		int duracionMinutos, Date fechaLimite, Profesor profesorCreador, List<PreguntaAbierta> preguntas) 
     {
-        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
+        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador, TIPO);
         this.preguntas = preguntas;
         this.numPreguntas = preguntas.size();
     }

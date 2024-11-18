@@ -14,6 +14,7 @@ import actividades.Examen;
 import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
+import exceptions.ModificarEstudianteLearningPathException;
 import learningPath.LearningPath;
 import persistenciaDatos.LocalDateTimeAdapter;
 import preguntas.PreguntaAbierta;
@@ -29,7 +30,7 @@ public class Main {
 	public static String archivoActividades = "actividades.json";
 
 	
-	public static void correrApp() {
+	public static void correrApp() throws ModificarEstudianteLearningPathException {
 		try {
 		
 		Aplicacion aplicacion = new Aplicacion();
@@ -101,7 +102,8 @@ public class Main {
 		LearningPath lp = new LearningPath("Introducción a las Pruebas", "Pruebas", objetivos, "mid",
 				prof1, actividades, mapaObligatorio);
 		
-		aplicacion.registrarLearningPath(lp);		
+		aplicacion.registrarLearningPath(lp);	
+		aplicacion.inscribirEstudianteLearningPath(stud2, lp);
 		
 		// Descarga de los Datos en Archivos JSON
 		aplicacion.descargarDatos();
@@ -219,7 +221,7 @@ public class Main {
 		
 		}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ModificarEstudianteLearningPathException {
 		correrApp();
 		
 	}

@@ -10,6 +10,7 @@ import exceptions.ModificarObjetivosException;
 import user.Profesor;
 
 public class Actividad {
+	private String tipo;
     private String titulo;
     private String descripcion;
     private List<String> objetivos;
@@ -25,7 +26,7 @@ public class Actividad {
     private List<Actividad> actividadesSeguimiento;
 
     // Constructor
-    public Actividad(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, Profesor profesorCreador) {
+    public Actividad(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite, Profesor profesorCreador, String tipoActividad) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.objetivos = objetivos;
@@ -39,6 +40,7 @@ public class Actividad {
         this.contadorRatings = 0;
         this.actividadesPrevias = new ArrayList<Actividad>(); 
         this.actividadesSeguimiento = new ArrayList<>();
+        this.tipo = tipoActividad;
     }
 
     // Getters, Setters y Actualizaciones
@@ -234,8 +236,7 @@ public class Actividad {
     }
     
     public String getTipoActividad() {
-    	String rta = "General";
-    	return rta;
+    	return tipo;
     	
     }
 

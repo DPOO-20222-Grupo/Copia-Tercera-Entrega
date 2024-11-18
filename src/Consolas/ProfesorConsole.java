@@ -154,7 +154,7 @@ public class ProfesorConsole {
         
         try {
         
-        aplicacion.revisarActividadRepetida(titulo, titulo, "Recurso");
+        aplicacion.revisarActividadRepetida(titulo, profesor.getLogin(), "Recurso");
         
         
         System.out.print("Ingrese los objetivos de revisar el recurso (separados por comas): ");
@@ -206,7 +206,7 @@ public class ProfesorConsole {
 	        
 	        try {
 	        	
-	        aplicacion.revisarActividadRepetida(titulo, titulo, "Tarea");
+	        aplicacion.revisarActividadRepetida(titulo, profesor.getLogin(), "Tarea");
 	        
 		        System.out.print("Ingrese los objetivos de la tarea (separados por comas): ");
 		        String objetivosInput = scanner.nextLine();
@@ -871,10 +871,9 @@ public class ProfesorConsole {
 	private static void modificarActividad(Profesor profesor) {
 	    String msjTitulo = "Ingrese el título de la actividad a modificar: ";
 	    String msjTipo = "Ingrese el tipo de la actividad a modificar: ";
-	    String tipo = scanner.nextLine();
 	    
 	    Actividad actividad = getActividad(msjTitulo, "", msjTipo, true, profesor);
-	    
+	    String tipo = actividad.getTipoActividad();
 
 	    if (actividad != null) {
 	    	
@@ -886,7 +885,7 @@ public class ProfesorConsole {
 					 "5. Fecha Limite\n"+
 					 "6. Duracion\n"+
 					 "7. Actividades Previas\n"+
-					 "8. Actividades de Seguimiento\n"
+					 "8. Actividades de Seguimiento"
 					 ;
 	        
 	    	System.out.println(menuGeneral);

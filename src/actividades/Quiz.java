@@ -18,7 +18,7 @@ public class Quiz extends Actividad {
     		Date fechaLimite, Profesor profesorCreador, double calificacionMinima, List<PreguntaCerrada> preguntas) 
     
     {
-        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
+        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador, TIPO);
         this.calificacionMinima = calificacionMinima;
         this.preguntas = preguntas;
         this.numPreguntas = preguntas.size();

@@ -10,7 +10,7 @@ public class Tarea extends Actividad {
 
     // Constructor
     public Tarea(String titulo, String descripcion, List<String> objetivos, String nivelDificultad, int duracionMinutos, Date fechaLimite,  Profesor profesorCreador) {
-        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador);
+        super(titulo, descripcion, objetivos, nivelDificultad, duracionMinutos, fechaLimite, profesorCreador, TIPO);
     }
     
     @Override

@@ -196,7 +196,7 @@ public class Aplicacion {
 		}
 		
 		else {
-			mapaPreguntasBoolean.put(tipo, (PreguntaBoolean) pregunta);
+			mapaPreguntasBoolean.put(llave, (PreguntaBoolean) pregunta);
 		}
 	}
 	
@@ -741,9 +741,9 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimientoEstudiante = mapaEstudiantes.get(estudiante.getLogin());
 		
-		Map <Actividad, SeguimientoActividad> mapaSeguimientosActividades = seguimientoEstudiante.getMapaSeguimientoActividades();
+		Map <String, SeguimientoActividad> mapaSeguimientosActividades = seguimientoEstudiante.getMapaSeguimientoActividades();
 		
-		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) mapaSeguimientosActividades.get(examen);
+		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) mapaSeguimientosActividades.get(examen.getIdActividad());
 		
 		seguimientoExamen.setNota(nota);
 		seguimientoExamen.actualizarEstadoCompletado();	
@@ -756,9 +756,9 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimientoEstudiante = mapaEstudiantes.get(estudiante.getLogin());
 		
-		Map <Actividad, SeguimientoActividad> mapaSeguimientosActividades = seguimientoEstudiante.getMapaSeguimientoActividades();
+		Map <String, SeguimientoActividad> mapaSeguimientosActividades = seguimientoEstudiante.getMapaSeguimientoActividades();
 		
-		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) mapaSeguimientosActividades.get(tarea);
+		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) mapaSeguimientosActividades.get(tarea.getIdActividad());
 		
 		seguimientoTarea.actualizarEstadoFinal(esExitoso);
 		
@@ -878,7 +878,7 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
 		
-		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) seguimientoEstudiante.getMapaSeguimientoActividades().get(tarea);
+		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) seguimientoEstudiante.getMapaSeguimientoActividades().get(tarea.getIdActividad());
 		
 		seguimientoTarea.actualizarEstadoEnviado();
 		
@@ -888,7 +888,7 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
 		
-		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen);
+		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen.getIdActividad());
 		
 		seguimientoExamen.actualizarEstadoEnviado();
 		
@@ -898,7 +898,7 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
 		
-		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen);
+		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen.getIdActividad());
 		
 		seguimientoExamen.registrarPregunta(pregunta, respuesta);
 		
@@ -909,7 +909,7 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
 		
-		SeguimientoEncuesta seguimientoEncuesta = (SeguimientoEncuesta) seguimientoEstudiante.getMapaSeguimientoActividades().get(encuesta);
+		SeguimientoEncuesta seguimientoEncuesta = (SeguimientoEncuesta) seguimientoEstudiante.getMapaSeguimientoActividades().get(encuesta.getIdActividad());
 		
 		seguimientoEncuesta.registrarPregunta(pregunta, respuesta);
 		
@@ -921,7 +921,7 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
 		
-		SeguimientoQuiz seguimientoQuiz = (SeguimientoQuiz) seguimientoEstudiante.getMapaSeguimientoActividades().get(quiz);
+		SeguimientoQuiz seguimientoQuiz = (SeguimientoQuiz) seguimientoEstudiante.getMapaSeguimientoActividades().get(quiz.getIdActividad());
 		
 		seguimientoQuiz.agregarRespuestaPregunta(pregunta, respuesta);
 		
@@ -933,7 +933,7 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
 		
-		SeguimientoActividad seguimientoActividad = seguimientoEstudiante.getMapaSeguimientoActividades().get(actividad);
+		SeguimientoActividad seguimientoActividad = seguimientoEstudiante.getMapaSeguimientoActividades().get(actividad.getIdActividad());
 		
 		seguimientoActividad.actualizarEstadoCompletado();
 		
@@ -956,14 +956,14 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimiento = estudiante.getLearningPathsInscritos().get(idLP);
 		
-		Map<Actividad, SeguimientoActividad> seguimientoActividades = seguimiento.getMapaSeguimientoActividades();
+		Map<String, SeguimientoActividad> seguimientoActividades = seguimiento.getMapaSeguimientoActividades();
 		
 		boolean cumplePrerrequisitos = true;
 		
 		for (Actividad actividadPrevia: prerrequisitos) {
 			
-			if (seguimientoActividades.containsKey(actividadPrevia)) {
-				SeguimientoActividad seguimientoActividadPrevia = seguimientoActividades.get(actividadPrevia);
+			if (seguimientoActividades.containsKey(actividadPrevia.getIdActividad())) {
+				SeguimientoActividad seguimientoActividadPrevia = seguimientoActividades.get(actividadPrevia.getIdActividad());
 				String estado = seguimientoActividadPrevia.getEstado();
 				
 				if (estado.equals("Incompleto")) {
