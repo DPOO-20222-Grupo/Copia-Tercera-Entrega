@@ -41,6 +41,7 @@ public class PersistenciaLearningPaths {
 	public static HashMap<String, LearningPath> cargarLP(String archivo) {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.create();
 		
 		HashMap<String, LearningPath> LPMap = new HashMap<String, LearningPath>();			

@@ -245,6 +245,26 @@ public class AplicacionTest {
     @Test 
     public void testCrearActividad() {
     	app.crearRevisarRecurso(recurso.getTitulo(), recurso.getDescripcion(), recurso.getObjetivos(), recurso.getNivelDificultad(), recurso.getDuracionMinutos(), recurso.getFechaLimite(), recurso.getTipoRecurso(), profesor, recurso.getEnlaceRecurso());
+    	app.crearEncuesta(encuesta.getTitulo(), encuesta.getDescripcion(), encuesta.getObjetivos(), encuesta.getNivelDificultad(), encuesta.getDuracionMinutos(), encuesta.getFechaLimite(), profesor, encuesta.getPreguntas());
+    	app.crearExamen(examen.getTitulo(), examen.getDescripcion(), examen.getObjetivos(), examen.getNivelDificultad(), examen.getDuracionMinutos(), examen.getFechaLimite(), profesor, examen.getPreguntas());
+    	app.crearTarea(tarea.getTitulo(), tarea.getDescripcion(), tarea.getObjetivos(), tarea.getNivelDificultad(), tarea.getDuracionMinutos(), tarea.getFechaLimite(), profesor);
+    	app.crearQuiz(quiz.getTitulo(), quiz.getDescripcion(), quiz.getObjetivos(), quiz.getNivelDificultad(), quiz.getDuracionMinutos(), quiz.getFechaLimite(), profesor,quiz.getCalificacionMinima(),quiz.getPreguntas());
+    	
+    	assertNotNull(app.getActividad(recurso.getIdActividad(), "Recurso"), "Actividad no fue registrada correctamente");
+    	assertNotNull(profesor.getMapaRecursosPropios().get(recurso.getIdActividad()), "Actividad no fue registrada correctamente" );
+    	
+    	assertNotNull(app.getActividad(encuesta.getIdActividad(), "Encuesta"), "Actividad no fue registrada correctamente");
+    	assertNotNull(profesor.getMapaEncuestasPropias().get(encuesta.getIdActividad()), "Actividad no fue registrada correctamente" );
+    	
+    	assertNotNull(app.getActividad(quiz.getIdActividad(), "Quiz"), "Actividad no fue registrada correctamente");
+    	assertNotNull(profesor.getMapaQuicesPropios().get(quiz.getIdActividad()), "Actividad no fue registrada correctamente" );
+    	
+    	assertNotNull(app.getActividad(examen.getIdActividad(), "Examen"), "Actividad no fue registrada correctamente");
+    	assertNotNull(profesor.getMapaExamenesPropios().get(examen.getIdActividad()), "Actividad no fue registrada correctamente" );
+    	
+    	assertNotNull(app.getActividad(tarea.getIdActividad(), "Tarea"), "Actividad no fue registrada correctamente");
+    	assertNotNull(profesor.getMapaTareasPropias().get(tarea.getIdActividad()), "Actividad no fue registrada correctamente" );
+    	
     }
 }
 

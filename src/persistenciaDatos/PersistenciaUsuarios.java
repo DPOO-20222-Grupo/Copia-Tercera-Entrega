@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import actividades.Actividad;
 import user.Estudiante;
 import user.Profesor;
 
@@ -52,6 +53,7 @@ public class PersistenciaUsuarios {
 
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.create();
 		
 		HashMap<String, Estudiante> studentMap = new HashMap<String, Estudiante>();	
@@ -76,6 +78,7 @@ public class PersistenciaUsuarios {
 	public static HashMap<String, Profesor> cargarProfesores(String archivo) {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.create();
 		
 		HashMap<String, Profesor> profMap = new HashMap<String, Profesor>();	

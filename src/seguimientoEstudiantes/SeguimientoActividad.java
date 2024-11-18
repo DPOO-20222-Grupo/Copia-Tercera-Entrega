@@ -3,7 +3,7 @@ package seguimientoEstudiantes;
 import actividades.Actividad;
 import user.Estudiante;
 
-public abstract class SeguimientoActividad {
+public  class SeguimientoActividad {
 
 	private Actividad actividad;
 	private String estado;
