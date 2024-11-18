@@ -10,7 +10,7 @@
     ],
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
-    "rating": 0.0,
+    "rating": 5.0,
     "fechaCreacion": "2024-11-18T01:56:17.776757",
     "fechaUltimaModificacion": "2024-11-18T01:56:17.776757",
     "version": 1.0,
@@ -177,6 +177,7 @@
         "tasaExito": 0.0,
         "tasaFracaso": 0.0
       },
+<<<<<<< HEAD
       "d.martinezf": {
         "mapaSeguimientoActividades": {
           "Quiz1 - l.munera": {
@@ -333,6 +334,164 @@
         },
         "loginEstudiante": "d.martinezf",
         "nombreEstudiante": "Diego Martinez",
+=======
+      "david2005": {
+        "mapaSeguimientoActividades": {
+          "Quiz1 - l.munera": {
+            "actividad": {
+              "calificacionMinima": 3.5,
+              "preguntas": [],
+              "numPreguntas": 0,
+              "tipo": "Quiz",
+              "titulo": "Quiz1",
+              "descripcion": "Primer Quiz",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "bajo",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 45,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Quiz"
+            },
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
+            "tiempoTotal": 0
+          },
+          "Parcial - l.munera": {
+            "actividad": {
+              "numPreguntas": 1,
+              "preguntas": [
+                {
+                  "enunciado": "Ingrese su nombre: ",
+                  "titulo": "Registro de Nombres",
+                  "id": 1
+                }
+              ],
+              "tipo": "Examen",
+              "titulo": "Parcial",
+              "descripcion": "Examen Parcial",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "medio",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 120,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Examen"
+            },
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
+            "tiempoTotal": 0
+          },
+          "Autoevaluación - l.munera": {
+            "actividad": {
+              "preguntas": [
+                {
+                  "enunciado": "Ingrese su nombre: ",
+                  "titulo": "Registro de Nombres",
+                  "id": 1
+                }
+              ],
+              "numPreguntas": 1,
+              "tipo": "Encuesta",
+              "titulo": "Autoevaluación",
+              "descripcion": "Autoevaluación acitividad #1",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "Bajo",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 15,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Encuesta"
+            },
+            "estado": "Completada",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
+            "tiempoTotal": 0
+          },
+          "Ver video - l.munera": {
+            "actividad": {
+              "tipoRecurso": "video",
+              "enlaceRecurso": "enlace",
+              "tipo": "Recurso",
+              "titulo": "Ver video",
+              "descripcion": "Ver video segunda guerra mundial",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "bajo",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 45,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "RevisarRecurso"
+            },
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
+            "tiempoTotal": 0
+          },
+          "Tarea1 - l.munera": {
+            "actividad": {
+              "tipo": "Tarea",
+              "titulo": "Tarea1",
+              "descripcion": "Tarea numero uno",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "bajo",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 120,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Tarea"
+            },
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
+            "tiempoTotal": 0
+          }
+        },
+        "loginEstudiante": "david2005",
+        "nombreEstudiante": "David Velasquez",
+>>>>>>> refs/remotes/origin/main
         "idLearningPath": "Introducción a las Pruebas - l.munera",
         "progreso": 0.0,
         "totalTiempo": 0,
@@ -466,6 +625,6 @@
     "mapaActividadesObligatorias": {
       "Actividad1": true
     },
-    "contadorRatings": 0
+    "contadorRatings": 2
   }
 }

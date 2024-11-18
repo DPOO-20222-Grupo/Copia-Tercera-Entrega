@@ -42,33 +42,69 @@ public class RegistroConsole {
         } while (opcion != 3);
     }
 
-	private static void registroProfesor() {
-		System.out.print("Ingrese el login que desea: ");
-        String login = scanner.nextLine();
-        System.out.print("Ingrese el password que desea: ");
-        String password = scanner.nextLine();
-        System.out.print("Ingrese su nombre completo: ");
-        String nombre = scanner.nextLine();
+    private static void registroProfesor() {
+        String login;
+        do {
+            System.out.print("Ingrese el login que desea: ");
+            login = scanner.nextLine().trim();
+            if (login.isEmpty()) {
+                System.out.println("Error: El login no puede estar vacío.");
+            }
+        } while (login.isEmpty());
+
+        String password;
+        do {
+            System.out.print("Ingrese el password que desea: ");
+            password = scanner.nextLine().trim();
+            if (password.isEmpty()) {
+                System.out.println("Error: El password no puede estar vacío.");
+            }
+        } while (password.isEmpty());
+
+        String nombre;
+        do {
+            System.out.print("Ingrese su nombre completo: ");
+            nombre = scanner.nextLine().trim();
+            if (nombre.isEmpty()) {
+                System.out.println("Error: El nombre no puede estar vacío.");
+            }
+        } while (nombre.isEmpty());
+
         aplicacion.crearProfesor(login, password, nombre);
         aplicacion.descargarDatos();
-        
         ProfesorConsole.mostrarMenuProfesor(aplicacion.getMapaProfesores().get(login));
-		
-	}
+    }
 
-	private static void registroEstudiante() {
-		System.out.print("Ingrese el login que desea: ");
-        String login = scanner.nextLine();
-        System.out.print("Ingrese el password que desea: ");
-        String password = scanner.nextLine();
-        System.out.print("Ingrese su nombre completo: ");
-        String nombre = scanner.nextLine();
+    private static void registroEstudiante() {
+        String login;
+        do {
+            System.out.print("Ingrese el login que desea: ");
+            login = scanner.nextLine().trim();
+            if (login.isEmpty()) {
+                System.out.println("Error: El login no puede estar vacío.");
+            }
+        } while (login.isEmpty());
+
+        String password;
+        do {
+            System.out.print("Ingrese el password que desea: ");
+            password = scanner.nextLine().trim();
+            if (password.isEmpty()) {
+                System.out.println("Error: El password no puede estar vacío.");
+            }
+        } while (password.isEmpty());
+
+        String nombre;
+        do {
+            System.out.print("Ingrese su nombre completo: ");
+            nombre = scanner.nextLine().trim();
+            if (nombre.isEmpty()) {
+                System.out.println("Error: El nombre no puede estar vacío.");
+            }
+        } while (nombre.isEmpty());
+
         aplicacion.crearEstudiante(login, password, nombre);
         aplicacion.descargarDatos();
-        
         EstudianteConsole.mostrarMenuEstudiante(aplicacion.getMapaEstudiantes().get(login));
-        	
-	}
-
-
+    }
 }
