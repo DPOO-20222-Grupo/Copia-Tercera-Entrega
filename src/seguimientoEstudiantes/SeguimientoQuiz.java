@@ -1,6 +1,7 @@
 package seguimientoEstudiantes;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import actividades.Quiz;
@@ -10,19 +11,20 @@ import user.Estudiante;
 public class SeguimientoQuiz extends SeguimientoActividad{
 	
 	private double nota;
-	private Map<PreguntaCerrada, Integer> respuestas;
+	private Map<String, PreguntaCerrada> preguntas;
+	private Map<String, Integer> respuestas;
 	private int numPreguntas;
 	
 	public SeguimientoQuiz (Quiz quiz, Estudiante estudiante) {
 		 super(quiz, estudiante);
 		 this.nota = -1;
-		 this.respuestas = new HashMap<PreguntaCerrada, Integer>();
+		 this.respuestas = new HashMap<String, Integer>();
 		 this.numPreguntas = quiz.getNumPreguntas();
 		 
 		 for (PreguntaCerrada pregunta: quiz.getPreguntas()) {
 			 
-			 respuestas.put(pregunta, -1);
-			 
+			 respuestas.put(pregunta.getIdPregunta(), -1);
+			 preguntas.put(pregunta.getIdPregunta(), pregunta);
 		 }
 	}
 	
@@ -41,25 +43,26 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 		this.nota = nota;
 	}
 	
-	public Map<PreguntaCerrada, Integer> getRespuestas() {
+	public Map<String, Integer> getRespuestas() {
 		return respuestas;
 	}
 	
 
 
 	public void agregarRespuestaPregunta (PreguntaCerrada pregunta, int opcionEscogida) {
-		this.respuestas.replace(pregunta, opcionEscogida);
+		this.respuestas.replace(pregunta.getIdPregunta(), opcionEscogida);
 	}
 	
 	public double calcularNota () {
 		
-		Map<PreguntaCerrada, Integer> respuestas = this.getRespuestas();
+		Map<String, Integer> respuestas = this.getRespuestas();
 		int numPreguntas = this.getNumPreguntas();
 		
 		float nota = 0;
 		
-		for (Map.Entry<PreguntaCerrada, Integer> entry : respuestas.entrySet()) {
-			PreguntaCerrada pregunta = entry.getKey();
+		for (Map.Entry<String, Integer> entry : respuestas.entrySet()) {
+			
+			PreguntaCerrada pregunta = preguntas.get(entry.getKey());
 			int opcionEscogida = entry.getValue();
 			
 			if (pregunta.verificarOpcionCorrecta(opcionEscogida)== true) {

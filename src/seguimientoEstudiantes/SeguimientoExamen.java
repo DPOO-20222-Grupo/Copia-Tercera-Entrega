@@ -10,16 +10,16 @@ import user.Estudiante;
 public class SeguimientoExamen extends SeguimientoActividad{
 	
 	private float nota;
-	private Map<PreguntaAbierta, String> respuestas;
+	private Map<String, String> respuestas;
 	
 	public SeguimientoExamen(Examen examen, Estudiante estudiante) {
 		super(examen, estudiante);
 		this.nota = -1;
-		this.respuestas = new HashMap<PreguntaAbierta, String>();
+		this.respuestas = new HashMap<String, String>();
 		
 		for(PreguntaAbierta pregunta: examen.getPreguntas()) {
 			
-			this.respuestas.put(pregunta, "");
+			this.respuestas.put(pregunta.getIdPregunta(), "");
 			
 		}
 		
@@ -44,13 +44,13 @@ public class SeguimientoExamen extends SeguimientoActividad{
 		this.setEstado("Completado");
 	}
 
-	public Map<PreguntaAbierta, String> getRespuestas() {
+	public Map<String, String> getRespuestas() {
 		return respuestas;
 	}
 	
 	public void registrarPregunta(PreguntaAbierta pregunta, String respuesta) {
 		
-		getRespuestas().replace(pregunta, respuesta);
+		getRespuestas().replace(pregunta.getIdPregunta(), respuesta);
 		
 	}
 
