@@ -10,8 +10,10 @@ import actividades.Tarea;
 import exceptions.ModificarEstudianteLearningPathException;
 import interfaz.Aplicacion;
 import learningPath.LearningPath;
+import preguntas.Pregunta;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
+import preguntas.PreguntaSeleccionMultiple;
 import user.Estudiante;
 
 public class EstudianteConsole {
@@ -245,14 +247,30 @@ public class EstudianteConsole {
             Quiz quiz = (Quiz) aplicacion.getActividad(idQuiz, "Quiz");
 
             // Recorrer las preguntas del quiz
-            for (PreguntaCerrada pregunta : quiz.getPreguntas()) {
-                System.out.println("Pregunta: " + pregunta.getEnunciado());
-                
-                System.out.print("Ingrese el número de opción (1-4): ");
-                int respuesta = scanner.nextInt();
-                scanner.nextLine();  
+            for (Pregunta pregunta : quiz.getPreguntas()) {
+                // Verifica si la pregunta es de tipo PreguntaSeleccionMultiple
+                if (pregunta instanceof PreguntaSeleccionMultiple) {
+                    PreguntaSeleccionMultiple preguntaSeleccionMultiple = (PreguntaSeleccionMultiple) pregunta;
+                    
+                    // Mostrar el enunciado de la pregunta
+                    System.out.println("Pregunta: " + preguntaSeleccionMultiple.getEnunciado());
 
-                aplicacion.responderPreguntaQuiz(quiz, estudiante, learningPath, pregunta, respuesta);
+                    // Mostrar las opciones de la pregunta
+                    System.out.println("1. " + preguntaSeleccionMultiple.getOpcion1());
+                    System.out.println("2. " + preguntaSeleccionMultiple.getOpcion2());
+                    System.out.println("3. " + preguntaSeleccionMultiple.getOpcion3());
+                    System.out.println("4. " + preguntaSeleccionMultiple.getOpcion4());
+
+                    System.out.print("Ingrese el número de opción (1-4): ");
+                    int respuesta = scanner.nextInt();
+                    scanner.nextLine();  
+
+                    // Registrar la respuesta
+                    aplicacion.responderPreguntaQuiz(quiz, estudiante, learningPath, preguntaSeleccionMultiple, respuesta);
+                } else {
+                    // Si la pregunta no es de tipo PreguntaSeleccionMultiple, manejarla de otra forma si es necesario
+                    System.out.println("Pregunta no es de tipo Selección Múltiple.");
+                }
             }
 
             System.out.println("Respuestas registradas exitosamente.");
@@ -261,6 +279,7 @@ public class EstudianteConsole {
             System.out.println("Error al registrar las respuestas: " + e.getMessage());
         }
     }
+
 
     
     public static void completarEncuestaRecurso(Estudiante estudiante) {
