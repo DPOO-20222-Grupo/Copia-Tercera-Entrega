@@ -14,27 +14,35 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import preguntas.PreguntaAbierta;
+import preguntas.PreguntaBoolean;
 import preguntas.PreguntaSeleccionMultiple;
 
 public class PersistenciaPreguntas {
 	
-	public static void persistirPreguntas(HashMap<String, PreguntaAbierta> abiertaMap, HashMap<String, PreguntaSeleccionMultiple> cerradaMap, String archivo) {
+	public static void persistirPreguntas(HashMap<String, PreguntaAbierta> abiertaMap, HashMap<String, PreguntaSeleccionMultiple> smMap, HashMap<String, PreguntaBoolean> bMap, String archivo) {
 		Gson gson = new GsonBuilder().setPrettyPrinting()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 				.create();
 		JsonObject jsonObject = new JsonObject();
 		JsonObject pAbiertas = new JsonObject();
-		JsonObject pCerradas = new JsonObject();
+		JsonObject pSM = new JsonObject();
+		JsonObject pBool = new JsonObject();
 		
 		for(Entry<String, PreguntaAbierta> entry: abiertaMap.entrySet()) {
 			pAbiertas.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
 		}
 		
-		for(Entry<String, PreguntaSeleccionMultiple> entry: cerradaMap.entrySet()) {
-			pCerradas.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
+		for(Entry<String, PreguntaSeleccionMultiple> entry: smMap.entrySet()) {
+			pSM.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
 		}
 		
-		jsonObject.add("Preguntas Selección Múltiple", pCerradas);
+		for(Entry<String, PreguntaBoolean> entry: bMap.entrySet()) {
+			pBool.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
+		}
+		
+		
+		jsonObject.add("Preguntas Selección Múltiple", pSM);
+		jsonObject.add("Preguntas Verdadero Falso", pBool);
 		jsonObject.add("Preguntas Abiertas", pAbiertas);
 		
 		try (FileWriter writer = new FileWriter(archivo)){
@@ -70,12 +78,12 @@ public class PersistenciaPreguntas {
 		return abiertaMap;
 	}
 	
-	public static HashMap<String, PreguntaSeleccionMultiple> cargarCerradas(String archivo) {
+	public static HashMap<String, PreguntaSeleccionMultiple> cargarSM(String archivo) {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 				.create();
 		
-		HashMap<String, PreguntaSeleccionMultiple> cerradaMap = new HashMap<String, PreguntaSeleccionMultiple>();			
+		HashMap<String, PreguntaSeleccionMultiple> smMap = new HashMap<String, PreguntaSeleccionMultiple>();			
 		
 		try(FileReader reader = new FileReader(archivo)){
 			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
@@ -84,7 +92,7 @@ public class PersistenciaPreguntas {
 			if(cerradas != null) {
 				for (Entry<String, JsonElement> entry: cerradas.entrySet()) {
 					PreguntaSeleccionMultiple pregunta = gson.fromJson(entry.getValue().getAsJsonObject(), PreguntaSeleccionMultiple.class);
-					cerradaMap.put(entry.getKey(), pregunta);
+					smMap.put(entry.getKey(), pregunta);
 				}
 			}
 			
@@ -92,7 +100,32 @@ public class PersistenciaPreguntas {
 			e.printStackTrace();			
 		}
 		
-		return cerradaMap;
+		return smMap;
+	}
+	
+	public static HashMap<String, PreguntaBoolean> cargarBooleanas(String archivo) {
+		Gson gson = new GsonBuilder()
+				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.create();
+		
+		HashMap<String, PreguntaBoolean> boolMap = new HashMap<String, PreguntaBoolean>();			
+		
+		try(FileReader reader = new FileReader(archivo)){
+			JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+			JsonObject cerradas = jsonObject.getAsJsonObject("Preguntas Verdadero Falso");
+			
+			if(cerradas != null) {
+				for (Entry<String, JsonElement> entry: cerradas.entrySet()) {
+					PreguntaBoolean pregunta = gson.fromJson(entry.getValue().getAsJsonObject(), PreguntaBoolean.class);
+					boolMap.put(entry.getKey(), pregunta);
+				}
+			}
+			
+		} catch(IOException e){
+			e.printStackTrace();			
+		}
+		
+		return boolMap;
 	}
 
 }

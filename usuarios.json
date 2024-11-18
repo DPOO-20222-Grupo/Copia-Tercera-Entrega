@@ -36,17 +36,19 @@
                 "rating": 0.0,
                 "contadorRatings": 0,
                 "actividadesPrevias": [],
-                "actividadesSeguimiento": []
+                "actividadesSeguimiento": [],
+                "tipoActividad": "Quiz"
               },
               "estado": "Incompleta",
               "loginEstudianteSeguimiento": "a.linares",
               "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoQuiz"
             },
             "Parcial - l.munera": {
               "nota": -1.0,
               "respuestas": {
-                "preguntas.PreguntaAbierta@64bf3bbf": ""
+                "preguntas.PreguntaAbierta@71318ec4": ""
               },
               "actividad": {
                 "numPreguntas": 1,
@@ -73,16 +75,18 @@
                 "rating": 0.0,
                 "contadorRatings": 0,
                 "actividadesPrevias": [],
-                "actividadesSeguimiento": []
+                "actividadesSeguimiento": [],
+                "tipoActividad": "Examen"
               },
               "estado": "Incompleta",
               "loginEstudianteSeguimiento": "a.linares",
               "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoExamen"
             },
             "Autoevaluación - l.munera": {
               "respuestas": {
-                "preguntas.PreguntaAbierta@64bf3bbf": ""
+                "preguntas.PreguntaAbierta@71318ec4": ""
               },
               "actividad": {
                 "preguntas": [
@@ -109,12 +113,14 @@
                 "rating": 0.0,
                 "contadorRatings": 0,
                 "actividadesPrevias": [],
-                "actividadesSeguimiento": []
+                "actividadesSeguimiento": [],
+                "tipoActividad": "Encuesta"
               },
               "estado": "Incompleta",
               "loginEstudianteSeguimiento": "a.linares",
               "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoEncuesta"
             },
             "Ver video - l.munera": {
               "recurso": "video",
@@ -137,12 +143,14 @@
                 "rating": 0.0,
                 "contadorRatings": 0,
                 "actividadesPrevias": [],
-                "actividadesSeguimiento": []
+                "actividadesSeguimiento": [],
+                "tipoActividad": "RevisarRecurso"
               },
               "estado": "Incompleta",
               "loginEstudianteSeguimiento": "a.linares",
               "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoRecurso"
             },
             "Tarea1 - l.munera": {
               "metodoEnvio": "",
@@ -163,12 +171,14 @@
                 "rating": 0.0,
                 "contadorRatings": 0,
                 "actividadesPrevias": [],
-                "actividadesSeguimiento": []
+                "actividadesSeguimiento": [],
+                "tipoActividad": "Tarea"
               },
               "estado": "Incompleta",
               "loginEstudianteSeguimiento": "a.linares",
               "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoTarea"
             }
           },
           "loginEstudiante": "a.linares",

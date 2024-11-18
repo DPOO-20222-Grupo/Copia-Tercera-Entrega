@@ -11,8 +11,13 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
+<<<<<<< HEAD
     "fechaCreacion": "2024-11-18T01:03:25.060118",
     "fechaUltimaModificacion": "2024-11-18T01:03:25.060118",
+=======
+    "fechaCreacion": "2024-11-18T01:28:53.4256174",
+    "fechaUltimaModificacion": "2024-11-18T01:28:53.4256174",
+>>>>>>> refs/remotes/origin/main
     "version": 1.0,
     "estudiantesInscritos": {
       "a.linares": {
@@ -52,7 +57,7 @@
           "Parcial - l.munera": {
             "nota": -1.0,
             "respuestas": {
-              "preguntas.PreguntaAbierta@64bf3bbf": ""
+              "preguntas.PreguntaAbierta@71318ec4": ""
             },
             "actividad": {
               "numPreguntas": 1,
@@ -89,7 +94,7 @@
           },
           "Autoevaluación - l.munera": {
             "respuestas": {
-              "preguntas.PreguntaAbierta@64bf3bbf": ""
+              "preguntas.PreguntaAbierta@71318ec4": ""
             },
             "actividad": {
               "preguntas": [

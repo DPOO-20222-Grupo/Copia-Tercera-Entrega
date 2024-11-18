@@ -84,7 +84,8 @@ public class Aplicacion {
 		this.mapaExamenes = PersistenciaActividades.cargarExamen(archivoActividades);
 		this.mapaQuices = PersistenciaActividades.cargarQuiz(archivoActividades);
 		this.mapaPreguntasAbiertas = PersistenciaPreguntas.cargarAbiertas(archivoPreguntas);
-		this.mapaPreguntasSeleccionMultiple = PersistenciaPreguntas.cargarCerradas(archivoPreguntas);
+		this.mapaPreguntasSeleccionMultiple = PersistenciaPreguntas.cargarSM(archivoPreguntas);
+		this.mapaPreguntasBoolean = PersistenciaPreguntas.cargarBooleanas(archivoPreguntas);
 	}
 
 	//Getters y Setters estructuras
@@ -996,7 +997,7 @@ public class Aplicacion {
 	public void descargarDatos () {
 		PersistenciaActividades.persistirActividades(mapaExamenes, mapaEncuestas, mapaQuices, mapaRevisarRecurso, mapaTareas, "actividades.json");
 		PersistenciaUsuarios.persistirUsuarios(mapaEstudiantes, mapaProfesores, "usuarios.json");
-		PersistenciaPreguntas.persistirPreguntas(mapaPreguntasAbiertas, mapaPreguntasSeleccionMultiple, "preguntas.json");
+		PersistenciaPreguntas.persistirPreguntas(mapaPreguntasAbiertas, mapaPreguntasSeleccionMultiple, mapaPreguntasBoolean,"preguntas.json");
 		PersistenciaLearningPaths.persistirLearningPaths(mapaLearningPaths, "lp.json");
 	}
 	
