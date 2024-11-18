@@ -11,7 +11,7 @@ public class PreguntaCerradaAdapter implements JsonSerializer<PreguntaCerrada>, 
     @Override
     public JsonElement serialize(PreguntaCerrada pregunta, Type type, JsonSerializationContext context) {
         JsonObject jsonObject = context.serialize(pregunta).getAsJsonObject();
-        jsonObject.addProperty("tipoSeguimiento", pregunta.getClass().getSimpleName());
+        jsonObject.addProperty("tipoPregunta", pregunta.getClass().getSimpleName());
         return jsonObject;
     }
 
@@ -20,14 +20,14 @@ public class PreguntaCerradaAdapter implements JsonSerializer<PreguntaCerrada>, 
             throws JsonParseException {
         JsonObject jsonObject = json.getAsJsonObject();
 
-        if (!jsonObject.has("tipoSeguimiento")) {
+        if (!jsonObject.has("tipoPregunta")) {
             throw new JsonParseException("El campo 'tipoSeguimiento' está ausente en el JSON.");
         }
 
-        String typeName = jsonObject.get("tipoSeguimiento").getAsString();
+        String typeName = jsonObject.get("tipoPregunta").getAsString();
 
         try {
-            Class<?> clazz = Class.forName("seguimientoEstudiantes." + typeName); // Ruta del paquete de las subclases
+            Class<?> clazz = Class.forName("preguntas." + typeName); // Ruta del paquete de las subclases
             return context.deserialize(jsonObject, clazz);
         } catch (ClassNotFoundException e) {
             throw new JsonParseException("Tipo desconocido: " + typeName, e);
