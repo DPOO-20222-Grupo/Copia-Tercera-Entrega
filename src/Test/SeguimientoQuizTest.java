@@ -56,9 +56,9 @@ class SeguimientoQuizTest {
     void testAgregarRespuestaPregunta() {
         seguimientoQuiz.agregarRespuestaPregunta(pregunta1, 1);
         seguimientoQuiz.agregarRespuestaPregunta(pregunta2, 2);
-        Map<PreguntaCerrada, Integer> respuestas = seguimientoQuiz.getRespuestas();
-        assertEquals(1, respuestas.get(pregunta1), "La respuesta para pregunta 1 no fue actualizada correctamente.");
-        assertEquals(2, respuestas.get(pregunta2), "La respuesta para pregunta 2 no fue actualizada correctamente.");
+        Map<String, Integer> respuestas = seguimientoQuiz.getRespuestas();
+        assertEquals(1, respuestas.get(pregunta1.getIdPregunta()), "La respuesta para pregunta 1 no fue actualizada correctamente.");
+        assertEquals(2, respuestas.get(pregunta2.getIdPregunta()), "La respuesta para pregunta 2 no fue actualizada correctamente.");
     }
 
     @Test
