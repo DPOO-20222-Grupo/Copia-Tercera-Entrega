@@ -9,7 +9,7 @@ import exceptions.ModificarActividadesSeguimientoException;
 import exceptions.ModificarObjetivosException;
 import user.Profesor;
 
-public class Actividad {
+public abstract class Actividad {
     private String titulo;
     private String descripcion;
     private List<String> objetivos;

@@ -15,7 +15,6 @@ import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
 import learningPath.LearningPath;
-import persistenciaDatos.LocalDateTimeAdapter;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;

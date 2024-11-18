@@ -1,7 +1,6 @@
 package exceptions;
 
 import preguntas.PreguntaCerrada;
-import preguntas.PreguntaSeleccionMultiple;
 
 @SuppressWarnings("serial")
 public class ModificarPreguntasQuizException extends Exception {

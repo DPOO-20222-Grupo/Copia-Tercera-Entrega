@@ -12,6 +12,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import actividades.Actividad;
 import learningPath.LearningPath;
 
 public class PersistenciaLearningPaths {
@@ -21,6 +22,7 @@ public class PersistenciaLearningPaths {
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.create();
 		JsonObject jsonObject = new JsonObject();
 			

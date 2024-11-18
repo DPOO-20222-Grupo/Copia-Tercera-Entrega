@@ -17,6 +17,7 @@ import user.Profesor;
 
 class SeguimientoExamenTest {
 	private SeguimientoExamen seg;
+	private PreguntaAbierta pAbierta;
 
 	@BeforeEach
 	void setUp() {
