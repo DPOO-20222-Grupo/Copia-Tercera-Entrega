@@ -16,7 +16,6 @@ import actividades.RevisarRecurso;
 import actividades.Tarea;
 import exceptions.ModificarEstudianteLearningPathException;
 import learningPath.LearningPath;
-import persistenciaDatos.LocalDateTimeAdapter;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;

@@ -17,11 +17,4 @@ public class SeguimientoRecurso extends SeguimientoActividad {
 		return recurso;
 	}
 
-	public void setRecurso(String recurso) {
-		this.recurso = recurso;
-	}
-	
-	
-	
-
 }

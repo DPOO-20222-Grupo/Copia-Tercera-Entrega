@@ -57,7 +57,7 @@ public class Profesor extends Usuario {
     }
     
     public String getTipo(){
-    	return this.TIPO;
+    	return TIPO;
     }
     
 
