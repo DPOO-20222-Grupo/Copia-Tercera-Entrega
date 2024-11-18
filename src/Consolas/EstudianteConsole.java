@@ -44,22 +44,21 @@ public class EstudianteConsole {
             System.out.println("\n== Menú Estudiante ==");
             System.out.println("1. Inscribirse en un Learning Path");
             System.out.println("2. Enviar Tarea");
-            System.out.println("3. Enviar Examen");
-            System.out.println("4. Responder Pregunta de Examen");
-            System.out.println("5. Responder Pregunta de Encuesta");
-            System.out.println("6. Responder Pregunta de Quiz");
-            System.out.println("7. Registrar que se completó una encuesta o recurso");
-            System.out.println("8. Ver Learning Paths Inscritos");
-            System.out.println("9. Reseñar o calificar una actividad");
-            System.out.println("10. Calificar un Learning Path");
-            System.out.println("11. Cerrar sesión");
+            System.out.println("3. Responder Preguntas de Examen y enviar al finalizar");
+            System.out.println("4. Responder Preguntas de Encuesta");
+            System.out.println("5. Responder Preguntas de Quiz");
+            System.out.println("6. Registrar que se completó una encuesta o recurso");
+            System.out.println("7. Ver Learning Paths Inscritos");
+            System.out.println("8. Reseñar o calificar una actividad");
+            System.out.println("9. Calificar un Learning Path");
+            System.out.println("10. Cerrar sesión");
             System.out.print("Seleccione una opción: ");
 
             try {
                 opcion = Integer.parseInt(scanner.nextLine()); 
 
-                if (opcion < 1 || opcion > 11) {
-                    System.out.println("Opción no válida. Por favor, seleccione una opción entre 1 y 11.");
+                if (opcion < 1 || opcion > 10) {
+                    System.out.println("Opción no válida. Por favor, seleccione una opción entre 1 y 10.");
                     continue;
                 }
 
@@ -68,33 +67,30 @@ public class EstudianteConsole {
                         inscribirLearningPath(estudiante);
                         break;
                     case 2:
-                        enviarTarea();
-                        break;
+                    	enviarTarea();
+                    	break;
                     case 3:
-                        enviarExamen();
-                        break;
-                    case 4:
                         responderPreguntaExamen();
                         break;
-                    case 5:
+                    case 4:
                         responderPreguntaEncuesta();
                         break;
-                    case 6:
+                    case 5:
                         responderPreguntaQuiz();
                         break;
-                    case 7:
+                    case 6:
                         completarEncuestaRecurso(estudiante);
                         break;
-                    case 8:
+                    case 7:
                         verLearningPaths(estudiante);
                         break;
-                    case 9:
+                    case 8:
                         calificarResenarActividad();
                         break;
-                    case 10:
+                    case 9:
                         calificarLearningPath();
                         break;
-                    case 11:
+                    case 10:
                         estudiante.logout();
                         System.out.println("Sesión cerrada.");
                         break;
@@ -105,7 +101,7 @@ public class EstudianteConsole {
             } catch (NumberFormatException e) {
                 System.out.println("Entrada no válida. Por favor, ingrese un número.");
             }
-        } while (opcion != 11);
+        } while (opcion != 10);
     }
 
     
@@ -129,7 +125,7 @@ public class EstudianteConsole {
             System.out.println("Error al inscribir el estudiante en el Learning Path: " + e.getMessage());
         }
     }
-
+    
     private static void enviarTarea() {
         String loginEstudiante, idLearningPath, tituloTarea;
 
@@ -166,45 +162,6 @@ public class EstudianteConsole {
             System.out.println("Tarea enviada exitosamente.");
         } catch (Exception e) {
             System.out.println("Error al enviar la tarea: " + e.getMessage());
-        }
-    }
-
-    private static void enviarExamen() {
-        String loginEstudiante, idLearningPath, tituloExamen;
-
-        do {
-            System.out.print("Ingrese el login del estudiante: ");
-            loginEstudiante = scanner.nextLine().trim();
-            if (loginEstudiante.isEmpty()) {
-                System.out.println("El login del estudiante no puede estar vacío. Por favor, ingrese un valor válido.");
-            }
-        } while (loginEstudiante.isEmpty());
-
-        do {
-            System.out.print("Ingrese el id del Learning Path: ");
-            idLearningPath = scanner.nextLine().trim();
-            if (idLearningPath.isEmpty()) {
-                System.out.println("El ID del Learning Path no puede estar vacío. Por favor, ingrese un valor válido.");
-            }
-        } while (idLearningPath.isEmpty());
-
-        do {
-            System.out.print("Ingrese el título del examen: ");
-            tituloExamen = scanner.nextLine().trim();
-            if (tituloExamen.isEmpty()) {
-                System.out.println("El título del examen no puede estar vacío. Por favor, ingrese un valor válido.");
-            }
-        } while (tituloExamen.isEmpty());
-
-        try {
-            Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
-            LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
-            Examen examen = (Examen) aplicacion.getActividad(tituloExamen, "Examen");
-
-            aplicacion.enviarExamen(examen, estudiante, learningPath);
-            System.out.println("Examen enviado exitosamente.");
-        } catch (Exception e) {
-            System.out.println("Error al enviar el examen: " + e.getMessage());
         }
     }
     
@@ -255,6 +212,10 @@ public class EstudianteConsole {
                 aplicacion.responderPreguntaExamen(examen, estudiante, learningPath, pregunta, respuesta);
                 System.out.println("Respuesta registrada exitosamente.\n");
             }
+            
+            aplicacion.enviarExamen(examen, estudiante, learningPath);
+            System.out.println("Examen enviado exitosamente.");
+            
         } catch (Exception e) {
             System.out.println("Error al registrar la respuesta: " + e.getMessage());
         }
@@ -311,6 +272,7 @@ public class EstudianteConsole {
                 aplicacion.responderPreguntaEncuesta(encuesta, estudiante, learningPath, pregunta, respuesta);
                 System.out.println("Respuesta registrada exitosamente.\n");
             }
+            
         } catch (Exception e) {
             System.out.println("Error al registrar la respuesta: " + e.getMessage());
         }
