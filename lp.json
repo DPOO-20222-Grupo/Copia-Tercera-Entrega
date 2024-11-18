@@ -11,8 +11,8 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
-    "fechaCreacion": "2024-11-17T23:28:58.370164",
-    "fechaUltimaModificacion": "2024-11-17T23:28:58.370164",
+    "fechaCreacion": "2024-11-18T01:28:53.4256174",
+    "fechaUltimaModificacion": "2024-11-18T01:28:53.4256174",
     "version": 1.0,
     "estudiantesInscritos": {
       "a.linares": {
@@ -41,7 +41,8 @@
               "rating": 0.0,
               "contadorRatings": 0,
               "actividadesPrevias": [],
-              "actividadesSeguimiento": []
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Quiz"
             },
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
@@ -51,7 +52,7 @@
           "Parcial - l.munera": {
             "nota": -1.0,
             "respuestas": {
-              "preguntas.PreguntaAbierta@64bf3bbf": ""
+              "preguntas.PreguntaAbierta@71318ec4": ""
             },
             "actividad": {
               "numPreguntas": 1,
@@ -78,7 +79,8 @@
               "rating": 0.0,
               "contadorRatings": 0,
               "actividadesPrevias": [],
-              "actividadesSeguimiento": []
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Examen"
             },
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
@@ -87,7 +89,7 @@
           },
           "Autoevaluación - l.munera": {
             "respuestas": {
-              "preguntas.PreguntaAbierta@64bf3bbf": ""
+              "preguntas.PreguntaAbierta@71318ec4": ""
             },
             "actividad": {
               "preguntas": [
@@ -114,7 +116,8 @@
               "rating": 0.0,
               "contadorRatings": 0,
               "actividadesPrevias": [],
-              "actividadesSeguimiento": []
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Encuesta"
             },
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
@@ -142,7 +145,8 @@
               "rating": 0.0,
               "contadorRatings": 0,
               "actividadesPrevias": [],
-              "actividadesSeguimiento": []
+              "actividadesSeguimiento": [],
+              "tipoActividad": "RevisarRecurso"
             },
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
@@ -168,7 +172,8 @@
               "rating": 0.0,
               "contadorRatings": 0,
               "actividadesPrevias": [],
-              "actividadesSeguimiento": []
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Tarea"
             },
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
@@ -187,6 +192,14 @@
     },
     "actividades": [
       {
+        "preguntas": [
+          {
+            "enunciado": "Ingrese su nombre: ",
+            "titulo": "Registro de Nombres",
+            "id": 1
+          }
+        ],
+        "numPreguntas": 1,
         "tipo": "Encuesta",
         "titulo": "Autoevaluación",
         "descripcion": "Autoevaluación acitividad #1",
@@ -203,9 +216,18 @@
         "rating": 0.0,
         "contadorRatings": 0,
         "actividadesPrevias": [],
-        "actividadesSeguimiento": []
+        "actividadesSeguimiento": [],
+        "tipoActividad": "Encuesta"
       },
       {
+        "numPreguntas": 1,
+        "preguntas": [
+          {
+            "enunciado": "Ingrese su nombre: ",
+            "titulo": "Registro de Nombres",
+            "id": 1
+          }
+        ],
         "tipo": "Examen",
         "titulo": "Parcial",
         "descripcion": "Examen Parcial",
@@ -222,9 +244,12 @@
         "rating": 0.0,
         "contadorRatings": 0,
         "actividadesPrevias": [],
-        "actividadesSeguimiento": []
+        "actividadesSeguimiento": [],
+        "tipoActividad": "Examen"
       },
       {
+        "tipoRecurso": "video",
+        "enlaceRecurso": "enlace",
         "tipo": "Recurso",
         "titulo": "Ver video",
         "descripcion": "Ver video segunda guerra mundial",
@@ -241,7 +266,8 @@
         "rating": 0.0,
         "contadorRatings": 0,
         "actividadesPrevias": [],
-        "actividadesSeguimiento": []
+        "actividadesSeguimiento": [],
+        "tipoActividad": "RevisarRecurso"
       },
       {
         "tipo": "Tarea",
@@ -260,9 +286,13 @@
         "rating": 0.0,
         "contadorRatings": 0,
         "actividadesPrevias": [],
-        "actividadesSeguimiento": []
+        "actividadesSeguimiento": [],
+        "tipoActividad": "Tarea"
       },
       {
+        "calificacionMinima": 3.5,
+        "preguntas": [],
+        "numPreguntas": 0,
         "tipo": "Quiz",
         "titulo": "Quiz1",
         "descripcion": "Primer Quiz",
@@ -279,7 +309,8 @@
         "rating": 0.0,
         "contadorRatings": 0,
         "actividadesPrevias": [],
-        "actividadesSeguimiento": []
+        "actividadesSeguimiento": [],
+        "tipoActividad": "Quiz"
       }
     ],
     "mapaActividadesObligatorias": {

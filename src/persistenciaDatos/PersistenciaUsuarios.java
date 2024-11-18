@@ -5,6 +5,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import actividades.Actividad;
+import seguimientoEstudiantes.SeguimientoActividad;
 import user.Estudiante;
 import user.Profesor;
 
@@ -21,6 +23,8 @@ public class PersistenciaUsuarios {
 	public static void persistirUsuarios(HashMap<String, Estudiante> studentMap, HashMap<String, Profesor> profMap, String archivo) {
 		Gson gson = new GsonBuilder().setPrettyPrinting()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
+				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())
 				.create();
 		
 		JsonObject jsonObject = new JsonObject();
@@ -52,6 +56,8 @@ public class PersistenciaUsuarios {
 
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
+				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())	
 				.create();
 		
 		HashMap<String, Estudiante> studentMap = new HashMap<String, Estudiante>();	
@@ -76,6 +82,8 @@ public class PersistenciaUsuarios {
 	public static HashMap<String, Profesor> cargarProfesores(String archivo) {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
+				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())
+				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.create();
 		
 		HashMap<String, Profesor> profMap = new HashMap<String, Profesor>();	
