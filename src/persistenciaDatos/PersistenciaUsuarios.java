@@ -57,10 +57,9 @@ public class PersistenciaUsuarios {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
-<<<<<<< HEAD
-=======
+
 				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())	
->>>>>>> refs/remotes/origin/main
+
 				.create();
 		
 		HashMap<String, Estudiante> studentMap = new HashMap<String, Estudiante>();	
@@ -85,10 +84,10 @@ public class PersistenciaUsuarios {
 	public static HashMap<String, Profesor> cargarProfesores(String archivo) {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
-<<<<<<< HEAD
-=======
+
+
 				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())
->>>>>>> refs/remotes/origin/main
+
 				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.create();
 		
