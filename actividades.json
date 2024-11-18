@@ -85,7 +85,7 @@
           "enunciado": "¿Qué color no es primario?",
           "titulo": "Colores",
           "id": 1,
-          "tipoSeguimiento": "PreguntaSeleccionMultiple"
+          "tipoPregunta": "PreguntaSeleccionMultiple"
         }
       ],
       "numPreguntas": 1,
