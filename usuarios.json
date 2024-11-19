@@ -223,21 +223,6 @@
     }
   },
   "profesores": {
-    "s.munozm234": {
-      "nombre": "Santiago Muñoz",
-      "mapaRecursosPropios": {},
-      "mapaTareasPropias": {},
-      "mapaExamenesPropios": {},
-      "mapaEncuestasPropias": {},
-      "mapaQuicesPropios": {},
-      "learningPathPropios": {},
-      "preguntasAbiertasPropias": {},
-      "preguntasSeleccionPropias": {},
-      "preguntasBooleanPropias": {},
-      "login": "s.munozm234",
-      "password": "Prueba1",
-      "isLoggedIn": false
-    },
     "l.munera": {
       "nombre": "Lina Munera",
       "mapaRecursosPropios": {},
@@ -287,43 +272,6 @@
       "login": "l.munera",
       "password": "Tristeza30",
       "isLoggedIn": false
-    },
-    "david2005": {
-      "nombre": "David Velasquez",
-      "mapaRecursosPropios": {
-        "Probando Final - david2005": {
-          "tipoRecurso": "Recurso",
-          "enlaceRecurso": "youtube",
-          "tipo": "Recurso",
-          "titulo": "Probando Final",
-          "descripcion": "ver youtube",
-          "objetivos": [
-            "divertirse",
-            "reir"
-          ],
-          "nivelDificultad": "bajo",
-          "loginProfesorCreador": "david2005",
-          "nombreProfesorCreador": "David Velasquez",
-          "duracionMinutos": 100,
-          "fechaLimite": "Dec 12, 2025, 12:00:00 AM",
-          "resenas": [],
-          "rating": 0.0,
-          "contadorRatings": 0,
-          "actividadesPrevias": [],
-          "actividadesSeguimiento": []
-        }
-      },
-      "mapaTareasPropias": {},
-      "mapaExamenesPropios": {},
-      "mapaEncuestasPropias": {},
-      "mapaQuicesPropios": {},
-      "learningPathPropios": {},
-      "preguntasAbiertasPropias": {},
-      "preguntasSeleccionPropias": {},
-      "preguntasBooleanPropias": {},
-      "login": "david2005",
-      "password": "2005",
-      "isLoggedIn": true
     }
   }
 }

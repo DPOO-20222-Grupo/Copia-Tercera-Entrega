@@ -11,18 +11,31 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
-<<<<<<< HEAD
-    "fechaCreacion": "2024-11-18T20:03:25.682577",
-    "fechaUltimaModificacion": "2024-11-18T20:03:25.682577",
-=======
-    "fechaCreacion": "2024-11-18T19:16:43.164618",
-    "fechaUltimaModificacion": "2024-11-18T19:16:43.164618",
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
+    "fechaCreacion": "2024-11-18T20:20:42.6362968",
+    "fechaUltimaModificacion": "2024-11-18T20:20:42.6362968",
     "version": 1.0,
     "estudiantesInscritos": {
       "a.linares": {
         "mapaSeguimientoActividades": {
           "Quiz1 - l.munera": {
+            "nota": -1.0,
+            "preguntas": {
+              "1 - Colores": {
+                "opcion1": "Azul",
+                "opcion2": "Rojo",
+                "opcion3": "Amarillo",
+                "opcion4": "Negro",
+                "opcionCorrecta": 4,
+                "enunciado": "¿Qué color no es primario?",
+                "titulo": "Colores",
+                "id": 1,
+                "tipoPregunta": "PreguntaSeleccionMultiple"
+              }
+            },
+            "respuestas": {
+              "1 - Colores": -1
+            },
+            "numPreguntas": 1,
             "actividad": {
               "calificacionMinima": 3.5,
               "preguntas": [
@@ -64,6 +77,10 @@
             "tiempoTotal": 0
           },
           "Parcial - l.munera": {
+            "nota": -1.0,
+            "respuestas": {
+              "1 - Registro de Nombres": ""
+            },
             "actividad": {
               "numPreguntas": 1,
               "preguntas": [
@@ -98,6 +115,9 @@
             "tiempoTotal": 0
           },
           "Autoevaluación - l.munera": {
+            "respuestas": {
+              "1 - Registro de Nombres": ""
+            },
             "actividad": {
               "preguntas": [
                 {
@@ -132,6 +152,7 @@
             "tiempoTotal": 0
           },
           "Ver video - l.munera": {
+            "recurso": "video",
             "actividad": {
               "tipoRecurso": "video",
               "enlaceRecurso": "enlace",
@@ -160,6 +181,7 @@
             "tiempoTotal": 0
           },
           "Tarea1 - l.munera": {
+            "metodoEnvio": "",
             "actividad": {
               "tipo": "Tarea",
               "titulo": "Tarea1",
