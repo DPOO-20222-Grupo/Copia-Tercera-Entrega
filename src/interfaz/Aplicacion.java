@@ -24,6 +24,7 @@ import exceptions.ModificarObjetivosException;
 import exceptions.ModificarPreguntasAbiertasException;
 import exceptions.ModificarPreguntasQuizException;
 import exceptions.TipoInvalidoValorException;
+import exceptions.UsuarioYaExistenteException;
 import learningPath.LearningPath;
 import persistenciaDatos.PersistenciaActividades;
 import persistenciaDatos.PersistenciaLearningPaths;
@@ -206,30 +207,42 @@ public class Aplicacion {
 		return llave;
 	}
 		
+	public void revisarUsuarioRepetido(String login, String tipo) throws UsuarioYaExistenteException{
+		if (tipo.equals("Estudiante") ) {
+			if (mapaEstudiantes.containsKey(login)) {
+				throw new UsuarioYaExistenteException(login, tipo);
+			}
+		}
+		else if (tipo.equals("Profesor") ) {
+			if (mapaEstudiantes.containsKey(login)) {
+				throw new UsuarioYaExistenteException(login, tipo);
+			}
+		}
+	}
 	public void revisarActividadRepetida (String titulo, String login, String tipo) throws ActividadYaExistenteException {
 		
 		String llave = generarLlaveLearningsActividades (titulo, login);
 		
-		if (tipo == "Tarea") {
+		if (tipo.equals("Tarea")) {
 			if (mapaTareas.containsKey(llave)) {
 				throw new ActividadYaExistenteException (titulo, tipo);
 			}
 		}
-		else if (tipo == "Quiz") {
+		else if (tipo.equals("Quiz")) {
 			
 			if (mapaQuices.containsKey(llave)) {
 				throw new ActividadYaExistenteException (titulo, tipo);
 			}
 			
 		}
-		else if (tipo == "Recurso") {
+		else if (tipo.equals( "Recurso")) {
 			
 			if (mapaRevisarRecurso.containsKey(llave)){
 				throw new ActividadYaExistenteException (titulo, tipo);
 			}
 			
 		}
-		else if (tipo == "Examen") {
+		else if (tipo.equals("Examen")) {
 			
 			if (mapaExamenes.containsKey(llave)) {
 				throw new ActividadYaExistenteException (titulo, tipo);

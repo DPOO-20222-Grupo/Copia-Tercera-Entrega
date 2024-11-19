@@ -16,12 +16,15 @@ import user.Estudiante;
 
 public class EstudianteConsole {
    
-	private static Aplicacion aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");  
+	private Aplicacion aplicacion;  
     private static Scanner scanner = new Scanner(System.in);
-
-    public static void main(String[] args) {
-        
-        System.out.println("== Sistema de Estudiantes ==");
+    
+    public EstudianteConsole (Aplicacion aplicacion){
+    	this.aplicacion = aplicacion;
+    }
+    
+    public void loginPlataforma () {
+    	System.out.println("== Sistema de Estudiantes ==");
         System.out.print("Ingrese su login: ");
         String login = scanner.nextLine();
         System.out.print("Ingrese su contraseña: ");
@@ -36,8 +39,11 @@ public class EstudianteConsole {
         }
         
     }
+    
+    
 
-    public static void mostrarMenuEstudiante(Estudiante estudiante) {
+
+    public void mostrarMenuEstudiante(Estudiante estudiante) {
         int opcion;
         do {
             System.out.println("\n== Menú Estudiante ==");
@@ -58,46 +64,46 @@ public class EstudianteConsole {
             switch (opcion) {
                 case 1:
                     inscribirLearningPath(estudiante);
-                    aplicacion.descargarDatos();
+                    
                     break;
                 case 2:
                 	enviarTarea();
-                	aplicacion.descargarDatos();
+                	
                 	break;
                 case 3:
                 	enviarExamen();
-                	aplicacion.descargarDatos();
+                	
                 	break;
                 case 4:
                 	responderPreguntaExamen();
-                	aplicacion.descargarDatos();
+                	
                 	break;
                 case 5:
                 	responderPreguntaEncuesta();
-                	aplicacion.descargarDatos();
+                	
                 	break;
                 case 6:
                 	responderPreguntaQuiz();
-                	aplicacion.descargarDatos();
+                	
                 	break;
                 case 7:
                 	completarEncuestaRecurso(estudiante);
-                	aplicacion.descargarDatos();
+                	
                 	break;
                 case 8:
                     verLearningPaths(estudiante);
-                    aplicacion.descargarDatos();
+                    
                     break;
                 case 9:
                 	calificarResenarActividad();
-                	aplicacion.descargarDatos();
+                	
                 case 10:
                 	calificarLearningPath();
-                	aplicacion.descargarDatos();
+                	
                 case 11:
                     estudiante.logout();
                     System.out.println("Sesión cerrada.");
-                    aplicacion.descargarDatos();
+                    
                     break;
                 default:
                     System.out.println("Opción no válida.");
@@ -105,7 +111,7 @@ public class EstudianteConsole {
         } while (opcion!= 11);
     }
     
-	private static void inscribirLearningPath(Estudiante estudiante) {
+	private void inscribirLearningPath(Estudiante estudiante) {
 
         System.out.print("Ingrese el id del Learning Path: ");
         String idLearningPath = scanner.nextLine();
@@ -119,7 +125,7 @@ public class EstudianteConsole {
         }
     }
 
-    private static void enviarTarea() {
+    private void enviarTarea() {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
@@ -141,7 +147,7 @@ public class EstudianteConsole {
         }
     }
 
-    private static void enviarExamen() {
+    private void enviarExamen() {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
@@ -163,7 +169,7 @@ public class EstudianteConsole {
         }
     }   
     
-    private static void responderPreguntaExamen() {
+    private  void responderPreguntaExamen() {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
@@ -196,7 +202,7 @@ public class EstudianteConsole {
     }
 
 
-    private static void responderPreguntaEncuesta() {
+    private void responderPreguntaEncuesta() {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
@@ -229,7 +235,7 @@ public class EstudianteConsole {
     }
 
 
-    private static void responderPreguntaQuiz() {
+    private  void responderPreguntaQuiz() {
         System.out.print("Ingrese el login del estudiante: ");
         String loginEstudiante = scanner.nextLine();
 
@@ -254,6 +260,7 @@ public class EstudianteConsole {
 
                 aplicacion.responderPreguntaQuiz(quiz, estudiante, learningPath, pregunta, respuesta);
             }
+            
 
             System.out.println("Respuestas registradas exitosamente.");
 
@@ -263,7 +270,7 @@ public class EstudianteConsole {
     }
 
     
-    public static void completarEncuestaRecurso(Estudiante estudiante) {
+    public  void completarEncuestaRecurso(Estudiante estudiante) {
         
         System.out.print("Ingrese el ID de la actividad (encuesta o recurso): ");
         String idActividad = scanner.nextLine();
@@ -292,14 +299,14 @@ public class EstudianteConsole {
     }
 
 
-     private static void verLearningPaths(Estudiante estudiante) {
+     private  void verLearningPaths(Estudiante estudiante) {
         System.out.println("== Learning Paths Inscritos ==");
         estudiante.getLearningPathsInscritos().forEach((id, seguimiento) -> {
             System.out.println("Learning Path: " + id);
         });
     }
     
-     private static void calificarResenarActividad() {
+     private  void calificarResenarActividad() {
      	System.out.println("Indique el ID de la actividad que desea reseñar o calificar: ");
      	String idActividad = scanner.nextLine();
      	System.out.println("Indique el tipo de la actividad: ");
@@ -339,7 +346,7 @@ public class EstudianteConsole {
      	}
      }
      
-     private static void calificarLearningPath() {
+     private void calificarLearningPath() {
      	System.out.println("Indique el ID del Learning Path que desea calificar: ");
      	String idLP = scanner.nextLine();
      	

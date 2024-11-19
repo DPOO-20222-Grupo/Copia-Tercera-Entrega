@@ -1,6 +1,8 @@
 package Consolas;
 
 import java.util.Scanner;
+
+import exceptions.UsuarioYaExistenteException;
 import interfaz.Aplicacion; 
 
 
@@ -22,7 +24,9 @@ public class RegistroConsole {
             System.out.println("\n== Menú Registro ==");
             System.out.println("1. Inscribirse como profesor");
             System.out.println("2. Inscribirse como estudiante");
-            System.out.println("3. Cerrar registro");
+            System.out.println("3. Iniciar sesión como profesor");
+            System.out.println("4. Iniciar sesión como estudiante");
+            System.out.println("5. Cerrar registro");
             System.out.print("Seleccione una opción: ");
             opcion = Integer.parseInt(scanner.nextLine());
 
@@ -32,22 +36,28 @@ public class RegistroConsole {
                     break;
                 case 2:
                     registroEstudiante();
-                    aplicacion.descargarDatos();
                     break;
                 case 3:
+                    loginProfesor();
+                    break;
+                case 4:
+                    loginEstudiante();
+                    break;
+                
+                case 5:
                     System.out.println("Sesión cerrada.");
                     aplicacion.descargarDatos();
                     break;
                 default:
                     System.out.println("Opción no válida.");
             }
-        } while (opcion != 3);
+        } while (opcion != 5);
     }
 
     private static void registroProfesor() {
         String login;
         do {
-            System.out.print("Ingrese el login que desea: ");
+            System.out.print("\nIngrese el login que desea: ");
             login = scanner.nextLine().trim();
             if (login.isEmpty()) {
                 System.out.println("Error: El login no puede estar vacío.");
@@ -56,7 +66,7 @@ public class RegistroConsole {
 
         String password;
         do {
-            System.out.print("Ingrese el password que desea: ");
+            System.out.print("\nIngrese el password que desea: ");
             password = scanner.nextLine().trim();
             if (password.isEmpty()) {
                 System.out.println("Error: El password no puede estar vacío.");
@@ -65,22 +75,27 @@ public class RegistroConsole {
 
         String nombre;
         do {
-            System.out.print("Ingrese su nombre completo: ");
+            System.out.print("\nIngrese su nombre completo: ");
             nombre = scanner.nextLine().trim();
             if (nombre.isEmpty()) {
                 System.out.println("Error: El nombre no puede estar vacío.");
             }
         } while (nombre.isEmpty());
-
-        aplicacion.crearProfesor(login, password, nombre);
-        ProfesorConsole.mostrarMenuProfesor(aplicacion.getMapaProfesores().get(login));
+        try {
+        	aplicacion.revisarUsuarioRepetido(login, "Profesor");
+	        aplicacion.crearProfesor(login, password, nombre);
+	        System.out.println("Registro Exitoso");
+        }
+        catch (UsuarioYaExistenteException e) {
+        	System.out.println(e.getMessage());
+        }
         
     }
 
     private static void registroEstudiante() {
         String login;
         do {
-            System.out.print("Ingrese el login que desea: ");
+            System.out.print("\nIngrese el login que desea: ");
             login = scanner.nextLine().trim();
             if (login.isEmpty()) {
                 System.out.println("Error: El login no puede estar vacío.");
@@ -89,7 +104,7 @@ public class RegistroConsole {
 
         String password;
         do {
-            System.out.print("Ingrese el password que desea: ");
+            System.out.print("\nIngrese el password que desea: ");
             password = scanner.nextLine().trim();
             if (password.isEmpty()) {
                 System.out.println("Error: El password no puede estar vacío.");
@@ -98,15 +113,31 @@ public class RegistroConsole {
 
         String nombre;
         do {
-            System.out.print("Ingrese su nombre completo: ");
+            System.out.print("\nIngrese su nombre completo: ");
             nombre = scanner.nextLine().trim();
             if (nombre.isEmpty()) {
                 System.out.println("Error: El nombre no puede estar vacío.");
             }
         } while (nombre.isEmpty());
-
-        aplicacion.crearEstudiante(login, password, nombre);
-        EstudianteConsole.mostrarMenuEstudiante(aplicacion.getMapaEstudiantes().get(login));
+        try {
+        	aplicacion.revisarUsuarioRepetido(login, "Estudiante");
+	        aplicacion.crearEstudiante(login, password, nombre);
+	        System.out.println("Registro Exitoso");
+        }
+        catch (UsuarioYaExistenteException e) {
+        	System.out.println(e.getMessage());
+        }
         
+    }
+    
+    private static void loginProfesor() {
+    	ProfesorConsole consola = new ProfesorConsole(aplicacion);
+    	consola.loginPlataforma();
+    }
+    
+    private static void loginEstudiante() {
+    	
+    	EstudianteConsole consola = new EstudianteConsole(aplicacion);
+    	consola.loginPlataforma();
     }
 }
