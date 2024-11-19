@@ -11,8 +11,13 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
+<<<<<<< HEAD
     "fechaCreacion": "2024-11-18T20:03:25.682577",
     "fechaUltimaModificacion": "2024-11-18T20:03:25.682577",
+=======
+    "fechaCreacion": "2024-11-18T19:16:43.164618",
+    "fechaUltimaModificacion": "2024-11-18T19:16:43.164618",
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
     "version": 1.0,
     "estudiantesInscritos": {
       "a.linares": {

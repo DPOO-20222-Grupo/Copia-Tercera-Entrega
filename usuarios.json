@@ -223,6 +223,21 @@
     }
   },
   "profesores": {
+    "s.munozm234": {
+      "nombre": "Santiago Muñoz",
+      "mapaRecursosPropios": {},
+      "mapaTareasPropias": {},
+      "mapaExamenesPropios": {},
+      "mapaEncuestasPropias": {},
+      "mapaQuicesPropios": {},
+      "learningPathPropios": {},
+      "preguntasAbiertasPropias": {},
+      "preguntasSeleccionPropias": {},
+      "preguntasBooleanPropias": {},
+      "login": "s.munozm234",
+      "password": "Prueba1",
+      "isLoggedIn": false
+    },
     "l.munera": {
       "nombre": "Lina Munera",
       "mapaRecursosPropios": {},
