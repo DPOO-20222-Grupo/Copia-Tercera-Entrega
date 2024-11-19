@@ -52,6 +52,7 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 
 	public void agregarRespuestaPregunta (PreguntaCerrada pregunta, int opcionEscogida) {
 		this.respuestas.replace(pregunta.getIdPregunta(), opcionEscogida);
+		actualizarNota();
 	}
 	
 	public double calcularNota () {

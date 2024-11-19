@@ -916,11 +916,6 @@ public class ProfesorConsole {
         else if (tipo == 3) {
         	aplicacion.crearPreguntaAbierta(enunciado, titulo, profesor);
         }
-        
-        
-        
-        
-    	
     	
     }
         	
