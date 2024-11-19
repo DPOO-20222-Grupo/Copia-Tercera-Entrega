@@ -941,7 +941,7 @@ public class ProfesorConsole {
 	    }
 
 	    
-	    aplicacion.clonarLearningPath(learningPathOriginal, profesor);
+	    
 
 
 	    aplicacion.clonarLearningPath(learningPathOriginal, profesor);

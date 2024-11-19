@@ -123,9 +123,17 @@ public class EstudianteConsole {
 
         try {
             LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
-            aplicacion.inscribirEstudianteLearningPath(estudiante, learningPath);
-            System.out.println("Estudiante inscrito en el Learning Path exitosamente.");
+            if (learningPath != null) {
+            	
+            	aplicacion.inscribirEstudianteLearningPath(estudiante, learningPath);
+                System.out.println("Estudiante inscrito en el Learning Path exitosamente.");
+            }	
+            else {
+            	System.out.println("Learning Path no encontrado.");	
+            }
+            
         } catch (ModificarEstudianteLearningPathException e) {
+
             System.out.println("Error al inscribir el estudiante en el Learning Path: " + e.getMessage());
         }
     }
