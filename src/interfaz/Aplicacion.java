@@ -438,7 +438,7 @@ public class Aplicacion {
 	                actividad.setTitulo(valor);
 	                String idNuevo = actividad.getIdActividad();
 	                mapaEncuestas.put(idNuevo, (Encuesta) actividad);
-	                profesor.getMapaEncuestasPropias().put(idActividad, (Encuesta) actividad);
+	                profesor.getMapaEncuestasPropias().put(idNuevo, (Encuesta) actividad);
 	                break;
 	                
 	            case "Tarea":
@@ -446,8 +446,8 @@ public class Aplicacion {
 	                mapaTareas.remove(idActividad);
 	                profesor.getMapaTareasPropias().remove(idActividad);
 	                actividad.setTitulo(valor);
-	                mapaTareas.put(idActividad, (Tarea) actividad);
 	                String idNuevo1 = actividad.getIdActividad();
+	                mapaTareas.put(idNuevo1, (Tarea) actividad);
 	                profesor.getMapaTareasPropias().put(idNuevo1, (Tarea) actividad);
 	                break;
 	                
@@ -456,8 +456,8 @@ public class Aplicacion {
 	                mapaQuices.remove(idActividad);
 	                profesor.getMapaQuicesPropios().remove(idActividad);
 	                actividad.setTitulo(valor);
-	                mapaQuices.put(idActividad, (Quiz) actividad);
 	                String idNuevo2 = actividad.getIdActividad();
+	                mapaQuices.put(idNuevo2, (Quiz) actividad);
 	                profesor.getMapaQuicesPropios().put(idNuevo2, (Quiz) actividad);
 	                break;
 	                
@@ -466,8 +466,8 @@ public class Aplicacion {
 	                mapaExamenes.remove(idActividad);
 	                profesor.getMapaExamenesPropios().remove(idActividad);
 	                actividad.setTitulo(valor);
-	                mapaExamenes.put(idActividad, (Examen) actividad);
 	                String idNuevo3 = actividad.getIdActividad();
+	                mapaExamenes.put(idNuevo3, (Examen) actividad);
 	                profesor.getMapaExamenesPropios().put(idNuevo3, (Examen) actividad);
 	                break;
 	                
@@ -476,8 +476,8 @@ public class Aplicacion {
 	                mapaRecursos.remove(idActividad);
 	                profesor.getMapaRecursosPropios().remove(idActividad);
 	                actividad.setTitulo(valor);
-	                mapaRecursos.put(idActividad, (RevisarRecurso) actividad);
 	                String idNuevo4 = actividad.getIdActividad();
+	                mapaRecursos.put(idNuevo4, (RevisarRecurso) actividad);
 	                profesor.getMapaRecursosPropios().put(idNuevo4, (RevisarRecurso) actividad);
 	                break;
 	        }

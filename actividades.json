@@ -50,6 +50,27 @@
     }
   },
   "Revisar Recursos": {
+    "Probando Final - david2005": {
+      "tipoRecurso": "Recurso",
+      "enlaceRecurso": "youtube",
+      "tipo": "Recurso",
+      "titulo": "Probando Final",
+      "descripcion": "ver youtube",
+      "objetivos": [
+        "divertirse",
+        "reir"
+      ],
+      "nivelDificultad": "bajo",
+      "loginProfesorCreador": "david2005",
+      "nombreProfesorCreador": "David Velasquez",
+      "duracionMinutos": 100,
+      "fechaLimite": "Dec 12, 2025, 12:00:00 AM",
+      "resenas": [],
+      "rating": 0.0,
+      "contadorRatings": 0,
+      "actividadesPrevias": [],
+      "actividadesSeguimiento": []
+    },
     "Ver video - l.munera": {
       "tipoRecurso": "video",
       "enlaceRecurso": "enlace",
@@ -65,6 +86,27 @@
       "nombreProfesorCreador": "Lina Munera",
       "duracionMinutos": 45,
       "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+      "resenas": [],
+      "rating": 0.0,
+      "contadorRatings": 0,
+      "actividadesPrevias": [],
+      "actividadesSeguimiento": []
+    },
+    "Video - david2005": {
+      "tipoRecurso": "Recurso",
+      "enlaceRecurso": "youtube",
+      "tipo": "Recurso",
+      "titulo": "Probando Final",
+      "descripcion": "ver youtube",
+      "objetivos": [
+        "divertirse",
+        "reir"
+      ],
+      "nivelDificultad": "bajo",
+      "loginProfesorCreador": "david2005",
+      "nombreProfesorCreador": "David Velasquez",
+      "duracionMinutos": 100,
+      "fechaLimite": "Dec 12, 2025, 12:00:00 AM",
       "resenas": [],
       "rating": 0.0,
       "contadorRatings": 0,
