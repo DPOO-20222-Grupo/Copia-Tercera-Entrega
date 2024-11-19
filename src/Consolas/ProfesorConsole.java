@@ -281,302 +281,488 @@ public class ProfesorConsole {
         System.out.println("Actividad de revisar recurso creada exitosamente.");
     }
 
-	private static void crearTarea(Profesor profesor) {        
-	    	System.out.print("Ingrese el titulo de la tarea: ");
-	        String titulo = scanner.nextLine();
-	        
-	        System.out.print("Ingrese la descripcion de la tarea: ");
-	        String descripcion = scanner.nextLine();
-	        
-	        try {
-	        	
-	        aplicacion.revisarActividadRepetida(titulo, profesor.getLogin(), "Tarea");
-	        
-		        System.out.print("Ingrese los objetivos de la tarea (separados por comas): ");
-		        String objetivosInput = scanner.nextLine();
-		        List<String> objetivos = new ArrayList<>();
-		        for (String objetivo : objetivosInput.split(",")) {
-		            objetivos.add(objetivo.trim());
-		        }
-		        
-		        System.out.print("Ingrese el nivel de dificultad de la tarea: ");
-		        String dificultad = scanner.nextLine();
-		        
-		        System.out.print("Ingrese la duracion en minutos de la tarea: ");
-		        int duracion = Integer.parseInt(scanner.nextLine());
-		        
-		        System.out.print("Ingrese la fecha limite de la tarea (formato: dd/MM/yyyy): ");
-		        String fechaInput = scanner.nextLine();
-		        Date fechaLimite = null;
-		        try {
-		            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		            fechaLimite = sdf.parse(fechaInput); 
-		        } catch (Exception e) {
-		            System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
-		            fechaLimite = new Date(); 
-		        }
-		
-		        aplicacion.crearTarea(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor);
-		        System.out.println("Tarea registrada exitosamente.");
-	        }
-	        
-	        catch (ActividadYaExistenteException e){
-	        	System.out.println(e.getMessage());
-	        }
-	    }
+    private static void crearTarea(Profesor profesor) {
+
+        System.out.print("Ingrese el título de la tarea: ");
+        String titulo;
+        do {
+            titulo = scanner.nextLine().trim();
+            if (titulo.isEmpty()) {
+                System.out.println("Error: El título no puede estar vacío.");
+                System.out.print("Ingrese el título de la tarea: ");
+            }
+        } while (titulo.isEmpty());
+
+        System.out.print("Ingrese la descripción de la tarea: ");
+        String descripcion;
+        do {
+            descripcion = scanner.nextLine().trim();
+            if (descripcion.isEmpty()) {
+                System.out.println("Error: La descripción no puede estar vacía.");
+                System.out.print("Ingrese la descripción de la tarea: ");
+            }
+        } while (descripcion.isEmpty());
+
+        try {
+            aplicacion.revisarActividadRepetida(titulo, profesor.getLogin(), "Tarea");
+        } catch (ActividadYaExistenteException e) {
+            System.out.println("Error: " + e.getMessage());
+            return;
+        }
+
+        System.out.print("Ingrese los objetivos de la tarea (separados por comas): ");
+        List<String> objetivos = new ArrayList<>();
+        while (objetivos.isEmpty()) {
+            String objetivosInput = scanner.nextLine().trim();
+            if (objetivosInput.isEmpty()) {
+                System.out.println("Error: Debe ingresar al menos un objetivo.");
+                System.out.print("Ingrese los objetivos de la tarea (separados por comas): ");
+                continue;
+            }
+            for (String objetivo : objetivosInput.split(",")) {
+                String objetivoLimpio = objetivo.trim();
+                if (!objetivoLimpio.isEmpty()) {
+                    objetivos.add(objetivoLimpio);
+                }
+            }
+            if (objetivos.isEmpty()) {
+                System.out.println("Error: Ningún objetivo válido fue ingresado.");
+            }
+        }
+
+        System.out.print("Ingrese el nivel de dificultad de la tarea: ");
+        String dificultad;
+        do {
+            dificultad = scanner.nextLine().trim();
+            if (dificultad.isEmpty()) {
+                System.out.println("Error: La dificultad no puede estar vacía.");
+                System.out.print("Ingrese el nivel de dificultad de la tarea: ");
+            }
+        } while (dificultad.isEmpty());
+
+        System.out.print("Ingrese la duración en minutos de la tarea: ");
+        int duracion = -1;
+        while (duracion <= 0) {
+            try {
+                String duracionInput = scanner.nextLine().trim();
+                if (duracionInput.isEmpty()) {
+                    throw new NumberFormatException("Duración vacía.");
+                }
+                duracion = Integer.parseInt(duracionInput);
+                if (duracion <= 0) {
+                    System.out.println("Error: La duración debe ser un número positivo.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Error: Debe ingresar un número válido.");
+                System.out.print("Ingrese la duración en minutos de la tarea: ");
+            }
+        }
+
+        System.out.print("Ingrese la fecha límite de la tarea (formato: dd/MM/yyyy): ");
+        Date fechaLimite = null;
+        while (fechaLimite == null) {
+            String fechaInput = scanner.nextLine().trim();
+            if (fechaInput.isEmpty()) {
+                System.out.println("Error: La fecha no puede estar vacía.");
+                System.out.print("Ingrese la fecha límite de la tarea (formato: dd/MM/yyyy): ");
+                continue;
+            }
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                sdf.setLenient(false);
+                fechaLimite = sdf.parse(fechaInput);
+            } catch (Exception e) {
+                System.out.println("Error: Formato de fecha incorrecto. Intente nuevamente.");
+                System.out.print("Ingrese la fecha límite de la tarea (formato: dd/MM/yyyy): ");
+            }
+        }
+
+        aplicacion.crearTarea(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor);
+        System.out.println("Tarea registrada exitosamente.");
+    }
+
+    private static void crearQuiz(Profesor profesor) {
+
+        System.out.print("Ingrese el título del quiz: ");
+        String titulo;
+        do {
+            titulo = scanner.nextLine().trim();
+            if (titulo.isEmpty()) {
+                System.out.println("El título del quiz no puede estar vacío.");
+                System.out.print("Ingrese el título del quiz: ");
+            }
+        } while (titulo.isEmpty());
+
+        System.out.print("Ingrese la descripción del quiz: ");
+        String descripcion;
+        do {
+            descripcion = scanner.nextLine().trim();
+            if (descripcion.isEmpty()) {
+                System.out.println("La descripción del quiz no puede estar vacía.");
+                System.out.print("Ingrese la descripción del quiz: ");
+            }
+        } while (descripcion.isEmpty());
+
+        System.out.print("Ingrese los objetivos del quiz (separados por comas): ");
+        List<String> objetivos = new ArrayList<>();
+        do {
+            String objetivosInput = scanner.nextLine().trim();
+            if (objetivosInput.isEmpty()) {
+                System.out.println("Los objetivos no pueden estar vacíos.");
+                System.out.print("Ingrese los objetivos del quiz (separados por comas): ");
+                continue;
+            }
+            for (String objetivo : objetivosInput.split(",")) {
+                objetivos.add(objetivo.trim());
+            }
+            if (objetivos.isEmpty()) {
+                System.out.println("Debe ingresar al menos un objetivo válido.");
+            }
+        } while (objetivos.isEmpty());
+
+        System.out.print("Ingrese el nivel de dificultad del quiz: ");
+        String dificultad;
+        do {
+            dificultad = scanner.nextLine().trim();
+            if (dificultad.isEmpty()) {
+                System.out.println("El nivel de dificultad no puede estar vacío.");
+                System.out.print("Ingrese el nivel de dificultad del quiz: ");
+            }
+        } while (dificultad.isEmpty());
+
+        System.out.print("Ingrese la duración en minutos del quiz: ");
+        int duracion = -1;
+        do {
+            try {
+                String duracionInput = scanner.nextLine().trim();
+                if (duracionInput.isEmpty()) {
+                    throw new NumberFormatException("Duración vacía.");
+                }
+                duracion = Integer.parseInt(duracionInput);
+                if (duracion <= 0) {
+                    System.out.println("La duración debe ser un número positivo.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("La duración debe ser un número entero válido.");
+                System.out.print("Ingrese la duración en minutos del quiz: ");
+            }
+        } while (duracion <= 0);
+
+        System.out.print("Ingrese la fecha límite del quiz (formato: dd/MM/yyyy): ");
+        Date fechaLimite = null;
+        do {
+            String fechaInput = scanner.nextLine().trim();
+            if (fechaInput.isEmpty()) {
+                System.out.println("La fecha límite no puede estar vacía.");
+                System.out.print("Ingrese la fecha límite del quiz (formato: dd/MM/yyyy): ");
+                continue;
+            }
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                fechaLimite = sdf.parse(fechaInput);
+                if (fechaLimite.before(new Date())) {
+                    System.out.println("La fecha límite no puede ser una fecha pasada.");
+                }
+            } catch (Exception e) {
+                System.out.println("Formato de fecha incorrecto. Intente nuevamente.");
+            }
+        } while (fechaLimite == null || fechaLimite.before(new Date()));
+
+        double calificacionMinima = -1;
+        do {
+            System.out.print("Ingrese la calificación mínima para aprobar el quiz: ");
+            try {
+                String calificacionInput = scanner.nextLine().trim();
+                calificacionMinima = Double.parseDouble(calificacionInput);
+                if (calificacionMinima < 0 || calificacionMinima > 5) {
+                    System.out.println("La calificación mínima debe estar entre 0 y 5.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("La calificación mínima debe ser un número válido.");
+            }
+        } while (calificacionMinima < 0 || calificacionMinima > 5);
+
+        List<PreguntaCerrada> preguntas = new ArrayList<>();
+        System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado', separadas por ';': ");
+        String preguntasInput = scanner.nextLine();
+        if (preguntasInput.isEmpty()) {
+            System.out.println("Las preguntas no pueden estar vacías.");
+            return; 
+        }
+        for (String preguntaData : preguntasInput.split(";")) {
+            String[] partes = preguntaData.split("\\|");
+            if (partes.length != 2) {
+                System.out.println("Formato de pregunta inválido. Asegúrese de usar 'título|enunciado'.");
+                return; 
+            }
+            String tituloPregunta = partes[0].trim();
+            String enunciado = partes[1].trim();
+
+            if (tituloPregunta.isEmpty() || enunciado.isEmpty()) {
+                System.out.println("El título y el enunciado de cada pregunta no pueden estar vacíos.");
+                return; 
+            }
+
+            System.out.println("Ingrese las opciones para la pregunta '" + tituloPregunta + "' (opciones separadas por '|'): ");
+            String opcionesInput = scanner.nextLine();
+            String[] opciones = opcionesInput.split("\\|");
+            if (opciones.length != 4) {
+                System.out.println("Debe ingresar exactamente 4 opciones.");
+                return; 
+            }
+
+            System.out.print("Ingrese la opción correcta (1, 2, 3, o 4): ");
+            int opcionCorrecta = -1;
+            do {
+                try {
+                    opcionCorrecta = Integer.parseInt(scanner.nextLine().trim());
+                    if (opcionCorrecta < 1 || opcionCorrecta > 4) {
+                        System.out.println("La opción correcta debe ser un número entre 1 y 4.");
+                    }
+                } catch (NumberFormatException e) {
+                    System.out.println("Debe ingresar un número entre 1 y 4.");
+                }
+            } while (opcionCorrecta < 1 || opcionCorrecta > 4);
+
+            PreguntaCerrada pregunta = new PreguntaSeleccionMultiple(enunciado, tituloPregunta, opciones[0], opciones[1], opciones[2], opciones[3], opcionCorrecta);
+            preguntas.add(pregunta);
+        }
+
+        aplicacion.crearQuiz(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, calificacionMinima, preguntas);
+        System.out.println("Quiz registrado exitosamente.");
+    }
 	
-	private static void crearQuiz(Profesor profesor) {
+    private static void crearExamen(Profesor profesor) {
 
-	    
-		System.out.print("Ingrese el titulo de la tarea: ");
-	    String titulo = scanner.nextLine();
-	    if (titulo.isEmpty()) {
-	        System.out.println("El título de la tarea no puede estar vacío.");
-	        return; 
-	    }
-	    
-	    System.out.print("Ingrese la descripcion de la tarea: ");
-	    String descripcion = scanner.nextLine();
+        System.out.print("Ingrese el título del examen: ");
+        String titulo;
+        do {
+            titulo = scanner.nextLine().trim();
+            if (titulo.isEmpty()) {
+                System.out.println("El título del examen no puede estar vacío.");
+                System.out.print("Ingrese el título del examen: ");
+            }
+        } while (titulo.isEmpty());
 
-	    if (descripcion.isEmpty()) {
-	        System.out.println("La descripción de la tarea no puede estar vacía.");
-	        return; 
-	    }
+        System.out.print("Ingrese la descripción del examen: ");
+        String descripcion;
+        do {
+            descripcion = scanner.nextLine().trim();
+            if (descripcion.isEmpty()) {
+                System.out.println("La descripción del examen no puede estar vacía.");
+                System.out.print("Ingrese la descripción del examen: ");
+            }
+        } while (descripcion.isEmpty());
 
-	    System.out.print("Ingrese los objetivos de la tarea (separados por comas): ");
-	    String objetivosInput = scanner.nextLine();
-	    List<String> objetivos = new ArrayList<>();
-	    if (objetivosInput.isEmpty()) {
-	        System.out.println("Los objetivos no pueden estar vacíos.");
-	        return; 
-	    }
-	    for (String objetivo : objetivosInput.split(",")) {
-	        objetivos.add(objetivo.trim());
-	    }
+        System.out.print("Ingrese los objetivos del examen (separados por comas): ");
+        List<String> objetivos = new ArrayList<>();
+        String objetivosInput;
+        do {
+            objetivosInput = scanner.nextLine().trim();
+            if (objetivosInput.isEmpty()) {
+                System.out.println("Los objetivos no pueden estar vacíos.");
+                System.out.print("Ingrese los objetivos del examen (separados por comas): ");
+                continue;
+            }
+            for (String objetivo : objetivosInput.split(",")) {
+                objetivos.add(objetivo.trim());
+            }
+            if (objetivos.isEmpty()) {
+                System.out.println("Debe ingresar al menos un objetivo válido.");
+            }
+        } while (objetivos.isEmpty());
 
-	    System.out.print("Ingrese el nivel de dificultad de la tarea: ");
-	    String dificultad = scanner.nextLine();
-	    if (dificultad.isEmpty()) {
-	        System.out.println("El nivel de dificultad no puede estar vacío.");
-	        return; 
-	    }
+        System.out.print("Ingrese el nivel de dificultad del examen: ");
+        String dificultad;
+        do {
+            dificultad = scanner.nextLine().trim();
+            if (dificultad.isEmpty()) {
+                System.out.println("El nivel de dificultad no puede estar vacío.");
+                System.out.print("Ingrese el nivel de dificultad del examen: ");
+            }
+        } while (dificultad.isEmpty());
 
-	    System.out.print("Ingrese la duracion en minutos de la tarea: ");
-	    int duracion = 0;
-	    try {
-	        duracion = Integer.parseInt(scanner.nextLine());
-	        if (duracion <= 0) {
-	            System.out.println("La duración debe ser un número positivo.");
-	            return; 
-	        }
-	    } catch (NumberFormatException e) {
-	        System.out.println("La duración debe ser un número entero.");
-	        return; 
-	    }
+        System.out.print("Ingrese la duración en minutos del examen: ");
+        int duracion;
+        do {
+            try {
+                String duracionInput = scanner.nextLine().trim();
+                if (duracionInput.isEmpty()) {
+                    throw new NumberFormatException("Duración vacía.");
+                }
+                duracion = Integer.parseInt(duracionInput);
+                if (duracion <= 0) {
+                    System.out.println("La duración debe ser un número positivo.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("La duración debe ser un número entero válido.");
+                System.out.print("Ingrese la duración en minutos del examen: ");
+                duracion = 0;  
+            }
+        } while (duracion <= 0);
 
-	    System.out.print("Ingrese la fecha limite de la tarea (formato: dd/MM/yyyy): ");
-	    String fechaInput = scanner.nextLine();
-	    Date fechaLimite = null;
-	    try {
-	        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	        fechaLimite = sdf.parse(fechaInput);
-	        if (fechaLimite.before(new Date())) {
-	            System.out.println("La fecha límite no puede ser una fecha pasada.");
-	            return; 
-	        }
-	    } catch (Exception e) {
-	        System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
-	        fechaLimite = new Date();
-	    }
+        System.out.print("Ingrese la fecha límite del examen (formato: dd/MM/yyyy): ");
+        Date fechaLimite = null;
+        do {
+            String fechaInput = scanner.nextLine().trim();
+            if (fechaInput.isEmpty()) {
+                System.out.println("La fecha límite no puede estar vacía.");
+                System.out.print("Ingrese la fecha límite del examen (formato: dd/MM/yyyy): ");
+                continue;
+            }
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                fechaLimite = sdf.parse(fechaInput);
+                if (fechaLimite.before(new Date())) {
+                    System.out.println("La fecha límite no puede ser una fecha pasada.");
+                }
+            } catch (Exception e) {
+                System.out.println("Formato de fecha incorrecto. Intente nuevamente.");
+            }
+        } while (fechaLimite == null || fechaLimite.before(new Date()));
 
-	    aplicacion.crearTarea(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor);
-	    System.out.println("Tarea registrada exitosamente.");
-	}
-	
-	private static void crearExamen(Profesor profesor) {
+        List<PreguntaAbierta> preguntas = new ArrayList<>();
+        System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado', separadas por ';': ");
+        String preguntasInput = scanner.nextLine();
+        if (preguntasInput.isEmpty()) {
+            System.out.println("Las preguntas no pueden estar vacías.");
+            return; 
+        }
+        for (String preguntaData : preguntasInput.split(";")) {
+            String[] partes = preguntaData.split("\\|");
+            if (partes.length != 2) {
+                System.out.println("Formato de pregunta inválido. Asegúrese de usar 'título|enunciado'.");
+                return; 
+            }
+            String tituloPregunta = partes[0].trim();
+            String enunciado = partes[1].trim();
 
-	    System.out.print("Ingrese el titulo del examen: ");
-	    String titulo = scanner.nextLine();
-	    if (titulo.isEmpty()) {
-	        System.out.println("El título del examen no puede estar vacío.");
-	        return; 
-	    }
+            if (tituloPregunta.isEmpty() || enunciado.isEmpty()) {
+                System.out.println("El título y el enunciado de cada pregunta no pueden estar vacíos.");
+                return; 
+            }
 
-	    System.out.print("Ingrese la descripcion del examen: ");
-	    String descripcion = scanner.nextLine();
-	    if (descripcion.isEmpty()) {
-	        System.out.println("La descripción del examen no puede estar vacía.");
-	        return; 
-	    }
+            PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
+            preguntas.add(pregunta);
+        }
 
-	    System.out.print("Ingrese los objetivos del examen (separados por comas): ");
-	    String objetivosInput = scanner.nextLine();
-	    List<String> objetivos = new ArrayList<>();
-	    if (objetivosInput.isEmpty()) {
-	        System.out.println("Los objetivos no pueden estar vacíos.");
-	        return;
-	    }
-	    for (String objetivo : objetivosInput.split(",")) {
-	        objetivos.add(objetivo.trim());
-	    }
+        aplicacion.crearExamen(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
+        System.out.println("Examen registrado exitosamente.");
+    }
 
-	    System.out.print("Ingrese el nivel de dificultad del examen: ");
-	    String dificultad = scanner.nextLine();
-	    if (dificultad.isEmpty()) {
-	        System.out.println("El nivel de dificultad no puede estar vacío.");
-	        return; 
-	    }
+    private static void crearEncuesta(Profesor profesor) {
 
-	    System.out.print("Ingrese la duracion en minutos del examen: ");
-	    int duracion = 0;
-	    try {
-	        duracion = Integer.parseInt(scanner.nextLine());
-	        if (duracion <= 0) {
-	            System.out.println("La duración debe ser un número positivo.");
-	            return;
-	        }
-	    } catch (NumberFormatException e) {
-	        System.out.println("La duración debe ser un número entero.");
-	        return; 
-	    }
+        String titulo;
+        do {
+            System.out.print("Ingrese el título de la encuesta: ");
+            titulo = scanner.nextLine().trim();
+            if (titulo.isEmpty()) {
+                System.out.println("El título de la encuesta no puede estar vacío.");
+            }
+        } while (titulo.isEmpty());
 
-	    System.out.print("Ingrese la fecha limite del examen (formato: dd/MM/yyyy): ");
-	    String fechaInput = scanner.nextLine();
-	    Date fechaLimite = null;
-	    try {
-	        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	        fechaLimite = sdf.parse(fechaInput);
-	        if (fechaLimite.before(new Date())) {
-	            System.out.println("La fecha límite no puede ser una fecha pasada.");
-	            return; 
-	        }
-	    } catch (Exception e) {
-	        System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
-	        fechaLimite = new Date();
-	    }
+        String descripcion;
+        do {
+            System.out.print("Ingrese la descripción de la encuesta: ");
+            descripcion = scanner.nextLine().trim();
+            if (descripcion.isEmpty()) {
+                System.out.println("La descripción de la encuesta no puede estar vacía.");
+            }
+        } while (descripcion.isEmpty());
 
-	    List<PreguntaAbierta> preguntas = new ArrayList<>();
-	    System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado', separadas por ';': ");
-	    String preguntasInput = scanner.nextLine();
-	    if (preguntasInput.isEmpty()) {
-	        System.out.println("Las preguntas no pueden estar vacías.");
-	        return; 
-	    }
-	    for (String preguntaData : preguntasInput.split(";")) {
-	        String[] partes = preguntaData.split("\\|");
-	        if (partes.length != 2) {
-	            System.out.println("Formato de pregunta inválido. Asegúrese de usar 'título|enunciado'.");
-	            return; 
-	        }
-	        String tituloPregunta = partes[0].trim();
-	        String enunciado = partes[1].trim();
+        List<String> objetivos = new ArrayList<>();
+        String objetivosInput;
+        do {
+            System.out.print("Ingrese los objetivos de la encuesta (separados por comas): ");
+            objetivosInput = scanner.nextLine().trim();
+            if (objetivosInput.isEmpty()) {
+                System.out.println("Los objetivos no pueden estar vacíos.");
+                continue;
+            }
+            for (String objetivo : objetivosInput.split(",")) {
+                objetivos.add(objetivo.trim());
+            }
+            if (objetivos.isEmpty()) {
+                System.out.println("Debe ingresar al menos un objetivo válido.");
+            }
+        } while (objetivos.isEmpty());
 
-	        if (tituloPregunta.isEmpty() || enunciado.isEmpty()) {
-	            System.out.println("El título y el enunciado de cada pregunta no pueden estar vacíos.");
-	            return; 
-	        }
+        String dificultad;
+        do {
+            System.out.print("Ingrese el nivel de dificultad de la encuesta: ");
+            dificultad = scanner.nextLine().trim();
+            if (dificultad.isEmpty()) {
+                System.out.println("El nivel de dificultad no puede estar vacío.");
+            }
+        } while (dificultad.isEmpty());
 
-	        PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
-	        preguntas.add(pregunta);
-	    }
+        int duracion;
+        do {
+            System.out.print("Ingrese la duración en minutos de la encuesta: ");
+            try {
+                String duracionInput = scanner.nextLine().trim();
+                if (duracionInput.isEmpty()) {
+                    throw new NumberFormatException("Duración vacía.");
+                }
+                duracion = Integer.parseInt(duracionInput);
+                if (duracion <= 0) {
+                    System.out.println("La duración debe ser un número positivo.");
+                    duracion = 0; 
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("La duración debe ser un número entero válido.");
+                duracion = 0; 
+            }
+        } while (duracion <= 0);
 
-	    aplicacion.crearExamen(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
-	    System.out.println("Examen registrado exitosamente.");
-	}
+        Date fechaLimite = null;
+        do {
+            System.out.print("Ingrese la fecha límite de la encuesta (formato: dd/MM/yyyy): ");
+            String fechaInput = scanner.nextLine().trim();
+            if (fechaInput.isEmpty()) {
+                System.out.println("La fecha límite no puede estar vacía.");
+                continue;
+            }
+            try {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                fechaLimite = sdf.parse(fechaInput);
+                if (fechaLimite.before(new Date())) {
+                    System.out.println("La fecha límite no puede ser una fecha pasada.");
+                    fechaLimite = null; 
+                }
+            } catch (Exception e) {
+                System.out.println("Formato de fecha incorrecto. Intente nuevamente.");
+            }
+        } while (fechaLimite == null || fechaLimite.before(new Date()));
 
-	private static void crearEncuesta(Profesor profesor) {
+        List<PreguntaAbierta> preguntas = new ArrayList<>();
+        System.out.println("Ingrese las preguntas de la encuesta en el formato 'título|enunciado', separadas por ';': ");
+        String preguntasInput = scanner.nextLine();
+        if (preguntasInput.isEmpty()) {
+            System.out.println("Las preguntas no pueden estar vacías.");
+            return;
+        }
+        for (String preguntaData : preguntasInput.split(";")) {
+            String[] partes = preguntaData.split("\\|");
+            if (partes.length != 2) {
+                System.out.println("Formato de pregunta inválido. Asegúrese de usar 'título|enunciado'.");
+                return;
+            }
+            String tituloPregunta = partes[0].trim();
+            String enunciado = partes[1].trim();
 
-	    System.out.print("Ingrese el titulo de la encuesta: ");
-	    String titulo = scanner.nextLine();
-	    if (titulo.isEmpty()) {
-	        System.out.println("El título de la encuesta no puede estar vacío.");
-	        return; 
-	    }
+            if (tituloPregunta.isEmpty() || enunciado.isEmpty()) {
+                System.out.println("El título y el enunciado de cada pregunta no pueden estar vacíos.");
+                return;
+            }
 
-	
-	    System.out.print("Ingrese la descripcion de la encuesta: ");
-	    String descripcion = scanner.nextLine();
-	    if (descripcion.isEmpty()) {
-	        System.out.println("La descripción de la encuesta no puede estar vacía.");
-	        return; 
-	    }
+            PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
+            preguntas.add(pregunta);
+        }
 
-	    System.out.print("Ingrese los objetivos de la encuesta (separados por comas): ");
-	    String objetivosInput = scanner.nextLine();
-	    List<String> objetivos = new ArrayList<>();
-	    if (objetivosInput.isEmpty()) {
-	        System.out.println("Los objetivos no pueden estar vacíos.");
-	        return; 
-	    }
-	    for (String objetivo : objetivosInput.split(",")) {
-	        objetivos.add(objetivo.trim());
-	    }
-
-	    System.out.print("Ingrese el nivel de dificultad de la encuesta: ");
-	    String dificultad = scanner.nextLine();
-	    if (dificultad.isEmpty()) {
-	        System.out.println("El nivel de dificultad no puede estar vacío.");
-	        return; 
-	    }
-
-
-	    System.out.print("Ingrese la duracion en minutos de la encuesta: ");
-	    int duracion = 0;
-	    try {
-	        duracion = Integer.parseInt(scanner.nextLine());
-	        if (duracion <= 0) {
-	            System.out.println("La duración debe ser un número positivo.");
-	            return; 
-	        }
-	    } catch (NumberFormatException e) {
-	        System.out.println("La duración debe ser un número entero.");
-	        return; 
-	    }
-
-	    System.out.print("Ingrese la fecha limite de la encuesta (formato: dd/MM/yyyy): ");
-	    String fechaInput = scanner.nextLine();
-	    Date fechaLimite = null;
-	    try {
-	        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	        fechaLimite = sdf.parse(fechaInput);
-	        if (fechaLimite.before(new Date())) {
-	            System.out.println("La fecha límite no puede ser una fecha pasada.");
-	            return; 
-	        }
-	    } catch (Exception e) {
-	        System.out.println("Formato de fecha incorrecto. Utilizando fecha actual.");
-	        fechaLimite = new Date();
-	    }
-
-	    List<PreguntaAbierta> preguntas = new ArrayList<>();
-	    System.out.println("Ingrese las preguntas de la encuesta en el formato 'título|enunciado', separadas por ';': ");
-	    String preguntasInput = scanner.nextLine();
-	    if (preguntasInput.isEmpty()) {
-	        System.out.println("Las preguntas no pueden estar vacías.");
-	        return; 
-	    }
-	    for (String preguntaData : preguntasInput.split(";")) {
-	        String[] partes = preguntaData.split("\\|");
-	        if (partes.length != 2) {
-	            System.out.println("Formato de pregunta inválido. Asegúrese de usar 'título|enunciado'.");
-	            return; 
-	        }
-	        String tituloPregunta = partes[0].trim();
-	        String enunciado = partes[1].trim();
-
-	        if (tituloPregunta.isEmpty() || enunciado.isEmpty()) {
-	            System.out.println("El título y el enunciado de cada pregunta no pueden estar vacíos.");
-	            return;
-	        }
-
-	        PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
-	        preguntas.add(pregunta);
-	    }
-
-	    aplicacion.crearEncuesta(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
-	    System.out.println("Encuesta registrada exitosamente.");
-	}
-
+        aplicacion.crearEncuesta(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
+        System.out.println("Encuesta registrada exitosamente.");
+    }
 
 	private static void crearLearningPath(Profesor profesor) {
 	    

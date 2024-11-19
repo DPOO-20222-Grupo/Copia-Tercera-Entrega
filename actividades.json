@@ -42,7 +42,9 @@
       "nombreProfesorCreador": "Lina Munera",
       "duracionMinutos": 120,
       "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-      "resenas": [],
+      "resenas": [
+        "Muy Buena"
+      ],
       "rating": 0.0,
       "contadorRatings": 0,
       "actividadesPrevias": [],
