@@ -17,10 +17,14 @@ import user.Estudiante;
 
 public class EstudianteConsole {
    
-	private static Aplicacion aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");  
+	private  Aplicacion aplicacion;  
     private static Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    
+    public EstudianteConsole (Aplicacion aplicacion) {
+    	this.aplicacion = aplicacion;
+    }
+    public void loginPlataforma(){
         
         System.out.println("== Sistema de Estudiantes ==");
         System.out.print("Ingrese su login: ");
@@ -38,7 +42,7 @@ public class EstudianteConsole {
         
     }
 
-    public static void mostrarMenuEstudiante(Estudiante estudiante) {
+    public  void mostrarMenuEstudiante(Estudiante estudiante) {
         int opcion = -1; 
         do {
             System.out.println("\n== Menú Estudiante ==");
@@ -105,7 +109,7 @@ public class EstudianteConsole {
     }
 
     
-    private static void inscribirLearningPath(Estudiante estudiante) {
+    private  void inscribirLearningPath(Estudiante estudiante) {
         String idLearningPath;
 
         do {
@@ -126,7 +130,7 @@ public class EstudianteConsole {
         }
     }
     
-    private static void enviarTarea() {
+    private  void enviarTarea() {
         String loginEstudiante, idLearningPath, tituloTarea;
 
         do {
@@ -165,7 +169,7 @@ public class EstudianteConsole {
         }
     }
     
-    private static void responderPreguntaExamen() {
+    private  void responderPreguntaExamen() {
         String loginEstudiante, tituloLearningPath, idExamen;
 
         do {
@@ -221,7 +225,7 @@ public class EstudianteConsole {
         }
     }
 
-    private static void responderPreguntaEncuesta() {
+    private  void responderPreguntaEncuesta() {
         String loginEstudiante, idLearningPath, idEncuesta;
 
         do {
@@ -278,7 +282,7 @@ public class EstudianteConsole {
         }
     }
 
-    private static void responderPreguntaQuiz() {
+    private  void responderPreguntaQuiz() {
         String loginEstudiante, idLearningPath, idQuiz;
 
         do {
@@ -352,7 +356,7 @@ public class EstudianteConsole {
         }
     }
   
-    public static void completarEncuestaRecurso(Estudiante estudiante) {
+    public  void completarEncuestaRecurso(Estudiante estudiante) {
         String idActividad, tipo, idLearningPath;
 
         do {
@@ -397,14 +401,14 @@ public class EstudianteConsole {
         System.out.println("Actividad completada exitosamente.");
     }
 
-     private static void verLearningPaths(Estudiante estudiante) {
+     private  void verLearningPaths(Estudiante estudiante) {
         System.out.println("== Learning Paths Inscritos ==");
         estudiante.getLearningPathsInscritos().forEach((id, seguimiento) -> {
             System.out.println("Learning Path: " + id);
         });
     }
     
-     private static void calificarResenarActividad() {
+     private  void calificarResenarActividad() {
     	    String idActividad, tipo;
 
     	    do {
@@ -481,7 +485,7 @@ public class EstudianteConsole {
     	}
 
      
-     private static void calificarLearningPath() {
+     private  void calificarLearningPath() {
     	    String idLP;
     	    double calificacion;
 

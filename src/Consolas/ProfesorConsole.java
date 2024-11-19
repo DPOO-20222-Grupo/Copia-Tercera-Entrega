@@ -35,10 +35,14 @@ import java.util.Map;
 
 public class ProfesorConsole {
     
-	private static Aplicacion aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");  
+	private  Aplicacion aplicacion ;  
     private static Scanner scanner = new Scanner(System.in);
+    
+    public ProfesorConsole(Aplicacion aplicacion) {
+    	this.aplicacion = aplicacion;
+    }
 
-    public static void main(String[] args) {
+    public void loginPlataforma() {
         
         System.out.println("== Sistema de Profesores ==");
         System.out.print("Ingrese su login: ");
@@ -56,7 +60,7 @@ public class ProfesorConsole {
         
     }
 
-    public static void mostrarMenuProfesor(Profesor profesor) {
+    public  void mostrarMenuProfesor(Profesor profesor) {
         int opcion = -1; 
         do {
             System.out.println("\n== Menú Profesor ==");
@@ -161,7 +165,7 @@ public class ProfesorConsole {
     }
 
 
-    private static void crearRevisarRecurso(Profesor profesor) {
+    private  void crearRevisarRecurso(Profesor profesor) {
 
         System.out.print("Ingrese el título del recurso: ");
         String titulo;
@@ -281,7 +285,7 @@ public class ProfesorConsole {
         System.out.println("Actividad de revisar recurso creada exitosamente.");
     }
 
-    private static void crearTarea(Profesor profesor) {
+    private  void crearTarea(Profesor profesor) {
 
         System.out.print("Ingrese el título de la tarea: ");
         String titulo;
@@ -381,7 +385,7 @@ public class ProfesorConsole {
         System.out.println("Tarea registrada exitosamente.");
     }
 
-    private static void crearQuiz(Profesor profesor) {
+    private  void crearQuiz(Profesor profesor) {
 
         System.out.print("Ingrese el título del quiz: ");
         String titulo;
@@ -532,7 +536,7 @@ public class ProfesorConsole {
         System.out.println("Quiz registrado exitosamente.");
     }
 	
-    private static void crearExamen(Profesor profesor) {
+    private  void crearExamen(Profesor profesor) {
 
         System.out.print("Ingrese el título del examen: ");
         String titulo;
@@ -650,7 +654,7 @@ public class ProfesorConsole {
         System.out.println("Examen registrado exitosamente.");
     }
 
-    private static void crearEncuesta(Profesor profesor) {
+    private  void crearEncuesta(Profesor profesor) {
 
         String titulo;
         do {
@@ -764,7 +768,7 @@ public class ProfesorConsole {
         System.out.println("Encuesta registrada exitosamente.");
     }
 
-	private static void crearLearningPath(Profesor profesor) {
+	private  void crearLearningPath(Profesor profesor) {
 	    
 	    System.out.print("Ingrese el titulo del learning path: ");
 	    String titulo = scanner.nextLine();
@@ -841,7 +845,7 @@ public class ProfesorConsole {
 	    System.out.println("Learning Path creado exitosamente.");
 	}
     
-    private static void clonarActividad(Profesor profesor) {
+    private  void clonarActividad(Profesor profesor) {
         
         System.out.print("Ingrese el id de la actividad que desea clonar: ");
         String id = scanner.nextLine();
@@ -868,7 +872,7 @@ public class ProfesorConsole {
     }
 
     
-    private static void crearPregunta(Profesor profesor) {
+    private  void crearPregunta(Profesor profesor) {
     	System.out.print("Ingrese el titulo que le desea dar a la pregunta: ");
         String titulo = scanner.nextLine();
         System.out.print("Ingrese el enunciado de la pregunta: ");
@@ -919,7 +923,7 @@ public class ProfesorConsole {
     	
     }
         	
-	private static void clonarLearningPath(Profesor profesor) {
+	private  void clonarLearningPath(Profesor profesor) {
 
 	    System.out.print("Ingrese el ID del Learning Path que desea clonar: ");
 	    String idLearningPathOriginal = scanner.nextLine();
@@ -945,7 +949,7 @@ public class ProfesorConsole {
 	}
 
 	
-	private static void modificarLearningPath(Profesor profesor) {
+	private  void modificarLearningPath(Profesor profesor) {
 	    System.out.print("Ingrese el ID del Learning Path a modificar: ");
 	    String idLP = scanner.nextLine();
 	    if (idLP.isEmpty()) {
@@ -1133,7 +1137,7 @@ public class ProfesorConsole {
 	}
 
 	
-	private static void modificarActividad(Profesor profesor) {
+	private  void modificarActividad(Profesor profesor) {
 	    String msjTitulo = "Ingrese el título de la actividad a modificar: ";
 	    String msjTipo = "Ingrese el tipo de la actividad a modificar: ";
 	    
@@ -1317,7 +1321,7 @@ public class ProfesorConsole {
 	    }
 	}
 	
-	private static void modificarActividadGeneral(Actividad actividad, int opcion) {
+	private  void modificarActividadGeneral(Actividad actividad, int opcion) {
 		String atributoModificar = null;
         String valor = null;
         String accion = null;
@@ -1384,7 +1388,7 @@ public class ProfesorConsole {
         }
 	}
 	
-	private static void modificarPrevSegActividad(Actividad actividadPrincipal, int opcion) {
+	private  void modificarPrevSegActividad(Actividad actividadPrincipal, int opcion) {
 			
 			String tipo;
 			String msjTitulo;
@@ -1441,7 +1445,7 @@ public class ProfesorConsole {
 	
 	}
 
-	private static void modificarPregunta (Profesor profesor) {
+	private  void modificarPregunta (Profesor profesor) {
 		System.out.println("Ingrese el ID de la pregunta que desea modificar: ");
 		String idPregunta = scanner.nextLine();
 		
@@ -1564,7 +1568,7 @@ public class ProfesorConsole {
 		
 	}
 	
-	private static void calificarActividad(Profesor profesor) {
+	private  void calificarActividad(Profesor profesor) {
 
         System.out.println("Ingrese el tipo de actividad a calificar (Examen/Tarea): ");
         String tipoActividad = scanner.nextLine();
@@ -1604,7 +1608,7 @@ public class ProfesorConsole {
         
     }
 	
-	private static void revisarActividadRepetida() {
+	private  void revisarActividadRepetida() {
 	    System.out.print("Ingrese el título de la actividad: ");
 	    String titulo = scanner.nextLine();
 
@@ -1649,7 +1653,7 @@ public class ProfesorConsole {
 	    }
 	}
 	
-	private static void revisarLearningPathRepetido() {
+	private  void revisarLearningPathRepetido() {
 		System.out.print("Ingrese el título de la actividad: ");
 	    String titulo = scanner.nextLine();
 
@@ -1666,7 +1670,7 @@ public class ProfesorConsole {
 	}
 
 	
-    private static void verActividades(Profesor profesor) {
+    private  void verActividades(Profesor profesor) {
         System.out.println("== Mis Actividades ==");
         profesor.getMapaRecursosPropios().forEach((id, recurso) -> System.out.println("Recurso: " + id));
         profesor.getMapaTareasPropias().forEach((id, tarea) -> System.out.println("Tarea: " + id));
@@ -1677,7 +1681,7 @@ public class ProfesorConsole {
     }
     
     
-    private static void calificarResenarActividad() {
+    private  void calificarResenarActividad() {
     	
     	
     	String msjTitulo = "Indique el titulo de la actividad que desea reseñar o calificar";
@@ -1717,7 +1721,7 @@ public class ProfesorConsole {
     	}
     }
     
-    private static void calificarLearningPath() {
+    private  void calificarLearningPath() {
     	String msjTitulo = "Indique el título del Learning Path que desea calificar: ";
     	String msjProfesor = "Indique el login del profesor creador del Learning Path que desea calificar";
     	
@@ -1730,7 +1734,7 @@ public class ProfesorConsole {
     	}
     }
     
-    private static Actividad getActividad(String msjTitulo, String msjProfesor, String msjTipo, boolean actividadPropia, Profesor profesor) {
+    private  Actividad getActividad(String msjTitulo, String msjProfesor, String msjTipo, boolean actividadPropia, Profesor profesor) {
     	System.out.println(msjTitulo);
 		String titulo = scanner.nextLine();
 		String login;
@@ -1753,7 +1757,7 @@ public class ProfesorConsole {
 
     }
     
-    private static LearningPath getLearningPath(String msjTitulo, String msjProfesor, boolean learningPathPropio, Profesor profesor) {
+    private  LearningPath getLearningPath(String msjTitulo, String msjProfesor, boolean learningPathPropio, Profesor profesor) {
     	System.out.println(msjTitulo);
 		String titulo = scanner.nextLine();
 		String login;
