@@ -13,7 +13,7 @@ public class ConsolaPrincipal {
 
     public static void main(String[] args) {
         
-        System.out.println("== Menú Principal ==");
+        
         mostrarMenuRegistro();
         
     }
@@ -21,6 +21,7 @@ public class ConsolaPrincipal {
     private static void mostrarMenuRegistro() {
         int opcion;
         do {
+        	System.out.println("\n== Menú Principal ==");
             System.out.println("1. Inscribirse como profesor");
             System.out.println("2. Inscribirse como estudiante");
             System.out.println("3. Iniciar sesión como profesor");
