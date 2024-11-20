@@ -112,8 +112,7 @@ public class Main {
 				prof1, actividades, mapaObligatorio);
 		
 		aplicacion.registrarLearningPath(lp);	
-		aplicacion.enviarTarea(ta, stud2, lp);
-		aplicacion.inscribirEstudianteLearningPath(stud2, lp);
+		aplicacion.resenarActividad(rr, "prueba");
 		
 		
 		
@@ -195,6 +194,7 @@ public class Main {
 				+ String.format("     * : %s\n", revisarRecurso.getObjetivos().get(1))
 				+ String.format("--- Dificultad: %s \n", revisarRecurso.getNivelDificultad())
 				+ String.format("--- Duracion Estimada: %d minutos \n", revisarRecurso.getDuracionMinutos())
+			+ revisarRecurso.getResenas().get(0)
 		
 				
 				
