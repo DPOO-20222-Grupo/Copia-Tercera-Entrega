@@ -371,8 +371,9 @@ public class Aplicacion {
 				profesor.getLearningPathPropios().remove(idLP);
 				 
 				learningPath.modificarTitulo(valor);
-				mapaGlobal.put(idLP, learningPath);
-				profesor.getLearningPathPropios().put(idLP, learningPath);
+				String idLPNuevo = learningPath.getIdLearnginPath();
+				mapaGlobal.put(idLPNuevo, learningPath);
+				profesor.getLearningPathPropios().put(idLPNuevo, learningPath);
 				
 			}
 		
