@@ -801,7 +801,7 @@ public class EstudianteConsole {
     			 String fecha = formatter.format(actividad.getActividadSeguimiento().getFechaLimite());
     			 System.out.println("Fecha: "+ fecha);
     			 
-    			 
+    			 //hola
     			 
     			 
     			 if (tipo.equals("Quiz")|| tipo.equals("Examen"))
