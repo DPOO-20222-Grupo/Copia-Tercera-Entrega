@@ -11,8 +11,13 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
+<<<<<<< HEAD
     "fechaCreacion": "2024-11-20T13:29:19.066384",
     "fechaUltimaModificacion": "2024-11-20T13:29:19.066384",
+=======
+    "fechaCreacion": "2024-11-20T13:44:35.0128817",
+    "fechaUltimaModificacion": "2024-11-20T13:44:35.0128817",
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
     "version": 1.0,
     "estudiantesInscritos": {
       "a.linares": {
@@ -206,7 +211,11 @@
               "actividadesSeguimiento": [],
               "tipoActividad": "Tarea"
             },
+<<<<<<< HEAD
             "estado": "Enviado",
+=======
+            "estado": "Incompleta",
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
             "loginEstudianteSeguimiento": "a.linares",
             "nombreEstudianteSeguimiento": "Andres Linares",
             "tiempoTotal": 0,
