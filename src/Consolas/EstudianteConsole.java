@@ -11,6 +11,7 @@ import actividades.Examen;
 import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
+import exceptions.ActividadYaCompletadaException;
 import exceptions.EstudianteNoInscritoException;
 import exceptions.ModificarEstudianteLearningPathException;
 import interfaz.Aplicacion;
@@ -628,7 +629,7 @@ public class EstudianteConsole {
 			System.out.println("Actividad completada exitosamente.");
 			
 			mostrarActividadesSeguimiento(recurso);
-		} catch (EstudianteNoInscritoException e) {
+		} catch (EstudianteNoInscritoException | ActividadYaCompletadaException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());
 		}
