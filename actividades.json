@@ -50,28 +50,6 @@
     }
   },
   "Revisar Recursos": {
-    "Video Juegos - c.espinosag": {
-      "tipoRecurso": "video",
-      "enlaceRecurso": "cesar.com",
-      "tipo": "Recurso",
-      "titulo": "Video Juegos",
-      "descripcion": "Ver video",
-      "objetivos": [
-        "Cesar",
-        "Cristian",
-        "Andres"
-      ],
-      "nivelDificultad": "Avanzado",
-      "loginProfesorCreador": "c.espinosag",
-      "nombreProfesorCreador": "Cesar Augusto Espinosa Gomez",
-      "duracionMinutos": 10,
-      "fechaLimite": "Dec 2, 2004, 12:00:00 AM",
-      "resenas": [],
-      "rating": 0.0,
-      "contadorRatings": 0,
-      "actividadesPrevias": [],
-      "actividadesSeguimiento": []
-    },
     "Ver video - l.munera": {
       "tipoRecurso": "video",
       "enlaceRecurso": "enlace",

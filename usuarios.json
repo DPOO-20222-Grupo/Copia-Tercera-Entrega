@@ -65,44 +65,6 @@
       "login": "l.munera",
       "password": "Tristeza30",
       "isLoggedIn": false
-    },
-    "c.espinosag": {
-      "nombre": "Cesar Augusto Espinosa Gomez",
-      "mapaRecursosPropios": {
-        "Video Juegos - c.espinosag": {
-          "tipoRecurso": "video",
-          "enlaceRecurso": "cesar.com",
-          "tipo": "Recurso",
-          "titulo": "Video Juegos",
-          "descripcion": "Ver video",
-          "objetivos": [
-            "Cesar",
-            "Cristian",
-            "Andres"
-          ],
-          "nivelDificultad": "Avanzado",
-          "loginProfesorCreador": "c.espinosag",
-          "nombreProfesorCreador": "Cesar Augusto Espinosa Gomez",
-          "duracionMinutos": 10,
-          "fechaLimite": "Dec 2, 2004, 12:00:00 AM",
-          "resenas": [],
-          "rating": 0.0,
-          "contadorRatings": 0,
-          "actividadesPrevias": [],
-          "actividadesSeguimiento": []
-        }
-      },
-      "mapaTareasPropias": {},
-      "mapaExamenesPropios": {},
-      "mapaEncuestasPropias": {},
-      "mapaQuicesPropios": {},
-      "learningPathPropios": {},
-      "preguntasAbiertasPropias": {},
-      "preguntasSeleccionPropias": {},
-      "preguntasBooleanPropias": {},
-      "login": "c.espinosag",
-      "password": "Hola1097",
-      "isLoggedIn": false
     }
   }
 }

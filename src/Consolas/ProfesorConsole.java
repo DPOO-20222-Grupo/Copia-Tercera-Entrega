@@ -584,7 +584,7 @@ public class ProfesorConsole {
         } while (calificacionMinima < 0 || calificacionMinima > 5);
 
         List<PreguntaCerrada> preguntas = new ArrayList<>();
-        System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado', separadas por ';': ");
+        System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado': ");
         String preguntasInput = scanner.nextLine();
         if (preguntasInput.isEmpty()) {
             System.out.println("Las preguntas no pueden estar vacías.");
@@ -750,7 +750,7 @@ public class ProfesorConsole {
         } while (fechaLimite == null || fechaLimite.before(new Date()));
 
         List<PreguntaAbierta> preguntas = new ArrayList<>();
-        System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado', separadas por ';': ");
+        System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado': ");
         String preguntasInput = scanner.nextLine();
         if (preguntasInput.isEmpty()) {
             System.out.println("Las preguntas no pueden estar vacías.");
@@ -892,7 +892,7 @@ public class ProfesorConsole {
         } while (fechaLimite == null || fechaLimite.before(new Date()));
 
         List<PreguntaAbierta> preguntas = new ArrayList<>();
-        System.out.println("Ingrese las preguntas de la encuesta en el formato 'título|enunciado', separadas por ';': ");
+        System.out.println("Ingrese las preguntas de la encuesta en el formato 'título|enunciado': ");
         String preguntasInput = scanner.nextLine();
         if (preguntasInput.isEmpty()) {
             System.out.println("Las preguntas no pueden estar vacías.");
