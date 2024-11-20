@@ -138,7 +138,7 @@ public class SeguimientoLearningPath {
 
     public float calcularTasaExito() {
     	
-    	int numActividadesExitosas = 0;
+    	float numActividadesExitosas = 0f;
     	int totalActividades = this.getMapaSeguimientoActividades().size();
     	for (SeguimientoActividad seguimiento: this.getMapaSeguimientoActividades().values()) {
     		String estado = seguimiento.getEstado();
@@ -159,22 +159,26 @@ public class SeguimientoLearningPath {
     	this.setTasaFracaso(1-tasaExito);
     }
 
-    // Calcula el tiempo promedio por actividad 
     public float calcularTiempoPromedioPorActividad() {
         if (progreso == 0) {
-            return 0; // Evita la división por cero si no hay progreso registrado.
+            return 0; 
         }
-        return totalTiempo / (progreso*mapaSeguimientoActividades.size());
+        
+        float actividadesCompletadas = (progreso * mapaSeguimientoActividades.size());
+
+        float promedio = ((float) totalTiempo) / actividadesCompletadas;
+       
+        return promedio;
     }
 
     // Método para verificar si el estudiante está en riesgo 
     public boolean estaEnRiesgo() {
-        return tasaFracaso > 0.6;
+        return this.getTasaFracaso() > 0.6;
     }
 
     // Método para actualizar el progreso al completar una actividad
     public void actualizarProgreso() {
-        float nuevoProgreso = this.getProgreso()+ (1/this.getMapaSeguimientoActividades().size());
+        float nuevoProgreso = this.getProgreso()+ (1f/this.getMapaSeguimientoActividades().size());
         this.setProgreso(nuevoProgreso);
     }
     
@@ -182,8 +186,5 @@ public class SeguimientoLearningPath {
     	int nuevoTiempo = this.getTotalTiempo()+tiempoAdicional;
     	this.setTotalTiempo(nuevoTiempo);
     }
-    
-    //hola
-
 }
 

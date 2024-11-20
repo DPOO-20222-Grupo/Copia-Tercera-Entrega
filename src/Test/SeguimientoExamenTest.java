@@ -25,6 +25,8 @@ class SeguimientoExamenTest {
 		List<String> objetivos = new ArrayList<String>();
 		Profesor profesor = new Profesor("login", "password", "nombre");
 		List<PreguntaAbierta> preguntas = new ArrayList<PreguntaAbierta>();
+		pAbierta = new PreguntaAbierta("enunciado", "titulo");
+		preguntas.add(pAbierta);
 		
 		Date fecha = new Date();
 		
@@ -50,5 +52,12 @@ class SeguimientoExamenTest {
 		seg.actualizarEstado(false);
 		assertEquals("No exitoso", seg.getEstado());
 	}
+	
+	@Test
+	void testRegistrarPregunta() {
+		seg.registrarPregunta(pAbierta, "respuesta");
+
+        assertEquals("respuesta", seg.getRespuestas().get(pAbierta.getIdPregunta()), "La respuesta para pregunta1 no fue registrada correctamente.");
+    }
 
 }

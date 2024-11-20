@@ -21,7 +21,7 @@ public  class SeguimientoActividad {
 	}
 	
 	
-	protected void setEstado(String estado) {
+	public void setEstado(String estado) {
 		this.estado = estado;
 	}
 
@@ -49,7 +49,7 @@ public  class SeguimientoActividad {
 	}
 	
 	public void actualizarEstadoCompletado () {
-		this.setEstado("Completada");
+		this.setEstado("Completado");
 	}
 	
 

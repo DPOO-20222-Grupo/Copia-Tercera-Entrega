@@ -42,7 +42,7 @@ class SeguimientoActividadTest {
 	void testEstado() {
 		assertEquals("Incompleta", seg.getEstado());
 		seg.actualizarEstadoCompletado();
-		assertEquals("Completada", seg.getEstado());
+		assertEquals("Completado", seg.getEstado());
 	}
 	
 	@Test
