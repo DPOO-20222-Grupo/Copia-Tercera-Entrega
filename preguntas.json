@@ -1,11 +1,22 @@
 {
-  "Preguntas Selección Múltiple": {},
+  "Preguntas Selección Múltiple": {
+    "1 - Colores": {
+      "opcion1": "Azul",
+      "opcion2": "Rojo",
+      "opcion3": "Amarillo",
+      "opcion4": "Negro",
+      "opcionCorrecta": 4,
+      "enunciado": "¿Qué color no es primario?",
+      "titulo": "Colores",
+      "id": 1
+    }
+  },
   "Preguntas Verdadero Falso": {},
   "Preguntas Abiertas": {
-    "46 - Registro de Nombres": {
+    "1 - Registro de Nombres": {
       "enunciado": "Ingrese su nombre: ",
       "titulo": "Registro de Nombres",
-      "id": 46
+      "id": 1
     }
   }
 }

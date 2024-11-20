@@ -1,18 +1,18 @@
 {
   "Tareas": {
-    "Tarea - prof123": {
+    "Tarea1 - l.munera": {
       "tipo": "Tarea",
-      "titulo": "Tarea",
+      "titulo": "Tarea1",
       "descripcion": "Tarea numero uno",
       "objetivos": [
         "Objetivo 1",
         "Objetivo 2"
       ],
       "nivelDificultad": "bajo",
-      "loginProfesorCreador": "prof123",
-      "nombreProfesorCreador": "nombre",
+      "loginProfesorCreador": "l.munera",
+      "nombreProfesorCreador": "Lina Munera",
       "duracionMinutos": 120,
-      "fechaLimite": "Nov 20, 2024, 1:08:30 PM",
+      "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
       "resenas": [],
       "rating": 0.0,
       "contadorRatings": 0,
@@ -20,12 +20,6 @@
       "actividadesSeguimiento": []
     }
   },
-<<<<<<< HEAD
-  "Examenes": {},
-  "Revisar Recursos": {},
-  "Quices": {},
-  "Encuestas": {}
-=======
   "Examenes": {
     "Parcial - l.munera": {
       "numPreguntas": 1,
@@ -56,6 +50,28 @@
     }
   },
   "Revisar Recursos": {
+    "Video Juegos - c.espinosag": {
+      "tipoRecurso": "video",
+      "enlaceRecurso": "cesar.com",
+      "tipo": "Recurso",
+      "titulo": "Video Juegos",
+      "descripcion": "Ver video",
+      "objetivos": [
+        "Cesar",
+        "Cristian",
+        "Andres"
+      ],
+      "nivelDificultad": "Avanzado",
+      "loginProfesorCreador": "c.espinosag",
+      "nombreProfesorCreador": "Cesar Augusto Espinosa Gomez",
+      "duracionMinutos": 10,
+      "fechaLimite": "Dec 2, 2004, 12:00:00 AM",
+      "resenas": [],
+      "rating": 0.0,
+      "contadorRatings": 0,
+      "actividadesPrevias": [],
+      "actividadesSeguimiento": []
+    },
     "Ver video - l.munera": {
       "tipoRecurso": "video",
       "enlaceRecurso": "enlace",
@@ -145,5 +161,4 @@
       "actividadesSeguimiento": []
     }
   }
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 }

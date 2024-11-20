@@ -235,10 +235,10 @@ public class ProfesorConsole {
         
         do {
         	System.out.print("Ingrese el nivel de dificultad del recurso a revisar");
-        	System.out.print("1. Principiante");
-        	System.out.print("2. Intermedio");
-        	System.out.print("3. Avanzado");
-        	System.out.print("Opción escogida: ");
+        	System.out.print("\n1. Principiante");
+        	System.out.print("\n2. Intermedio");
+        	System.out.print("\n3. Avanzado");
+        	System.out.print("\nOpción escogida: ");
         	
         	if (scanner.hasNextInt()) {
                 opcion = scanner.nextInt();
@@ -382,10 +382,10 @@ public class ProfesorConsole {
         
         do {
         	System.out.print("Ingrese el nivel de dificultad de la tarea");
-        	System.out.print("1. Principiante");
-        	System.out.print("2. Intermedio");
-        	System.out.print("3. Avanzado");
-        	System.out.print("Opción escogida: ");
+        	System.out.print("\n1. Principiante");
+        	System.out.print("\n2. Intermedio");
+        	System.out.print("\n3. Avanzado");
+        	System.out.print("\nOpción escogida: ");
         	
         	if (scanner.hasNextInt()) {
                 opcion = scanner.nextInt();
@@ -499,10 +499,10 @@ public class ProfesorConsole {
         
         do {
         	System.out.print("Ingrese el nivel de dificultad del quiz");
-        	System.out.print("1. Principiante");
-        	System.out.print("2. Intermedio");
-        	System.out.print("3. Avanzado");
-        	System.out.print("Opción escogida: ");
+        	System.out.print("\n1. Principiante");
+        	System.out.print("\n2. Intermedio");
+        	System.out.print("\n3. Avanzado");
+        	System.out.print("\nOpción escogida: ");
         	
         	if (scanner.hasNextInt()) {
                 opcion = scanner.nextInt();
@@ -678,10 +678,10 @@ public class ProfesorConsole {
         
         do {
         	System.out.print("Ingrese el nivel de dificultad del examen ");
-        	System.out.print("1. Principiante");
-        	System.out.print("2. Intermedio");
-        	System.out.print("3. Avanzado");
-        	System.out.print("Opción escogida: ");
+        	System.out.print("\n1. Principiante");
+        	System.out.print("\n2. Intermedio");
+        	System.out.print("\n3. Avanzado");
+        	System.out.print("\nOpción escogida: ");
         	
         	if (scanner.hasNextInt()) {
                 opcion = scanner.nextInt();
@@ -820,10 +820,10 @@ public class ProfesorConsole {
         
         do {
         	System.out.print("Ingrese el nivel de dificultad de la encuesta ");
-        	System.out.print("1. Principiante");
-        	System.out.print("2. Intermedio");
-        	System.out.print("3. Avanzado");
-        	System.out.print("Opción escogida: ");
+        	System.out.print("\n1. Principiante");
+        	System.out.print("\n2. Intermedio");
+        	System.out.print("\n3. Avanzado");
+        	System.out.print("\nOpción escogida: ");
         	
         	if (scanner.hasNextInt()) {
                 opcion = scanner.nextInt();
@@ -952,10 +952,10 @@ public class ProfesorConsole {
         
         do {
         	System.out.print("Ingrese el nivel de dificultad del Learning Path ");
-        	System.out.print("1. Principiante");
-        	System.out.print("2. Intermedio");
-        	System.out.print("3. Avanzado");
-        	System.out.print("Opción escogida: ");
+        	System.out.print("\n1. Principiante");
+        	System.out.print("\n2. Intermedio");
+        	System.out.print("\n3. Avanzado");
+        	System.out.print("\nOpción escogida: ");
         	
         	if (scanner.hasNextInt()) {
                 opcion = scanner.nextInt();
