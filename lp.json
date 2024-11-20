@@ -18,6 +18,180 @@
       "a.linares": {
         "mapaSeguimientoActividades": {
           "Quiz1 - l.munera": {
+            "actividad": {
+              "calificacionMinima": 3.5,
+              "preguntas": [
+                {
+                  "opcion1": "Azul",
+                  "opcion2": "Rojo",
+                  "opcion3": "Amarillo",
+                  "opcion4": "Negro",
+                  "opcionCorrecta": 4,
+                  "enunciado": "¿Qué color no es primario?",
+                  "titulo": "Colores",
+                  "id": 1,
+                  "tipoPregunta": "PreguntaSeleccionMultiple"
+                }
+              ],
+              "numPreguntas": 1,
+              "tipo": "Quiz",
+              "titulo": "Quiz1",
+              "descripcion": "Primer Quiz",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "bajo",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 45,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Quiz"
+            },
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0
+          },
+          "Parcial - l.munera": {
+            "actividad": {
+              "numPreguntas": 1,
+              "preguntas": [
+                {
+                  "enunciado": "Ingrese su nombre: ",
+                  "titulo": "Registro de Nombres",
+                  "id": 1
+                }
+              ],
+              "tipo": "Examen",
+              "titulo": "Parcial",
+              "descripcion": "Examen Parcial",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "medio",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 120,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Examen"
+            },
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0
+          },
+          "Autoevaluación - l.munera": {
+            "actividad": {
+              "preguntas": [
+                {
+                  "enunciado": "Ingrese su nombre: ",
+                  "titulo": "Registro de Nombres",
+                  "id": 1
+                }
+              ],
+              "numPreguntas": 1,
+              "tipo": "Encuesta",
+              "titulo": "Autoevaluación",
+              "descripcion": "Autoevaluación acitividad #1",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "Bajo",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 15,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Encuesta"
+            },
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0
+          },
+          "Ver video - l.munera": {
+            "actividad": {
+              "tipoRecurso": "video",
+              "enlaceRecurso": "enlace",
+              "tipo": "Recurso",
+              "titulo": "Ver video",
+              "descripcion": "Ver video segunda guerra mundial",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "bajo",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 45,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "RevisarRecurso"
+            },
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0
+          },
+          "Tarea1 - l.munera": {
+            "actividad": {
+              "tipo": "Tarea",
+              "titulo": "Tarea1",
+              "descripcion": "Tarea numero uno",
+              "objetivos": [
+                "Objetivo 1",
+                "Objetivo 2"
+              ],
+              "nivelDificultad": "bajo",
+              "loginProfesorCreador": "l.munera",
+              "nombreProfesorCreador": "Lina Munera",
+              "duracionMinutos": 120,
+              "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+              "resenas": [],
+              "rating": 0.0,
+              "contadorRatings": 0,
+              "actividadesPrevias": [],
+              "actividadesSeguimiento": [],
+              "tipoActividad": "Tarea"
+            },
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0
+          }
+        },
+        "loginEstudiante": "a.linares",
+        "nombreEstudiante": "Andres Linares",
+        "idLearningPath": "Introducción a las Pruebas - l.munera",
+        "progreso": 0.0,
+        "totalTiempo": 0,
+        "tasaExito": 0.0,
+        "tasaFracaso": 0.0
+      },
+      "david2005": {
+        "mapaSeguimientoActividades": {
+          "Quiz1 - l.munera": {
             "nota": -1.0,
             "preguntas": {
               "1 - Colores": {
@@ -72,8 +246,8 @@
               "tipoActividad": "Quiz"
             },
             "estado": "Incompleta",
-            "loginEstudianteSeguimiento": "a.linares",
-            "nombreEstudianteSeguimiento": "Andres Linares",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
           },
           "Parcial - l.munera": {
@@ -110,8 +284,8 @@
               "tipoActividad": "Examen"
             },
             "estado": "Incompleta",
-            "loginEstudianteSeguimiento": "a.linares",
-            "nombreEstudianteSeguimiento": "Andres Linares",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
           },
           "Autoevaluación - l.munera": {
@@ -147,8 +321,8 @@
               "tipoActividad": "Encuesta"
             },
             "estado": "Incompleta",
-            "loginEstudianteSeguimiento": "a.linares",
-            "nombreEstudianteSeguimiento": "Andres Linares",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
           },
           "Ver video - l.munera": {
@@ -176,8 +350,8 @@
               "tipoActividad": "RevisarRecurso"
             },
             "estado": "Incompleta",
-            "loginEstudianteSeguimiento": "a.linares",
-            "nombreEstudianteSeguimiento": "Andres Linares",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
           },
           "Tarea1 - l.munera": {
@@ -202,14 +376,14 @@
               "actividadesSeguimiento": [],
               "tipoActividad": "Tarea"
             },
-            "estado": "Incompleta",
-            "loginEstudianteSeguimiento": "a.linares",
-            "nombreEstudianteSeguimiento": "Andres Linares",
+            "estado": "Enviado",
+            "loginEstudianteSeguimiento": "david2005",
+            "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
           }
         },
-        "loginEstudiante": "a.linares",
-        "nombreEstudiante": "Andres Linares",
+        "loginEstudiante": "david2005",
+        "nombreEstudiante": "David Velasquez",
         "idLearningPath": "Introducción a las Pruebas - l.munera",
         "progreso": 0.0,
         "totalTiempo": 0,
