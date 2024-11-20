@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import exceptions.ActividadPreviaCiclicoException;
+import exceptions.ActividadSeguimientoCiclicoException;
 import exceptions.ModificarActividadesPreviasException;
 import exceptions.ModificarActividadesSeguimientoException;
 import exceptions.ModificarObjetivosException;
 import user.Profesor;
 
 public abstract class Actividad {
+	public final static String BAJO = "Principiante";
+	public final static String MEDIO = "Intermedio";
+	public final static String ALTO = "Avanzado";
 	private String tipo;
     private String titulo;
     private String descripcion;
@@ -185,13 +190,37 @@ public abstract class Actividad {
     // Métodos para gestionar actividades previas y de seguimiento
 
 
-	public void agregarActividadPrevia(Actividad actividad) throws ModificarActividadesPreviasException {
-        if (!actividadesPrevias.contains(actividad)) {
-            actividadesPrevias.add(actividad);
+	public void agregarActividadPrevia(Actividad actividad) throws ModificarActividadesPreviasException, ActividadPreviaCiclicoException {
+		boolean check1 = this.actividadesPrevias.contains(actividad);
+		boolean check2 = actividad.revisarAgregarActividadesPrevias(this);
+		if (check1 == true ) {
+			throw new ModificarActividadesPreviasException(actividad, "Agregar");
+		}
+		
+		else if (check2 == false) {
+			throw new ActividadPreviaCiclicoException(this, actividad);
+		}
+		else {
+			
+		actividadesPrevias.add(actividad);
+		}
+	}
+	
+	public boolean revisarAgregarActividadesPrevias(Actividad actividadAgregar) {
+		
+        if (this.actividadesPrevias != null) {
+            for (Actividad actividad : this.actividadesPrevias) {
+                if (actividad.equals(actividadAgregar)) {
+                    return false; 
+                }
+
+                if (!actividad.revisarAgregarActividadesPrevias(actividadAgregar)) {
+                    return false; 
+                }
+            }
         }
-        else {
-        	throw new ModificarActividadesPreviasException(actividad, "Agregar");
-        }
+  
+        return true;
     }
 	
 
@@ -204,19 +233,41 @@ public abstract class Actividad {
     		throw new ModificarActividadesPreviasException(actividad, "Agregar");
     	}
     }
+    
+    
 
     public List<Actividad> getActividadesPrevias() {
         return actividadesPrevias;
     }
     
-	public void agregarActividadSeguimiento(Actividad actividad) throws ModificarActividadesSeguimientoException {
-        if (!actividadesSeguimiento.contains(actividad)) {
-            actividadesSeguimiento.add(actividad);
-        }
-        else {
+	public void agregarActividadSeguimiento(Actividad actividad) throws ModificarActividadesSeguimientoException, ActividadSeguimientoCiclicoException {
+        boolean check = revisarAgregarActividadesSeguimiento(this, actividad);
+		if (actividadesSeguimiento.contains(actividad)) {
         	throw new ModificarActividadesSeguimientoException(actividad, "Agregar");
         }
+        else if (check == false){
+        	throw new ActividadSeguimientoCiclicoException(this, actividad); 
+        }
     }
+	
+	public boolean revisarAgregarActividadesSeguimiento(Actividad actividadPrincipal, Actividad actividadAgregar) {
+		
+		
+        if (actividadAgregar.getActividadesSeguimiento() != null) {
+            for (Actividad actividad : actividadAgregar.getActividadesSeguimiento() ) {
+                if (actividad.equals(actividadPrincipal)) {
+                    return false; 
+                }
+
+                if (!actividad.revisarAgregarActividadesSeguimiento(actividadPrincipal, actividadAgregar)) {
+                    return false; 
+                }
+            }
+        }
+  
+        return true;
+    }
+	
 	
 
     public void eliminarActividadSeguimiento(Actividad actividad) throws ModificarActividadesSeguimientoException {

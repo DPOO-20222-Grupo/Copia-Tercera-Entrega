@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import actividades.Tarea;
+import exceptions.ActividadPreviaCiclicoException;
+import exceptions.ActividadSeguimientoCiclicoException;
 import exceptions.ModificarActividadesPreviasException;
 import exceptions.ModificarActividadesSeguimientoException;
 import exceptions.ModificarObjetivosException;
@@ -129,7 +131,7 @@ class ActividadTest {
 	}
 	
 	@Test
-	void testActividades() throws ModificarActividadesPreviasException, ModificarActividadesSeguimientoException {
+	void testActividades() throws ModificarActividadesPreviasException, ModificarActividadesSeguimientoException, ActividadPreviaCiclicoException, ActividadSeguimientoCiclicoException {
 		tarea1.agregarActividadPrevia(tarea3);
 		assertEquals(tarea3, tarea1.getActividadesPrevias().getLast());
 		assertThrows(ModificarActividadesPreviasException.class, () -> tarea1.agregarActividadPrevia(tarea3));

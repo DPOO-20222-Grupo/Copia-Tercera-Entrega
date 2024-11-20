@@ -72,7 +72,7 @@ public class PersistenciaActividades {
 		
 			try (FileWriter writer = new FileWriter(archivo)){
 				gson.toJson(jsonObject, writer);
-				System.out.printf("Actividades guardadas correctamente en archivo JSON: '%s'.\n", archivo);
+				System.out.printf("\nActividades guardadas correctamente en archivo JSON: '%s'.\n", archivo);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

@@ -1,4 +1,75 @@
 {
+<<<<<<< HEAD
   "estudiantes": {},
   "profesores": {}
+=======
+  "estudiantes": {
+    "d.martinezf": {
+      "nombre": "Diego Martinez",
+      "learningPathsInscritos": {},
+      "login": "d.martinezf",
+      "password": "Banano123",
+      "isLoggedIn": false
+    },
+    "a.linares": {
+      "nombre": "Andres Linares",
+      "learningPathsInscritos": {},
+      "login": "a.linares",
+      "password": "Banano123",
+      "isLoggedIn": false
+    }
+  },
+  "profesores": {
+    "l.munera": {
+      "nombre": "Lina Munera",
+      "mapaRecursosPropios": {},
+      "mapaTareasPropias": {},
+      "mapaExamenesPropios": {},
+      "mapaEncuestasPropias": {},
+      "mapaQuicesPropios": {
+        "Quiz1 - l.munera": {
+          "calificacionMinima": 3.5,
+          "preguntas": [
+            {
+              "opcion1": "Azul",
+              "opcion2": "Rojo",
+              "opcion3": "Amarillo",
+              "opcion4": "Negro",
+              "opcionCorrecta": 4,
+              "enunciado": "¿Qué color no es primario?",
+              "titulo": "Colores",
+              "id": 1,
+              "tipoPregunta": "PreguntaSeleccionMultiple"
+            }
+          ],
+          "numPreguntas": 1,
+          "tipo": "Quiz",
+          "titulo": "Quiz1",
+          "descripcion": "Primer Quiz",
+          "objetivos": [
+            "Objetivo 1",
+            "Objetivo 2"
+          ],
+          "nivelDificultad": "bajo",
+          "loginProfesorCreador": "l.munera",
+          "nombreProfesorCreador": "Lina Munera",
+          "duracionMinutos": 45,
+          "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+          "resenas": [],
+          "rating": 0.0,
+          "contadorRatings": 0,
+          "actividadesPrevias": [],
+          "actividadesSeguimiento": []
+        }
+      },
+      "learningPathPropios": {},
+      "preguntasAbiertasPropias": {},
+      "preguntasSeleccionPropias": {},
+      "preguntasBooleanPropias": {},
+      "login": "l.munera",
+      "password": "Tristeza30",
+      "isLoggedIn": false
+    }
+  }
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 }

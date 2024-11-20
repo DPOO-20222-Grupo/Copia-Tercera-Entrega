@@ -7,6 +7,8 @@ import actividades.Examen;
 import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
+import exceptions.ActividadPreviaCiclicoException;
+import exceptions.ActividadSeguimientoCiclicoException;
 import exceptions.ActividadYaExistenteException;
 import exceptions.LearningPathYaExistenteException;
 import exceptions.ModificarActividadesLearningPathException;
@@ -22,6 +24,10 @@ import preguntas.Pregunta;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
+import seguimientoEstudiantes.SeguimientoActividad;
+import seguimientoEstudiantes.SeguimientoExamen;
+import seguimientoEstudiantes.SeguimientoLearningPath;
+import seguimientoEstudiantes.SeguimientoQuiz;
 import user.Estudiante;
 import user.Profesor;
 
@@ -80,15 +86,17 @@ public class ProfesorConsole {
             System.out.println("14. Revisar si una actividad ya existe");
             System.out.println("15. Revisar si un Learning Path ya existe");
             System.out.println("16. Ver mis actividades");
-            System.out.println("17. Reseñar o calificar una actividad");
-            System.out.println("18. Calificar un Learning Path");
-            System.out.println("19. Cerrar sesión");
+            System.out.println("17. Ver mis Learning Paths");
+            System.out.println("18. Ver el progreso de un estudiante en un Learning Path");
+            System.out.println("19. Reseñar o calificar una actividad");
+            System.out.println("20. Calificar un Learning Path");
+            System.out.println("21. Cerrar sesión");
             System.out.print("Seleccione una opción: ");
             
             try {
                 opcion = Integer.parseInt(scanner.nextLine()); 
 
-                if (opcion < 1 || opcion > 19) {
+                if (opcion < 1 || opcion > 21) {
                     System.out.println("Opción no válida. Por favor, seleccione una opción entre 1 y 19.");
                     continue;
                 }
@@ -134,21 +142,28 @@ public class ProfesorConsole {
                         modificarPregunta(profesor);
                         break;
                     case 14:
-                        revisarActividadRepetida();
+                        revisarActividadRepetida(profesor);
                         break;
                     case 15:
-                        revisarLearningPathRepetido();
+                        revisarLearningPathRepetido(profesor);
                         break;
                     case 16:
                         verActividades(profesor);
                         break;
                     case 17:
-                        calificarResenarActividad();
+                        verLearningPaths(profesor);
                         break;
                     case 18:
+                        verProgresoLearningPathEstudiante();
+                        break;
+                        
+                    case 19:
+                        calificarResenarActividad();
+                        break;
+                    case 20:
                         calificarLearningPath();
                         break;
-                    case 19:
+                    case 21:
                         profesor.logout();
                         System.out.println("Sesión cerrada.");
                         break;
@@ -161,7 +176,7 @@ public class ProfesorConsole {
                 System.out.println("Entrada no válida. Por favor, ingrese un número.");
             }
 
-        } while (opcion != 19); 
+        } while (opcion != 21); 
     }
 
 
@@ -214,15 +229,43 @@ public class ProfesorConsole {
             }
         }
 
-        System.out.print("Ingrese el nivel de dificultad del recurso a revisar: ");
+        
         String dificultad;
+        int opcion = 0;
+        
         do {
-            dificultad = scanner.nextLine().trim();
-            if (dificultad.isEmpty()) {
-                System.out.println("Error: La dificultad no puede estar vacía.");
-                System.out.print("Ingrese el nivel de dificultad del recurso a revisar: ");
+        	System.out.print("Ingrese el nivel de dificultad del recurso a revisar");
+        	System.out.print("1. Principiante");
+        	System.out.print("2. Intermedio");
+        	System.out.print("3. Avanzado");
+        	System.out.print("Opción escogida: ");
+        	
+        	if (scanner.hasNextInt()) {
+                opcion = scanner.nextInt();
+                scanner.nextLine();  
+                if (opcion < 1 || opcion > 3) {
+                    System.out.println("Opción inválida. Debe ser un número entre 1 y 3.");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un número válido.");
+                scanner.nextLine();  
             }
-        } while (dificultad.isEmpty());
+            
+        } while (opcion<1 || opcion>3);
+        
+        if (opcion ==1) {
+        	dificultad = Actividad.BAJO;
+        	
+        }
+        
+        else if(opcion == 2) {
+        	dificultad = Actividad.MEDIO;
+        }
+        
+        else {
+        	dificultad = Actividad.ALTO;
+        }
+        
 
         System.out.print("Ingrese la duración en minutos que le tomará al estudiante revisar el recurso: ");
         int duracion = -1;
@@ -334,15 +377,42 @@ public class ProfesorConsole {
             }
         }
 
-        System.out.print("Ingrese el nivel de dificultad de la tarea: ");
         String dificultad;
+        int opcion = 0;
+        
         do {
-            dificultad = scanner.nextLine().trim();
-            if (dificultad.isEmpty()) {
-                System.out.println("Error: La dificultad no puede estar vacía.");
-                System.out.print("Ingrese el nivel de dificultad de la tarea: ");
+        	System.out.print("Ingrese el nivel de dificultad de la tarea");
+        	System.out.print("1. Principiante");
+        	System.out.print("2. Intermedio");
+        	System.out.print("3. Avanzado");
+        	System.out.print("Opción escogida: ");
+        	
+        	if (scanner.hasNextInt()) {
+                opcion = scanner.nextInt();
+                scanner.nextLine();  
+                if (opcion < 1 || opcion > 3) {
+                    System.out.println("Opción inválida. Debe ser un número entre 1 y 3.");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un número válido.");
+                scanner.nextLine();  
             }
-        } while (dificultad.isEmpty());
+            
+        } while (opcion<1 || opcion>3);
+        
+        if (opcion ==1) {
+        	dificultad = Actividad.BAJO;
+        	
+        }
+        
+        else if(opcion == 2) {
+        	dificultad = Actividad.MEDIO;
+        }
+        
+        else {
+        	dificultad = Actividad.ALTO;
+        }
+        
 
         System.out.print("Ingrese la duración en minutos de la tarea: ");
         int duracion = -1;
@@ -424,15 +494,42 @@ public class ProfesorConsole {
             }
         } while (objetivos.isEmpty());
 
-        System.out.print("Ingrese el nivel de dificultad del quiz: ");
         String dificultad;
+        int opcion = 0;
+        
         do {
-            dificultad = scanner.nextLine().trim();
-            if (dificultad.isEmpty()) {
-                System.out.println("El nivel de dificultad no puede estar vacío.");
-                System.out.print("Ingrese el nivel de dificultad del quiz: ");
+        	System.out.print("Ingrese el nivel de dificultad del quiz");
+        	System.out.print("1. Principiante");
+        	System.out.print("2. Intermedio");
+        	System.out.print("3. Avanzado");
+        	System.out.print("Opción escogida: ");
+        	
+        	if (scanner.hasNextInt()) {
+                opcion = scanner.nextInt();
+                scanner.nextLine();  
+                if (opcion < 1 || opcion > 3) {
+                    System.out.println("Opción inválida. Debe ser un número entre 1 y 3.");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un número válido.");
+                scanner.nextLine();  
             }
-        } while (dificultad.isEmpty());
+            
+        } while (opcion<1 || opcion>3);
+        
+        if (opcion ==1) {
+        	dificultad = Actividad.BAJO;
+        	
+        }
+        
+        else if(opcion == 2) {
+        	dificultad = Actividad.MEDIO;
+        }
+        
+        else {
+        	dificultad = Actividad.ALTO;
+        }
+        
 
         System.out.print("Ingrese la duración en minutos del quiz: ");
         int duracion = -1;
@@ -576,15 +673,42 @@ public class ProfesorConsole {
             }
         } while (objetivos.isEmpty());
 
-        System.out.print("Ingrese el nivel de dificultad del examen: ");
         String dificultad;
+        int opcion = 0;
+        
         do {
-            dificultad = scanner.nextLine().trim();
-            if (dificultad.isEmpty()) {
-                System.out.println("El nivel de dificultad no puede estar vacío.");
-                System.out.print("Ingrese el nivel de dificultad del examen: ");
+        	System.out.print("Ingrese el nivel de dificultad del examen ");
+        	System.out.print("1. Principiante");
+        	System.out.print("2. Intermedio");
+        	System.out.print("3. Avanzado");
+        	System.out.print("Opción escogida: ");
+        	
+        	if (scanner.hasNextInt()) {
+                opcion = scanner.nextInt();
+                scanner.nextLine();  
+                if (opcion < 1 || opcion > 3) {
+                    System.out.println("Opción inválida. Debe ser un número entre 1 y 3.");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un número válido.");
+                scanner.nextLine();  
             }
-        } while (dificultad.isEmpty());
+            
+        } while (opcion<1 || opcion>3);
+        
+        if (opcion ==1) {
+        	dificultad = Actividad.BAJO;
+        	
+        }
+        
+        else if(opcion == 2) {
+        	dificultad = Actividad.MEDIO;
+        }
+        
+        else {
+        	dificultad = Actividad.ALTO;
+        }
+        
 
         System.out.print("Ingrese la duración en minutos del examen: ");
         int duracion;
@@ -692,13 +816,41 @@ public class ProfesorConsole {
         } while (objetivos.isEmpty());
 
         String dificultad;
+        int opcion = 0;
+        
         do {
-            System.out.print("Ingrese el nivel de dificultad de la encuesta: ");
-            dificultad = scanner.nextLine().trim();
-            if (dificultad.isEmpty()) {
-                System.out.println("El nivel de dificultad no puede estar vacío.");
+        	System.out.print("Ingrese el nivel de dificultad de la encuesta ");
+        	System.out.print("1. Principiante");
+        	System.out.print("2. Intermedio");
+        	System.out.print("3. Avanzado");
+        	System.out.print("Opción escogida: ");
+        	
+        	if (scanner.hasNextInt()) {
+                opcion = scanner.nextInt();
+                scanner.nextLine();  
+                if (opcion < 1 || opcion > 3) {
+                    System.out.println("Opción inválida. Debe ser un número entre 1 y 3.");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un número válido.");
+                scanner.nextLine();  
             }
-        } while (dificultad.isEmpty());
+            
+        } while (opcion<1 || opcion>3);
+        
+        if (opcion ==1) {
+        	dificultad = Actividad.BAJO;
+        	
+        }
+        
+        else if(opcion == 2) {
+        	dificultad = Actividad.MEDIO;
+        }
+        
+        else {
+        	dificultad = Actividad.ALTO;
+        }
+        
 
         int duracion;
         do {
@@ -795,12 +947,41 @@ public class ProfesorConsole {
 	        objetivos.add(objetivo.trim());
 	    }
 
-	    System.out.print("Ingrese el nivel de dificultad de la actividad: ");
-	    String dificultad = scanner.nextLine();
-	    if (dificultad.isEmpty()) {
-	        System.out.println("El nivel de dificultad no puede estar vacío.");
-	        return; 
-	    }
+	    String dificultad;
+        int opcion = 0;
+        
+        do {
+        	System.out.print("Ingrese el nivel de dificultad del Learning Path ");
+        	System.out.print("1. Principiante");
+        	System.out.print("2. Intermedio");
+        	System.out.print("3. Avanzado");
+        	System.out.print("Opción escogida: ");
+        	
+        	if (scanner.hasNextInt()) {
+                opcion = scanner.nextInt();
+                scanner.nextLine();  
+                if (opcion < 1 || opcion > 3) {
+                    System.out.println("Opción inválida. Debe ser un número entre 1 y 3.");
+                }
+            } else {
+                System.out.println("Por favor, ingrese un número válido.");
+                scanner.nextLine();  
+            }
+            
+        } while (opcion<1 || opcion>3);
+        
+        if (opcion ==1) {
+        	dificultad = LearningPath.BAJO;
+        	
+        }
+        
+        else if(opcion == 2) {
+        	dificultad = LearningPath.MEDIO;
+        }
+        
+        else {
+        	dificultad = LearningPath.ALTO;
+        }
 
 	    List<Actividad> actividades = new ArrayList<>();
 	    String continuar;
@@ -1142,9 +1323,10 @@ public class ProfesorConsole {
 	    String msjTipo = "Ingrese el tipo de la actividad a modificar: ";
 	    
 	    Actividad actividad = getActividad(msjTitulo, "", msjTipo, true, profesor);
-	    String tipo = actividad.getTipoActividad();
+	    
 
 	    if (actividad != null) {
+	    	String tipo = actividad.getTipoActividad();
 	    	
 	    	String menuGeneral = "Seleccione el atributo a modificar:\n" +
 					 "1. Titulo\n"+
@@ -1312,13 +1494,13 @@ public class ProfesorConsole {
 	        else {
 	        modificarActividadGeneral(actividad, opcion);
 	        }
-	    	
-	         
+	    	  
 	    } 
-	    
 	    else {
-	        System.out.println("Actividad no encontrada.");
+	    	System.out.println("Actividad no encontrada");
+	    	return;
 	    }
+	    
 	}
 	
 	private  void modificarActividadGeneral(Actividad actividad, int opcion) {
@@ -1394,18 +1576,21 @@ public class ProfesorConsole {
 			String msjTitulo;
 			String msjProfesor;
 			String msjTipo;
+			String msjMismaAct;
 			
 			if (opcion == 7) {
 				tipo = "Previa";
 				msjTitulo = "Ingrese el título de la actividad a agregar/eliminar de las actividades previas: ";
 				msjProfesor = "Ingrese el login del profesor creador de la actividad a agregar/eliminar de las actividades previas: ";
 				msjTipo = "Ingrese el tipo de la actividad a agregar/eliminar de las actividades previas: ";
+				msjMismaAct = "La actividad a agregar en actividades previas no puede ser la misma que la actividad principal";
 			}
 			else {
 				tipo = "Seguimiento";
 				msjTitulo = "Ingrese el título de la actividad a agregar/eliminar de las actividades de seguimiento: ";
 				msjProfesor = "Ingrese el login del profesor creador de la actividad a agregar/eliminar de las actividades de seguimiento: ";
 				msjTipo = "Ingrese el tipo de la actividad a agregar/eliminar de las actividades de seguimiento: ";
+				msjMismaAct = "La actividad a agregar en actividades de seguimiento no puede ser la misma que la  actividad principal";
 			}
 			
 			
@@ -1415,8 +1600,11 @@ public class ProfesorConsole {
 		
 		    
 		    Actividad actividadOperacion = getActividad(msjTitulo, msjProfesor, msjTipo, false, null);
-			
 		    if (actividadOperacion != null) {
+		    	if (actividadPrincipal.equals(actividadOperacion)) {
+		    		System.out.println(msjMismaAct);
+		    		return;
+		    	}
 				System.out.println("Indique la accion que quiere realizar:");
 				System.out.println("1. Agregar");
 				System.out.println("2. Eliminar");
@@ -1431,7 +1619,7 @@ public class ProfesorConsole {
 						System.out.println("Actividad modificada exitosamente");
 					}
 					
-					catch (ModificarActividadesPreviasException | ModificarActividadesSeguimientoException e) {
+					catch (ModificarActividadesPreviasException | ModificarActividadesSeguimientoException | ActividadPreviaCiclicoException | ActividadSeguimientoCiclicoException e) {
 						System.out.println("Error al modificar actividad: " + e.getMessage());
 					}
 					
@@ -1608,12 +1796,9 @@ public class ProfesorConsole {
         
     }
 	
-	private  void revisarActividadRepetida() {
+	private  void revisarActividadRepetida(Profesor profesor) {
 	    System.out.print("Ingrese el título de la actividad: ");
 	    String titulo = scanner.nextLine();
-
-	    System.out.print("Ingrese el login del profesor: ");
-	    String login = scanner.nextLine();
 
 	    System.out.println("Seleccione el tipo de actividad:");
 	    System.out.println("1. Tarea");
@@ -1646,25 +1831,23 @@ public class ProfesorConsole {
 	    }
 
 	    try {
-	        aplicacion.revisarActividadRepetida(titulo, login, tipo);
-	        System.out.println("La actividad no existe, puede ser creada.");
+	        aplicacion.revisarActividadRepetida(titulo, profesor.getLogin(), tipo);
+	        System.out.println("La actividad no existe bajo su login, puede ser creada.");
 	    } catch (ActividadYaExistenteException e) {
-	        System.out.println("La actividad '" + titulo + "' de tipo '" + tipo + "' ya existe.");
+	        System.out.println(e.getMessage());
 	    }
 	}
 	
-	private  void revisarLearningPathRepetido() {
-		System.out.print("Ingrese el título de la actividad: ");
+	private  void revisarLearningPathRepetido(Profesor profesor) {
+		System.out.print("Ingrese el título del Learning Path: ");
 	    String titulo = scanner.nextLine();
 
-	    System.out.print("Ingrese el login del profesor: ");
-	    String login = scanner.nextLine();
 
 	    try {
-	        aplicacion.revisarLearningPathRepetido(titulo, login);
+	        aplicacion.revisarLearningPathRepetido(titulo, profesor.getLogin());
 	        System.out.println("El learning Path no existe, puede ser creado.");
 	    } catch (LearningPathYaExistenteException e) {
-	        System.out.println("El learning Path " + titulo + "ya existe.");
+	        System.out.println(e.getMessage());
 	    }
 		
 	}
@@ -1678,6 +1861,20 @@ public class ProfesorConsole {
         profesor.getMapaQuicesPropios().forEach((id, quiz) -> System.out.println("Quiz: " + id));
         profesor.getMapaEncuestasPropias().forEach((id, encuesta) -> System.out.println("Encuesta: " + id));
         
+    }
+    
+    private void verLearningPaths(Profesor profesor) {
+    	
+    	if (profesor.getLearningPathPropios().size()>0) {
+    		System.out.println("\n--- Mis Learning Paths ---");
+	    	int i = 1;
+	    	for(LearningPath lp: profesor.getLearningPathPropios().values()) {
+	    		System.out.println(String.format("%d. %s", i, lp.getTitulo()));
+	    	}
+    	}
+    	else {
+    		System.out.println("\nNo tiene Learning Paths propios");
+    	}
     }
     
     
@@ -1735,19 +1932,44 @@ public class ProfesorConsole {
     }
     
     private  Actividad getActividad(String msjTitulo, String msjProfesor, String msjTipo, boolean actividadPropia, Profesor profesor) {
-    	System.out.println(msjTitulo);
-		String titulo = scanner.nextLine();
+    	String titulo;
+    	do {
+	    	System.out.println(msjTitulo);
+			titulo = scanner.nextLine();
+			if (titulo.isEmpty()) {
+				System.out.println("El título de la actividad no puede estar vacío, inténtelo de nuevo\n");
+			}
+    	}
+    	while(titulo.isEmpty());
+		
 		String login;
+		
     	if (actividadPropia == true) {
     		login = profesor.getLogin();
     	}
     	
     	else {
-    		System.out.println(msjProfesor);
-    		login = scanner.nextLine();
+    		do {
+	    		System.out.println(msjProfesor);
+	    		login = scanner.nextLine();
+	    		if (login.isEmpty()) {
+					System.out.println("El profesor de la actividad no puede estar vacío, inténtelo de nuevo\n");
+				}
+    		}
+    		while(login.isEmpty());
     	}
-    	System.out.println(msjTipo);
-		String tipo = scanner.nextLine();
+    	
+    	
+		String tipo;
+		do {
+			System.out.println(msjTipo);
+			tipo = scanner.nextLine();
+			if (tipo.isEmpty()) {
+				System.out.println("El tipo de la actividad no puede estar vacío, inténtelo de nuevo\n");
+			}
+		}
+		while(tipo.isEmpty());
+		
     	
 		String idActividad = aplicacion.generarLlaveLearningsActividades(titulo, login);
 		
@@ -1758,16 +1980,29 @@ public class ProfesorConsole {
     }
     
     private  LearningPath getLearningPath(String msjTitulo, String msjProfesor, boolean learningPathPropio, Profesor profesor) {
-    	System.out.println(msjTitulo);
-		String titulo = scanner.nextLine();
-		String login;
+    	String titulo, login;
+    	do {
+	    	System.out.println(msjTitulo);
+			titulo = scanner.nextLine();
+			if(titulo.isEmpty()){
+				System.out.println("El título del Learning Path no puede ser vacío, inténtelo de nuevo.");
+			}
+    	}
+    	while(titulo.isEmpty());
+
     	if (learningPathPropio == true) {
     		login = profesor.getLogin();
     	}
     	
     	else {
-    		System.out.println(msjProfesor);
-    		login = scanner.nextLine();
+    		do {
+	    		System.out.println(msjProfesor);
+	    		login = scanner.nextLine();
+	    		if(login.isEmpty()){
+					System.out.println("El profesor del Learning Path no puede ser vacío, inténtelo de nuevo.");
+				}
+    		}
+    		while(login.isEmpty());
     	}
     	
     	
@@ -1776,6 +2011,85 @@ public class ProfesorConsole {
 		LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
 		
 		return learningPath;
+    }
+    
+    private void verProgresoLearningPathEstudiante() {
+    	String login;
+    	do {
+	    	System.out.println("\nIngrese el login del estudiante para el cual quiere ver el progreso: ");
+	    	login = scanner.nextLine();
+	    	if (login.isEmpty()) {
+	    		System.out.println("El login del estudiante no puede estar vacío. Intende de nuevo.");
+	    	}
+    	}
+    	while(login.isEmpty());
+    	
+    	Estudiante estudiante = aplicacion.getEstudiante(login);
+    	
+    	if (estudiante!= null) {
+    		String msjTitulo = "Ingrese el título del Learning Path para el cual quiere ver el progreso del estudiante: ";
+    		String msjProfesor = "Ingrese el login del profesor creador del Learning Path: ";
+    		
+    		LearningPath learningPath = getLearningPath(msjTitulo, msjProfesor, false, null);
+    		
+    		if (learningPath != null) {
+    			SeguimientoLearningPath seguimientoEstudiante = estudiante.getLearningPathsInscritos().get(learningPath.getIdLearnginPath());
+    	    	 if (seguimientoEstudiante != null) {
+    	    		 
+    	    		 System.out.println("\n---Progreso de Learning Path---");
+    	    		 System.out.println("Título: "+learningPath.getTitulo());
+    	    		 System.out.println("Descripción: "+learningPath.getDescripcion());
+    	    		 System.out.println(String.format("Progreso: %.2f", seguimientoEstudiante.getProgreso()*100));
+    	    		 System.out.println(String.format("Porcentaje de Éxito: %.2f", seguimientoEstudiante.getTasaExito()));
+    	    		 
+    	    		 HashMap<String, SeguimientoActividad> mapaSeguimientos = seguimientoEstudiante.getMapaSeguimientoActividades();
+    	    		 System.out.println("\n--Actividades--");
+    	    		 for(SeguimientoActividad actividad: mapaSeguimientos.values()){
+    	    			 
+    	    			 String tipo = actividad.getActividadSeguimiento().getTipoActividad();
+    	    			 
+    	    			 System.out.println("\nTítulo: "+ actividad.getActividadSeguimiento().getTitulo());
+    	    			 System.out.println("Tipo: "+ tipo);
+    	    			 System.out.println("Estado: "+ actividad.getEstado());
+    	    			 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+    	    			 String fecha = formatter.format(actividad.getActividadSeguimiento().getFechaLimite());
+    	    			 System.out.println("Fecha: "+ fecha);
+    	    			 
+    	    			 //hola
+    	    			 
+    	    			 
+    	    			 if (tipo.equals("Quiz")|| tipo.equals("Examen"))
+    	    			 
+    	    			 {
+    	    				 if (tipo.equals("Quiz")) {
+    	    					 SeguimientoQuiz segQuiz = (SeguimientoQuiz) actividad;
+    	        				 System.out.println(String.format("Calificación: %.2f", segQuiz.getNota()));
+    	    				 }
+    	    				 
+    	    				 else {
+    	    				 SeguimientoExamen segExa = (SeguimientoExamen) actividad;
+    	    				 System.out.println(String.format("Calificación: %.2f", segExa.getNota()));
+    	    				 }
+    	    			 }
+    	    			 
+    	    			 
+    	    		 }
+    	    		 
+    	    	 }
+    	    	 
+    	    	 else {
+    	    		 System.out.println("Learning Path no inscrito");
+    	    	 }
+    		}
+    		else {
+    			System.out.println("Learning Path no encontrado");
+    		}
+    	}
+    	
+    	else {
+    		System.out.println("Estudiante no encontrado");
+    	}
+    	
     }
 
 }

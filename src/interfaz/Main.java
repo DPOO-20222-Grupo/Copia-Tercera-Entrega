@@ -14,6 +14,10 @@ import actividades.Examen;
 import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
+import exceptions.ActividadPreviaCiclicoException;
+import exceptions.ActividadYaCompletadaException;
+import exceptions.EstudianteNoInscritoException;
+import exceptions.ModificarActividadesPreviasException;
 import exceptions.ModificarEstudianteLearningPathException;
 import learningPath.LearningPath;
 import preguntas.PreguntaAbierta;
@@ -29,7 +33,7 @@ public class Main {
 	public static String archivoActividades = "actividades.json";
 
 	
-	public static void correrApp() throws ModificarEstudianteLearningPathException {
+	public static void correrApp() throws ModificarEstudianteLearningPathException, ModificarActividadesPreviasException, ActividadPreviaCiclicoException, EstudianteNoInscritoException, ActividadYaCompletadaException {
 		try {
 		
 		Aplicacion aplicacion = new Aplicacion();
@@ -79,6 +83,11 @@ public class Main {
 		RevisarRecurso rr = new RevisarRecurso("Ver video", "Ver video segunda guerra mundial", objetivos, "bajo", 45,
 				date, "video", prof1, "enlace");
 		
+		
+		
+		
+		
+		
 		aplicacion.registrarActividad(en);
 		aplicacion.registrarActividad(qu);
 		aplicacion.registrarActividad(ta);
@@ -103,7 +112,9 @@ public class Main {
 				prof1, actividades, mapaObligatorio);
 		
 		aplicacion.registrarLearningPath(lp);	
-		aplicacion.inscribirEstudianteLearningPath(stud2, lp);
+		aplicacion.resenarActividad(rr, "prueba");
+		
+		
 		
 		// Descarga de los Datos en Archivos JSON
 		aplicacion.descargarDatos();
@@ -183,6 +194,7 @@ public class Main {
 				+ String.format("     * : %s\n", revisarRecurso.getObjetivos().get(1))
 				+ String.format("--- Dificultad: %s \n", revisarRecurso.getNivelDificultad())
 				+ String.format("--- Duracion Estimada: %d minutos \n", revisarRecurso.getDuracionMinutos())
+			+ revisarRecurso.getResenas().get(0)
 		
 				
 				
@@ -221,8 +233,27 @@ public class Main {
 		
 		}
 	
-	public static void main(String[] args) throws ModificarEstudianteLearningPathException {
-		correrApp();
+	
+	public static void main(String[] args) {
+		
+		try {
+			correrApp();
+		} catch (ModificarEstudianteLearningPathException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ModificarActividadesPreviasException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		} catch (ActividadPreviaCiclicoException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());;
+		} catch (EstudianteNoInscritoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ActividadYaCompletadaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 }

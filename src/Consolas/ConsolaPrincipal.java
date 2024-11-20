@@ -6,50 +6,58 @@ import exceptions.UsuarioYaExistenteException;
 import interfaz.Aplicacion; 
 
 
-public class RegistroConsole {
+public class ConsolaPrincipal {
 	   
     private static Scanner scanner = new Scanner(System.in);
     private static Aplicacion aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");  
 
     public static void main(String[] args) {
         
-        System.out.println("== Sistema de Registro ==");
+        
         mostrarMenuRegistro();
         
     }
 
     private static void mostrarMenuRegistro() {
-        int opcion;
+        int opcion= 0;
         do {
-            System.out.println("\n== Menú Registro ==");
+        	System.out.println("\n== Menú Principal ==");
             System.out.println("1. Inscribirse como profesor");
             System.out.println("2. Inscribirse como estudiante");
             System.out.println("3. Iniciar sesión como profesor");
             System.out.println("4. Iniciar sesión como estudiante");
             System.out.println("5. Cerrar registro");
             System.out.print("Seleccione una opción: ");
+            try {
             opcion = Integer.parseInt(scanner.nextLine());
 
             switch (opcion) {
                 case 1:
                     registroProfesor();
+                    aplicacion.descargarDatos();
                     break;
                 case 2:
                     registroEstudiante();
+                    aplicacion.descargarDatos();
                     break;
                 case 3:
                     loginProfesor();
+                    aplicacion.descargarDatos();
                     break;
                 case 4:
                     loginEstudiante();
+                    aplicacion.descargarDatos();
                     break;
                 
                 case 5:
                     System.out.println("Sesión cerrada.");
-                    aplicacion.descargarDatos();
                     break;
                 default:
                     System.out.println("Opción no válida.");
+            }
+            }
+            catch(NumberFormatException e) {
+            	System.out.println("Opción no válida.");
             }
         } while (opcion != 5);
     }

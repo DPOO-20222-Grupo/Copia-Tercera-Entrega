@@ -20,8 +20,130 @@
       "actividadesSeguimiento": []
     }
   },
+<<<<<<< HEAD
   "Examenes": {},
   "Revisar Recursos": {},
   "Quices": {},
   "Encuestas": {}
+=======
+  "Examenes": {
+    "Parcial - l.munera": {
+      "numPreguntas": 1,
+      "preguntas": [
+        {
+          "enunciado": "Ingrese su nombre: ",
+          "titulo": "Registro de Nombres",
+          "id": 1
+        }
+      ],
+      "tipo": "Examen",
+      "titulo": "Parcial",
+      "descripcion": "Examen Parcial",
+      "objetivos": [
+        "Objetivo 1",
+        "Objetivo 2"
+      ],
+      "nivelDificultad": "medio",
+      "loginProfesorCreador": "l.munera",
+      "nombreProfesorCreador": "Lina Munera",
+      "duracionMinutos": 120,
+      "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+      "resenas": [],
+      "rating": 0.0,
+      "contadorRatings": 0,
+      "actividadesPrevias": [],
+      "actividadesSeguimiento": []
+    }
+  },
+  "Revisar Recursos": {
+    "Ver video - l.munera": {
+      "tipoRecurso": "video",
+      "enlaceRecurso": "enlace",
+      "tipo": "Recurso",
+      "titulo": "Ver video",
+      "descripcion": "Ver video segunda guerra mundial",
+      "objetivos": [
+        "Objetivo 1",
+        "Objetivo 2"
+      ],
+      "nivelDificultad": "bajo",
+      "loginProfesorCreador": "l.munera",
+      "nombreProfesorCreador": "Lina Munera",
+      "duracionMinutos": 45,
+      "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+      "resenas": [
+        "prueba"
+      ],
+      "rating": 0.0,
+      "contadorRatings": 0,
+      "actividadesPrevias": [],
+      "actividadesSeguimiento": []
+    }
+  },
+  "Quices": {
+    "Quiz1 - l.munera": {
+      "calificacionMinima": 3.5,
+      "preguntas": [
+        {
+          "opcion1": "Azul",
+          "opcion2": "Rojo",
+          "opcion3": "Amarillo",
+          "opcion4": "Negro",
+          "opcionCorrecta": 4,
+          "enunciado": "¿Qué color no es primario?",
+          "titulo": "Colores",
+          "id": 1,
+          "tipoPregunta": "PreguntaSeleccionMultiple"
+        }
+      ],
+      "numPreguntas": 1,
+      "tipo": "Quiz",
+      "titulo": "Quiz1",
+      "descripcion": "Primer Quiz",
+      "objetivos": [
+        "Objetivo 1",
+        "Objetivo 2"
+      ],
+      "nivelDificultad": "bajo",
+      "loginProfesorCreador": "l.munera",
+      "nombreProfesorCreador": "Lina Munera",
+      "duracionMinutos": 45,
+      "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+      "resenas": [],
+      "rating": 0.0,
+      "contadorRatings": 0,
+      "actividadesPrevias": [],
+      "actividadesSeguimiento": []
+    }
+  },
+  "Encuestas": {
+    "Autoevaluación - l.munera": {
+      "preguntas": [
+        {
+          "enunciado": "Ingrese su nombre: ",
+          "titulo": "Registro de Nombres",
+          "id": 1
+        }
+      ],
+      "numPreguntas": 1,
+      "tipo": "Encuesta",
+      "titulo": "Autoevaluación",
+      "descripcion": "Autoevaluación acitividad #1",
+      "objetivos": [
+        "Objetivo 1",
+        "Objetivo 2"
+      ],
+      "nivelDificultad": "Bajo",
+      "loginProfesorCreador": "l.munera",
+      "nombreProfesorCreador": "Lina Munera",
+      "duracionMinutos": 15,
+      "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+      "resenas": [],
+      "rating": 0.0,
+      "contadorRatings": 0,
+      "actividadesPrevias": [],
+      "actividadesSeguimiento": []
+    }
+  }
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
 }
