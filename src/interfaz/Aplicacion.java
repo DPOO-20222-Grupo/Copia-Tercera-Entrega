@@ -218,7 +218,7 @@ public class Aplicacion {
 			}
 		}
 		else if (tipo.equals("Profesor") ) {
-			if (mapaEstudiantes.containsKey(login)) {
+			if (mapaProfesores.containsKey(login)) {
 				throw new UsuarioYaExistenteException(login, tipo);
 			}
 		}

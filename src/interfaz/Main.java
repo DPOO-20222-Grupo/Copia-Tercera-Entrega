@@ -81,10 +81,7 @@ public class Main {
 		RevisarRecurso rr = new RevisarRecurso("Ver video", "Ver video segunda guerra mundial", objetivos, "bajo", 45,
 				date, "video", prof1, "enlace");
 		
-		qu.agregarActividadPrevia(rr);
-		ta.agregarActividadPrevia(qu);
-
-		rr.agregarActividadPrevia(ta);
+		
 		
 		
 		

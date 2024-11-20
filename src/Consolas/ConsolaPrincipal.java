@@ -6,14 +6,14 @@ import exceptions.UsuarioYaExistenteException;
 import interfaz.Aplicacion; 
 
 
-public class RegistroConsole {
+public class ConsolaPrincipal {
 	   
     private static Scanner scanner = new Scanner(System.in);
     private static Aplicacion aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");  
 
     public static void main(String[] args) {
         
-        System.out.println("== Sistema de Registro ==");
+        System.out.println("== Menú Principal ==");
         mostrarMenuRegistro();
         
     }
@@ -21,7 +21,6 @@ public class RegistroConsole {
     private static void mostrarMenuRegistro() {
         int opcion;
         do {
-            System.out.println("\n== Menú Registro ==");
             System.out.println("1. Inscribirse como profesor");
             System.out.println("2. Inscribirse como estudiante");
             System.out.println("3. Iniciar sesión como profesor");
