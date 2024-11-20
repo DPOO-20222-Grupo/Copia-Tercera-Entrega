@@ -15,6 +15,7 @@ import com.google.gson.JsonObject;
 import actividades.Actividad;
 import learningPath.LearningPath;
 import preguntas.PreguntaCerrada;
+import seguimientoEstudiantes.SeguimientoActividad;
 
 public class PersistenciaLearningPaths {
 	
@@ -25,6 +26,7 @@ public class PersistenciaLearningPaths {
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
+				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())
 				.create();
 		JsonObject jsonObject = new JsonObject();
 			
@@ -45,6 +47,7 @@ public class PersistenciaLearningPaths {
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
+				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())
 				.create();
 		
 		HashMap<String, LearningPath> LPMap = new HashMap<String, LearningPath>();			

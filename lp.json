@@ -11,8 +11,8 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
-    "fechaCreacion": "2024-11-18T21:23:13.9493618",
-    "fechaUltimaModificacion": "2024-11-18T21:23:13.9493618",
+    "fechaCreacion": "2024-11-20T12:37:32.062954",
+    "fechaUltimaModificacion": "2024-11-20T12:37:32.062954",
     "version": 1.0,
     "estudiantesInscritos": {
       "a.linares": {
@@ -246,9 +246,16 @@
               "tipoActividad": "Quiz"
             },
             "estado": "Incompleta",
+<<<<<<< HEAD
             "loginEstudianteSeguimiento": "david2005",
             "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
+=======
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoQuiz"
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
           },
           "Parcial - l.munera": {
             "nota": -1.0,
@@ -284,9 +291,16 @@
               "tipoActividad": "Examen"
             },
             "estado": "Incompleta",
+<<<<<<< HEAD
             "loginEstudianteSeguimiento": "david2005",
             "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
+=======
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoExamen"
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
           },
           "Autoevaluación - l.munera": {
             "respuestas": {
@@ -321,9 +335,16 @@
               "tipoActividad": "Encuesta"
             },
             "estado": "Incompleta",
+<<<<<<< HEAD
             "loginEstudianteSeguimiento": "david2005",
             "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
+=======
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoEncuesta"
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
           },
           "Ver video - l.munera": {
             "recurso": "video",
@@ -350,9 +371,16 @@
               "tipoActividad": "RevisarRecurso"
             },
             "estado": "Incompleta",
+<<<<<<< HEAD
             "loginEstudianteSeguimiento": "david2005",
             "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
+=======
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoRecurso"
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
           },
           "Tarea1 - l.munera": {
             "metodoEnvio": "",
@@ -376,10 +404,18 @@
               "actividadesSeguimiento": [],
               "tipoActividad": "Tarea"
             },
+<<<<<<< HEAD
             "estado": "Enviado",
             "loginEstudianteSeguimiento": "david2005",
             "nombreEstudianteSeguimiento": "David Velasquez",
             "tiempoTotal": 0
+=======
+            "estado": "Incompleta",
+            "loginEstudianteSeguimiento": "a.linares",
+            "nombreEstudianteSeguimiento": "Andres Linares",
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoTarea"
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Proyecto_1_Final.git
           }
         },
         "loginEstudiante": "david2005",

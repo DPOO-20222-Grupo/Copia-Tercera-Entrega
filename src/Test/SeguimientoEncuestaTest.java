@@ -45,7 +45,7 @@ class SeguimientoEncuestaTest {
 	@Test
 	void testRegistrarPregunta() {
 		seg.registrarPregunta(pregunta1, "respuesta");
-		assertEquals("respuesta", seg.getRespuestas().get(pregunta1));
+		assertEquals("respuesta", seg.getRespuestas().get(pregunta1.getIdPregunta()));
 	}
 
 }
