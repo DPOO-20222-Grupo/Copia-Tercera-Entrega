@@ -14,7 +14,10 @@ import actividades.Examen;
 import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
+import exceptions.ActividadPreviaCiclicoException;
+import exceptions.ActividadSeguimientoCiclicoException;
 import exceptions.ActividadYaExistenteException;
+import exceptions.EstudianteNoInscritoException;
 import exceptions.LearningPathYaExistenteException;
 import exceptions.ModificarActividadesLearningPathException;
 import exceptions.ModificarActividadesPreviasException;
@@ -525,9 +528,11 @@ public class Aplicacion {
 	 * tira excepciones si la actividad a agregar (eliminar) ya se encontraba (no se encontraba) en la lista correspondiente
 	 * @throws ModificarActividadesPreviasException 
 	 * @throws ModificarActividadesSeguimientoException
+	 * @throws ActividadPreviaCiclicoException 
+	 * @throws ActividadSeguimientoCiclicoException 
 	 */
 	public void modificarSeguimientoPrevioActividad (Actividad actividadPrincipal, Actividad actividadOperacion, String tipo, int accion)
-				throws ModificarActividadesPreviasException, ModificarActividadesSeguimientoException
+				throws ModificarActividadesPreviasException, ModificarActividadesSeguimientoException, ActividadPreviaCiclicoException, ActividadSeguimientoCiclicoException
 	{
 		
 		if (tipo.equals("Previa")) {
@@ -888,68 +893,110 @@ public class Aplicacion {
 	}
 	
 	//Permite a un estudiante enviar una tarea
-	public void enviarTarea (Tarea tarea, Estudiante estudiante, LearningPath learningPath) {
+	public void enviarTarea (Tarea tarea, Estudiante estudiante, LearningPath learningPath) throws EstudianteNoInscritoException {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		if (seguimientoEstudiante == null) {
+			throw new EstudianteNoInscritoException(learningPath);
+		}
 		
+		else {
 		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) seguimientoEstudiante.getMapaSeguimientoActividades().get(tarea.getIdActividad());
 		
 		seguimientoTarea.actualizarEstadoEnviado();
+		}
 		
 	}
 	//Permite actualizar el estado de un examen a enviado
-	public void enviarExamen (Examen examen, Estudiante estudiante, LearningPath learningPath) {
+	public void enviarExamen (Examen examen, Estudiante estudiante, LearningPath learningPath) throws EstudianteNoInscritoException {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
 		
+		if (seguimientoEstudiante == null) {
+			throw new EstudianteNoInscritoException(learningPath);
+		}
+		
+		else {
+
 		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen.getIdActividad());
 		
 		seguimientoExamen.actualizarEstadoEnviado();
 		
+		}
+		
 	}
 	//Permite a un estudiante registrar su respuesta a una pregunta de un examen de un learning path
-	public void responderPreguntaExamen (Examen examen, Estudiante estudiante, LearningPath learningPath, PreguntaAbierta pregunta, String respuesta) {
+	public void responderPreguntaExamen (Examen examen, Estudiante estudiante, LearningPath learningPath, PreguntaAbierta pregunta, String respuesta) throws EstudianteNoInscritoException {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		
+		if (seguimientoEstudiante == null) {
+			throw new EstudianteNoInscritoException(learningPath);
+		}
+		
+		else {
 		
 		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen.getIdActividad());
 		
 		seguimientoExamen.registrarPregunta(pregunta, respuesta);
 		
+		}
+		
 	}
 	
 	//Permite a un estudiante registrar su respuesta a una pregunta de una encuesta
-	public void responderPreguntaEncuesta (Encuesta encuesta, Estudiante estudiante, LearningPath learningPath, PreguntaAbierta pregunta, String respuesta) {
+	public void responderPreguntaEncuesta (Encuesta encuesta, Estudiante estudiante, LearningPath learningPath, PreguntaAbierta pregunta, String respuesta) throws EstudianteNoInscritoException {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		
+		if (seguimientoEstudiante == null) {
+			throw new EstudianteNoInscritoException(learningPath);
+		}
+		
+		else {
 		
 		SeguimientoEncuesta seguimientoEncuesta = (SeguimientoEncuesta) seguimientoEstudiante.getMapaSeguimientoActividades().get(encuesta.getIdActividad());
 		
 		seguimientoEncuesta.registrarPregunta(pregunta, respuesta);
 		
+		}
+		
 	}
 	
 	//Permite a un estudiante registrar su respuesta a una pregunta de un quiz
 	
-	public void responderPreguntaQuiz (Quiz quiz, Estudiante estudiante, LearningPath learningPath, PreguntaCerrada pregunta, int respuesta) {
+	public void responderPreguntaQuiz (Quiz quiz, Estudiante estudiante, LearningPath learningPath, PreguntaCerrada pregunta, int respuesta) throws EstudianteNoInscritoException {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		
+		if (seguimientoEstudiante == null) {
+			throw new EstudianteNoInscritoException(learningPath);
+		}
+		
+		else {
 		
 		SeguimientoQuiz seguimientoQuiz = (SeguimientoQuiz) seguimientoEstudiante.getMapaSeguimientoActividades().get(quiz.getIdActividad());
 		
 		seguimientoQuiz.agregarRespuestaPregunta(pregunta, respuesta);
-		
+		}
 	}
 	
 	//Permite registrar que se completo una encuesta o recurso
 	
-	public void completarEncuestaRecurso (Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
+	public void completarEncuestaRecurso (Actividad actividad, Estudiante estudiante, LearningPath learningPath) throws EstudianteNoInscritoException {
 		
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		if (seguimientoEstudiante == null) {
+			throw new EstudianteNoInscritoException(learningPath);
+		}
+		
+		else {
 		
 		SeguimientoActividad seguimientoActividad = seguimientoEstudiante.getMapaSeguimientoActividades().get(actividad.getIdActividad());
 		
 		seguimientoActividad.actualizarEstadoCompletado();
+		
+		}
 		
 		
 	}
@@ -1088,6 +1135,13 @@ public class Aplicacion {
 		else {
 			return null;
 		}
+	}
+	
+	public void actualizarDuracionDesarrolloActividad (Estudiante estudiante, LearningPath learningPath, Actividad actividad, int duracion) {
+		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		SeguimientoActividad seguimientoActividad = seguimientoEstudiante.getMapaSeguimientoActividades().get(actividad.getIdActividad());
+		seguimientoActividad.setTiempoTotal(duracion);
+		seguimientoEstudiante.actualizarTiempoTotal(duracion);
 	}
 
 	

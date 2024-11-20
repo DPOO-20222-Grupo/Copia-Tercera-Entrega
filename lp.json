@@ -11,8 +11,8 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
-    "fechaCreacion": "2024-11-18T21:23:13.9493618",
-    "fechaUltimaModificacion": "2024-11-18T21:23:13.9493618",
+    "fechaCreacion": "2024-11-19T12:53:03.717462",
+    "fechaUltimaModificacion": "2024-11-19T12:53:03.717462",
     "version": 1.0,
     "estudiantesInscritos": {
       "a.linares": {
@@ -74,7 +74,8 @@
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
             "nombreEstudianteSeguimiento": "Andres Linares",
-            "tiempoTotal": 0
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoQuiz"
           },
           "Parcial - l.munera": {
             "nota": -1.0,
@@ -112,7 +113,8 @@
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
             "nombreEstudianteSeguimiento": "Andres Linares",
-            "tiempoTotal": 0
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoExamen"
           },
           "Autoevaluación - l.munera": {
             "respuestas": {
@@ -149,7 +151,8 @@
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
             "nombreEstudianteSeguimiento": "Andres Linares",
-            "tiempoTotal": 0
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoEncuesta"
           },
           "Ver video - l.munera": {
             "recurso": "video",
@@ -178,7 +181,8 @@
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
             "nombreEstudianteSeguimiento": "Andres Linares",
-            "tiempoTotal": 0
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoRecurso"
           },
           "Tarea1 - l.munera": {
             "metodoEnvio": "",
@@ -205,7 +209,8 @@
             "estado": "Incompleta",
             "loginEstudianteSeguimiento": "a.linares",
             "nombreEstudianteSeguimiento": "Andres Linares",
-            "tiempoTotal": 0
+            "tiempoTotal": 0,
+            "tipoSeguimiento": "SeguimientoTarea"
           }
         },
         "loginEstudiante": "a.linares",

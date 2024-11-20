@@ -15,6 +15,9 @@ import user.Profesor;
 
 
 public class LearningPath {
+	public final static String BAJO = "Principiante";
+	public final static String MEDIO = "Intermedio";
+	public final static String ALTO = "Avanzado";
     private String titulo;
     private String descripcion;
     private String loginProfesorCreador;

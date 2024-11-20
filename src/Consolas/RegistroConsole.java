@@ -33,20 +33,23 @@ public class RegistroConsole {
             switch (opcion) {
                 case 1:
                     registroProfesor();
+                    aplicacion.descargarDatos();
                     break;
                 case 2:
                     registroEstudiante();
+                    aplicacion.descargarDatos();
                     break;
                 case 3:
                     loginProfesor();
+                    aplicacion.descargarDatos();
                     break;
                 case 4:
                     loginEstudiante();
+                    aplicacion.descargarDatos();
                     break;
                 
                 case 5:
                     System.out.println("Sesión cerrada.");
-                    aplicacion.descargarDatos();
                     break;
                 default:
                     System.out.println("Opción no válida.");
