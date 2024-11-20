@@ -19,7 +19,7 @@ public class ConsolaPrincipal {
     }
 
     private static void mostrarMenuRegistro() {
-        int opcion;
+        int opcion= 0;
         do {
         	System.out.println("\n== Menú Principal ==");
             System.out.println("1. Inscribirse como profesor");
@@ -28,6 +28,7 @@ public class ConsolaPrincipal {
             System.out.println("4. Iniciar sesión como estudiante");
             System.out.println("5. Cerrar registro");
             System.out.print("Seleccione una opción: ");
+            try {
             opcion = Integer.parseInt(scanner.nextLine());
 
             switch (opcion) {
@@ -53,6 +54,10 @@ public class ConsolaPrincipal {
                     break;
                 default:
                     System.out.println("Opción no válida.");
+            }
+            }
+            catch(NumberFormatException e) {
+            	System.out.println("Opción no válida.");
             }
         } while (opcion != 5);
     }

@@ -15,6 +15,8 @@ import actividades.Quiz;
 import actividades.RevisarRecurso;
 import actividades.Tarea;
 import exceptions.ActividadPreviaCiclicoException;
+import exceptions.ActividadYaCompletadaException;
+import exceptions.EstudianteNoInscritoException;
 import exceptions.ModificarActividadesPreviasException;
 import exceptions.ModificarEstudianteLearningPathException;
 import learningPath.LearningPath;
@@ -31,7 +33,7 @@ public class Main {
 	public static String archivoActividades = "actividades.json";
 
 	
-	public static void correrApp() throws ModificarEstudianteLearningPathException, ModificarActividadesPreviasException, ActividadPreviaCiclicoException {
+	public static void correrApp() throws ModificarEstudianteLearningPathException, ModificarActividadesPreviasException, ActividadPreviaCiclicoException, EstudianteNoInscritoException, ActividadYaCompletadaException {
 		try {
 		
 		Aplicacion aplicacion = new Aplicacion();
@@ -110,7 +112,10 @@ public class Main {
 				prof1, actividades, mapaObligatorio);
 		
 		aplicacion.registrarLearningPath(lp);	
+		aplicacion.enviarTarea(ta, stud2, lp);
 		aplicacion.inscribirEstudianteLearningPath(stud2, lp);
+		
+		
 		
 		// Descarga de los Datos en Archivos JSON
 		aplicacion.descargarDatos();
@@ -242,6 +247,12 @@ public class Main {
 		} catch (ActividadPreviaCiclicoException e) {
 			// TODO Auto-generated catch block
 			System.out.println(e.getMessage());;
+		} catch (EstudianteNoInscritoException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ActividadYaCompletadaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 	}

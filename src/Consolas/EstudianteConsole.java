@@ -202,7 +202,7 @@ public class EstudianteConsole {
             }
         } while (loginProfesorTarea.isEmpty());
 
-        try {
+        
         	String idLearningPath = aplicacion.generarLlaveLearningsActividades(tituloLearningPath, loginProfesorLP);
         	
             LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
@@ -210,22 +210,32 @@ public class EstudianteConsole {
 	            String idTarea = aplicacion.generarLlaveLearningsActividades(tituloTarea, loginProfesorTarea);
 	            Tarea tarea = (Tarea) aplicacion.getActividad(idTarea, "Tarea");
 	            if (tarea != null) {
+	            	try {
+	            	boolean check = aplicacion.revisarActividadesPrevias(tarea, estudiante, learningPath);
 		            String impresion = String.format("Tarea: %s\n"+
 		            								 "Descripcion: %s \n" +
 		            								 "Duración estimada: %d minutos\n"
 		            								 , tarea.getTitulo(),tarea.getDescripcion(),tarea.getDuracionMinutos());
-		            boolean check = aplicacion.revisarActividadesPrevias(tarea, estudiante, learningPath);
+		            
 		        	if (check == false) {
 		        		System.out.println("Advertencia: No se cumplen los prerrequisitos en el Learning Path de la actividad");
 		        	}
 		            System.out.println(impresion);
-		            aplicacion.enviarTarea(tarea, estudiante, learningPath);
-		            System.out.println("¿Aproximadamente cuánto tiempo, en minutos, le tomó realizar la actividad?: ");
-		            int duracion = Integer.parseInt(scanner.nextLine());
-		            aplicacion.actualizarDuracionDesarrolloActividad(estudiante, learningPath, tarea, duracion);
-		            System.out.println("Tarea enviada exitosamente.");
 		            
-		            mostrarActividadesSeguimiento(tarea);
+			            aplicacion.enviarTarea(tarea, estudiante, learningPath);
+			            System.out.println("¿Aproximadamente cuánto tiempo, en minutos, le tomó realizar la actividad?: ");
+			            
+			            int duracion = Integer.parseInt(scanner.nextLine());
+			            aplicacion.actualizarDuracionDesarrolloActividad(estudiante, learningPath, tarea, duracion);
+			            System.out.println("Tarea enviada exitosamente.");
+			            
+			            mostrarActividadesSeguimiento(tarea);
+		            
+		            }
+		            
+		            catch (Exception e) {
+		            	System.out.println(e.getMessage());
+		            }
 	            }
 	            else {
 	            	System.out.println("Tarea no encontrada");
@@ -236,9 +246,7 @@ public class EstudianteConsole {
             	System.out.println("Learning Path no encontrado");
             	return;
             }
-        } catch (Exception e) {
-            System.out.println("Error al enviar la tarea: " + e.getMessage());
-        }
+        
     }
     
     private  void responderPreguntaExamen(Estudiante estudiante) {
@@ -288,11 +296,11 @@ public class EstudianteConsole {
             if (learningPath != null) {
 	            Examen examen = (Examen) aplicacion.getActividad(idExamen, "Examen");
 	            if (examen != null) {
-	            	
+	            	boolean check = aplicacion.revisarActividadesPrevias(examen, estudiante, learningPath);
 	            	System.out.println("\nExamen: "+examen.getTitulo());
 	            	System.out.println("\nDescripción: "+examen.getDescripcion());
 	            	System.out.println(String.format("\nDuración estimada: %d minutos",examen.getDuracionMinutos()));
-	            	boolean check = aplicacion.revisarActividadesPrevias(examen, estudiante, learningPath);
+	            	
 	            	if (check == false) {
 	            		System.out.println("Advertencia: No se cumplen los prerrequisitos en el Learning Path de la actividad");
 	            	}
@@ -380,11 +388,11 @@ public class EstudianteConsole {
             if (learningPath != null) {
 	            Encuesta encuesta = (Encuesta) aplicacion.getActividad(idEncuesta, "Encuesta");
 	            if (encuesta != null) {
-	            	
+	            	boolean check = aplicacion.revisarActividadesPrevias(encuesta, estudiante, learningPath);
 	            	System.out.println("\nEncuesta: "+encuesta.getTitulo());
 	            	System.out.println("\nDescripción: "+encuesta.getDescripcion());
 	            	System.out.println(String.format("\nDuración estimada: %d minutos",encuesta.getDuracionMinutos()));
-	            	boolean check = aplicacion.revisarActividadesPrevias(encuesta, estudiante, learningPath);
+	            	
 	            	if (check == false) {
 	            		System.out.println("Advertencia: No se cumplen los prerrequisitos en el Learning Path de la actividad");
 	            	}
@@ -481,11 +489,11 @@ public class EstudianteConsole {
             	System.out.println("Quiz no encontrado");
             	return;
             }
-            
+            boolean check = aplicacion.revisarActividadesPrevias(quiz, estudiante, learningPath);
             System.out.println("\nQuiz: "+quiz.getTitulo());
         	System.out.println("\nDescripción: "+quiz.getDescripcion());
         	System.out.println(String.format("\nDuración estimada: %d minutos",quiz.getDuracionMinutos()));
-        	boolean check = aplicacion.revisarActividadesPrevias(quiz, estudiante, learningPath);
+        	
         	if (check == false) {
         		System.out.println("Advertencia: No se cumplen los prerrequisitos en el Learning Path de la actividad");
         	}
@@ -614,14 +622,18 @@ public class EstudianteConsole {
             System.out.println("Actividad no encontrada.");
             return;
         }
-        
+        try {
+        boolean check = aplicacion.revisarActividadesPrevias(recurso, estudiante, learningPath);
         System.out.println("\nRecurso: "+recurso.getTitulo());
         System.out.println("\nDescripción: "+recurso.getDescripcion());
     	System.out.println(String.format("\nDuración estimada: %d minutos",recurso.getDuracionMinutos()));
     	System.out.println("\nTipo de Recurso: "+recurso.getTipoRecurso());
     	System.out.println("\nEnlace de Recurso: "+recurso.getEnlaceRecurso());
+    	if (check == false) {
+    		System.out.println("Advertencia: No se cumplen los prerrequisitos en el Learning Path de la actividad");
+    	}
     	
-        try {
+        
         	System.out.println("¿Aproximadamente cuánto tiempo, en minutos, le tomó realizar la actividad?: ");
             int duracion = Integer.parseInt(scanner.nextLine());
             aplicacion.actualizarDuracionDesarrolloActividad(estudiante, learningPath, recurso, duracion);

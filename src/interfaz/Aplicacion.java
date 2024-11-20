@@ -903,7 +903,7 @@ public class Aplicacion {
 		
 		else {
 		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) seguimientoEstudiante.getMapaSeguimientoActividades().get(tarea.getIdActividad());
-			if(seguimientoTarea.getEstado().equals("Incompleto")) {
+			if(seguimientoTarea.getEstado().equals("Incompleta")) {
 				seguimientoTarea.actualizarEstadoEnviado();
 			}
 			
@@ -927,7 +927,7 @@ public class Aplicacion {
 		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen.getIdActividad());
 		
 		
-		if(seguimientoExamen.getEstado().equals("Incompleto")) {
+		if(seguimientoExamen.getEstado().equals("Incompleta")) {
 			seguimientoExamen.actualizarEstadoEnviado();
 		}
 		
@@ -951,7 +951,7 @@ public class Aplicacion {
 		
 		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) seguimientoEstudiante.getMapaSeguimientoActividades().get(examen.getIdActividad());
 		
-		if(seguimientoExamen.getEstado().equals("Incompleto")) {
+		if(seguimientoExamen.getEstado().equals("Incompleta")) {
 			seguimientoExamen.registrarPregunta(pregunta, respuesta);;
 		}
 		
@@ -976,7 +976,7 @@ public class Aplicacion {
 		
 		SeguimientoEncuesta seguimientoEncuesta = (SeguimientoEncuesta) seguimientoEstudiante.getMapaSeguimientoActividades().get(encuesta.getIdActividad());
 		
-		if(seguimientoEncuesta.getEstado().equals("Incompleto")) {
+		if(seguimientoEncuesta.getEstado().equals("Incompleta")) {
 			seguimientoEncuesta.registrarPregunta(pregunta, respuesta);;
 		}
 		
@@ -1019,7 +1019,7 @@ public class Aplicacion {
 		else {
 		
 		SeguimientoActividad seguimientoActividad = seguimientoEstudiante.getMapaSeguimientoActividades().get(actividad.getIdActividad());
-		if(seguimientoActividad.getEstado().equals("Incompleto")) {
+		if(seguimientoActividad.getEstado().equals("Incompleta")) {
 			seguimientoActividad.actualizarEstadoCompletado();
 		}
 		
@@ -1041,8 +1041,9 @@ public class Aplicacion {
 	 * @param estudiante Estudiante que quiere realizar "actividad"
 	 * @param learningPath Learning Path en el que se encuentra "actividad"
 	 * @return
+	 * @throws EstudianteNoInscritoException 
 	 */
-	public boolean revisarActividadesPrevias(Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
+	public boolean revisarActividadesPrevias(Actividad actividad, Estudiante estudiante, LearningPath learningPath) throws EstudianteNoInscritoException {
 		
 		List<Actividad> prerrequisitos = actividad.getActividadesPrevias();
 		
@@ -1050,6 +1051,7 @@ public class Aplicacion {
 		
 		SeguimientoLearningPath seguimiento = estudiante.getLearningPathsInscritos().get(idLP);
 		
+		if (seguimiento != null) {
 		Map<String, SeguimientoActividad> seguimientoActividades = seguimiento.getMapaSeguimientoActividades();
 		
 		boolean cumplePrerrequisitos = true;
@@ -1069,6 +1071,11 @@ public class Aplicacion {
 		}
 		
 		return cumplePrerrequisitos;
+		}
+		
+		else {
+			throw new EstudianteNoInscritoException(learningPath);
+		}
 		
 		
 	}
