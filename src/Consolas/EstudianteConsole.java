@@ -690,8 +690,8 @@ public class EstudianteConsole {
     	        tipo = scanner.nextLine().trim();
     	        if (tipo.isEmpty()) {
     	            System.out.println("El tipo de la actividad no puede estar vacío. Por favor, ingrese un valor válido.");
-    	        } else if (!tipo.equals("Encuesta") && !tipo.equals("recurso") && !tipo.equals("Examen") && !tipo.equals("Quiz")) {
-    	            System.out.println("El tipo de actividad debe ser 'Encuesta', 'Recurso', 'Examen' o 'Quiz'.");
+    	        } else if (!tipo.equals("Encuesta") && !tipo.equals("recurso") && !tipo.equals("Examen") && !tipo.equals("Quiz") && !tipo.equals("Tarea")) {
+    	            System.out.println("El tipo de actividad debe ser 'Encuesta', 'Recurso', 'Examen', 'Tarea' o 'Quiz'.");
     	        }
     	    } while (tipo.isEmpty() || (!tipo.equals("Encuesta") && !tipo.equals("Recurso") && !tipo.equals("Examen") && !tipo.equals("Quiz")));
     	    

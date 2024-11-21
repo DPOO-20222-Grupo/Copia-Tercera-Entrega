@@ -1059,7 +1059,7 @@ public class ProfesorConsole {
         
     	String msjTitulo = "Ingrese el título de la actividad que desea clonar: ";
     	String msjProfesor = "Ingrese el login del profesor creador de la actividad que desea clonar: ";
-    	String msjTipo = "Ingrese el tipo de la actividad que desea clonar: ";
+    	String msjTipo = "Ingrese el tipo de la actividad que desea clonar(Examen/Tarea/Quiz/Recurso/Encuesta): ";
     	
         Actividad actividadOriginal = getActividad(msjTitulo, msjProfesor,msjTipo, false, null);
 
@@ -1196,7 +1196,7 @@ public class ProfesorConsole {
 	                return; 
 	            }
 
-	            System.out.print("Ingrese el tipo de la actividad a modificar: ");
+	            System.out.print("Ingrese el tipo de la actividad a modificar (Examen/Tarea/Quiz/Recurso/Encuesta): ");
 	            String tipoActividad = scanner.nextLine();
 	            if (tipoActividad.isEmpty()) {
 	                System.out.println("El tipo de actividad no puede estar vacío.");
@@ -1349,7 +1349,7 @@ public class ProfesorConsole {
 	
 	private  void modificarActividad(Profesor profesor) {
 	    String msjTitulo = "Ingrese el título de la actividad a modificar: ";
-	    String msjTipo = "Ingrese el tipo de la actividad a modificar: ";
+	    String msjTipo = "Ingrese el tipo de la actividad a modificar (Examen/Tarea/Quiz/Recurso/Encuesta): ";
 	    
 	    Actividad actividad = getActividad(msjTitulo, "", msjTipo, true, profesor);
 	    
@@ -2032,7 +2032,7 @@ public class ProfesorConsole {
     	
     	String msjTitulo = "Indique el titulo de la actividad que desea reseñar o calificar";
     	String msjProfesor = "Indique el login del profesor creador de la actividad que desea reseñar o calificar";
-    	String msjTipo = "Indique el tipo de actividad que desea reseñar o calificar";
+    	String msjTipo = "Indique el tipo de actividad que desea reseñar o calificar (Examen/Tarea/Quiz/Recurso/Encuesta)";
     	Actividad actividad = getActividad(msjTitulo, msjProfesor, msjTipo, false, null);
     	
     	if (actividad != null) {
@@ -2268,7 +2268,7 @@ public class ProfesorConsole {
     private void verCalificacionActividad () {
     	String msjTitulo = "Ingrese el título de la actividad para la cual quiere ver la calificación y reseñas: ";
     	String msjProfesor = "Ingrese el login del profesor creador de la actividad Learning Path para la cual quiere ver la calificación y reseñas: ";
-    	String msjTipo = "Ingrese el tipo de la actividad para la cual quiere ver la calificación y reseñas: ";
+    	String msjTipo = "Ingrese el tipo de la actividad para la cual quiere ver la calificación y reseñas (Examen/Tarea/Quiz/Recurso/Encuesta): ";
     	
     	Actividad actividad = getActividad(msjTitulo, msjProfesor, msjTipo,false, null);
     	
