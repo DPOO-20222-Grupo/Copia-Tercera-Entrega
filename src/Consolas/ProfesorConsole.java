@@ -104,72 +104,93 @@ public class ProfesorConsole {
                 switch (opcion) {
                     case 1:
                         crearRevisarRecurso(profesor);
+                        
                         break;
                     case 2:
                         crearTarea(profesor);
+                        
                         break;
                     case 3:
                         crearQuiz(profesor);
+                        
                         break;
                     case 4:
                         crearExamen(profesor);
+                         
                         break;
                     case 5:
                         crearEncuesta(profesor);
+                        
                         break;
                     case 6:
                         crearLearningPath(profesor);
+                        
                         break;
                     case 7:
                         crearPregunta(profesor);
+                         
                         break;
                     case 8:
                         clonarActividad(profesor);
+                        
                         break;
                     case 9:
                         clonarLearningPath(profesor);
+                        
                         break;
                     case 10:
                         modificarLearningPath(profesor);
+                         
                         break;
                     case 11:
                         modificarActividad(profesor);
+                        
                         break;
                     case 12:
                         calificarActividad(profesor);
+                        
                         break;
                     case 13:
                         modificarPregunta(profesor);
+                        
                         break;
                     case 14:
                         revisarActividadRepetida(profesor);
+                        
                         break;
                     case 15:
                         revisarLearningPathRepetido(profesor);
+                        
                         break;
                     case 16:
                         verActividades(profesor);
+                         
                         break;
                     case 17:
                         verLearningPaths(profesor);
+                        
                         break;
                     case 18:
                         verProgresoLearningPathEstudiante();
+                        
                         break;
                         
                     case 19:
                         calificarResenarActividad();
+                         
                         break;
                     case 20:
                         calificarLearningPath();
+                        
                         break;
                     case 21:
                         profesor.logout();
                         System.out.println("Sesión cerrada.");
+                        
                         break;
                 }
 
-                aplicacion.descargarDatos(); 
+                
 
             } catch (NumberFormatException e) {
                 
