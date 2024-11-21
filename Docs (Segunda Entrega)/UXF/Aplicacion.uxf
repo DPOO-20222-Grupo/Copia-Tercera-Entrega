@@ -1,0 +1,149 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>20</x><y>40</y><w>800</w><h>1210</h></coordinates><panel_attributes>Aplicacion
+--
+--
++ Aplicacion()
++ Aplicacion(archivoUsuarios: String, archivoLP: String, archivoPreguntas: String, archivoActividades: String
++ getMapaEstudiantes(): HashMap&lt;String, Estudiante&gt;
++ getMapaProfesores(): HashMap&lt;String, Profesor&gt;
++ getMapaLearningPaths(): HashMap&lt;String, LearningPath&gt;
++ getMapaTareas(): HashMap&lt;String, Tarea&gt;
++ getMapaRevisarRecurso(): HashMap&lt;String, RevisarRecurso&gt;
++ getMapaEncuestas(): HashMap&lt;String, Encuesta&gt;
++ getMapaExamenes(): HashMap&lt;String, Examen&gt;
++ getMapaQuices(): HashMap&lt;String, Quiz&gt;
++ getMapaPreguntasAbiertas(): HashMap&lt;String, PreguntaAbierta&gt;
++ getMapaPreguntasSeleccionMultiple(): HashMap&lt;String, PreguntaSeleccionMultiple&gt;
++ registrarUsuario(nuevoUsuario: Usuario): void
++ registrarLearningPath(pLearningPath: LearningPath): void
++ registrarActividad(actividad: Actividad): void
++ registrarPregunta(pregunta: Pregunta): void
++ generarLlaveLearningsActividades(titulo: String, login: String): String
++ revisarActividadesRepetidas(titulo: String, login: String, tipo: String): void
++ revisarLearningPathRepetido(titulo: String, login: String): void
++ crearLearningPath(titulo: String, descripcion: String, objetivos: List&lt;String&gt;, nivelDificultad: String, profesorCreador: Profesor, 
+listaActividades: List&lt;Actividad&gt;, mapaObligatoriedad: Map&lt;String, Boolean&gt;): void
++ crearEstudiante(login: String, password: String, nombre: String): void
++ crearProfesor(login: String, password: String, nombre: String): void
++ crearRevisarRecurso(titulo: String, descripcion: String, objetivos: List&lt;String&gt;, nivelDificultad: String, duracionMinutos: int, 
+fechaLimite: Date, tipoRecurso: String, profesorCreador: Profesor, enlaceRecurso: String): void
++ crearTarea(titulo: String, descripcion: String, objetivos: List&lt;String&gt;, nivelDificultad: String, duracionMinutos: int, fechaLimite: Date, 
+profesorCreador: Profesor): void
++ crearQuiz(titulo: String, descripcion: String, objetivos: List&lt;String&gt;, nivelDificultad: String, duracionMinutos: int, fechaLimite: Date, 
+profesorCreador: Profesor, calificacionMinima: float, preguntas: List&lt;PreguntaSeleccionMultiple&gt;): void
++ crearExamen(titulo: String, descripcion: String, objetivos: List&lt;String&gt;, nivelDificultad: String, duracionMinutos: int, fechaLimite: Date, 
+profesorCreador: Profesor, preguntas: List&lt;PreguntaAbierta&gt;): void
++ crearEncuesta(titulo: String, descripcion: String, objetivos: List&lt;String&gt;, nivelDificultad: String, duracionMinutos: int, fechaLimite: Date, 
+profesorCreador: Profesor, preguntas: List&lt;PreguntaAbierta&gt;): void
++ modificarAtributosStringLearningPath(learningPath: LearningPath, atributoModificar: String, valor: String, accion: String): void
++ modificarActividadesLearningPath(learningPath: LearningPath, actividad: Actividad, obligatoriedad: boolean, accion: String): void
++ modificarTituloActividad(actividad: Actividad, titulo: String): void
++ modificarAtributosStringActividad(actividad: Actividad, valor: String, atributo: String, accion: String): void
++ modificarFechaLimiteActividad(actividad: Actividad, fecha: Date): void
++ modificarDuracionActividad(actividad: Actividad, duracion: int): void
++ modificarRecurso(recurso: RevisarRecurso, valor: String, atributo: String): void
++ modificarSeguimientoPrevioActividad (actividadPrincipal: Actividad, actividadOperacion: Actividad, tipo: String, accion: String): void
++ modificarPreguntasExamenEncuesta(actividad: Actividad, pregunta: PreguntaAbierta, accion: String): void
++ modificarPreguntasQuiz(quiz: Quiz, pregunta: PreguntaSeleccionMultiple, accion: String): void 
++ modificarCalificacionMinimaQuiz(quiz: Quiz, nuevaCalificacion: float): void
++ crearPreguntaAbierta(enunciado: String, titulo: String, profesorCreador: Profesor): void
++ crearPreguntaSeleccion(enunciado: String, titulo: String, opcion1: String, opcion2: String, opcion3: String, opcion4: String, 
+opcionCorrecta: int, profesorCreador: Profesor): void
++ modificarTituloPregunta(pregunta: Pregunta, titulo: String, profesorCreador: Profesor): void
++ modificarEnunciadoPregunta(pregunta: Pregunta, enunciado: String): void
++ modificarOpcionesPreguntaSeleccion(pregunta: PreguntaSeleccionMultiple, nuevaOpcion: String, opcionModificar: int): void
++ modificarOpcionCorrectaPreguntaSeleccion(pregunta: PreguntaSeleccionMultiple, nuevaOpcion: int): void
++ calificarExamen(examen: Examen, estudiante: Estudiante, learningPath: LearningPath, nota: float): void
++ calificarTarea(tarea: Tarea, estudiante: Estudiante, learningPath: LearningPath, esExitoso: boolean): void
++ clonarActividad(actividadOriginal: Actividad, profesorClonando: Profesor): void
++ clonarLearningPath(learningPathOriginal: LearningPath, profesorClonando: Profesor): void
++ inscribirEstudianteLearningPath(estudiante: Estudiante, learningPath: LearningPath) : void
++ enviarTarea(tarea: Tarea, estudiante: Estudiante, learningPath: LearningPath): void
++ enviarExamen(examen: Examen, estudiante: Estudiante, learningPath: LearningPath): void
++ responderPreguntaExamen(examen: Examen, estudiante: Estudiante, learningPath: LearningPath, pregunta: PreguntaAbierta, 
+respuesta: String): void
++ responderPreguntaEncuesta(encuesta: Encuesta, estudiante: Estudiante, learningPath: LearningPath, pregunta: PreguntaAbierta, 
+respuesta: String): void
++ responderPreguntaQuiz(quiz: Quiz, estudiante: Estudiante, learningPath: LearningPath, pregunta: PreguntaSeleccionMultiple, 
+respuesta: int): void
++ completarEncuestaRecurso(actividad: Actividad, estudiante: Estudiante, learningPath: LearningPath): void
++ revisarActividadesPrevias(actividad: Actividad, estudiante: Estudiante, learningPath: LearningPath): boolean
++ calificarLearningPath(learningPath: LearningPath, rating: float): void
++ resenarActividad(actividad: Actividad, resena: String): void
++ calificarActividad(actividad: Actividad, rating: float): void
++ getEstudiante(login: String): Estudiante
++ getProfesor(login: String): Profesor
++ getActividad(id: String, tipo: String): Actividad
++ getLearningPath(id: String): LearningPath
++ getPregunta(id: String, tipo: String): Pregunta
++ descargarDatos(mapaExamenes: HashMap&lt;String, Examen&gt;, mapaEncuestas: HashMap&lt;String, Encuesta&gt;, 
+mapaQuices: HashMap&lt;String, Quiz&gt;, mapaRevisarRecurso: HashMap&lt;String, RevisarRecurso&gt;, mapaTareas: HashMap&lt;String, Tarea&gt;, 
+mapaEstudiantes: HashMap&lt;String, Estudiante&gt;, profMap: HashMap&lt;String, Profesor&gt;, abiertaMap: HashMap&lt;String, PreguntaAbierta&gt;, 
+cerradaMap: HashMap&lt;String, PreguntaSeleccionMultiple&gt;, mapaLearningPaths: HashMap&lt;String, LearningPath&gt;): void</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>0</x><y>0</y><w>850</w><h>1270</h></coordinates><panel_attributes>Interfaz
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>100</y><w>210</w><h>40</h></coordinates><panel_attributes>Quiz
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>180</y><w>210</w><h>40</h></coordinates><panel_attributes>Examen
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>250</y><w>210</w><h>40</h></coordinates><panel_attributes>Tarea
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>320</y><w>210</w><h>40</h></coordinates><panel_attributes>RevisarRecurso
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>390</y><w>210</w><h>40</h></coordinates><panel_attributes>Encuesta
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>460</y><w>210</w><h>40</h></coordinates><panel_attributes>Estudiante
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>530</y><w>210</w><h>40</h></coordinates><panel_attributes>Profesor
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>600</y><w>210</w><h>40</h></coordinates><panel_attributes>LearningPath
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>680</y><w>210</w><h>40</h></coordinates><panel_attributes>PreguntaAbierta
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>750</y><w>210</w><h>40</h></coordinates><panel_attributes>PreguntaSeleccionMultiple
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>100</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaQuices</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>180</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaExamenes</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>250</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaTareas</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>320</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaRevisarRecurso</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>390</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaEncuestas</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>460</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaEstudiantes</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>530</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaProfesores</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>600</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaLearningPaths</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>680</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaPreguntasAbiertas</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>750</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaPreguntasSeleccionMultiple</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1090</x><y>830</y><w>210</w><h>40</h></coordinates><panel_attributes>PreguntaBoolean
+--
+--
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>810</x><y>830</y><w>300</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+m1=1
+m2=0..*
+mapaPreguntasBoolean</panel_attributes><additional_attributes>10;20;280;20</additional_attributes></element></diagram>

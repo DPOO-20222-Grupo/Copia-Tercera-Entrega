@@ -40,21 +40,21 @@ public class Main {
 		
 		// Pruebas de Registro de Usuarios
 		
-		Estudiante stud1 = new Estudiante("d.martinezf", "Banano123", "Diego Martinez");
-		Estudiante stud2 = new Estudiante("a.linares", "Banano123", "Andres Linares");
-		Profesor prof1 = new Profesor("l.munera", "Tristeza30", "Lina Munera");
+		aplicacion.crearEstudiante("d.martinezf", "Banano123", "Diego Martinez");
+		aplicacion.crearEstudiante("a.linares", "Banano123", "Andres Linares");
+		aplicacion.crearProfesor("l.munera", "Tristeza30", "Lina Munera");
 		
-		aplicacion.registrarUsuario(prof1);
-		aplicacion.registrarUsuario(stud1);
-		aplicacion.registrarUsuario(stud2);
+		Estudiante stud1 = aplicacion.getEstudiante("d.martinezf");
+		Estudiante stud2 = aplicacion.getEstudiante("a.linares");
+		Profesor prof1 = aplicacion.getProfesor("l.munera");
 		
 		// Pruebas de Registro de Preguntas
 		
-		PreguntaAbierta pregAbierta = new PreguntaAbierta("Ingrese su nombre: ", "Registro de Nombres");
-		PreguntaSeleccionMultiple pregCerrada = new PreguntaSeleccionMultiple("¿Qué color no es primario?", "Colores", "Azul", "Rojo", "Amarillo", "Negro", 4);
+		aplicacion.crearPreguntaAbierta("Ingrese su nombre: ", "Registro de Nombres", prof1);
+		aplicacion.crearPreguntaSeleccion("¿Qué color no es primario?", "Colores", "Azul", "Rojo", "Amarillo", "Negro", 4, prof1);
 		
-		aplicacion.registrarPregunta(pregAbierta);
-		aplicacion.registrarPregunta(pregCerrada);
+		PreguntaAbierta pregAbierta = (PreguntaAbierta) aplicacion.getPregunta("1 - Registro de Nombres", "Abierta");
+		PreguntaSeleccionMultiple pregCerrada = (PreguntaSeleccionMultiple) aplicacion.getPregunta("1 - Colores", "Cerrada");
 		
 		// Pruebas de Registro de Actividades
 		
@@ -70,29 +70,29 @@ public class Main {
 		SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");		
 		Date date = formateador.parse(fecha);
 		
-		Encuesta en = new Encuesta("Autoevaluación", "Autoevaluación acitividad #1", objetivos, "Bajo", 15, date,
+		aplicacion.crearEncuesta("Autoevaluación", "Autoevaluación acitividad #1", objetivos, "Bajo", 15, date,
 				 prof1, preguntasAbiertas);
-		aplicacion.crearQuiz("Quiz1", "Primer Quiz", objetivos, "bajo", 45, date, prof1, (float) 3.5, preguntasCerradas);
+		
+		Encuesta en = (Encuesta) aplicacion.getActividad("Autoevaluación - l.munera", "Encuesta");
+		
+		aplicacion.crearQuiz("Quiz1", "Primer Quiz", objetivos, "bajo", 45, date, prof1, 0.7, preguntasCerradas);
 		
 		Quiz qu = (Quiz) aplicacion.getActividad("Quiz1 - l.munera", "Quiz");
 		
-		Tarea ta = new Tarea("Tarea1", "Tarea numero uno", objetivos, "bajo", 120, date, prof1);
+		aplicacion.crearTarea("Tarea1", "Tarea numero uno", objetivos, "bajo", 120, date, prof1);
 		
-		Examen ex = new Examen("Parcial", "Examen Parcial", objetivos, "medio", 120, date, prof1, preguntasAbiertas);
+		Tarea ta =  (Tarea) aplicacion.getActividad("Tarea1 - l.munera", "Tarea");
 		
-		RevisarRecurso rr = new RevisarRecurso("Ver video", "Ver video segunda guerra mundial", objetivos, "bajo", 45,
+		aplicacion.crearExamen("Parcial", "Examen Parcial", objetivos, "medio", 120, date, prof1, preguntasAbiertas);
+		
+		Examen ex = (Examen) aplicacion.getActividad("Parcial - l.munera", "Examen" );
+		
+		aplicacion.crearRevisarRecurso("Ver video", "Ver video segunda guerra mundial", objetivos, "bajo", 45,
 				date, "video", prof1, "enlace");
 		
+		RevisarRecurso rr = (RevisarRecurso) aplicacion.getActividad("Ver video - l.munera", "Recurso");
 		
-		
-		
-		
-		
-		aplicacion.registrarActividad(en);
-		aplicacion.registrarActividad(qu);
-		aplicacion.registrarActividad(ta);
-		aplicacion.registrarActividad(ex);
-		aplicacion.registrarActividad(rr);
+
 		
 		// Pruebas de Registro de LearningPaths
 		
@@ -106,13 +106,15 @@ public class Main {
 		
 		HashMap<String, Boolean> mapaObligatorio = new HashMap<String, Boolean>();
 		
-		mapaObligatorio.put("Actividad1", true);
+		mapaObligatorio.put(en.getIdActividad(), true);
+		mapaObligatorio.put(ex.getIdActividad(), false);
+		mapaObligatorio.put(rr.getIdActividad(), true);
+		mapaObligatorio.put(ta.getIdActividad(), false);
+		mapaObligatorio.put(qu.getIdActividad(), true);
 		
-		LearningPath lp = new LearningPath("Introducción a las Pruebas", "Pruebas", objetivos, "mid",
+		
+		aplicacion.crearLearningPath("Introducción a las Pruebas", "Pruebas", objetivos, "mid",
 				prof1, actividades, mapaObligatorio);
-		
-		aplicacion.registrarLearningPath(lp);	
-		aplicacion.resenarActividad(rr, "prueba");
 		
 		
 		
@@ -194,7 +196,7 @@ public class Main {
 				+ String.format("     * : %s\n", revisarRecurso.getObjetivos().get(1))
 				+ String.format("--- Dificultad: %s \n", revisarRecurso.getNivelDificultad())
 				+ String.format("--- Duracion Estimada: %d minutos \n", revisarRecurso.getDuracionMinutos())
-			+ revisarRecurso.getResenas().get(0)
+			
 		
 				
 				

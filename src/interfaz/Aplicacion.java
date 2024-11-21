@@ -756,7 +756,7 @@ public class Aplicacion {
 	
 	//Metodos que permiten a profesores calificar actividades de estudiantes en un learning path 
 	
-	public void calificarExamen(Examen examen, Estudiante estudiante, LearningPath learningPath, float nota) {
+	public void calificarExamen(Examen examen, Estudiante estudiante, LearningPath learningPath, float nota, boolean estado) {
 		
 		Map <String, SeguimientoLearningPath> mapaEstudiantes = learningPath.getEstudiantesInscritos();
 		
@@ -767,21 +767,33 @@ public class Aplicacion {
 		SeguimientoExamen seguimientoExamen = (SeguimientoExamen) mapaSeguimientosActividades.get(examen.getIdActividad());
 		
 		seguimientoExamen.setNota(nota);
-		seguimientoExamen.actualizarEstadoCompletado();	
+		seguimientoExamen.actualizarEstado(estado);
+		
+		
 		
 	}
 	
-	public void calificarTarea(Tarea tarea, Estudiante estudiante, LearningPath learningPath, boolean esExitoso) {
+	public void calificarTarea(Tarea tarea, Estudiante estudiante, LearningPath learningPath, boolean esExitoso) throws EstudianteNoInscritoException {
 		
 		Map <String, SeguimientoLearningPath> mapaEstudiantes = learningPath.getEstudiantesInscritos();
 		
+		
 		SeguimientoLearningPath seguimientoEstudiante = mapaEstudiantes.get(estudiante.getLogin());
 		
-		Map <String, SeguimientoActividad> mapaSeguimientosActividades = seguimientoEstudiante.getMapaSeguimientoActividades();
 		
-		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) mapaSeguimientosActividades.get(tarea.getIdActividad());
+		if (seguimientoEstudiante != null) {
+			Map <String, SeguimientoActividad> mapaSeguimientosActividades = seguimientoEstudiante.getMapaSeguimientoActividades();
+			
+			SeguimientoTarea seguimientoTarea = (SeguimientoTarea) mapaSeguimientosActividades.get(tarea.getIdActividad());
+			
+			seguimientoTarea.actualizarEstadoFinal(esExitoso);
+		}
 		
-		seguimientoTarea.actualizarEstadoFinal(esExitoso);
+		else {
+			throw new EstudianteNoInscritoException(learningPath);
+		}
+		
+		
 		
 		
 	}
@@ -906,6 +918,7 @@ public class Aplicacion {
 		SeguimientoTarea seguimientoTarea = (SeguimientoTarea) seguimientoEstudiante.getMapaSeguimientoActividades().get(tarea.getIdActividad());
 			if(seguimientoTarea.getEstado().equals("Incompleta")) {
 				seguimientoTarea.actualizarEstadoEnviado();
+				seguimientoEstudiante.actualizarProgreso();
 			}
 			
 			else {
@@ -930,6 +943,8 @@ public class Aplicacion {
 		
 		if(seguimientoExamen.getEstado().equals("Incompleta")) {
 			seguimientoExamen.actualizarEstadoEnviado();
+			seguimientoEstudiante.actualizarProgreso();
+			seguimientoEstudiante.actualizarTasaExito();
 		}
 		
 		else {
@@ -1022,6 +1037,8 @@ public class Aplicacion {
 		SeguimientoActividad seguimientoActividad = seguimientoEstudiante.getMapaSeguimientoActividades().get(actividad.getIdActividad());
 		if(seguimientoActividad.getEstado().equals("Incompleta")) {
 			seguimientoActividad.actualizarEstadoCompletado();
+			seguimientoEstudiante.actualizarProgreso();
+			seguimientoEstudiante.actualizarTasaExito();
 		}
 		
 		else {
@@ -1183,6 +1200,13 @@ public class Aplicacion {
 		SeguimientoActividad seguimientoActividad = seguimientoEstudiante.getMapaSeguimientoActividades().get(actividad.getIdActividad());
 		seguimientoActividad.setTiempoTotal(duracion);
 		seguimientoEstudiante.actualizarTiempoTotal(duracion);
+		seguimientoEstudiante.actualizarProgreso();
+	}
+	
+	public void actualizarMetodoEnvioTarea (Estudiante estudiante, LearningPath learningPath, Tarea tarea, String metodo) {
+		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+		SeguimientoTarea seguimientoActividad = (SeguimientoTarea) seguimientoEstudiante.getMapaSeguimientoActividades().get(tarea.getIdActividad());
+		seguimientoActividad.setMetodoEnvio(metodo);
 	}
 
 	

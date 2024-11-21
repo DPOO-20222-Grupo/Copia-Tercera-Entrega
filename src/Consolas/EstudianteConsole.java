@@ -24,6 +24,7 @@ import seguimientoEstudiantes.SeguimientoActividad;
 import seguimientoEstudiantes.SeguimientoExamen;
 import seguimientoEstudiantes.SeguimientoLearningPath;
 import seguimientoEstudiantes.SeguimientoQuiz;
+import seguimientoEstudiantes.SeguimientoTarea;
 import user.Estudiante;
 import user.Profesor;
 
@@ -226,7 +227,13 @@ public class EstudianteConsole {
 			            System.out.println("¿Aproximadamente cuánto tiempo, en minutos, le tomó realizar la actividad?: ");
 			            
 			            int duracion = Integer.parseInt(scanner.nextLine());
+			            
+			            System.out.println("¿Por cuál metodo envió esta tarea?: ");
+			            String metodoEnvio = scanner.nextLine();
+			            
 			            aplicacion.actualizarDuracionDesarrolloActividad(estudiante, learningPath, tarea, duracion);
+			            aplicacion.actualizarMetodoEnvioTarea(estudiante, learningPath, tarea, metodoEnvio);
+			            
 			            System.out.println("Tarea enviada exitosamente.");
 			            
 			            mostrarActividadesSeguimiento(tarea);
@@ -563,6 +570,10 @@ public class EstudianteConsole {
             }
 
             System.out.println("Respuestas registradas exitosamente.");
+            
+            learningPath.getEstudiantesInscritos().get(estudiante.getLogin()).actualizarProgreso();
+            learningPath.getEstudiantesInscritos().get(estudiante.getLogin()).actualizarTasaExito();
+            
             System.out.println("¿Aproximadamente cuánto tiempo, en minutos, le tomó realizar la actividad?: ");
             int duracion = Integer.parseInt(scanner.nextLine());
             aplicacion.actualizarDuracionDesarrolloActividad(estudiante, learningPath, quiz, duracion);
@@ -813,16 +824,22 @@ public class EstudianteConsole {
     			 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     			 String fecha = formatter.format(actividad.getActividadSeguimiento().getFechaLimite());
     			 System.out.println("Fecha: "+ fecha);
+    			 System.out.println(String.format("Obligatoria: %B", learningPath.getMapaActividadesObligatorias().get(actividad.getActividadSeguimiento().getIdActividad())));
     			 
     			 //hola
     			 
     			 
-    			 if (tipo.equals("Quiz")|| tipo.equals("Examen"))
+    			 if (tipo.equals("Quiz")|| tipo.equals("Examen") || tipo.equals("Tarea"))
     			 
     			 {
     				 if (tipo.equals("Quiz")) {
     					 SeguimientoQuiz segQuiz = (SeguimientoQuiz) actividad;
         				 System.out.println(String.format("Calificación: %.2f", segQuiz.getNota()));
+    				 }
+    				 
+    				 else if(tipo.equals("Tarea")) {
+    					 SeguimientoTarea segTar = (SeguimientoTarea) actividad;
+    					 System.out.println(String.format("Metodo de envío: %s", segTar.getMetodoEnvio()));
     				 }
     				 
     				 else {

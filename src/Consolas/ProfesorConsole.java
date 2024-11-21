@@ -10,6 +10,7 @@ import actividades.Tarea;
 import exceptions.ActividadPreviaCiclicoException;
 import exceptions.ActividadSeguimientoCiclicoException;
 import exceptions.ActividadYaExistenteException;
+import exceptions.EstudianteNoInscritoException;
 import exceptions.LearningPathYaExistenteException;
 import exceptions.ModificarActividadesLearningPathException;
 import exceptions.ModificarActividadesPreviasException;
@@ -28,6 +29,7 @@ import seguimientoEstudiantes.SeguimientoActividad;
 import seguimientoEstudiantes.SeguimientoExamen;
 import seguimientoEstudiantes.SeguimientoLearningPath;
 import seguimientoEstudiantes.SeguimientoQuiz;
+import seguimientoEstudiantes.SeguimientoTarea;
 import user.Estudiante;
 import user.Profesor;
 
@@ -87,16 +89,19 @@ public class ProfesorConsole {
             System.out.println("15. Revisar si un Learning Path ya existe");
             System.out.println("16. Ver mis actividades");
             System.out.println("17. Ver mis Learning Paths");
-            System.out.println("18. Ver el progreso de un estudiante en un Learning Path");
-            System.out.println("19. Reseñar o calificar una actividad");
-            System.out.println("20. Calificar un Learning Path");
-            System.out.println("21. Cerrar sesión");
+            System.out.println("18. Ver mis Preguntas");
+            System.out.println("19. Ver el progreso de un estudiante en un Learning Path");
+            System.out.println("20. Reseñar o calificar una actividad");
+            System.out.println("21. Calificar un Learning Path");
+            System.out.println("22. Ver calificación de un Learning Path");
+            System.out.println("23. Ver reseñas y calificación de una actividad");
+            System.out.println("24. Cerrar sesión");
             System.out.print("Seleccione una opción: ");
             
             try {
                 opcion = Integer.parseInt(scanner.nextLine()); 
 
-                if (opcion < 1 || opcion > 21) {
+                if (opcion < 1 || opcion > 24) {
                     System.out.println("Opción no válida. Por favor, seleccione una opción entre 1 y 19.");
                     continue;
                 }
@@ -171,19 +176,30 @@ public class ProfesorConsole {
                         
                         break;
                     case 18:
+                    	verPreguntas(profesor);
+                    	break;
+                    case 19:
                         verProgresoLearningPathEstudiante();
                         
                         break;
                         
-                    case 19:
+                    case 20:
                         calificarResenarActividad();
                          
                         break;
-                    case 20:
+                    case 21:
                         calificarLearningPath();
                         
                         break;
-                    case 21:
+                    case 22:
+                        verCalificacionLP();
+                        
+                        break;
+                    case 23:
+                        verCalificacionActividad();
+                        
+                        break;
+                    case 24:
                         profesor.logout();
                         System.out.println("Sesión cerrada.");
                         
@@ -197,7 +213,7 @@ public class ProfesorConsole {
                 System.out.println("Entrada no válida. Por favor, ingrese un número.");
             }
 
-        } while (opcion != 21); 
+        } while (opcion != 24); 
     }
 
 
@@ -592,17 +608,17 @@ public class ProfesorConsole {
 
         double calificacionMinima = -1;
         do {
-            System.out.print("Ingrese la calificación mínima para aprobar el quiz: ");
+            System.out.print("Ingrese la calificación mínima para aprobar el quiz (0-1): ");
             try {
                 String calificacionInput = scanner.nextLine().trim();
                 calificacionMinima = Double.parseDouble(calificacionInput);
-                if (calificacionMinima < 0 || calificacionMinima > 5) {
-                    System.out.println("La calificación mínima debe estar entre 0 y 5.");
+                if (calificacionMinima < 0 || calificacionMinima > 1) {
+                    System.out.println("La calificación mínima debe estar entre 0 y 1.");
                 }
             } catch (NumberFormatException e) {
                 System.out.println("La calificación mínima debe ser un número válido.");
             }
-        } while (calificacionMinima < 0 || calificacionMinima > 5);
+        } while (calificacionMinima < 0 || calificacionMinima > 1);
 
         List<PreguntaCerrada> preguntas = new ArrayList<>();
         System.out.println("Ingrese las preguntas del examen en el formato 'título|enunciado': ");
@@ -1007,21 +1023,13 @@ public class ProfesorConsole {
 	    List<Actividad> actividades = new ArrayList<>();
 	    String continuar;
 	    do {
-	        System.out.print("Ingrese el ID de la actividad: ");
-	        String idActividad = scanner.nextLine();
-	        if (idActividad.isEmpty()) {
-	            System.out.println("El ID de la actividad no puede estar vacío.");
-	            return; 
-	        }
+	    	String msjTitulo = "Ingrese el título de la actividad que desea agregar al Learning Path: ";
+	    	String msjProfesor = "Ingrese el login del profesor creador de la actividad que desea agregar al Learning Path: ";
+	    	String msjTipo = "Ingrese el tipo de la actividad que desea desea agregar al Learning Path: ";
+	    	
+	        Actividad actividad = getActividad(msjTitulo, msjProfesor,msjTipo, false, null);
 
-	        System.out.print("Ingrese el tipo de la actividad: ");
-	        String tipo = scanner.nextLine();
-	        if (tipo.isEmpty()) {
-	            System.out.println("El tipo de la actividad no puede estar vacío.");
-	            return; 
-	        }
-
-	        Actividad actividad = aplicacion.getActividad(idActividad, tipo);
+	        
 	        if (actividad != null) {
 	            actividades.add(actividad);
 	        } else {
@@ -1049,21 +1057,12 @@ public class ProfesorConsole {
     
     private  void clonarActividad(Profesor profesor) {
         
-        System.out.print("Ingrese el id de la actividad que desea clonar: ");
-        String id = scanner.nextLine();
-        if (id.isEmpty()) {
-            System.out.println("El ID de la actividad no puede estar vacío.");
-            return; 
-        }
+    	String msjTitulo = "Ingrese el título de la actividad que desea clonar: ";
+    	String msjProfesor = "Ingrese el login del profesor creador de la actividad que desea clonar: ";
+    	String msjTipo = "Ingrese el tipo de la actividad que desea clonar: ";
+    	
+        Actividad actividadOriginal = getActividad(msjTitulo, msjProfesor,msjTipo, false, null);
 
-        System.out.print("Ingrese el tipo de la actividad que desea clonar: ");
-        String tipo = scanner.nextLine();
-        if (tipo.isEmpty()) {
-            System.out.println("El tipo de la actividad no puede estar vacío.");
-            return; 
-        }
-
-        Actividad actividadOriginal = aplicacion.getActividad(id, tipo);
         if (actividadOriginal == null) {
             System.out.println("No se encontró una actividad con el ID y tipo proporcionados.");
             return; 
@@ -1126,25 +1125,34 @@ public class ProfesorConsole {
     }
         	
 	private  void clonarLearningPath(Profesor profesor) {
+		String tituloLearningPathOriginal, loginLPOriginal;
+		
+		do {
+	    System.out.print("Ingrese el título del Learning Path que desea clonar: ");
+	     tituloLearningPathOriginal = scanner.nextLine();
+		    if (tituloLearningPathOriginal.isEmpty()) {
+		        System.out.println("El título del Learning Path no puede estar vacío.");
+		        
+		    }
+		}
+	    while(tituloLearningPathOriginal.isEmpty());
+		do {
+		    System.out.print("Ingrese el login del profesor creador del Learning Path que desea clonar: ");
+		    loginLPOriginal = scanner.nextLine();
+			    if (loginLPOriginal.isEmpty()) {
+			        System.out.println("El profesor del Learning Path no puede estar vacío.");
+			        
+			    }
+			}
+		    while(loginLPOriginal.isEmpty());
 
-	    System.out.print("Ingrese el ID del Learning Path que desea clonar: ");
-	    String idLearningPathOriginal = scanner.nextLine();
-	    if (idLearningPathOriginal.isEmpty()) {
-	        System.out.println("El ID del Learning Path no puede estar vacío.");
-	        return; 
-	    }
-
-	    HashMap<String, LearningPath> mapaLearningPaths = aplicacion.getMapaLearningPaths(); 
-	    LearningPath learningPathOriginal = mapaLearningPaths.get(idLearningPathOriginal);
+	    String idLPOriginal = aplicacion.generarLlaveLearningsActividades(tituloLearningPathOriginal, loginLPOriginal);
+	    LearningPath learningPathOriginal = aplicacion.getLearningPath(idLPOriginal);
 	    
 	    if (learningPathOriginal == null) {
 	        System.out.println("Learning Path no encontrado. Verifique el ID e intente de nuevo.");
 	        return; 
 	    }
-
-	    
-	    
-
 
 	    aplicacion.clonarLearningPath(learningPathOriginal, profesor);
 	    System.out.println("Learning Path clonado con éxito para el profesor: " + profesor.getNombre());
@@ -1778,42 +1786,162 @@ public class ProfesorConsole {
 	}
 	
 	private  void calificarActividad(Profesor profesor) {
-
-        System.out.println("Ingrese el tipo de actividad a calificar (Examen/Tarea): ");
-        String tipoActividad = scanner.nextLine();
-
-        System.out.println("Ingrese el id del Learning Path: ");
-        String id = scanner.nextLine();
-        LearningPath learningPath = aplicacion.getLearningPath(id);
-
-        System.out.println("Ingrese el login del estudiante: ");
-        String loginEstudiante = scanner.nextLine();
-        Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
-
-        if (tipoActividad.equalsIgnoreCase("Examen")) {
-            System.out.println("Ingrese el id del examen: ");
-            String idExamen = scanner.nextLine();
-            Examen examen = aplicacion.getMapaExamenes().get(idExamen);
-
-            System.out.println("Ingrese la nota del examen: ");
-            float nota = scanner.nextFloat();
-
-            aplicacion.calificarExamen(examen, estudiante, learningPath, nota);
-            System.out.println("Examen calificado con éxito.");
-            
-        } else if (tipoActividad.equalsIgnoreCase("Tarea")) {
-            System.out.println("Ingrese el nombre de la tarea: ");
-            String nombreTarea = scanner.nextLine();
-            Tarea tarea = aplicacion.getMapaTareas().get(nombreTarea);
-
-            System.out.println("¿La tarea fue exitosa? (true/false): ");
-            boolean esExitoso = scanner.nextBoolean();
-
-            aplicacion.calificarTarea(tarea, estudiante, learningPath, esExitoso);
-            System.out.println("Tarea calificada con éxito.");
-        } else {
-            System.out.println("Tipo de actividad no válido.");
-        }
+		String tipoActividad, tituloLearningPath, loginEstudiante, tituloExamen, loginExamen, tituloTarea, loginTarea;
+		do {
+	        System.out.println("Ingrese el tipo de actividad a calificar (Examen/Tarea): ");
+	        tipoActividad = scanner.nextLine();
+	        if (tipoActividad.isEmpty()) {
+	        	System.out.println("El tipo de actividad no puede estar vacío. Intente de nuevo.");
+	        }
+		}
+		
+		while (tipoActividad.isEmpty());
+		
+		do {
+	        System.out.println("Ingrese el título del Learning Path: ");
+	        tituloLearningPath = scanner.nextLine();
+	        if (tituloLearningPath.isEmpty()) {
+	        	System.out.println("El título del Learning Path no puede estar vacío. Intente de nuevo.");
+			}
+		}
+	    while (tituloLearningPath.isEmpty());
+	    String idLearningPath = aplicacion.generarLlaveLearningsActividades(tituloLearningPath, profesor.getLogin());
+	    
+	    LearningPath learningPath = aplicacion.getLearningPath(idLearningPath);
+	    if (learningPath != null) {
+		    do {
+	        System.out.println("Ingrese el login del estudiante: ");
+	        loginEstudiante = scanner.nextLine();
+		        if (loginEstudiante.isEmpty()) {
+		        	System.out.println("El login del estudiante no puede estar vacío. Intente de nuevo.");
+		        }
+		    }
+		    while (loginEstudiante.isEmpty());
+	        
+	        Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
+	        
+	        if (estudiante != null) {
+	
+		        if (tipoActividad.equalsIgnoreCase("Examen")) {
+		        	
+		        	do {
+			            System.out.println("Ingrese el título del examen que desea calificar: ");
+			            tituloExamen = scanner.nextLine();
+			            if (tituloExamen.isEmpty()) {
+				        	System.out.println("El título del examen no puede estar vacío. Intente de nuevo.");
+				        }
+		        	}
+		        	while (tituloExamen.isEmpty());
+		        	
+		        	do {
+			            System.out.println("Ingrese el nombre del profesor creador del examen que desea calificar: ");
+			            loginExamen = scanner.nextLine();
+			            if (loginExamen.isEmpty()) {
+				        	System.out.println("El profesor del examen no puede estar vacío. Intente de nuevo.");
+				        }
+		        	}
+		        	while (loginExamen.isEmpty());
+			        
+		        	String idExamen = aplicacion.generarLlaveLearningsActividades(tituloExamen, loginExamen);
+		            Examen examen = (Examen) aplicacion.getActividad(idExamen, tipoActividad);
+		            
+		            if (examen != null) {
+		            
+			            SeguimientoLearningPath seguimientoGeneral = estudiante.getLearningPathsInscritos().get(idLearningPath);
+			            
+			            if (seguimientoGeneral!= null) {
+			            
+				            SeguimientoExamen seguimiento = (SeguimientoExamen) seguimientoGeneral.getMapaSeguimientoActividades().get(idExamen);
+				            
+				            Map<String, String> respuestas = seguimiento.getRespuestas();
+				            
+				            System.out.println("== Respuestas del Examen ==");
+				            int i = 1;
+				            for(Map.Entry<String, String> entry: respuestas.entrySet()) {
+				            	
+				            	PreguntaAbierta pregunta = (PreguntaAbierta) aplicacion.getPregunta(entry.getKey(), "Abierta");
+				            	System.out.println(String.format("%d. %s", i, pregunta.getEnunciado()));
+				            	System.out.println(String.format("Respuesta: %s", entry.getValue()));
+				            	i++;
+				            	
+				            }
+				            
+				            
+				            System.out.println("\nIngrese la nota del examen: ");
+				            float nota = scanner.nextFloat();
+				            
+				            System.out.println("\n¿El examen fue exitoso? (true/false): ");
+				            boolean estado = scanner.nextBoolean();
+				
+				            aplicacion.calificarExamen(examen, estudiante, learningPath, nota, estado);
+				            System.out.println("Examen calificado con éxito.");
+				            seguimientoGeneral.actualizarTasaExito();
+			            }
+			            else {
+			            	System.out.println("Estudiante no inscrito al Learning Path");
+			            }
+				            
+		            } 
+		            
+		            else {
+			        	System.out.println("Examen no encontrado");
+			        }
+		        }   
+		        
+		        else if (tipoActividad.equalsIgnoreCase("Tarea")) {
+		        	do {
+			            System.out.println("Ingrese el título de la tarea que desea calificar: ");
+			            tituloTarea = scanner.nextLine();
+			            if (tituloTarea.isEmpty()) {
+				        	System.out.println("El título de la tarea no puede estar vacío. Intente de nuevo.");
+				        }
+		        	}
+		        	while (tituloTarea.isEmpty());
+		        	
+		        	do {
+			            System.out.println("Ingrese el nombre del profesor creador de la tarea que desea calificar: ");
+			            loginTarea = scanner.nextLine();
+			            if (loginTarea.isEmpty()) {
+				        	System.out.println("El profesor de la tarea no puede estar vacío. Intente de nuevo.");
+				        }
+		        	}
+		        	while (loginTarea.isEmpty());
+		        	
+		        	Tarea tarea = (Tarea) aplicacion.getActividad(tituloTarea, loginTarea);
+		        	
+		            System.out.println("¿La tarea fue exitosa? (true/false): ");
+		            boolean esExitoso = scanner.nextBoolean();
+		
+		            try {
+						aplicacion.calificarTarea(tarea, estudiante, learningPath, esExitoso);
+						estudiante.getLearningPathsInscritos().get(learningPath.getIdLearnginPath()).actualizarTasaExito();
+						System.out.println("Tarea calificada con éxito.");
+					} catch (EstudianteNoInscritoException e) {
+						// TODO Auto-generated catch block
+						System.out.println("Estudiante no inscrito en Learning Path");
+					}
+		            
+		        } 
+	        
+		        else {
+		            System.out.println("Tipo de actividad no válido.");
+		        }
+		        
+		        
+		        
+		        
+		        
+	        }
+	        
+	        else {
+	        	System.out.println("Estudiante no encontrado");
+	        }
+	    }
+	    
+	    else {
+	    	System.out.println("Learning Path no encontrado");
+	    }
+		
         
     }
 	
@@ -2075,16 +2203,21 @@ public class ProfesorConsole {
     	    			 SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
     	    			 String fecha = formatter.format(actividad.getActividadSeguimiento().getFechaLimite());
     	    			 System.out.println("Fecha: "+ fecha);
-    	    			 
+    	    			 System.out.println(String.format("Obligatoria: %B", learningPath.getMapaActividadesObligatorias().get(actividad.getActividadSeguimiento().getIdActividad())));
     	    			 //hola
     	    			 
     	    			 
-    	    			 if (tipo.equals("Quiz")|| tipo.equals("Examen"))
-    	    			 
+    	    			 if (tipo.equals("Quiz")|| tipo.equals("Examen") || tipo.equals("Tarea"))
+    	        			 
     	    			 {
     	    				 if (tipo.equals("Quiz")) {
     	    					 SeguimientoQuiz segQuiz = (SeguimientoQuiz) actividad;
     	        				 System.out.println(String.format("Calificación: %.2f", segQuiz.getNota()));
+    	    				 }
+    	    				 
+    	    				 else if(tipo.equals("Tarea")) {
+    	    					 SeguimientoTarea segTar = (SeguimientoTarea) actividad;
+    	    					 System.out.println(String.format("Metodo de envío: %s", segTar.getMetodoEnvio()));
     	    				 }
     	    				 
     	    				 else {
@@ -2110,6 +2243,63 @@ public class ProfesorConsole {
     	else {
     		System.out.println("Estudiante no encontrado");
     	}
+    	
+    }
+    
+    
+    private void verCalificacionLP () {
+    	String msjTitulo = "Ingrese el título del Learning Path para el cual quiere ver la calificación: ";
+    	String msjProfesor = "Ingrese el login del profesor creador del Learning Path para el cual quier ver la calificación: ";
+    	
+    	LearningPath learningPath = getLearningPath(msjTitulo, msjProfesor, false, null);
+    	
+    	if (learningPath!= null) {
+    		System.out.println("== Calificación Learning Path ==");
+    		System.out.println(String.format("Título: %s", learningPath.getTitulo()));
+    		System.out.println(String.format("Profesor creador: %s (%s)", learningPath.getNombreProfesorCreador(), learningPath.getLoginProfesorCreador()));
+    		System.out.println(String.format("Calificación: %.2f", learningPath.getRating()));
+    	}
+    	
+    	else {
+    		System.out.println("Learning Path no encontrado");
+    	}
+    }
+    
+    private void verCalificacionActividad () {
+    	String msjTitulo = "Ingrese el título de la actividad para la cual quiere ver la calificación y reseñas: ";
+    	String msjProfesor = "Ingrese el login del profesor creador de la actividad Learning Path para la cual quiere ver la calificación y reseñas: ";
+    	String msjTipo = "Ingrese el tipo de la actividad para la cual quiere ver la calificación y reseñas: ";
+    	
+    	Actividad actividad = getActividad(msjTitulo, msjProfesor, msjTipo,false, null);
+    	
+    	if (actividad!= null) {
+    		System.out.println("== Calificación Actividad ==");
+    		System.out.println(String.format("Título: %s", actividad.getTitulo()));
+    		System.out.println(String.format("Profesor creador: %s (%s)", actividad.getNombreProfesorCreador(), actividad.getLoginProfesorCreador()));
+    		System.out.println(String.format("Calificación: %.2f", actividad.getRating()));
+    		System.out.println("== Reseñas Actividad ==");
+    		int i = 1;
+    		for(String resena: actividad.getResenas()) {
+    			System.out.println(String.format("%d. %s", i, resena));
+    			i++;
+    		}
+    	}
+    	
+    	else {
+    		System.out.println("Learning Path no encontrado");
+    	}
+    }
+    
+    private void verPreguntas(Profesor profesor) {
+    	 System.out.println("\n== Mis Preguntas ==");
+    	 System.out.println("\n--Preguntas Abiertas");
+         profesor.getPreguntasAbiertasPropias().forEach((id, pregAbierta) -> System.out.println("ID: " + id));
+         System.out.println("\n--Preguntas de Selección Múltiple");
+         profesor.getPreguntasSeleccionPropias().forEach((id, pregSeleccion) -> System.out.println("ID: " + id));
+         System.out.println("\n--Pregunta de Verdadero o Falso");
+         profesor.getPreguntasBooleanPropias().forEach((id, pregBoolean) -> System.out.println("ID:" + id));
+
+    	
     	
     }
 
