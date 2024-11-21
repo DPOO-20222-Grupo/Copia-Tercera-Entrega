@@ -248,6 +248,10 @@ public abstract class Actividad {
         else if (check == false){
         	throw new ActividadSeguimientoCiclicoException(this, actividad); 
         }
+		
+        else {
+        	actividadesSeguimiento.add(actividad);
+        }
     }
 	
 	public boolean revisarAgregarActividadesSeguimiento(Actividad actividadPrincipal, Actividad actividadAgregar) {
