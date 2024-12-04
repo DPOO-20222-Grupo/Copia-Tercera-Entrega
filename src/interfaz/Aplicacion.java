@@ -3,7 +3,10 @@ package interfaz;
 
 import java.util.HashMap;  
 import java.util.Map;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import java.util.List;
@@ -62,6 +65,7 @@ public class Aplicacion {
 	private HashMap<String, PreguntaAbierta> mapaPreguntasAbiertas;
 	private HashMap<String, PreguntaSeleccionMultiple> mapaPreguntasSeleccionMultiple;
 	private HashMap<String, PreguntaBoolean> mapaPreguntasBoolean;
+	private HashMap<String, Integer> mapaActividadesDiarias;
 	
 	
 	public Aplicacion () {
@@ -76,6 +80,7 @@ public class Aplicacion {
 		this.mapaPreguntasSeleccionMultiple = new HashMap<String, PreguntaSeleccionMultiple>();
 		this.mapaLearningPaths = new HashMap<String, LearningPath>();
 		this.mapaPreguntasBoolean = new HashMap<String, PreguntaBoolean>();
+		this.mapaActividadesDiarias = new HashMap<String, Integer>();
 	
 	}
 	
@@ -1207,6 +1212,25 @@ public class Aplicacion {
 		SeguimientoLearningPath seguimientoEstudiante = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
 		SeguimientoTarea seguimientoActividad = (SeguimientoTarea) seguimientoEstudiante.getMapaSeguimientoActividades().get(tarea.getIdActividad());
 		seguimientoActividad.setMetodoEnvio(metodo);
+	}
+	
+	public void completarActividadDia() {
+		
+		LocalDate fecha = LocalDate.now();
+
+		DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		
+		String llave = fecha.format(formatoFecha);
+		
+		if (mapaActividadesDiarias.containsKey(llave)) {
+			int nuevoValor = mapaActividadesDiarias.get(llave) +1;
+			mapaActividadesDiarias.replace(llave, nuevoValor);
+		}
+		
+		else {
+			mapaActividadesDiarias.put(llave, 1);
+		}
+		
 	}
 
 	
