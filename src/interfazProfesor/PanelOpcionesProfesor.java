@@ -1,15 +1,24 @@
 package interfazProfesor;
 
-import java.awt.*;
+import java.awt.*; 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import javax.swing.*;
+
+import interfaz.Aplicacion;
+import preguntas.PreguntaAbierta;
 import user.Profesor;
 
 @SuppressWarnings("serial")
 public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 
     private Profesor profesor;
+    private Aplicacion aplicacion;
 
     private static final String[] OPCIONES = {
             "Crear una actividad para revisar un recurso",
@@ -39,6 +48,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
     };
 
     public PanelOpcionesProfesor(Profesor profesor) {
+    	aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");
         this.profesor = profesor;
         this.setLayout(new BorderLayout());
 
@@ -235,29 +245,447 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 		
 	}
 
-	private void crearEncuesta(Profesor profesor2) {
+	private void crearEncuesta(Profesor profesor) {
+		JPanel panelRecurso = new JPanel();
+	    panelRecurso.setLayout(new GridLayout(17,1));
+	    
+
+	    JLabel lblTitulo = new JLabel("Título de la Encuesta:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTitulo = new JTextField(20);
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblTitulo);
+	    panelRecurso.add(txtTitulo);
+	    
+	    JLabel lblDescripcion = new JLabel("Descripción de la Encuesta:");
+	    lblDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextArea txtDescripcion = new JTextArea(10, 20);
+	    txtDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JScrollPane scrollDescripcion = new JScrollPane(txtDescripcion);
+	    panelRecurso.add(lblDescripcion);
+	    panelRecurso.add(scrollDescripcion);
+	    
+	    JLabel lblObjetivos = new JLabel("Objetivos (separados por comas):");
+	    lblObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtObjetivos = new JTextField(20);
+	    txtObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblObjetivos);
+	    panelRecurso.add(txtObjetivos);
+	    
+	    JLabel lblDificultad = new JLabel("Nivel de dificultad:");
+	    lblDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    String[] nivelesDificultad = {"Principiante", "Intermedio", "Avanzado"};
+	    JComboBox<String> cbDificultad = new JComboBox<>(nivelesDificultad);
+	    cbDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblDificultad);
+	    panelRecurso.add(cbDificultad);
+	    
+	    JLabel lblDuracion = new JLabel("Duración (minutos):");
+	    lblDuracion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtDuracion = new JTextField(10);
+	    txtDuracion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblDuracion);
+	    panelRecurso.add(txtDuracion);
+	    
+	    JLabel lblFechaLimite = new JLabel("Fecha límite (dd/MM/yyyy):");
+	    lblFechaLimite.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtFechaLimite = new JTextField(10);
+	    txtFechaLimite.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblFechaLimite);
+	    panelRecurso.add(txtFechaLimite);
+	    
+	    JLabel lblPreguntas = new JLabel("Preguntas en formato titulo|enunciado separadas por ;");
+	    lblPreguntas.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtPreguntas = new JTextField(20);
+	    txtPreguntas.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblPreguntas);
+	    panelRecurso.add(txtPreguntas);
+	    
+	    JButton btnGuardar = new JButton("Crear Actividad");
+	    btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnGuardar.addActionListener(e -> {
+	        try {
+	            String titulo = txtTitulo.getText();
+	            if (titulo.isEmpty()) throw new IllegalArgumentException("El título no puede estar vacío.");
+	            
+	            String descripcion = txtDescripcion.getText();
+	            if (descripcion.isEmpty()) throw new IllegalArgumentException("La descripción no puede estar vacía.");
+	            
+	            String[] objetivosArray = txtObjetivos.getText().split(",");
+	            List<String> objetivos = new ArrayList<>();
+	            for (String obj : objetivosArray) {
+	                if (!obj.trim().isEmpty()) {
+	                    objetivos.add(obj.trim());
+	                }
+	            }
+	            if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
+	            
+	            String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
+	            
+	            int duracion = Integer.parseInt(txtDuracion.getText().trim());
+	            if (duracion <= 0) throw new IllegalArgumentException("La duración debe ser positiva.");
+	            
+	            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	            sdf.setLenient(false);
+	            Date fechaLimite = sdf.parse(txtFechaLimite.getText().trim());
+	            
+	            String[] preguntasArray = txtPreguntas.getText().split(";");
+	            List<PreguntaAbierta> preguntas = new ArrayList<>();
+	            for (String preg : preguntasArray) {
+	            	
+	            	String[] partes = preg.split("\\|");
+	            	String tituloPregunta = partes[0].trim();
+	                String enunciado = partes[1].trim();
+	                PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
+	                preguntas.add(pregunta);
+	            	
+	            }
+	            
+	            aplicacion.crearEncuesta(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
+	            aplicacion.descargarDatos();
+	            JOptionPane.showMessageDialog(this, "Actividad creada exitosamente.");
+	        } catch (IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Validación", JOptionPane.ERROR_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+	    panelRecurso.add(btnGuardar);
+	    
+	    this.add(panelRecurso, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
+		
+	}
+
+	private void crearExamen(Profesor profesor) {
+		
+		JPanel panelRecurso = new JPanel();
+	    panelRecurso.setLayout(new GridLayout(17,1));
+	    
+
+	    JLabel lblTitulo = new JLabel("Título del Examen:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTitulo = new JTextField(20);
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblTitulo);
+	    panelRecurso.add(txtTitulo);
+	    
+	    JLabel lblDescripcion = new JLabel("Descripción del Examen:");
+	    lblDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextArea txtDescripcion = new JTextArea(10, 20);
+	    txtDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JScrollPane scrollDescripcion = new JScrollPane(txtDescripcion);
+	    panelRecurso.add(lblDescripcion);
+	    panelRecurso.add(scrollDescripcion);
+	    
+	    JLabel lblObjetivos = new JLabel("Objetivos (separados por comas):");
+	    lblObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtObjetivos = new JTextField(20);
+	    txtObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblObjetivos);
+	    panelRecurso.add(txtObjetivos);
+	    
+	    JLabel lblDificultad = new JLabel("Nivel de dificultad:");
+	    lblDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    String[] nivelesDificultad = {"Principiante", "Intermedio", "Avanzado"};
+	    JComboBox<String> cbDificultad = new JComboBox<>(nivelesDificultad);
+	    cbDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblDificultad);
+	    panelRecurso.add(cbDificultad);
+	    
+	    JLabel lblDuracion = new JLabel("Duración (minutos):");
+	    lblDuracion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtDuracion = new JTextField(10);
+	    txtDuracion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblDuracion);
+	    panelRecurso.add(txtDuracion);
+	    
+	    JLabel lblFechaLimite = new JLabel("Fecha límite (dd/MM/yyyy):");
+	    lblFechaLimite.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtFechaLimite = new JTextField(10);
+	    txtFechaLimite.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblFechaLimite);
+	    panelRecurso.add(txtFechaLimite);
+	    
+	    JLabel lblPreguntas = new JLabel("Preguntas en formato titulo|enunciado separadas por ;");
+	    lblPreguntas.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtPreguntas = new JTextField(20);
+	    txtPreguntas.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblPreguntas);
+	    panelRecurso.add(txtPreguntas);
+	    
+	    JButton btnGuardar = new JButton("Crear Actividad");
+	    btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnGuardar.addActionListener(e -> {
+	        try {
+	            String titulo = txtTitulo.getText();
+	            if (titulo.isEmpty()) throw new IllegalArgumentException("El título no puede estar vacío.");
+	            
+	            String descripcion = txtDescripcion.getText();
+	            if (descripcion.isEmpty()) throw new IllegalArgumentException("La descripción no puede estar vacía.");
+	            
+	            String[] objetivosArray = txtObjetivos.getText().split(",");
+	            List<String> objetivos = new ArrayList<>();
+	            for (String obj : objetivosArray) {
+	                if (!obj.trim().isEmpty()) {
+	                    objetivos.add(obj.trim());
+	                }
+	            }
+	            if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
+	            
+	            String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
+	            
+	            int duracion = Integer.parseInt(txtDuracion.getText().trim());
+	            if (duracion <= 0) throw new IllegalArgumentException("La duración debe ser positiva.");
+	            
+	            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	            sdf.setLenient(false);
+	            Date fechaLimite = sdf.parse(txtFechaLimite.getText().trim());
+	            
+	            String[] preguntasArray = txtPreguntas.getText().split(";");
+	            List<PreguntaAbierta> preguntas = new ArrayList<>();
+	            for (String preg : preguntasArray) {
+	            	
+	            	String[] partes = preg.split("\\|");
+	            	String tituloPregunta = partes[0].trim();
+	                String enunciado = partes[1].trim();
+	                PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
+	                preguntas.add(pregunta);
+	            	
+	            }
+	            
+	            aplicacion.crearExamen(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor, preguntas);
+	            aplicacion.descargarDatos();
+	            JOptionPane.showMessageDialog(this, "Actividad creada exitosamente.");
+	        } catch (IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Validación", JOptionPane.ERROR_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+	    panelRecurso.add(btnGuardar);
+	    
+	    this.add(panelRecurso, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
+		
+	}
+
+	private void crearQuiz(Profesor profesor) {
+		
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void crearExamen(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	private void crearTarea(Profesor profesor) {
 		
-	}
+		JPanel panelRecurso = new JPanel();
+	    panelRecurso.setLayout(new GridLayout(17,1));
+	    
 
-	private void crearQuiz(Profesor profesor2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	private void crearTarea(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	    JLabel lblTitulo = new JLabel("Título de la Tarea:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTitulo = new JTextField(20);
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblTitulo);
+	    panelRecurso.add(txtTitulo);
+	    
+	    JLabel lblDescripcion = new JLabel("Descripción de la Tarea:");
+	    lblDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextArea txtDescripcion = new JTextArea(10, 20);
+	    txtDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JScrollPane scrollDescripcion = new JScrollPane(txtDescripcion);
+	    panelRecurso.add(lblDescripcion);
+	    panelRecurso.add(scrollDescripcion);
+	    
+	    JLabel lblObjetivos = new JLabel("Objetivos (separados por comas):");
+	    lblObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtObjetivos = new JTextField(20);
+	    txtObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblObjetivos);
+	    panelRecurso.add(txtObjetivos);
+	    
+	    JLabel lblDificultad = new JLabel("Nivel de dificultad:");
+	    lblDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    String[] nivelesDificultad = {"Principiante", "Intermedio", "Avanzado"};
+	    JComboBox<String> cbDificultad = new JComboBox<>(nivelesDificultad);
+	    cbDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblDificultad);
+	    panelRecurso.add(cbDificultad);
+	    
+	    JLabel lblDuracion = new JLabel("Duración (minutos):");
+	    lblDuracion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtDuracion = new JTextField(10);
+	    txtDuracion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblDuracion);
+	    panelRecurso.add(txtDuracion);
+	    
+	    JLabel lblFechaLimite = new JLabel("Fecha límite (dd/MM/yyyy):");
+	    lblFechaLimite.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtFechaLimite = new JTextField(10);
+	    txtFechaLimite.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblFechaLimite);
+	    panelRecurso.add(txtFechaLimite);
+	    
+	    JButton btnGuardar = new JButton("Crear Actividad");
+	    btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnGuardar.addActionListener(e -> {
+	        try {
+	            String titulo = txtTitulo.getText();
+	            if (titulo.isEmpty()) throw new IllegalArgumentException("El título no puede estar vacío.");
+	            
+	            String descripcion = txtDescripcion.getText();
+	            if (descripcion.isEmpty()) throw new IllegalArgumentException("La descripción no puede estar vacía.");
+	            
+	            String[] objetivosArray = txtObjetivos.getText().split(",");
+	            List<String> objetivos = new ArrayList<>();
+	            for (String obj : objetivosArray) {
+	                if (!obj.trim().isEmpty()) {
+	                    objetivos.add(obj.trim());
+	                }
+	            }
+	            if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
+	            
+	            String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
+	            
+	            int duracion = Integer.parseInt(txtDuracion.getText().trim());
+	            if (duracion <= 0) throw new IllegalArgumentException("La duración debe ser positiva.");
+	            
+	            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	            sdf.setLenient(false);
+	            Date fechaLimite = sdf.parse(txtFechaLimite.getText().trim());
+	            
+	            aplicacion.crearTarea(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor);
+	            aplicacion.descargarDatos();
+	            JOptionPane.showMessageDialog(this, "Actividad creada exitosamente.");
+	            
+	        } catch (IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Validación", JOptionPane.ERROR_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+	    panelRecurso.add(btnGuardar);
+	    
+	    this.add(panelRecurso, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();		
 		
 	}
 
 	private void crearRevisarRecurso(Profesor profesor) {
-		// TODO Auto-generated method stub
-		
+
+	    JPanel panelRecurso = new JPanel();
+	    panelRecurso.setLayout(new GridLayout(17,1));
+	    
+
+	    JLabel lblTitulo = new JLabel("Título del recurso:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTitulo = new JTextField(20);
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblTitulo);
+	    panelRecurso.add(txtTitulo);
+	    
+	    JLabel lblDescripcion = new JLabel("Descripción del recurso:");
+	    lblDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextArea txtDescripcion = new JTextArea(10, 20);
+	    txtDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JScrollPane scrollDescripcion = new JScrollPane(txtDescripcion);
+	    panelRecurso.add(lblDescripcion);
+	    panelRecurso.add(scrollDescripcion);
+	    
+	    JLabel lblObjetivos = new JLabel("Objetivos (separados por comas):");
+	    lblObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtObjetivos = new JTextField(20);
+	    txtObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblObjetivos);
+	    panelRecurso.add(txtObjetivos);
+	    
+	    JLabel lblDificultad = new JLabel("Nivel de dificultad:");
+	    lblDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    String[] nivelesDificultad = {"Principiante", "Intermedio", "Avanzado"};
+	    JComboBox<String> cbDificultad = new JComboBox<>(nivelesDificultad);
+	    cbDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblDificultad);
+	    panelRecurso.add(cbDificultad);
+	    
+	    JLabel lblDuracion = new JLabel("Duración (minutos):");
+	    lblDuracion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtDuracion = new JTextField(10);
+	    txtDuracion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblDuracion);
+	    panelRecurso.add(txtDuracion);
+	    
+	    JLabel lblFechaLimite = new JLabel("Fecha límite (dd/MM/yyyy):");
+	    lblFechaLimite.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtFechaLimite = new JTextField(10);
+	    txtFechaLimite.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblFechaLimite);
+	    panelRecurso.add(txtFechaLimite);
+	    
+	    JLabel lblTipoRecurso = new JLabel("Tipo de recurso:");
+	    lblTipoRecurso.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTipoRecurso = new JTextField(20);
+	    txtTipoRecurso.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblTipoRecurso);
+	    panelRecurso.add(txtTipoRecurso);
+	    
+	    JLabel lblEnlace = new JLabel("Enlace del recurso:");
+	    lblEnlace.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtEnlace = new JTextField(20);
+	    txtEnlace.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblEnlace);
+	    panelRecurso.add(txtEnlace);
+	    
+	    JButton btnGuardar = new JButton("Crear Actividad");
+	    btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnGuardar.addActionListener(e -> {
+	        try {
+	            String titulo = txtTitulo.getText();
+	            if (titulo.isEmpty()) throw new IllegalArgumentException("El título no puede estar vacío.");
+	            
+	            String descripcion = txtDescripcion.getText();
+	            if (descripcion.isEmpty()) throw new IllegalArgumentException("La descripción no puede estar vacía.");
+	            
+	            String[] objetivosArray = txtObjetivos.getText().split(",");
+	            List<String> objetivos = new ArrayList<>();
+	            for (String obj : objetivosArray) {
+	                if (!obj.trim().isEmpty()) {
+	                    objetivos.add(obj.trim());
+	                }
+	            }
+	            if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
+	            
+	            String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
+	            
+	            int duracion = Integer.parseInt(txtDuracion.getText().trim());
+	            if (duracion <= 0) throw new IllegalArgumentException("La duración debe ser positiva.");
+	            
+	            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	            sdf.setLenient(false);
+	            Date fechaLimite = sdf.parse(txtFechaLimite.getText().trim());
+	            
+	            String tipoRecurso = txtTipoRecurso.getText().trim();
+	            if (tipoRecurso.isEmpty()) throw new IllegalArgumentException("El tipo de recurso no puede estar vacío.");
+	            
+	            String enlace = txtEnlace.getText().trim();
+	            if (enlace.isEmpty()) throw new IllegalArgumentException("El enlace no puede estar vacío.");
+	            
+	            aplicacion.crearRevisarRecurso(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, tipoRecurso, profesor, enlace);
+	            aplicacion.descargarDatos();
+	            JOptionPane.showMessageDialog(this, "Actividad creada exitosamente.");
+	        } catch (IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Validación", JOptionPane.ERROR_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+	    panelRecurso.add(btnGuardar);
+	    
+	    this.add(panelRecurso, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 	}
 }
 
