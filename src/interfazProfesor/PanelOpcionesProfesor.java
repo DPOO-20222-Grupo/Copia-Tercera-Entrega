@@ -192,8 +192,56 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 		
 	}
 
-	private void verActividades(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	private void verActividades(Profesor profesor) {
+		
+	    JPanel panelActividades = new JPanel();
+	    panelActividades.setLayout(new BorderLayout());
+	    
+	    JLabel lblTitulo = new JLabel("== Mis Actividades ==");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	    lblTitulo.setHorizontalAlignment(SwingConstants.CENTER); 
+	    panelActividades.add(lblTitulo, BorderLayout.NORTH);
+
+	    JTextArea textArea = new JTextArea(20, 50);
+	    textArea.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    textArea.setEditable(false);  
+	    JScrollPane scrollPane = new JScrollPane(textArea);
+	    panelActividades.add(scrollPane, BorderLayout.CENTER);
+
+	    JButton btnCerrar = new JButton("Cerrar");
+	    btnCerrar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnCerrar.addActionListener(e -> {
+	        panelActividades.setVisible(false);
+	    });
+	    panelActividades.add(btnCerrar, BorderLayout.SOUTH);
+
+	    StringBuilder actividadesText = new StringBuilder();
+
+	    profesor.getMapaRecursosPropios().forEach((id, recurso) -> {
+	        actividadesText.append("Recurso: ").append(id).append("\n");
+	    });
+
+	    profesor.getMapaTareasPropias().forEach((id, tarea) -> {
+	        actividadesText.append("Tarea: ").append(id).append("\n");
+	    });
+
+	    profesor.getMapaExamenesPropios().forEach((id, examen) -> {
+	        actividadesText.append("Examen: ").append(id).append("\n");
+	    });
+	    
+	    profesor.getMapaQuicesPropios().forEach((id, quiz) -> {
+	        actividadesText.append("Quiz: ").append(id).append("\n");
+	    });
+
+	    profesor.getMapaEncuestasPropias().forEach((id, encuesta) -> {
+	        actividadesText.append("Encuesta: ").append(id).append("\n");
+	    });
+
+	    textArea.setText(actividadesText.toString());
+
+	    this.add(panelActividades, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
