@@ -10,6 +10,8 @@ import java.util.List;
 
 import javax.swing.*;
 
+import Consolas.ProfesorConsole;
+import actividades.Actividad;
 import interfaz.Aplicacion;
 import preguntas.PreguntaAbierta;
 import user.Profesor;
@@ -230,9 +232,62 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 		
 	}
 
-	private void clonarActividad(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	private void clonarActividad(Profesor profesor) {
 		
+		JPanel panelRecurso = new JPanel();
+	    panelRecurso.setLayout(new GridLayout(17,1));
+	    
+
+	    JLabel lblTitulo = new JLabel("Título de la Actividad:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTitulo = new JTextField(20);
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblTitulo);
+	    panelRecurso.add(txtTitulo);
+	    
+	    JLabel lblProfesor = new JLabel("Login del Profesor Dueño de la Actividad:");
+	    lblProfesor.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtProfesor = new JTextField(20);
+	    txtProfesor.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblProfesor);
+	    panelRecurso.add(txtProfesor);
+	    
+	    JLabel lblTipo = new JLabel("Tipo de la actividad que desea clonar \n (Examen/Tarea/Quiz/Recurso/Encuesta)");
+	    lblTipo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTipo = new JTextField(20);
+	    txtTipo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblTipo);
+	    panelRecurso.add(txtTipo);
+	    
+	    JButton btnGuardar = new JButton("Clonar Actividad");
+	    btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnGuardar.addActionListener(e -> {
+	        try {
+	            String titulo = txtTitulo.getText();
+	            if (titulo.isEmpty()) throw new IllegalArgumentException("El título no puede estar vacío.");
+	            
+	            String profesorOg = txtProfesor.getText();
+	            if (profesorOg.isEmpty()) throw new IllegalArgumentException("El profesor no puede estar vacío.");
+	            
+	            String tipo = txtTipo.getText();
+	            if (tipo.isEmpty()) throw new IllegalArgumentException("El tipo de actividad no puede estar vacío.");
+	            
+	            Actividad actividadOriginal = aplicacion.getActividad(titulo + " - " + profesor, tipo);
+	            aplicacion.clonarActividad(actividadOriginal, profesor);
+	            aplicacion.descargarDatos();
+	            JOptionPane.showMessageDialog(this, "Actividad creada exitosamente.");
+	        } catch (IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Validación", JOptionPane.ERROR_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+	    panelRecurso.add(btnGuardar);
+	    
+	    this.add(panelRecurso, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
+
 	}
 
 	private void crearPregunta(Profesor profesor2) {

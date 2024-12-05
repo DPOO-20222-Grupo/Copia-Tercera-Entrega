@@ -2080,7 +2080,7 @@ public class ProfesorConsole {
     	}
     }
     
-    private  Actividad getActividad(String msjTitulo, String msjProfesor, String msjTipo, boolean actividadPropia, Profesor profesor) {
+    public  Actividad getActividad(String msjTitulo, String msjProfesor, String msjTipo, boolean actividadPropia, Profesor profesor) {
     	String titulo;
     	do {
 	    	System.out.println(msjTitulo);
