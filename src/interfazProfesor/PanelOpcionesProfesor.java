@@ -252,11 +252,14 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	    panelRecurso.add(lblProfesor);
 	    panelRecurso.add(txtProfesor);
 	    
-	    JLabel lblTipo = new JLabel("Tipo de la actividad que desea clonar \n (Examen/Tarea/Quiz/Recurso/Encuesta)");
+	    JLabel lblTipo = new JLabel("Tipo de la actividad que desea clonar: ");
 	    lblTipo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JLabel lblOpciones = new JLabel("(Examen/Tarea/Quiz/Recurso/Encuesta)");
+	    lblOpciones.setFont(new Font("Times New Roman", Font.BOLD, 16));
 	    JTextField txtTipo = new JTextField(20);
 	    txtTipo.setFont(new Font("Times New Roman", Font.BOLD, 16));
 	    panelRecurso.add(lblTipo);
+	    panelRecurso.add(lblOpciones);
 	    panelRecurso.add(txtTipo);
 	    
 	    JButton btnGuardar = new JButton("Clonar Actividad");
@@ -272,10 +275,11 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	            String tipo = txtTipo.getText();
 	            if (tipo.isEmpty()) throw new IllegalArgumentException("El tipo de actividad no puede estar vacío.");
 	            
-	            Actividad actividadOriginal = aplicacion.getActividad(titulo + " - " + profesor, tipo);
+	            String id = titulo + " - " + profesorOg;
+	            Actividad actividadOriginal = aplicacion.getActividad(id , tipo);
 	            aplicacion.clonarActividad(actividadOriginal, profesor);
 	            aplicacion.descargarDatos();
-	            JOptionPane.showMessageDialog(this, "Actividad creada exitosamente.");
+	            JOptionPane.showMessageDialog(this, "Actividad clonada exitosamente.");
 	        } catch (IllegalArgumentException ex) {
 	            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Validación", JOptionPane.ERROR_MESSAGE);
 	        } catch (Exception ex) {
