@@ -11,8 +11,13 @@
     "nivelDificultad": "mid",
     "duracionMinutos": 345,
     "rating": 0.0,
+<<<<<<< HEAD
     "fechaCreacion": "2024-12-05T18:37:52.1866443",
     "fechaUltimaModificacion": "2024-12-05T18:37:52.1866443",
+=======
+    "fechaCreacion": "2024-12-05T00:18:18.309627",
+    "fechaUltimaModificacion": "2024-12-05T00:18:18.309627",
+>>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Copia-Tercera-Entrega.git
     "version": 1.0,
     "estudiantesInscritos": {},
     "actividades": [
