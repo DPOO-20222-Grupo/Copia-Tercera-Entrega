@@ -19,6 +19,7 @@ import exceptions.ActividadYaCompletadaException;
 import exceptions.EstudianteNoInscritoException;
 import exceptions.ModificarActividadesPreviasException;
 import exceptions.ModificarEstudianteLearningPathException;
+import interfazEstudiante.VentanaEstudiante;
 import learningPath.LearningPath;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
@@ -92,7 +93,7 @@ public class Main {
 		
 		RevisarRecurso rr = (RevisarRecurso) aplicacion.getActividad("Ver video - l.munera", "Recurso");
 		
-
+		
 		
 		// Pruebas de Registro de LearningPaths
 		
@@ -116,7 +117,7 @@ public class Main {
 		aplicacion.crearLearningPath("Introducción a las Pruebas", "Pruebas", objetivos, "mid",
 				prof1, actividades, mapaObligatorio);
 		
-		
+		new VentanaEstudiante(aplicacion, stud1);
 		
 		// Descarga de los Datos en Archivos JSON
 		aplicacion.descargarDatos();
