@@ -35,6 +35,7 @@ public class VentanaInicial extends JFrame implements ActionListener {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null); 
         this.setLayout(new BorderLayout(10, 10));
+        this.setResizable(false);
 
         
         

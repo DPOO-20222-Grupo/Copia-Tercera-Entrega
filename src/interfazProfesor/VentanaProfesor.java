@@ -1,6 +1,6 @@
 package interfazProfesor;
 
-import javax.swing.*; 
+import javax.swing.*;  
 
 import interfaz.Aplicacion;
 import interfazProfesor.PanelOpcionesProfesor;
@@ -12,7 +12,6 @@ public class VentanaProfesor extends JFrame{
 	private Aplicacion aplicacion;
 	private Profesor profesor;
 	private PanelOpcionesProfesor panelOpciones; 
-	private JPanel panelContenido;
 	
 	
 	public VentanaProfesor(Aplicacion aplicacion, Profesor profesor) {
@@ -23,7 +22,10 @@ public class VentanaProfesor extends JFrame{
 		this.add(panelOpciones);
 		
 		this.setVisible(true);
-		this.setSize(600, 400);	
+		this.setSize(800, 600);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null); 
+        this.setResizable(false);
 	}
 }
 

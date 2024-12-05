@@ -47,7 +47,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
         this.add(lblNombre, BorderLayout.NORTH);
 
         JPanel panelOpciones = new JPanel();
-        panelOpciones.setLayout(new GridLayout(OPCIONES.length, 1, 5, 5));
+        panelOpciones.setLayout(new GridLayout(OPCIONES.length, 1));
 
         ButtonGroup grupoBotones = new ButtonGroup();
         for (String opcion : OPCIONES) {
@@ -59,7 +59,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
             panelOpciones.add(btnOpcion);
         }
 
-        this.add(new JScrollPane(panelOpciones), BorderLayout.CENTER);
+        this.add(new JScrollPane(panelOpciones), BorderLayout.WEST);
     }
 
     @Override
