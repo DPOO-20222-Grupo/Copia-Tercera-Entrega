@@ -9,6 +9,7 @@ import javax.swing.*;
 import exceptions.UsuarioYaExistenteException;
 import interfaz.Aplicacion;
 import interfazEstudiante.VentanaEstudiante;
+import interfazProfesor.VentanaProfesor;
 import user.Estudiante;
 import user.Profesor;
 
@@ -182,7 +183,7 @@ public class VentanaInicial extends JFrame implements ActionListener {
             
 	            Estudiante estudiante = aplicacion.getMapaEstudiantes().get(login); 
 	            if (estudiante != null && estudiante.login(login, password)) {
-	                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso como " + tipoUsuario + ".");
+	                JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.");
 	                new VentanaEstudiante(aplicacion, estudiante); 
 	                this.dispose(); 
 	            } else {
@@ -191,8 +192,8 @@ public class VentanaInicial extends JFrame implements ActionListener {
             else {
 	            Profesor profesor = aplicacion.getMapaProfesores().get(login); 
 	            if (profesor != null && profesor.login(login, password)) {
-	            	JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso como " + tipoUsuario + ".");
-	                //new VentanaProfesor(aplicacion, login); 
+	            	JOptionPane.showMessageDialog(this, "Inicio de sesión exitoso.");
+	                new VentanaProfesor(aplicacion, profesor); 
 	                this.dispose(); 
 	            } else {
 	                JOptionPane.showMessageDialog(this, "Credenciales incorrectas.", "Error", JOptionPane.ERROR_MESSAGE);
