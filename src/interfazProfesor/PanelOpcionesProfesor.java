@@ -316,7 +316,78 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	}
 
 	private void calificarLearningPath() {
-		// TODO Auto-generated method stub
+		
+		panelCentro.setLayout(new GridLayout(17, 1));
+	    
+	    JLabel lblTitulo = new JLabel("Título del Learning Path:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTitulo = new JTextField();
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JLabel lblProfesor = new JLabel("Login del Profesor:");
+	    lblProfesor.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtProfesor = new JTextField();
+	    txtProfesor.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JLabel lblCalificacion = new JLabel("Calificación (0.0 - 5.0):");
+	    lblCalificacion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtCalificacion = new JTextField();
+	    txtCalificacion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JButton btnRegistrar = new JButton("Registrar Calificación");
+	    btnRegistrar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+
+	    panelCentro.add(lblTitulo);
+	    panelCentro.add(txtTitulo);
+	    panelCentro.add(lblProfesor);
+	    panelCentro.add(txtProfesor);
+	    panelCentro.add(lblCalificacion);
+	    panelCentro.add(txtCalificacion);
+	    panelCentro.add(btnRegistrar);
+
+	    btnRegistrar.addActionListener(e -> {
+	        try {
+	            String titulo = txtTitulo.getText().trim();
+	            String profesor = txtProfesor.getText().trim();
+	            double calificacion = Double.parseDouble(txtCalificacion.getText().trim());
+
+	            if (titulo.isEmpty() || profesor.isEmpty() || calificacion < 0.0 || calificacion > 5.0) {
+	                throw new IllegalArgumentException("El título y el login del profesor son obligatorios y la calificación debe estar entre 0.0 y 5.0.");
+	            }
+
+	            LearningPath learningPath = aplicacion.getLearningPath(titulo + " - " + profesor);
+
+	            if (learningPath != null) {
+	                aplicacion.calificarLearningPath(learningPath, calificacion);
+	                aplicacion.descargarDatos();
+	                JOptionPane.showMessageDialog(
+	                    null, "¡Calificación registrada con éxito!",
+	                    "Éxito", JOptionPane.INFORMATION_MESSAGE
+	                );
+	            } else {
+	                JOptionPane.showMessageDialog(
+	                    null, "No se encontró el Learning Path especificado.",
+	                    "Error", JOptionPane.ERROR_MESSAGE
+	                );
+	            }
+	        } catch (NumberFormatException ex) {
+	            JOptionPane.showMessageDialog(
+	                null, "La calificación debe ser un número válido.",
+	                "Error", JOptionPane.ERROR_MESSAGE
+	            );
+	        } catch (IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(
+	                null, ex.getMessage(),
+	                "Validación", JOptionPane.WARNING_MESSAGE
+	            );
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(
+	                null, "Ocurrió un error inesperado: " + ex.getMessage(),
+	                "Error", JOptionPane.ERROR_MESSAGE
+	            );
+	        }
+	    });
+
+	    this.add(panelCentro, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
