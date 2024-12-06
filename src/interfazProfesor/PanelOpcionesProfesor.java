@@ -164,7 +164,66 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	}
 
 	private void verCalificacionLP() {
-		// TODO Auto-generated method stub
+		
+		JPanel panelCalificacion = new JPanel();
+	    panelCalificacion.setLayout(new GridLayout(6, 1));
+
+	    JLabel lblTitulo = new JLabel("Título del Learning Path:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTitulo = new JTextField(20);
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelCalificacion.add(lblTitulo);
+	    panelCalificacion.add(txtTitulo);
+
+	    JLabel lblProfesor = new JLabel("Login del Profesor Creador:");
+	    lblProfesor.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtProfesor = new JTextField(20);
+	    txtProfesor.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelCalificacion.add(lblProfesor);
+	    panelCalificacion.add(txtProfesor);
+
+	    JButton btnBuscar = new JButton("Ver Calificación");
+	    btnBuscar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelCalificacion.add(btnBuscar);
+
+	    JTextArea textAreaResultado = new JTextArea(5, 30);
+	    textAreaResultado.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    textAreaResultado.setEditable(false);
+	    JScrollPane scrollPaneResultado = new JScrollPane(textAreaResultado);
+	    scrollPaneResultado.setPreferredSize(new Dimension(600, 250));
+	    panelCalificacion.add(scrollPaneResultado);
+
+	    btnBuscar.addActionListener(e -> {
+	        String titulo = txtTitulo.getText().trim();
+	        String loginProfesor = txtProfesor.getText().trim();
+
+	        if (titulo.isEmpty() || loginProfesor.isEmpty()) {
+	            textAreaResultado.setText("Error: Por favor, complete ambos campos.");
+	            return;
+	        }
+
+	        LearningPath learningPath = aplicacion.getLearningPath(titulo + " - " + loginProfesor);
+
+	        if (learningPath != null) {
+	            String resultado = String.format("""
+	                    == Calificación Learning Path ==
+	                    Título: %s
+	                    Profesor creador: %s (%s)
+	                    Calificación: %.2f
+	                    """, 
+	                    learningPath.getTitulo(), 
+	                    learningPath.getNombreProfesorCreador(), 
+	                    learningPath.getLoginProfesorCreador(), 
+	                    learningPath.getRating());
+	            textAreaResultado.setText(resultado);
+	        } else {
+	            textAreaResultado.setText("Learning Path no encontrado.");
+	        }
+	    });
+
+	    this.add(panelCalificacion, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
