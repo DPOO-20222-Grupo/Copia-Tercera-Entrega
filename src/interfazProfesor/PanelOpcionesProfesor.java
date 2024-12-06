@@ -13,6 +13,7 @@ import javax.swing.*;
 import Consolas.ProfesorConsole;
 import actividades.Actividad;
 import interfaz.Aplicacion;
+import learningPath.LearningPath;
 import preguntas.PreguntaAbierta;
 import user.Profesor;
 
@@ -182,13 +183,51 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 		
 	}
 
-	private void verPreguntas(Profesor profesor2) {
+	private void verPreguntas(Profesor profesor) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	private void verLearningPaths(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	private void verLearningPaths(Profesor profesor) {
+		
+		JPanel panelLearningPaths = new JPanel();
+	    panelLearningPaths.setLayout(new BorderLayout());
+	    
+	    JLabel lblTitulo = new JLabel("--- Mis Learning Paths ---");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	    lblTitulo.setHorizontalAlignment(SwingConstants.CENTER); 
+	    panelLearningPaths.add(lblTitulo, BorderLayout.NORTH);
+
+	    JTextArea textArea = new JTextArea(20, 50);
+	    textArea.setFont(new Font("imes New Roman", Font.BOLD, 14));
+	    textArea.setEditable(false);  
+	    JScrollPane scrollPane = new JScrollPane(textArea);
+	    panelLearningPaths.add(scrollPane, BorderLayout.CENTER);
+
+	    JButton btnCerrar = new JButton("Cerrar");
+	    btnCerrar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnCerrar.addActionListener(e -> {
+	        panelLearningPaths.setVisible(false);
+	    });
+	    panelLearningPaths.add(btnCerrar, BorderLayout.SOUTH);
+
+	    if (profesor.getLearningPathPropios().size() > 0) {
+	        StringBuilder learningPathsText = new StringBuilder();
+	        int i = 1;
+	        for (LearningPath lp : profesor.getLearningPathPropios().values()) {
+	            learningPathsText.append(String.format("%d. %s\n", i, lp.getTitulo()));
+	            i++;
+	        }
+	        textArea.setText(learningPathsText.toString());
+	        textArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	    } else {
+	        textArea.setText("No tiene Learning Paths propios");
+	        textArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	    }
+
+	    this.add(panelLearningPaths, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
@@ -203,13 +242,13 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	    panelActividades.add(lblTitulo, BorderLayout.NORTH);
 
 	    JTextArea textArea = new JTextArea(20, 50);
-	    textArea.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    textArea.setFont(new Font("Times New Roman", Font.BOLD, 20));
 	    textArea.setEditable(false);  
 	    JScrollPane scrollPane = new JScrollPane(textArea);
 	    panelActividades.add(scrollPane, BorderLayout.CENTER);
 
 	    JButton btnCerrar = new JButton("Cerrar");
-	    btnCerrar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnCerrar.setFont(new Font("Times New Roman", Font.BOLD, 20));
 	    btnCerrar.addActionListener(e -> {
 	        panelActividades.setVisible(false);
 	    });
@@ -275,8 +314,53 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 		
 	}
 
-	private void clonarLearningPath(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	private void clonarLearningPath(Profesor profesor) {
+		
+		JPanel panelRecurso = new JPanel();
+	    panelRecurso.setLayout(new GridLayout(17,1));
+	    
+
+	    JLabel lblTitulo = new JLabel("Título del Learning Path:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTitulo = new JTextField(20);
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblTitulo);
+	    panelRecurso.add(txtTitulo);
+	    
+	    JLabel lblProfesor = new JLabel("Login del Profesor Dueño del Learning Path:");
+	    lblProfesor.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtProfesor = new JTextField(20);
+	    txtProfesor.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelRecurso.add(lblProfesor);
+	    panelRecurso.add(txtProfesor);
+	    
+	    JButton btnGuardar = new JButton("Clonar Learning Path");
+	    btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnGuardar.addActionListener(e -> {
+	        try {
+	            String titulo = txtTitulo.getText();
+	            if (titulo.isEmpty()) throw new IllegalArgumentException("El título no puede estar vacío.");
+	            
+	            String profesorOg = txtProfesor.getText();
+	            if (profesorOg.isEmpty()) throw new IllegalArgumentException("El profesor no puede estar vacío.");
+	            
+	            
+	            String id = titulo + " - " + profesorOg;
+	            LearningPath learningOriginal = aplicacion.getLearningPath(id);
+	            aplicacion.clonarLearningPath(learningOriginal, profesor);
+	            aplicacion.descargarDatos();
+	            JOptionPane.showMessageDialog(this, "Learning Path clonado exitosamente.");
+	        } catch (IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Validación", JOptionPane.ERROR_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+	    panelRecurso.add(btnGuardar);
+	    
+	    this.add(panelRecurso, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
