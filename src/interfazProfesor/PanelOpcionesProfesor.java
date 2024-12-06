@@ -772,8 +772,153 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 
 	}
 
-	private void crearPregunta(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	private void crearPregunta(Profesor profesor) {
+		
+		panelCentro.setLayout(new BorderLayout());
+	    JPanel panelEtiquetas = new JPanel();
+	    panelEtiquetas.setLayout(new GridLayout(0,1));
+		
+		
+	    JLabel lblTitulo = new JLabel("Título de la pregunta:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    JTextField txtTitulo = new JTextField();
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+
+	    JLabel lblEnunciado = new JLabel("Enunciado de la pregunta:");
+	    lblEnunciado.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    JTextField txtEnunciado = new JTextField();
+	    txtEnunciado.setFont(new Font("Times New Roman", Font.BOLD, 14));
+
+	    JLabel lblTipo = new JLabel("Seleccione el tipo de pregunta:");
+	    lblTipo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    String[] opcionesTipo = {"Selección Múltiple", "Verdadero o Falso", "Abierta"};
+	    JComboBox<String> comboTipo = new JComboBox<>(opcionesTipo);
+	    comboTipo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+
+	    JPanel panelOpciones = new JPanel(new GridLayout(0, 1));
+
+	    JButton btnRegistrar = new JButton("Registrar Pregunta");
+	    btnRegistrar.setFont(new Font("Times New Roman", Font.BOLD, 14));
+
+	    comboTipo.addActionListener(e -> {
+	        panelOpciones.removeAll();
+	        String tipoSeleccionado = (String) comboTipo.getSelectedItem();
+	        
+	        if ("Selección Múltiple".equals(tipoSeleccionado)) {
+	            JLabel lblOpcion1 = new JLabel("Opción 1:");
+	            lblOpcion1.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	            panelOpciones.add(lblOpcion1);
+	            JTextField txtOpcion1 = new JTextField();
+	            panelOpciones.add(txtOpcion1);
+
+	            JLabel lblOpcion2 = new JLabel("Opción 2:");
+	            lblOpcion2.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	            panelOpciones.add(lblOpcion2);
+	            JTextField txtOpcion2 = new JTextField();
+	            panelOpciones.add(txtOpcion2);
+
+	            JLabel lblOpcion3 = new JLabel("Opción 3:");
+	            lblOpcion3.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	            panelOpciones.add(lblOpcion3);
+	            JTextField txtOpcion3 = new JTextField();
+	            panelOpciones.add(txtOpcion3);
+
+	            JLabel lblOpcion4 = new JLabel("Opción 4:");
+	            lblOpcion4.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	            panelOpciones.add(lblOpcion4);
+	            JTextField txtOpcion4 = new JTextField();
+	            panelOpciones.add(txtOpcion4);
+
+	            JLabel lblOpcionCorrecta = new JLabel("Número de la opción correcta:");
+	            lblOpcionCorrecta.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	            panelOpciones.add(lblOpcionCorrecta);
+	            JTextField txtOpcionCorrecta = new JTextField();
+	            panelOpciones.add(txtOpcionCorrecta);
+	        } else if ("Verdadero o Falso".equals(tipoSeleccionado)) {
+	            JLabel lblBoolean = new JLabel("Seleccione la respuesta correcta:");
+	            lblBoolean.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	            panelOpciones.add(lblBoolean);
+
+	            String[] opcionesBoolean = {"Falso (0)", "Verdadero (1)"};
+	            JComboBox<String> comboBoolean = new JComboBox<>(opcionesBoolean);
+	            comboBoolean.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	            panelOpciones.add(comboBoolean);
+	        } else if ("Abierta".equals(tipoSeleccionado)) {
+	            JLabel lblAbierta = new JLabel("No hay opciones adicionales para preguntas abiertas.");
+	            lblAbierta.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	            panelOpciones.add(lblAbierta);
+	        }
+
+	        
+	        panelOpciones.revalidate();
+	        panelOpciones.repaint();
+	    });
+
+	    btnRegistrar.addActionListener(e -> {
+	        try {
+	            String titulo = txtTitulo.getText().trim();
+	            String enunciado = txtEnunciado.getText().trim();
+	            String tipoSeleccionado = (String) comboTipo.getSelectedItem();
+
+	            if (titulo.isEmpty() || enunciado.isEmpty()) {
+	                throw new IllegalArgumentException("El título y el enunciado son obligatorios.");
+	            }
+
+	            if ("Selección Múltiple".equals(tipoSeleccionado)) {
+	                Component[] components = panelOpciones.getComponents();
+	                String opcion1 = ((JTextField) components[1]).getText().trim();
+	                String opcion2 = ((JTextField) components[3]).getText().trim();
+	                String opcion3 = ((JTextField) components[5]).getText().trim();
+	                String opcion4 = ((JTextField) components[7]).getText().trim();
+	                int opcionCorrecta = Integer.parseInt(((JTextField) components[9]).getText().trim());
+
+	                aplicacion.crearPreguntaSeleccion(enunciado, titulo, opcion1, opcion2, opcion3, opcion4, opcionCorrecta, profesor);
+	                aplicacion.descargarDatos();
+	            } else if ("Verdadero o Falso".equals(tipoSeleccionado)) {
+	                JComboBox<String> comboBoolean = (JComboBox<String>) panelOpciones.getComponent(1);
+	                int opcionCorrecta = comboBoolean.getSelectedIndex();
+	                aplicacion.crearPreguntaBoolean(enunciado, titulo, opcionCorrecta, profesor);
+	                aplicacion.descargarDatos();
+	            } else if ("Abierta".equals(tipoSeleccionado)) {
+	                aplicacion.crearPreguntaAbierta(enunciado, titulo, profesor);
+	                aplicacion.descargarDatos();
+	            }
+
+	            JOptionPane.showMessageDialog(
+	                null, "¡Pregunta registrada con éxito!",
+	                "Éxito", JOptionPane.INFORMATION_MESSAGE
+	            );
+	        } catch (NumberFormatException ex) {
+	            JOptionPane.showMessageDialog(
+	                null, "La opción correcta debe ser un número válido.",
+	                "Error", JOptionPane.ERROR_MESSAGE
+	            );
+	        } catch (IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(
+	                null, ex.getMessage(),
+	                "Validación", JOptionPane.WARNING_MESSAGE
+	            );
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(
+	                null, "Ocurrió un error inesperado: " + ex.getMessage(),
+	                "Error", JOptionPane.ERROR_MESSAGE
+	            );
+	        }
+	    });
+
+	    panelEtiquetas.add(lblTitulo);
+	    panelEtiquetas.add(txtTitulo);
+	    panelEtiquetas.add(lblEnunciado);
+	    panelEtiquetas.add(txtEnunciado);
+	    panelEtiquetas.add(lblTipo);
+	    panelEtiquetas.add(comboTipo);
+	    panelCentro.add(panelEtiquetas, BorderLayout.NORTH);
+	    panelCentro.add(panelOpciones, BorderLayout.CENTER);
+	    panelCentro.add(btnRegistrar, BorderLayout.SOUTH);
+
+	    this.add(panelCentro, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
