@@ -184,7 +184,51 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	}
 
 	private void verPreguntas(Profesor profesor) {
-		// TODO Auto-generated method stub
+		
+		JPanel panelPreguntas = new JPanel();
+	    panelPreguntas.setLayout(new BorderLayout());
+
+	    JLabel lblTitulo = new JLabel("== Mis Preguntas ==");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	    lblTitulo.setHorizontalAlignment(SwingConstants.CENTER); 
+	    panelPreguntas.add(lblTitulo, BorderLayout.NORTH);
+
+	    JTextArea textArea = new JTextArea(20, 50);
+	    textArea.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    textArea.setEditable(false); 
+	    JScrollPane scrollPane = new JScrollPane(textArea);
+	    panelPreguntas.add(scrollPane, BorderLayout.CENTER);
+
+	    JButton btnCerrar = new JButton("Cerrar");
+	    btnCerrar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    btnCerrar.addActionListener(e -> {
+	        panelPreguntas.setVisible(false);
+	    });
+	    panelPreguntas.add(btnCerrar, BorderLayout.SOUTH);
+
+	    StringBuilder preguntasTexto = new StringBuilder();
+
+	    preguntasTexto.append("-- Preguntas Abiertas --\n");
+	    profesor.getPreguntasAbiertasPropias().forEach((id, pregAbierta) -> 
+	        preguntasTexto.append("  - ID: ").append(id).append("\n"));
+
+	    preguntasTexto.append("\n-- Preguntas de Selección Múltiple --\n");
+	    profesor.getPreguntasSeleccionPropias().forEach((id, pregSeleccion) -> 
+	        preguntasTexto.append("  - ID: ").append(id).append("\n"));
+
+	    preguntasTexto.append("\n-- Preguntas de Verdadero o Falso --\n");
+	    profesor.getPreguntasBooleanPropias().forEach((id, pregBoolean) -> 
+	        preguntasTexto.append("  - ID: ").append(id).append("\n"));
+
+	    if (preguntasTexto.toString().trim().isEmpty()) {
+	        preguntasTexto.append("No tiene preguntas propias");
+	    }
+
+	    textArea.setText(preguntasTexto.toString());
+
+	    this.add(panelPreguntas, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
