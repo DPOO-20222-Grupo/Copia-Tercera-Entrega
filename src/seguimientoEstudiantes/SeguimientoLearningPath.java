@@ -71,13 +71,8 @@ public class SeguimientoLearningPath {
     			seguimientoActividades.put(actividad.getIdActividad(), seguimiento);
     			
     		}
-
-
-			
         }
         	this.mapaSeguimientoActividades = seguimientoActividades;
-        
-    
     }
 
     public float getProgreso() {
