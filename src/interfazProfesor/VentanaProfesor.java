@@ -14,9 +14,9 @@ public class VentanaProfesor extends JFrame{
 	private PanelOpcionesProfesor panelOpciones; 
 	
 	
-	public VentanaProfesor(Aplicacion aplicacion, Profesor profesor) {
-		this.aplicacion = aplicacion;
-		this.profesor = profesor;
+	public VentanaProfesor(Aplicacion app, Profesor prof) {
+		this.aplicacion = app;
+		this.profesor = prof;
 		
 		this.panelOpciones = new PanelOpcionesProfesor(profesor);
 		this.add(panelOpciones);

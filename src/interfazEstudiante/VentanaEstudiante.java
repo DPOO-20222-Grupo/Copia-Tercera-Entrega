@@ -10,25 +10,28 @@ import interfaz.Aplicacion;
 import interfazActividadesCompletadas.PanelActividadesDiarias;
 import user.Estudiante;
 
+@SuppressWarnings("serial")
 public class VentanaEstudiante extends JFrame{
 	
-	private Aplicacion app;
-	
+	private Aplicacion aplicacion;
 	private Estudiante estudiante;
-	
 	private PanelOpcionesEstudiante panelOpciones; 
-	
 	private JPanel panelContenido;
 	
-	public VentanaEstudiante(Aplicacion app, Estudiante estudiante) {
-		this.app = app;
-		this.estudiante = estudiante;
+	public VentanaEstudiante(Aplicacion app, Estudiante est) {
+		this.aplicacion = app;
+		this.estudiante = est;
 		
 		this.panelOpciones = new PanelOpcionesEstudiante(estudiante);
+
 		this.setLayout(new BorderLayout());
 		this.add(panelOpciones, BorderLayout.NORTH);
+
+		this.add(panelOpciones);
+
 		
 		this.setVisible(true);
+
 		
 		this.setSize(600, 400);
 		
@@ -38,6 +41,12 @@ public class VentanaEstudiante extends JFrame{
 		
 		
 		
+
+		this.setSize(800, 400);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null); 
+        this.setResizable(true);
+
 	}
 
 }
