@@ -16,6 +16,7 @@ import exceptions.ActividadYaExistenteException;
 import exceptions.LearningPathYaExistenteException;
 import interfaz.Aplicacion;
 import learningPath.LearningPath;
+import preguntas.Pregunta;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
@@ -642,8 +643,134 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 		
 	}
 
-	private void modificarPregunta(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	private void modificarPregunta(Profesor profesor) {
+		
+		panelCentro.setLayout(new BorderLayout());
+
+        JLabel lblTitulo = new JLabel("Modificar Pregunta", JLabel.CENTER);
+        lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 18));
+        panelCentro.add(lblTitulo, BorderLayout.NORTH);
+
+        JPanel panelFormulario = new JPanel(new GridLayout(8, 2));
+        JLabel lblIdPregunta = new JLabel("Ingrese el ID de la pregunta");
+        lblIdPregunta.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        panelFormulario.add(lblIdPregunta);
+
+        JTextField txtIdPregunta = new JTextField();
+        txtIdPregunta.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        panelFormulario.add(txtIdPregunta);
+
+        JLabel lblTipoPregunta = new JLabel("Seleccione el tipo de pregunta");
+        lblTipoPregunta.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        panelFormulario.add(lblTipoPregunta);
+
+        JComboBox<String> comboTipoPregunta = new JComboBox<>(new String[]{"Selección Múltiple", "Verdadero o Falso", "Abierta"});
+        comboTipoPregunta.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        panelFormulario.add(comboTipoPregunta);
+
+        JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER)); 
+        JButton btnBuscarModificar = new JButton("Buscar y Modificar");
+        btnBuscarModificar.setFont(new Font("Times New Roman", Font.BOLD, 30));
+        panelBoton.add(btnBuscarModificar);
+
+        panelFormulario.add(new JLabel()); 
+        panelFormulario.add(panelBoton);
+        
+        JTextArea txtResultado = new JTextArea(5, 30);
+        txtResultado.setEditable(false);
+        txtResultado.setFont(new Font("Times New Roman", Font.BOLD, 14));
+        JScrollPane scrollResultado = new JScrollPane(txtResultado);
+        panelCentro.add(scrollResultado, BorderLayout.SOUTH);
+
+        panelCentro.add(panelFormulario, BorderLayout.CENTER);
+
+        btnBuscarModificar.addActionListener(e -> {
+            String idPregunta = txtIdPregunta.getText().trim();
+            int tipo = comboTipoPregunta.getSelectedIndex();
+            String tipoString = switch (tipo) {
+                case 0 -> "Cerrada";
+                case 1 -> "Verdadero o Falso";
+                case 2 -> "Abierta";
+                default -> "";
+            };
+
+            if (idPregunta.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar el ID de la pregunta", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            Pregunta pregunta = aplicacion.getPregunta(idPregunta, tipoString);
+            if (pregunta != null) {
+                txtResultado.setText(String.format("Pregunta encontrada\nID: %s\nTipo: %s\nTítulo: %s\n",
+                        pregunta.getId(), tipoString, pregunta.getTitulo()));
+
+                String[] opciones = switch (tipoString) {
+                    case "Cerrada" -> new String[]{"Título", "Enunciado", "Opción Correcta", "Opciones Posibles"};
+                    case "Verdadero o Falso" -> new String[]{"Título", "Enunciado", "Opción Correcta"};
+                    case "Abierta" -> new String[]{"Título", "Enunciado"};
+                    default -> new String[0];
+                };
+
+                String atributo = (String) JOptionPane.showInputDialog(this, "Seleccione el atributo a modificar",
+                        "Modificar Pregunta", JOptionPane.PLAIN_MESSAGE, null, opciones, opciones[0]);
+
+                if (atributo != null) {
+                    String nuevoValor = JOptionPane.showInputDialog(this, "Ingrese el nuevo valor para " + atributo);
+                    if (nuevoValor == null || nuevoValor.trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(this, "El valor ingresado no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    if (atributo.equals("Título")) {
+                        aplicacion.modificarTituloPregunta(pregunta, nuevoValor, profesor);
+                        aplicacion.descargarDatos();
+                        JOptionPane.showMessageDialog(this, "Pregunta modificada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        txtResultado.setText("");
+                    } else if (atributo.equals("Enunciado")) {
+                        aplicacion.modificarEnunciadoPregunta(pregunta, nuevoValor);
+                        aplicacion.descargarDatos();
+                        JOptionPane.showMessageDialog(this, "Pregunta modificada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        txtResultado.setText("");
+                    } else if (atributo.equals("Opción Correcta")) {
+                        if (tipoString.equals("Verdadero o Falso")) {
+                            int opcionCorrecta = nuevoValor.equalsIgnoreCase("Verdadero") ? 1 : 0;
+                            aplicacion.modificarOpcionCorrectaPreguntaCerrada((PreguntaCerrada) pregunta, opcionCorrecta);
+                            aplicacion.descargarDatos();
+                            JOptionPane.showMessageDialog(this, "Pregunta modificada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                            txtResultado.setText("");
+                        } else if (tipoString.equals("Cerrada")) {
+                            try {
+                                int opcion = Integer.parseInt(nuevoValor);
+                                aplicacion.modificarOpcionCorrectaPreguntaCerrada((PreguntaCerrada) pregunta, opcion);
+                                aplicacion.descargarDatos();
+                                JOptionPane.showMessageDialog(this, "Pregunta modificada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                                txtResultado.setText("");
+                            } catch (NumberFormatException ex) {
+                                JOptionPane.showMessageDialog(this, "La opción debe ser un número válido", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                    } else if (atributo.equals("Opciones Posibles")) {
+                        try {
+                            int numOpcion = Integer.parseInt(JOptionPane.showInputDialog(this, "Ingrese el número de la opción a modificar"));
+                            aplicacion.modificarOpcionesPreguntaSeleccion((PreguntaSeleccionMultiple) pregunta, nuevoValor, numOpcion);
+                            aplicacion.descargarDatos();
+                            JOptionPane.showMessageDialog(this, "Pregunta modificada con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                            txtResultado.setText("");
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(this, "El número ingresado no es válido", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+
+                }
+            } else {
+                txtResultado.setText("La pregunta no fue encontrada");
+            }
+            
+        });
+        
+        this.add(panelCentro, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 

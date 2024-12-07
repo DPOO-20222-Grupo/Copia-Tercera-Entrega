@@ -30,7 +30,7 @@ public abstract class Pregunta {
 
 	public abstract String getTipo();
 	
-	protected abstract int getId();
+	public abstract int getId();
 	
 	public String getIdPregunta () {
 		String titulo = this.getTitulo();
