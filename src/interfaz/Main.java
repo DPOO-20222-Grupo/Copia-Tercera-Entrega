@@ -117,7 +117,7 @@ public class Main {
 		aplicacion.crearLearningPath("Introducción a las Pruebas", "Pruebas", objetivos, "mid",
 				prof1, actividades, mapaObligatorio);
 		
-		new VentanaEstudiante(aplicacion, stud1);
+		
 		
 		// Descarga de los Datos en Archivos JSON
 		aplicacion.descargarDatos();
@@ -139,7 +139,8 @@ public class Main {
 		RevisarRecurso revisarRecurso = (RevisarRecurso) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Ver video", "l.munera"), "Recurso");
 
 		Encuesta encuesta = (Encuesta) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Autoevaluación", "l.munera"), "Encuesta");
-
+		
+		
 		
 		System.out.println(
 				"\nEstudiante 1. \n"
@@ -230,6 +231,12 @@ public class Main {
 				+ String.format("  * : %s\n", printLp.getActividades().get(4).getTitulo())
 				+ "\n"
 				);
+		
+		aplicacion.inscribirEstudianteLearningPath(estudiante, printLp);
+		aplicacion.enviarExamen(examen, estudiante, printLp);
+		aplicacion.enviarTarea(tarea, estudiante, printLp);
+		aplicacion.completarEncuestaRecurso(encuesta, estudiante, printLp);
+		new VentanaEstudiante(aplicacion, estudiante);
 		} catch(ParseException e) {
 			System.out.println("Error al convertir la fecha: " + e.getMessage());
 		}

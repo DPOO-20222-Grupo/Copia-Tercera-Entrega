@@ -18,7 +18,7 @@ public class SeguimientoLearningPath {
 	private String loginEstudiante;
 	private String nombreEstudiante;
 	private String idLearningPath;
-    private float progreso; //proporcion de actividades completadas
+    private float progreso; 
     private int totalTiempo;
     private float tasaExito;
     private float tasaFracaso;
@@ -71,13 +71,8 @@ public class SeguimientoLearningPath {
     			seguimientoActividades.put(actividad.getIdActividad(), seguimiento);
     			
     		}
-
-
-			
         }
         	this.mapaSeguimientoActividades = seguimientoActividades;
-        
-    
     }
 
     public float getProgreso() {
