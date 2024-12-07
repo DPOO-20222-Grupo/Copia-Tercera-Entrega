@@ -7,9 +7,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.Date;
 
 import java.util.List;
+import java.util.Locale;
 
 import actividades.Actividad;
 import actividades.Encuesta;
@@ -924,6 +926,7 @@ public class Aplicacion {
 			if(seguimientoTarea.getEstado().equals("Incompleta")) {
 				seguimientoTarea.actualizarEstadoEnviado();
 				seguimientoEstudiante.actualizarProgreso();
+				completarActividadDia();
 			}
 			
 			else {
@@ -950,6 +953,7 @@ public class Aplicacion {
 			seguimientoExamen.actualizarEstadoEnviado();
 			seguimientoEstudiante.actualizarProgreso();
 			seguimientoEstudiante.actualizarTasaExito();
+			completarActividadDia();
 		}
 		
 		else {
@@ -1044,6 +1048,7 @@ public class Aplicacion {
 			seguimientoActividad.actualizarEstadoCompletado();
 			seguimientoEstudiante.actualizarProgreso();
 			seguimientoEstudiante.actualizarTasaExito();
+			completarActividadDia();
 		}
 		
 		else {
@@ -1232,6 +1237,64 @@ public class Aplicacion {
 		}
 		
 	}
+	
+	public int getActividadesCompletadasMes(int mes, int anio) {
+		
+		
+		LocalDate diaInicial = LocalDate.of(anio, mes, 1);
+		DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		int total = 0;
+		while (diaInicial.getMonthValue() == mes) {
+			String llave = diaInicial.format(formatoFecha);
+			if (mapaActividadesDiarias.containsKey(llave)) {
+				total += mapaActividadesDiarias.get(llave);
+			}
+			diaInicial = diaInicial.plusDays(1);
+		}
+		
+		return total;
+	}
+	
+	public Map<String, Integer> getActividadesCompletadasAnio(int anio) {
+		
+		HashMap<String, Integer> retorno = new HashMap<String, Integer>();
+		
+		for( int mes = 1; mes<13; mes++){
+			
+			int totalMes = getActividadesCompletadasMes(mes, anio);
+			
+			String llave = Month.of(mes).getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
+			retorno.put(llave, totalMes);
+			
+		}
+		
+		return retorno;
+		
+		
+	}
+	
+	public String getMaximoMes(Map<String, Integer> mapa) {
+		
+		int maxActual = 0;
+		String mesMax = "";
+		
+		for(Map.Entry<String, Integer> entry: mapa.entrySet()) {
+			
+			if (entry.getValue()> maxActual) {
+				maxActual = entry.getValue();
+				mesMax = entry.getKey();
+			}
+			
+		}
+		
+		if (mesMax.equals("")){
+			mesMax = "Jan";
+		}
+		
+		return mesMax;
+		
+	}
+	
 
 	
 }
