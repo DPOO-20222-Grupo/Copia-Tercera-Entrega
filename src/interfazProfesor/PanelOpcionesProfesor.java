@@ -393,8 +393,95 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	}
 
 	private void calificarResenarActividad() {
-		// TODO Auto-generated method stub
 		
+		panelCentro.setLayout(new BorderLayout());
+		
+		JPanel panelFormulario = new JPanel(new GridLayout(15,1));
+
+	    JLabel lblTitulo = new JLabel("Título de la actividad:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	    JTextField txtTitulo = new JTextField();
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+	    JLabel lblProfesor = new JLabel("Login del profesor:");
+	    lblProfesor.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	    JTextField txtProfesor = new JTextField();
+	    txtProfesor.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+	    JLabel lblTipo = new JLabel("Tipo de actividad:");
+	    lblTipo.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	    JComboBox<String> comboTipo = new JComboBox<>(new String[]{"Examen", "Tarea", "Quiz", "Recurso", "Encuesta"});
+	    comboTipo.setFont(new Font("Times New Roman", Font.BOLD, 20));
+	    
+	    JButton btnBuscarActividad = new JButton("Buscar Actividad");
+	    btnBuscarActividad.setFont(new Font("Times New Roman", Font.BOLD, 20));
+
+	    panelFormulario.add(lblTitulo);
+	    panelFormulario.add(txtTitulo);
+	    panelFormulario.add(lblProfesor);
+	    panelFormulario.add(txtProfesor);
+	    panelFormulario.add(lblTipo);
+	    panelFormulario.add(comboTipo);
+	    panelFormulario.add(btnBuscarActividad);
+
+	    panelCentro.add(panelFormulario, BorderLayout.CENTER);
+
+	    btnBuscarActividad.addActionListener(e -> {
+	        String titulo = txtTitulo.getText();
+	        String profesor = txtProfesor.getText();
+	        String tipo = (String) comboTipo.getSelectedItem();
+
+	        Actividad actividad = aplicacion.getActividad(titulo + " - "+ profesor, tipo); 
+
+	        if (actividad != null) {
+	            String[] opciones = {"Reseñar", "Calificar"};
+	            int opcion = JOptionPane.showOptionDialog(
+	                    panelCentro,
+	                    "Seleccione la acción que desea realizar:",
+	                    "Acción",
+	                    JOptionPane.DEFAULT_OPTION,
+	                    JOptionPane.QUESTION_MESSAGE,
+	                    null,
+	                    opciones,
+	                    opciones[0]
+	            );
+
+	            if (opcion == 0) {
+	                String resena = JOptionPane.showInputDialog(
+	                		panelCentro,
+	                        "Ingrese la reseña para la actividad:",
+	                        "Reseñar",
+	                        JOptionPane.PLAIN_MESSAGE
+	                );
+	                if (resena != null && !resena.isEmpty()) {
+	                    aplicacion.resenarActividad(actividad, resena);
+	                    aplicacion.descargarDatos();
+	                    JOptionPane.showMessageDialog(panelCentro, "Reseña guardada exitosamente.");
+	                }
+	            } else if (opcion == 1) { 
+	                String inputCalificacion = JOptionPane.showInputDialog(
+	                		panelCentro,
+	                        "Ingrese la calificación para la actividad:",
+	                        "Calificar",
+	                        JOptionPane.PLAIN_MESSAGE
+	                );
+	                try {
+	                    double calificacion = Double.parseDouble(inputCalificacion);
+	                    aplicacion.calificarActividad(actividad, calificacion);
+	                    aplicacion.descargarDatos();
+	                    JOptionPane.showMessageDialog(panelCentro, "Calificación guardada exitosamente.");
+	                } catch (NumberFormatException ex) {
+	                    JOptionPane.showMessageDialog(panelCentro, "Calificación inválida.", "Error", JOptionPane.ERROR_MESSAGE);
+	                }
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(panelCentro, "Actividad no encontrada.", "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+
+	    this.add(panelCentro, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 	}
 
 	private void verProgresoLearningPathEstudiante() {

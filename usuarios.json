@@ -1,19 +1,5 @@
 {
   "estudiantes": {
-    "c.espinosag": {
-      "nombre": "cesar",
-      "learningPathsInscritos": {},
-      "login": "c.espinosag",
-      "password": "1097llll",
-      "isLoggedIn": false
-    },
-    "c.gomez": {
-      "nombre": "caterine",
-      "learningPathsInscritos": {},
-      "login": "c.gomez",
-      "password": "1097llll",
-      "isLoggedIn": false
-    },
     "d.martinezf": {
       "nombre": "Diego Martinez",
       "learningPathsInscritos": {},
@@ -183,18 +169,8 @@
           "nivelDificultad": "mid",
           "duracionMinutos": 345,
           "rating": 0.0,
-<<<<<<< HEAD
-          "fechaCreacion": "2024-12-07T13:08:44.677255",
-          "fechaUltimaModificacion": "2024-12-07T13:08:44.677255",
-=======
-<<<<<<< HEAD
-          "fechaCreacion": "2024-12-07T00:20:44.950017",
-          "fechaUltimaModificacion": "2024-12-07T00:20:44.950017",
-=======
-          "fechaCreacion": "2024-12-06T06:52:13.1265214",
-          "fechaUltimaModificacion": "2024-12-06T06:52:13.1265214",
->>>>>>> refs/remotes/origin/main
->>>>>>> branch 'main' of https://github.com/DPOO-20222-Grupo/Copia-Tercera-Entrega.git
+          "fechaCreacion": "2024-12-07T13:35:15.9012142",
+          "fechaUltimaModificacion": "2024-12-07T13:35:15.9012142",
           "version": 1.0,
           "estudiantesInscritos": {},
           "actividades": [
@@ -364,36 +340,6 @@
       "preguntasBooleanPropias": {},
       "login": "l.munera",
       "password": "Tristeza30",
-      "isLoggedIn": false
-    },
-    "c.espinosag": {
-      "nombre": "cesar",
-      "mapaRecursosPropios": {},
-      "mapaTareasPropias": {},
-      "mapaExamenesPropios": {},
-      "mapaEncuestasPropias": {},
-      "mapaQuicesPropios": {},
-      "learningPathPropios": {},
-      "preguntasAbiertasPropias": {},
-      "preguntasSeleccionPropias": {},
-      "preguntasBooleanPropias": {},
-      "login": "c.espinosag",
-      "password": "1097llll",
-      "isLoggedIn": false
-    },
-    "a.espinosa": {
-      "nombre": "augusto",
-      "mapaRecursosPropios": {},
-      "mapaTareasPropias": {},
-      "mapaExamenesPropios": {},
-      "mapaEncuestasPropias": {},
-      "mapaQuicesPropios": {},
-      "learningPathPropios": {},
-      "preguntasAbiertasPropias": {},
-      "preguntasSeleccionPropias": {},
-      "preguntasBooleanPropias": {},
-      "login": "a.espinosa",
-      "password": "cesarcesar",
       "isLoggedIn": false
     }
   }
