@@ -7,6 +7,13 @@
       "password": "1097llll",
       "isLoggedIn": false
     },
+    "c.gomez": {
+      "nombre": "caterine",
+      "learningPathsInscritos": {},
+      "login": "c.gomez",
+      "password": "1097llll",
+      "isLoggedIn": false
+    },
     "d.martinezf": {
       "nombre": "Diego Martinez",
       "learningPathsInscritos": {},
@@ -362,6 +369,21 @@
       "preguntasBooleanPropias": {},
       "login": "c.espinosag",
       "password": "1097llll",
+      "isLoggedIn": false
+    },
+    "a.espinosa": {
+      "nombre": "augusto",
+      "mapaRecursosPropios": {},
+      "mapaTareasPropias": {},
+      "mapaExamenesPropios": {},
+      "mapaEncuestasPropias": {},
+      "mapaQuicesPropios": {},
+      "learningPathPropios": {},
+      "preguntasAbiertasPropias": {},
+      "preguntasSeleccionPropias": {},
+      "preguntasBooleanPropias": {},
+      "login": "a.espinosa",
+      "password": "cesarcesar",
       "isLoggedIn": false
     }
   }

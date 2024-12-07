@@ -22,10 +22,10 @@ public class VentanaEstudiante extends JFrame{
 		this.add(panelOpciones);
 		
 		this.setVisible(true);
-		this.setSize(600, 400);
+		this.setSize(800, 400);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null); 
-        this.setResizable(false);
+        this.setResizable(true);
 	}
 
 }
