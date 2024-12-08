@@ -72,7 +72,7 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 		super();
 		this.estudiante = estudiante;
 		this.setLayout(new BorderLayout());
-		this.aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");
+		this.aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json", "cifrasActividades.json");
 		
 		panelOeste = new JPanel();
 		

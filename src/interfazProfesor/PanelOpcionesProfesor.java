@@ -71,7 +71,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
     };
 
     public PanelOpcionesProfesor(Profesor profesor) {
-    	aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");
+    	aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json", "cifrasActividades.json");
         this.profesor = profesor;
         this.setLayout(new BorderLayout());
 
