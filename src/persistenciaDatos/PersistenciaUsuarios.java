@@ -4,10 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.reflect.TypeToken;
 
 import actividades.Actividad;
 import preguntas.PreguntaCerrada;
 import seguimientoEstudiantes.SeguimientoActividad;
+import seguimientoEstudiantes.SeguimientoLearningPath;
 import user.Estudiante;
 import user.Profesor;
 
@@ -27,6 +29,7 @@ public class PersistenciaUsuarios {
 				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())
 				.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
+				.registerTypeAdapter(new TypeToken<Map<String, SeguimientoLearningPath>>() {}.getType(), new LearningPathsAdapter())
 				.create();
 		
 		JsonObject jsonObject = new JsonObject();
@@ -72,6 +75,7 @@ public class PersistenciaUsuarios {
 			if (estudiantesJson != null) {
 				for (Map.Entry<String, JsonElement> entry: estudiantesJson.entrySet()) {
 					Estudiante estudiante = gson.fromJson(entry.getValue().getAsJsonObject(), Estudiante.class);
+										
 					studentMap.put(entry.getKey(), estudiante);
 				} 
 			}

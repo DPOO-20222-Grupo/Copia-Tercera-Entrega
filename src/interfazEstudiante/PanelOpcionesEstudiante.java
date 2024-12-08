@@ -223,7 +223,6 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 				 if (seleccionado != null) {
 		                try {
 							aplicacion.inscribirEstudianteLearningPath(estudiante, aplicacion.getLearningPath(seleccionado));
-							aplicacion.descargarDatos();
 						} catch (ModificarEstudianteLearningPathException e1) {
 							e1.printStackTrace();
 						}
@@ -820,7 +819,6 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 	}
 
 	private void mostrarTarea(Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
-	    // Mostrar la tarea y permitir enviarla
 	    Tarea tarea = (Tarea) actividad;
 	    JPanel tareaPanel = new JPanel();
 	    tareaPanel.setLayout(new BoxLayout(tareaPanel, BoxLayout.Y_AXIS));
@@ -829,21 +827,28 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 	    tareaPanel.add(lblTarea);
 
 	    JButton btnEnviarTarea = new JButton("Enviar tarea");
-	    btnEnviarTarea.addActionListener(e -> {
-	        try {
-				aplicacion.enviarTarea(tarea, estudiante, learningPath);
-			} catch (EstudianteNoInscritoException | ActividadYaCompletadaException e1) {
-				e1.printStackTrace();
-			}
-	    });
-
-	    tareaPanel.add(btnEnviarTarea);
 
 	    JFrame tareaFrame = new JFrame("Realizar Tarea");
 	    tareaFrame.add(tareaPanel);
 	    tareaFrame.setSize(400, 300);
 	    tareaFrame.setVisible(true);
+
+	    btnEnviarTarea.addActionListener(e -> {
+	        enviarTarea(tarea, estudiante, learningPath, tareaFrame);
+	    });
+
+	    tareaPanel.add(btnEnviarTarea);
 	}
-
-
+	
+	private void enviarTarea(Tarea tarea, Estudiante estudiante, LearningPath learningPath, JFrame tareaFrame) {
+	    try {
+	        aplicacion.enviarTarea(tarea, estudiante, learningPath);
+	        JOptionPane.showMessageDialog(tareaFrame, "Tarea enviada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	        tareaFrame.dispose(); 
+	    } catch (EstudianteNoInscritoException | ActividadYaCompletadaException e) {
+	        JOptionPane.showMessageDialog(tareaFrame, "Error al enviar la tarea: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	        e.printStackTrace();
+	    }
+	}
+	
 }

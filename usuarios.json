@@ -1,5 +1,12 @@
 {
   "estudiantes": {
+    "d.munera": {
+      "nombre": "daniel",
+      "learningPathsInscritos": {},
+      "login": "d.munera",
+      "password": "dani2024",
+      "isLoggedIn": false
+    },
     "c.espinosag": {
       "nombre": "cesar",
       "learningPathsInscritos": {},
