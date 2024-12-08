@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.swing.*;
 
-import Consolas.ProfesorConsole;
 import actividades.Actividad;
 import exceptions.ActividadYaExistenteException;
 import exceptions.LearningPathYaExistenteException;
@@ -20,6 +20,12 @@ import preguntas.Pregunta;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
+import seguimientoEstudiantes.SeguimientoActividad;
+import seguimientoEstudiantes.SeguimientoExamen;
+import seguimientoEstudiantes.SeguimientoLearningPath;
+import seguimientoEstudiantes.SeguimientoQuiz;
+import seguimientoEstudiantes.SeguimientoTarea;
+import user.Estudiante;
 import user.Profesor;
 
 @SuppressWarnings("serial")
@@ -485,7 +491,101 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	}
 
 	private void verProgresoLearningPathEstudiante() {
-		// TODO Auto-generated method stub
+		
+		panelCentro.setLayout(new BorderLayout());
+
+	    JPanel panelEntrada = new JPanel(new GridLayout(3, 2));
+	    JLabel lblLogin = new JLabel("Login del estudiante:");
+	    JTextField txtLogin = new JTextField();
+	    JLabel lblTituloLearningPath = new JLabel("Título del Learning Path:");
+	    JTextField txtTituloLearningPath = new JTextField();
+	    JLabel lblProfesor = new JLabel("Login del profesor creador del Learning Path:");
+	    JTextField txtProfesor = new JTextField();
+	    JButton btnConsultar = new JButton("Consultar");
+
+	    panelEntrada.add(lblLogin);
+	    panelEntrada.add(txtLogin);
+	    panelEntrada.add(lblTituloLearningPath);
+	    panelEntrada.add(txtTituloLearningPath);
+	    panelEntrada.add(lblProfesor);
+	    panelEntrada.add(txtProfesor);
+
+	    JTextArea textAreaResultados = new JTextArea(20, 50);
+	    textAreaResultados.setEditable(false);
+	    JScrollPane scrollPane = new JScrollPane(textAreaResultados);
+
+	    panelCentro.add(panelEntrada, BorderLayout.NORTH);
+	    panelCentro.add(scrollPane, BorderLayout.CENTER);
+
+	    btnConsultar.addActionListener(e -> {
+	        String login = txtLogin.getText().trim();
+	        String tituloLearningPath = txtTituloLearningPath.getText().trim();
+	        String loginProfesor = txtProfesor.getText().trim();
+
+	        if (login.isEmpty() || tituloLearningPath.isEmpty() || loginProfesor.isEmpty()) {
+	            textAreaResultados.setText("Todos los campos son obligatorios. Por favor, complete todos los datos.");
+	            return;
+	        }
+
+	        Estudiante estudiante = aplicacion.getEstudiante(login);
+	        if (estudiante == null) {
+	            textAreaResultados.setText("Estudiante no encontrado.");
+	            return;
+	        }
+
+	        LearningPath learningPath = aplicacion.getLearningPath(tituloLearningPath);
+	        if (learningPath == null) {
+	            textAreaResultados.setText("Learning Path no encontrado.");
+	            return;
+	        }
+
+	        SeguimientoLearningPath seguimientoEstudiante = estudiante.getLearningPathsInscritos().get(learningPath.getIdLearnginPath());
+	        if (seguimientoEstudiante == null) {
+	            textAreaResultados.setText("El estudiante no está inscrito en el Learning Path seleccionado.");
+	            return;
+	        }
+
+	        StringBuilder resultado = new StringBuilder();
+	        resultado.append("--- Progreso del Learning Path ---\n");
+	        resultado.append("Título: ").append(learningPath.getTitulo()).append("\n");
+	        resultado.append("Descripción: ").append(learningPath.getDescripcion()).append("\n");
+	        resultado.append(String.format("Progreso: %.2f%%\n", seguimientoEstudiante.getProgreso() * 100));
+	        resultado.append(String.format("Porcentaje de Éxito: %.2f%%\n", seguimientoEstudiante.getTasaExito()));
+
+	        resultado.append("\n-- Actividades --\n");
+	        HashMap<String, SeguimientoActividad> mapaSeguimientos = seguimientoEstudiante.getMapaSeguimientoActividades();
+	        for (SeguimientoActividad actividad : mapaSeguimientos.values()) {
+	            String tipo = actividad.getActividadSeguimiento().getTipoActividad();
+	            resultado.append("\nTítulo: ").append(actividad.getActividadSeguimiento().getTitulo()).append("\n");
+	            resultado.append("Tipo: ").append(tipo).append("\n");
+	            resultado.append("Estado: ").append(actividad.getEstado()).append("\n");
+
+	            SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+	            String fecha = formatter.format(actividad.getActividadSeguimiento().getFechaLimite());
+	            resultado.append("Fecha: ").append(fecha).append("\n");
+	            resultado.append(String.format("Obligatoria: %b\n",
+	                    learningPath.getMapaActividadesObligatorias().get(actividad.getActividadSeguimiento().getIdActividad())));
+
+	            if (tipo.equals("Quiz")) {
+	                SeguimientoQuiz segQuiz = (SeguimientoQuiz) actividad;
+	                resultado.append(String.format("Calificación: %.2f\n", segQuiz.getNota()));
+	            } else if (tipo.equals("Tarea")) {
+	                SeguimientoTarea segTarea = (SeguimientoTarea) actividad;
+	                resultado.append("Método de envío: ").append(segTarea.getMetodoEnvio()).append("\n");
+	            } else if (tipo.equals("Examen")) {
+	                SeguimientoExamen segExamen = (SeguimientoExamen) actividad;
+	                resultado.append(String.format("Calificación: %.2f\n", segExamen.getNota()));
+	            }
+	        }
+
+	        textAreaResultados.setText(resultado.toString());
+	    });
+
+	    panelEntrada.add(btnConsultar);
+
+	    this.add(panelCentro, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
