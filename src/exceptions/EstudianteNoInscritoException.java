@@ -1,8 +1,8 @@
 package exceptions;
 
 import learningPath.LearningPath;
-import user.Estudiante;
 
+@SuppressWarnings("serial")
 public class EstudianteNoInscritoException extends Exception{
 
 	private LearningPath learningPath;
