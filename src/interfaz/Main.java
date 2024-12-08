@@ -32,6 +32,7 @@ public class Main {
 	public static String archivoLP = "lp.json";
 	public static String archivoPreguntas = "preguntas.json";
 	public static String archivoActividades = "actividades.json";
+	public static String archivoConteo = "cifrasActividades.json";
 
 	
 	public static void correrApp() throws ModificarEstudianteLearningPathException, ModificarActividadesPreviasException, ActividadPreviaCiclicoException, EstudianteNoInscritoException, ActividadYaCompletadaException {
@@ -117,13 +118,18 @@ public class Main {
 		aplicacion.crearLearningPath("Introducción a las Pruebas", "Pruebas", objetivos, "mid",
 				prof1, actividades, mapaObligatorio);
 		
-		new VentanaEstudiante(aplicacion, stud1);
+		LearningPath learningPath = aplicacion.getLearningPath("Introducción a las Pruebas - l.munera");
+		
+		aplicacion.inscribirEstudianteLearningPath(stud2, learningPath);
+		aplicacion.enviarExamen(ex, stud2, learningPath);
+		aplicacion.enviarTarea(ta, stud2, learningPath);
+		aplicacion.completarEncuestaRecurso(rr, stud2, learningPath);
 		
 		// Descarga de los Datos en Archivos JSON
 		aplicacion.descargarDatos();
 		
 		// Re-Carga de Archivos
-		Aplicacion aplicacion_recargada = new Aplicacion(archivoUsuarios, archivoLP, archivoPreguntas, archivoActividades);
+		Aplicacion aplicacion_recargada = new Aplicacion(archivoUsuarios, archivoLP, archivoPreguntas, archivoActividades, archivoConteo);
 		
 		// Pruebas para asegurar que la Re-Carga está bien hecha
 		
@@ -139,7 +145,8 @@ public class Main {
 		RevisarRecurso revisarRecurso = (RevisarRecurso) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Ver video", "l.munera"), "Recurso");
 
 		Encuesta encuesta = (Encuesta) aplicacion_recargada.getActividad(aplicacion_recargada.generarLlaveLearningsActividades("Autoevaluación", "l.munera"), "Encuesta");
-
+		
+		
 		
 		System.out.println(
 				"\nEstudiante 1. \n"
@@ -230,6 +237,8 @@ public class Main {
 				+ String.format("  * : %s\n", printLp.getActividades().get(4).getTitulo())
 				+ "\n"
 				);
+		
+
 		} catch(ParseException e) {
 			System.out.println("Error al convertir la fecha: " + e.getMessage());
 		}
