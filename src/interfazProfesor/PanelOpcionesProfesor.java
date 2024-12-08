@@ -8,12 +8,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.*;
 
 import actividades.Actividad;
+import actividades.Examen;
+import actividades.Tarea;
 import exceptions.ActividadYaExistenteException;
+import exceptions.EstudianteNoInscritoException;
 import exceptions.LearningPathYaExistenteException;
+import exceptions.ModificarObjetivosException;
+import exceptions.TipoInvalidoValorException;
 import interfaz.Aplicacion;
 import learningPath.LearningPath;
 import preguntas.Pregunta;
@@ -222,9 +228,9 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	    panelCentro.add(c);
 
 	    btnBuscar.addActionListener(e -> {
-	        String titulo = txtTitulo.getText().trim();
-	        String tipo = txtTipo.getText().trim();
-	        String loginProfesor = txtProfesor.getText().trim();
+	        String titulo = txtTitulo.getText();
+	        String tipo = txtTipo.getText();
+	        String loginProfesor = txtProfesor.getText();
 
 	        if (titulo.isEmpty() || loginProfesor.isEmpty() || tipo.isEmpty()) {
 	            textAreaResultado.setText("Error: Por favor, complete todos los campos.");
@@ -290,8 +296,8 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	    panelCentro.add(c);
 
 	    btnBuscar.addActionListener(e -> {
-	        String titulo = txtTitulo.getText().trim();
-	        String loginProfesor = txtProfesor.getText().trim();
+	        String titulo = txtTitulo.getText();
+	        String loginProfesor = txtProfesor.getText();
 
 	        if (titulo.isEmpty() || loginProfesor.isEmpty()) {
 	            textAreaResultado.setText("Error: Por favor, complete ambos campos.");
@@ -351,9 +357,9 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 
 	    btnRegistrar.addActionListener(e -> {
 	        try {
-	            String titulo = txtTitulo.getText().trim();
-	            String profesor = txtProfesor.getText().trim();
-	            double calificacion = Double.parseDouble(txtCalificacion.getText().trim());
+	            String titulo = txtTitulo.getText();
+	            String profesor = txtProfesor.getText();
+	            double calificacion = Double.parseDouble(txtCalificacion.getText());
 
 	            if (titulo.isEmpty() || profesor.isEmpty() || calificacion < 0.0 || calificacion > 5.0) {
 	                throw new IllegalArgumentException("El título y el login del profesor son obligatorios y la calificación debe estar entre 0.0 y 5.0.");
@@ -494,14 +500,21 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 		
 		panelCentro.setLayout(new BorderLayout());
 
-	    JPanel panelEntrada = new JPanel(new GridLayout(3, 2));
+	    JPanel panelEntrada = new JPanel(new GridLayout(8, 1));
 	    JLabel lblLogin = new JLabel("Login del estudiante:");
+	    lblLogin.setFont(new Font("Times New Roman", Font.BOLD, 20));
 	    JTextField txtLogin = new JTextField();
+	    txtLogin.setFont(new Font("Times New Roman", Font.BOLD, 20));
 	    JLabel lblTituloLearningPath = new JLabel("Título del Learning Path:");
+	    lblTituloLearningPath.setFont(new Font("Times New Roman", Font.BOLD, 20));
 	    JTextField txtTituloLearningPath = new JTextField();
+	    txtTituloLearningPath.setFont(new Font("Times New Roman", Font.BOLD, 20));
 	    JLabel lblProfesor = new JLabel("Login del profesor creador del Learning Path:");
+	    lblProfesor.setFont(new Font("Times New Roman", Font.BOLD, 20));
 	    JTextField txtProfesor = new JTextField();
+	    txtProfesor.setFont(new Font("Times New Roman", Font.BOLD, 20));
 	    JButton btnConsultar = new JButton("Consultar");
+	    btnConsultar.setFont(new Font("Times New Roman", Font.BOLD, 20));
 
 	    panelEntrada.add(lblLogin);
 	    panelEntrada.add(txtLogin);
@@ -511,6 +524,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	    panelEntrada.add(txtProfesor);
 
 	    JTextArea textAreaResultados = new JTextArea(20, 50);
+	    textAreaResultados.setFont(new Font("Times New Roman", Font.BOLD, 20));
 	    textAreaResultados.setEditable(false);
 	    JScrollPane scrollPane = new JScrollPane(textAreaResultados);
 
@@ -518,9 +532,9 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	    panelCentro.add(scrollPane, BorderLayout.CENTER);
 
 	    btnConsultar.addActionListener(e -> {
-	        String login = txtLogin.getText().trim();
-	        String tituloLearningPath = txtTituloLearningPath.getText().trim();
-	        String loginProfesor = txtProfesor.getText().trim();
+	        String login = txtLogin.getText();
+	        String tituloLearningPath = txtTituloLearningPath.getText();
+	        String loginProfesor = txtProfesor.getText();
 
 	        if (login.isEmpty() || tituloLearningPath.isEmpty() || loginProfesor.isEmpty()) {
 	            textAreaResultados.setText("Todos los campos son obligatorios. Por favor, complete todos los datos.");
@@ -533,7 +547,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	            return;
 	        }
 
-	        LearningPath learningPath = aplicacion.getLearningPath(tituloLearningPath);
+	        LearningPath learningPath = aplicacion.getLearningPath(tituloLearningPath + " - " + loginProfesor);
 	        if (learningPath == null) {
 	            textAreaResultados.setText("Learning Path no encontrado.");
 	            return;
@@ -618,7 +632,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	    profesor.getPreguntasBooleanPropias().forEach((id, pregBoolean) -> 
 	        preguntasTexto.append("  - ID: ").append(id).append("\n"));
 
-	    if (preguntasTexto.toString().trim().isEmpty()) {
+	    if (preguntasTexto.toString().isEmpty()) {
 	        preguntasTexto.append("No tiene preguntas propias");
 	    }
 
@@ -872,7 +886,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
         panelCentro.add(panelFormulario, BorderLayout.CENTER);
 
         btnBuscarModificar.addActionListener(e -> {
-            String idPregunta = txtIdPregunta.getText().trim();
+            String idPregunta = txtIdPregunta.getText();
             int tipo = comboTipoPregunta.getSelectedIndex();
             String tipoString = switch (tipo) {
                 case 0 -> "Cerrada";
@@ -903,7 +917,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 
                 if (atributo != null) {
                     String nuevoValor = JOptionPane.showInputDialog(this, "Ingrese el nuevo valor para " + atributo);
-                    if (nuevoValor == null || nuevoValor.trim().isEmpty()) {
+                    if (nuevoValor == null || nuevoValor.isEmpty()) {
                         JOptionPane.showMessageDialog(this, "El valor ingresado no es válido", "Error", JOptionPane.ERROR_MESSAGE);
                         return;
                     }
@@ -962,17 +976,270 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	}
 
 	private void calificarActividad(Profesor profesor) {
-		// TODO Auto-generated method stub
+		
+		panelCentro.setLayout(new BorderLayout());
+
+	    Font fuente = new Font("Times New Roman", Font.BOLD, 14);
+
+	    JPanel panelEntrada = new JPanel(new GridLayout(15, 1));
+
+	    JLabel lblTipoActividad = new JLabel("Tipo de actividad (Examen/Tarea):");
+	    lblTipoActividad.setFont(fuente);
+	    JTextField txtTipoActividad = new JTextField();
+	    txtTipoActividad.setFont(fuente);
+
+	    JLabel lblTituloLearningPath = new JLabel("Título del Learning Path:");
+	    lblTituloLearningPath.setFont(fuente);
+	    JTextField txtTituloLearningPath = new JTextField();
+	    txtTituloLearningPath.setFont(fuente);
+
+	    JLabel lblLoginEstudiante = new JLabel("Login del estudiante:");
+	    lblLoginEstudiante.setFont(fuente);
+	    JTextField txtLoginEstudiante = new JTextField();
+	    txtLoginEstudiante.setFont(fuente);
+
+	    JLabel lblTituloActividad = new JLabel("Título de la actividad:");
+	    lblTituloActividad.setFont(fuente);
+	    JTextField txtTituloActividad = new JTextField();
+	    txtTituloActividad.setFont(fuente);
+
+	    JLabel lblLoginProfesor = new JLabel("Login del profesor creador:");
+	    lblLoginProfesor.setFont(fuente);
+	    JTextField txtLoginProfesor = new JTextField();
+	    txtLoginProfesor.setFont(fuente);
+
+	    JLabel lblNota = new JLabel("Nota (solo para examen):");
+	    lblNota.setFont(fuente);
+	    JTextField txtNota = new JTextField();
+	    txtNota.setFont(fuente);
+
+	    JLabel lblExitoso = new JLabel("¿Fue exitoso? (true/false):");
+	    lblExitoso.setFont(fuente);
+	    JTextField txtExitoso = new JTextField();
+	    txtExitoso.setFont(fuente);
+
+	    JButton btnCalificar = new JButton("Calificar");
+	    btnCalificar.setFont(fuente);
+
+	    panelEntrada.add(lblTipoActividad);
+	    panelEntrada.add(txtTipoActividad);
+	    panelEntrada.add(lblTituloLearningPath);
+	    panelEntrada.add(txtTituloLearningPath);
+	    panelEntrada.add(lblLoginEstudiante);
+	    panelEntrada.add(txtLoginEstudiante);
+	    panelEntrada.add(lblTituloActividad);
+	    panelEntrada.add(txtTituloActividad);
+	    panelEntrada.add(lblLoginProfesor);
+	    panelEntrada.add(txtLoginProfesor);
+	    panelEntrada.add(lblNota);
+	    panelEntrada.add(txtNota);
+	    panelEntrada.add(lblExitoso);
+	    panelEntrada.add(txtExitoso);
+	    panelEntrada.add(btnCalificar);
+
+	    JTextArea textAreaResultados = new JTextArea(20, 50);
+	    textAreaResultados.setFont(fuente);
+	    textAreaResultados.setEditable(false);
+	    JScrollPane scrollPane = new JScrollPane(textAreaResultados);
+
+	    panelCentro.add(panelEntrada, BorderLayout.NORTH);
+	    panelCentro.add(scrollPane, BorderLayout.CENTER);
+
+	    btnCalificar.addActionListener(e -> {
+	        String tipoActividad = txtTipoActividad.getText();
+	        String tituloLearningPath = txtTituloLearningPath.getText();
+	        String loginEstudiante = txtLoginEstudiante.getText();
+	        String tituloActividad = txtTituloActividad.getText();
+	        String loginProfesor = txtLoginProfesor.getText();
+	        String notaStr = txtNota.getText();
+	        String exitosoStr = txtExitoso.getText();
+
+	        if (tipoActividad.isEmpty() || tituloLearningPath.isEmpty() || loginEstudiante.isEmpty() ||
+	            tituloActividad.isEmpty() || loginProfesor.isEmpty() || exitosoStr.isEmpty() ||
+	            (tipoActividad.equalsIgnoreCase("Examen") && notaStr.isEmpty())) {
+	            textAreaResultados.setText("Todos los campos son obligatorios. Por favor, complete todos los datos.");
+	            return;
+	        }
+
+	        LearningPath learningPath = aplicacion.getLearningPath(aplicacion.generarLlaveLearningsActividades(tituloLearningPath, profesor.getLogin()));
+	        if (learningPath == null) {
+	            textAreaResultados.setText("Learning Path no encontrado.");
+	            return;
+	        }
+
+	        Estudiante estudiante = aplicacion.getEstudiante(loginEstudiante);
+	        if (estudiante == null) {
+	            textAreaResultados.setText("Estudiante no encontrado.");
+	            return;
+	        }
+
+	        try {
+	            if (tipoActividad.equalsIgnoreCase("Examen")) {
+	                float nota = Float.parseFloat(notaStr);
+	                boolean exitoso = Boolean.parseBoolean(exitosoStr);
+
+	                Examen examen = (Examen) aplicacion.getActividad(tituloActividad + " - " + loginProfesor, "Examen");
+
+	                if (examen != null) {
+	                    aplicacion.calificarExamen(examen, estudiante, learningPath, nota, exitoso);
+	                    textAreaResultados.setText("Examen calificado con éxito.");
+	                } else {
+	                    textAreaResultados.setText("Examen no encontrado.");
+	                }
+	            } else if (tipoActividad.equalsIgnoreCase("Tarea")) {
+	                boolean exitoso = Boolean.parseBoolean(exitosoStr);
+
+	                Tarea tarea = (Tarea) aplicacion.getActividad(tituloActividad + " - " + loginProfesor, "Tarea");
+
+	                if (tarea != null) {
+	                    aplicacion.calificarTarea(tarea, estudiante, learningPath, exitoso);
+	                    textAreaResultados.setText("Tarea calificada con éxito.");
+	                } else {
+	                    textAreaResultados.setText("Tarea no encontrada.");
+	                }
+	            } else {
+	                textAreaResultados.setText("Tipo de actividad no válido.");
+	            }
+	        } catch (NumberFormatException ex) {
+	            textAreaResultados.setText("Error en el formato de los datos numéricos. Verifique la nota o el estado exitoso.");
+	        } catch (EstudianteNoInscritoException ex) {
+	            textAreaResultados.setText("Estudiante no inscrito en el Learning Path.");
+	        }
+	    });
+
+	    panelCentro.revalidate();
+	    panelCentro.repaint();
+		
 		
 	}
 
-	private void modificarActividad(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	private void modificarActividad(Profesor profesor) {
+		
+		
 		
 	}
 
-	private void modificarLearningPath(Profesor profesor2) {
-		// TODO Auto-generated method stub
+	private void modificarLearningPath(Profesor profesor) {
+		
+		panelCentro.setLayout(new BorderLayout());
+
+	    JLabel lblTitulo = new JLabel("Modificar Learning Path", JLabel.CENTER);
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 18));
+	    panelCentro.add(lblTitulo, BorderLayout.NORTH);
+
+	    JPanel panelFormulario = new JPanel(new GridLayout(8, 2));
+	    JLabel lblIdLearning = new JLabel("Ingrese el ID del Learning Path");
+	    lblIdLearning.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(lblIdLearning);
+
+	    JTextField txtIdLearning = new JTextField();
+	    txtIdLearning.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(txtIdLearning);
+
+	    JLabel lblTipoAtributo = new JLabel("Seleccione el atributo a modificar");
+	    lblTipoAtributo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(lblTipoAtributo);
+
+	    JComboBox<String> comboTipoAtributo = new JComboBox<>(new String[]{"Titulo", "Descripcion", "Dificultad", "Objetivos"});
+	    comboTipoAtributo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(comboTipoAtributo);
+
+	    JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	    JButton btnModificar = new JButton("Modificar");
+	    btnModificar.setFont(new Font("Times New Roman", Font.BOLD, 30));
+	    panelBoton.add(btnModificar);
+
+	    panelFormulario.add(new JLabel());
+	    panelFormulario.add(panelBoton);
+
+	    JTextArea txtResultado = new JTextArea(5, 30);
+	    txtResultado.setEditable(false);
+	    txtResultado.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    JScrollPane scrollResultado = new JScrollPane(txtResultado);
+	    panelCentro.add(scrollResultado, BorderLayout.SOUTH);
+
+	    panelCentro.add(panelFormulario, BorderLayout.CENTER);
+
+	    btnModificar.addActionListener(e -> {
+	        String idLearning = txtIdLearning.getText();
+	        int tipo = comboTipoAtributo.getSelectedIndex();
+	        String tipoString = switch (tipo) {
+	            case 0 -> "Titulo";
+	            case 1 -> "Descripcion";
+	            case 2 -> "Dificultad";
+	            case 3 -> "Objetivos";
+	            default -> "";
+	        };
+
+	        if (idLearning.isEmpty()) {
+	            JOptionPane.showMessageDialog(this, "Debe ingresar el ID del Learning Path", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        LearningPath learningPath = profesor.getLearningPathPropios().get(idLearning);
+	        if (learningPath == null) {
+	            JOptionPane.showMessageDialog(this, "Learning Path no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        String nuevoValor = JOptionPane.showInputDialog(this, "Ingrese el nuevo valor para " + tipoString + ":");
+	        if (nuevoValor == null || nuevoValor.isEmpty()) {
+	            JOptionPane.showMessageDialog(this, "El nuevo valor no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        switch (tipo) {
+	            case 0: 
+				try {
+					aplicacion.modificarAtributosStringLearningPath(learningPath, tipoString, nuevoValor, "");
+				} catch (TipoInvalidoValorException | ModificarObjetivosException e1) {
+					e1.printStackTrace();
+				}
+	                aplicacion.descargarDatos();
+	                break;
+	            case 1: 
+				try {
+					aplicacion.modificarAtributosStringLearningPath(learningPath, tipoString, nuevoValor, "");
+				} catch (TipoInvalidoValorException | ModificarObjetivosException e1) {
+					e1.printStackTrace();
+				}
+	                aplicacion.descargarDatos();
+	                break;
+	            case 2: 
+				try {
+					aplicacion.modificarAtributosStringLearningPath(learningPath, tipoString, nuevoValor, "");
+				} catch (TipoInvalidoValorException | ModificarObjetivosException e1) {
+					e1.printStackTrace();
+				}
+	                aplicacion.descargarDatos();
+	                break;
+	            case 3: 
+	            	String accion = JOptionPane.showInputDialog(this, "Ingrese la accion a realizar (Agregar/Eliminar) " + tipoString + ":");	
+	            	
+            	try {
+					aplicacion.modificarAtributosStringLearningPath(learningPath, tipoString, nuevoValor, accion);
+				} catch (TipoInvalidoValorException | ModificarObjetivosException e1) {
+					e1.printStackTrace();
+				}
+	                aplicacion.descargarDatos();            	
+	                
+	                break;
+	            default:
+	                JOptionPane.showMessageDialog(this, "Opción inválida", "Error", JOptionPane.ERROR_MESSAGE);
+	                return;
+	        }
+
+	        JOptionPane.showMessageDialog(this, "El atributo " + tipoString + " ha sido modificado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	        
+	        txtResultado.setText("Learning Path modificado:\n" +
+	                "ID: " + idLearning + "\n" +
+	                "Atributo modificado: " + tipoString + "\n" +
+	                "Nuevo valor: " + nuevoValor);
+	    });
+
+	    this.add(panelCentro, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
@@ -1170,8 +1437,8 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 
 	    btnRegistrar.addActionListener(e -> {
 	        try {
-	            String titulo = txtTitulo.getText().trim();
-	            String enunciado = txtEnunciado.getText().trim();
+	            String titulo = txtTitulo.getText();
+	            String enunciado = txtEnunciado.getText();
 	            String tipoSeleccionado = (String) comboTipo.getSelectedItem();
 
 	            if (titulo.isEmpty() || enunciado.isEmpty()) {
@@ -1180,11 +1447,11 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 
 	            if ("Selección Múltiple".equals(tipoSeleccionado)) {
 	                Component[] components = panelOpciones.getComponents();
-	                String opcion1 = ((JTextField) components[1]).getText().trim();
-	                String opcion2 = ((JTextField) components[3]).getText().trim();
-	                String opcion3 = ((JTextField) components[5]).getText().trim();
-	                String opcion4 = ((JTextField) components[7]).getText().trim();
-	                int opcionCorrecta = Integer.parseInt(((JTextField) components[9]).getText().trim());
+	                String opcion1 = ((JTextField) components[1]).getText();
+	                String opcion2 = ((JTextField) components[3]).getText();
+	                String opcion3 = ((JTextField) components[5]).getText();
+	                String opcion4 = ((JTextField) components[7]).getText();
+	                int opcionCorrecta = Integer.parseInt(((JTextField) components[9]).getText());
 
 	                aplicacion.crearPreguntaSeleccion(enunciado, titulo, opcion1, opcion2, opcion3, opcion4, opcionCorrecta, profesor);
 	                aplicacion.descargarDatos();
@@ -1236,10 +1503,144 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 		
 	}
 
-	private void crearLearningPath(Profesor profesor2) {
-		// TODO Auto-generated method stub
-		
+	private void crearLearningPath(Profesor profesor) {
+	    panelCentro.setLayout(new GridLayout(16, 1));
+
+	    JLabel lblTitulo = new JLabel("Título del Learning Path:");
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtTitulo = new JTextField(20);
+	    txtTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelCentro.add(lblTitulo);
+	    panelCentro.add(txtTitulo);
+
+	    JLabel lblDescripcion = new JLabel("Descripción del Learning Path:");
+	    lblDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextArea txtDescripcion = new JTextArea(10, 20);
+	    txtDescripcion.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JScrollPane scrollDescripcion = new JScrollPane(txtDescripcion);
+	    panelCentro.add(lblDescripcion);
+	    panelCentro.add(scrollDescripcion);
+
+	    JLabel lblObjetivos = new JLabel("Objetivos (separados por comas):");
+	    lblObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JTextField txtObjetivos = new JTextField(20);
+	    txtObjetivos.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelCentro.add(lblObjetivos);
+	    panelCentro.add(txtObjetivos);
+
+	    JLabel lblDificultad = new JLabel("Nivel de dificultad:");
+	    lblDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    String[] nivelesDificultad = {"Principiante", "Intermedio", "Avanzado"};
+	    JComboBox<String> cbDificultad = new JComboBox<>(nivelesDificultad);
+	    cbDificultad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelCentro.add(lblDificultad);
+	    panelCentro.add(cbDificultad);
+
+	    JButton btnAgregarActividad = new JButton("Agregar Actividad");
+	    btnAgregarActividad.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelCentro.add(btnAgregarActividad);
+
+	    DefaultListModel<String> modelActividades = new DefaultListModel<>();
+	    JList<String> listActividades = new JList<>(modelActividades);
+	    listActividades.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    JScrollPane scrollActividades = new JScrollPane(listActividades);
+	    panelCentro.add(scrollActividades);
+
+	    JButton btnGuardar = new JButton("Crear Learning Path");
+	    btnGuardar.setFont(new Font("Times New Roman", Font.BOLD, 16));
+
+	    btnAgregarActividad.addActionListener(e -> {
+	        String tituloActividad = JOptionPane.showInputDialog(this, "Ingrese el título de la actividad:");
+	        if (tituloActividad == null || tituloActividad.isEmpty()) {
+	            JOptionPane.showMessageDialog(this, "El título de la actividad no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        String loginProfesor = JOptionPane.showInputDialog(this, "Ingrese el login del profesor creador de la actividad:");
+	        if (loginProfesor == null || loginProfesor.isEmpty()) {
+	            JOptionPane.showMessageDialog(this, "El login del profesor no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        String tipoActividad = JOptionPane.showInputDialog(this, "Ingrese el tipo de la actividad:");
+	        if (tipoActividad == null || tipoActividad.isEmpty()) {
+	            JOptionPane.showMessageDialog(this, "El tipo de la actividad no puede estar vacío.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        // Verificar que la actividad no sea null
+	        Actividad actividad = aplicacion.getActividad(tituloActividad + " - " + loginProfesor, tipoActividad);
+	        if (actividad == null) {
+	            JOptionPane.showMessageDialog(this, "No se encontró la actividad con esos parámetros.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        modelActividades.addElement(actividad.getTitulo());
+	    });
+
+	    btnGuardar.addActionListener(e -> {
+	        try {
+	            String titulo = txtTitulo.getText();
+	            if (titulo.isEmpty()) throw new IllegalArgumentException("El título no puede estar vacío.");
+
+	            String descripcion = txtDescripcion.getText();
+	            if (descripcion.isEmpty()) throw new IllegalArgumentException("La descripción no puede estar vacía.");
+
+	            String[] objetivosArray = txtObjetivos.getText().split(",");
+	            List<String> objetivos = new ArrayList<>();
+	            for (String obj : objetivosArray) {
+	                if (!obj.isEmpty()) {
+	                    objetivos.add(obj);
+	                }
+	            }
+	            if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
+
+	            String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
+
+	            List<Actividad> actividades = new ArrayList<>();
+	            for (int i = 0; i < modelActividades.getSize(); i++) {
+	                String tituloActividad = modelActividades.getElementAt(i);
+	                String loginProfesor = JOptionPane.showInputDialog(this, "Ingrese el login del profesor para la actividad '" + tituloActividad + "':");
+	                String tipoActividad = JOptionPane.showInputDialog(this, "Ingrese el tipo de la actividad '" + tituloActividad + "':");
+
+	                // Verificar que la actividad no sea null
+	                Actividad actividad = aplicacion.getActividad(tituloActividad + " - " + loginProfesor, tipoActividad);
+	                if (actividad == null) {
+	                    JOptionPane.showMessageDialog(this, "No se encontró la actividad con esos parámetros.", "Error", JOptionPane.ERROR_MESSAGE);
+	                    return;
+	                }
+
+	                actividades.add(actividad);
+	            }
+
+	            if (actividades.isEmpty()) {
+	                JOptionPane.showMessageDialog(this, "Debe agregar al menos una actividad al Learning Path.", "Error", JOptionPane.ERROR_MESSAGE);
+	                return;
+	            }
+
+	            Map<String, Boolean> mapaObligatoriedad = new HashMap<>();
+	            for (Actividad actividad : actividades) {
+	                int respuesta = JOptionPane.showConfirmDialog(this, "¿La actividad '" + actividad.getTitulo() + "' es obligatoria?", "Obligatoriedad", JOptionPane.YES_NO_OPTION);
+	                mapaObligatoriedad.put(actividad.getTitulo(), respuesta == JOptionPane.YES_OPTION);
+	            }
+
+	            aplicacion.crearLearningPath(titulo, descripcion, objetivos, dificultad, profesor, actividades, mapaObligatoriedad);
+	            aplicacion.descargarDatos();
+	            JOptionPane.showMessageDialog(this, "Learning Path creado exitosamente.");
+
+	        } catch (IllegalArgumentException ex) {
+	            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Validación", JOptionPane.ERROR_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(this, "Error inesperado: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+	    });
+
+	    panelCentro.add(btnGuardar);
+	    this.add(panelCentro, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 	}
+
 
 	private void crearEncuesta(Profesor profesor) {
 		
@@ -1310,28 +1711,28 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	            String[] objetivosArray = txtObjetivos.getText().split(",");
 	            List<String> objetivos = new ArrayList<>();
 	            for (String obj : objetivosArray) {
-	                if (!obj.trim().isEmpty()) {
-	                    objetivos.add(obj.trim());
+	                if (!obj.isEmpty()) {
+	                    objetivos.add(obj);
 	                }
 	            }
 	            if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
 	            
 	            String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
 	            
-	            int duracion = Integer.parseInt(txtDuracion.getText().trim());
+	            int duracion = Integer.parseInt(txtDuracion.getText());
 	            if (duracion <= 0) throw new IllegalArgumentException("La duración debe ser positiva.");
 	            
 	            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	            sdf.setLenient(false);
-	            Date fechaLimite = sdf.parse(txtFechaLimite.getText().trim());
+	            Date fechaLimite = sdf.parse(txtFechaLimite.getText());
 	            
 	            String[] preguntasArray = txtPreguntas.getText().split(";");
 	            List<PreguntaAbierta> preguntas = new ArrayList<>();
 	            for (String preg : preguntasArray) {
 	            	
 	            	String[] partes = preg.split("\\|");
-	            	String tituloPregunta = partes[0].trim();
-	                String enunciado = partes[1].trim();
+	            	String tituloPregunta = partes[0];
+	                String enunciado = partes[1];
 	                PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
 	                preguntas.add(pregunta);
 	            	
@@ -1423,28 +1824,28 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	            String[] objetivosArray = txtObjetivos.getText().split(",");
 	            List<String> objetivos = new ArrayList<>();
 	            for (String obj : objetivosArray) {
-	                if (!obj.trim().isEmpty()) {
-	                    objetivos.add(obj.trim());
+	                if (!obj.isEmpty()) {
+	                    objetivos.add(obj);
 	                }
 	            }
 	            if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
 	            
 	            String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
 	            
-	            int duracion = Integer.parseInt(txtDuracion.getText().trim());
+	            int duracion = Integer.parseInt(txtDuracion.getText());
 	            if (duracion <= 0) throw new IllegalArgumentException("La duración debe ser positiva.");
 	            
 	            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	            sdf.setLenient(false);
-	            Date fechaLimite = sdf.parse(txtFechaLimite.getText().trim());
+	            Date fechaLimite = sdf.parse(txtFechaLimite.getText());
 	            
 	            String[] preguntasArray = txtPreguntas.getText().split(";");
 	            List<PreguntaAbierta> preguntas = new ArrayList<>();
 	            for (String preg : preguntasArray) {
 	            	
 	            	String[] partes = preg.split("\\|");
-	            	String tituloPregunta = partes[0].trim();
-	                String enunciado = partes[1].trim();
+	            	String tituloPregunta = partes[0];
+	                String enunciado = partes[1];
 	                PreguntaAbierta pregunta = new PreguntaAbierta(enunciado, tituloPregunta);
 	                preguntas.add(pregunta);
 	            	
@@ -1591,20 +1992,20 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
                 String[] objetivosArray = txtObjetivos.getText().split(",");
                 List<String> objetivos = new ArrayList<>();
                 for (String obj : objetivosArray) {
-                    if (!obj.trim().isEmpty()) {
-                        objetivos.add(obj.trim());
+                    if (!obj.isEmpty()) {
+                        objetivos.add(obj);
                     }
                 }
                 if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
 
                 String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
 
-                int duracion = Integer.parseInt(txtDuracion.getText().trim());
+                int duracion = Integer.parseInt(txtDuracion.getText());
                 if (duracion <= 0) throw new IllegalArgumentException("La duración debe ser positiva.");
 
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 sdf.setLenient(false);
-                Date fechaLimite = sdf.parse(txtFechaLimite.getText().trim());
+                Date fechaLimite = sdf.parse(txtFechaLimite.getText());
 
                 double calificacionMinima = Double.parseDouble(txtCalificacionMinima.getText());
                 if (calificacionMinima <= 0) throw new IllegalArgumentException("La calificación mínima debe ser positiva.");
@@ -1616,13 +2017,13 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
                     if (partes.length != 2) {
                         throw new IllegalArgumentException("Formato de pregunta inválido. Debe ser título|enunciado.");
                     }
-                    String tituloPregunta = partes[0].trim();
-                    String enunciado = partes[1].trim();
+                    String tituloPregunta = partes[0];
+                    String enunciado = partes[1];
 
-                    String opcion1 = txtOpcion1.getText().trim();
-                    String opcion2 = txtOpcion2.getText().trim();
-                    String opcion3 = txtOpcion3.getText().trim();
-                    String opcion4 = txtOpcion4.getText().trim();
+                    String opcion1 = txtOpcion1.getText();
+                    String opcion2 = txtOpcion2.getText();
+                    String opcion3 = txtOpcion3.getText();
+                    String opcion4 = txtOpcion4.getText();
 
                     if (opcion1.isEmpty() || opcion2.isEmpty() || opcion3.isEmpty() || opcion4.isEmpty()) {
                         throw new IllegalArgumentException("Debe ingresar todas las opciones de respuesta.");
@@ -1715,20 +2116,20 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	            String[] objetivosArray = txtObjetivos.getText().split(",");
 	            List<String> objetivos = new ArrayList<>();
 	            for (String obj : objetivosArray) {
-	                if (!obj.trim().isEmpty()) {
-	                    objetivos.add(obj.trim());
+	                if (!obj.isEmpty()) {
+	                    objetivos.add(obj);
 	                }
 	            }
 	            if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
 	            
 	            String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
 	            
-	            int duracion = Integer.parseInt(txtDuracion.getText().trim());
+	            int duracion = Integer.parseInt(txtDuracion.getText());
 	            if (duracion <= 0) throw new IllegalArgumentException("La duración debe ser positiva.");
 	            
 	            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	            sdf.setLenient(false);
-	            Date fechaLimite = sdf.parse(txtFechaLimite.getText().trim());
+	            Date fechaLimite = sdf.parse(txtFechaLimite.getText());
 	            
 	            aplicacion.crearTarea(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, profesor);
 	            aplicacion.descargarDatos();
@@ -1824,25 +2225,25 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	            String[] objetivosArray = txtObjetivos.getText().split(",");
 	            List<String> objetivos = new ArrayList<>();
 	            for (String obj : objetivosArray) {
-	                if (!obj.trim().isEmpty()) {
-	                    objetivos.add(obj.trim());
+	                if (!obj.isEmpty()) {
+	                    objetivos.add(obj);
 	                }
 	            }
 	            if (objetivos.isEmpty()) throw new IllegalArgumentException("Debe ingresar al menos un objetivo.");
 	            
 	            String dificultad = nivelesDificultad[cbDificultad.getSelectedIndex()];
 	            
-	            int duracion = Integer.parseInt(txtDuracion.getText().trim());
+	            int duracion = Integer.parseInt(txtDuracion.getText());
 	            if (duracion <= 0) throw new IllegalArgumentException("La duración debe ser positiva.");
 	            
 	            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	            sdf.setLenient(false);
-	            Date fechaLimite = sdf.parse(txtFechaLimite.getText().trim());
+	            Date fechaLimite = sdf.parse(txtFechaLimite.getText());
 	            
-	            String tipoRecurso = txtTipoRecurso.getText().trim();
+	            String tipoRecurso = txtTipoRecurso.getText();
 	            if (tipoRecurso.isEmpty()) throw new IllegalArgumentException("El tipo de recurso no puede estar vacío.");
 	            
-	            String enlace = txtEnlace.getText().trim();
+	            String enlace = txtEnlace.getText();
 	            if (enlace.isEmpty()) throw new IllegalArgumentException("El enlace no puede estar vacío.");
 	            
 	            aplicacion.crearRevisarRecurso(titulo, descripcion, objetivos, dificultad, duracion, fechaLimite, tipoRecurso, profesor, enlace);
