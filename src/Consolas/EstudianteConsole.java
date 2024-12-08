@@ -2,7 +2,6 @@ package Consolas;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner; 
 
 import actividades.Actividad;
@@ -16,7 +15,6 @@ import exceptions.EstudianteNoInscritoException;
 import exceptions.ModificarEstudianteLearningPathException;
 import interfaz.Aplicacion;
 import learningPath.LearningPath;
-import preguntas.Pregunta;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
 import preguntas.PreguntaSeleccionMultiple;
@@ -26,7 +24,6 @@ import seguimientoEstudiantes.SeguimientoLearningPath;
 import seguimientoEstudiantes.SeguimientoQuiz;
 import seguimientoEstudiantes.SeguimientoTarea;
 import user.Estudiante;
-import user.Profesor;
 
 public class EstudianteConsole {
    
