@@ -10,7 +10,7 @@ import interfaz.Aplicacion;
 import interfazActividadesCompletadas.PanelActividadesDiarias;
 import user.Estudiante;
 
-@SuppressWarnings("serial")
+@SuppressWarnings({ "serial", "unused" })
 public class VentanaEstudiante extends JFrame{
 	
 	private Aplicacion aplicacion;
