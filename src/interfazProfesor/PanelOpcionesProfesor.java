@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,6 +16,7 @@ import actividades.Actividad;
 import exceptions.ActividadYaExistenteException;
 import exceptions.LearningPathYaExistenteException;
 import interfaz.Aplicacion;
+import interfazActividadesCompletadas.PanelActividadesDiarias;
 import learningPath.LearningPath;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
@@ -81,6 +83,8 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
         
         panelCentro = new JPanel();
         this.add(panelCentro, BorderLayout.CENTER);
+        
+        this.add(new PanelActividadesDiarias(aplicacion, LocalDate.now()), BorderLayout.SOUTH);
         
     }
 

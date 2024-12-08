@@ -1,6 +1,9 @@
 package interfazActividadesCompletadas;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.time.LocalDate;
 import java.time.Month;
@@ -9,18 +12,22 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
 import interfaz.Aplicacion;
 
 @SuppressWarnings("serial")
 public class PanelActividadesDiarias extends JPanel {
 
-	private Aplicacion app;
+	private Aplicacion app;	
 	private LocalDate fechaInicial;
+	private JPanel panelTitulo;
 	private JPanel panelMeses;
 	private JPanel panelCuadros;
+	private JPanel panelLeyenda;
 	
 	public PanelActividadesDiarias(Aplicacion aplicacion, LocalDate fecha ) {
 		super();
@@ -32,12 +39,24 @@ public class PanelActividadesDiarias extends JPanel {
 		this.panelCuadros = new JPanel();
 		panelCuadros.setLayout(new GridLayout(1,12, 5, 5));
 		
-		this.setLayout(new BorderLayout(2,2));
+		this.setLayout(new GridLayout(4,1, 5, 5));
 		
-		this.add(panelMeses, BorderLayout.NORTH);
-		this.add(panelCuadros, BorderLayout.SOUTH);
+		this.panelTitulo = new JPanel();
+		panelTitulo.setLayout(new FlowLayout(FlowLayout.LEFT));
+		panelTitulo.add(new JLabel("Actividades completadas en el año por estudiantes"));
+		
+		
+		this.panelLeyenda = new JPanel();
+		agregarElementosPanelLeyenda(panelLeyenda);
+		
+		this.add(panelTitulo);
+		this.add(panelMeses);
+		this.add(panelCuadros);
+		this.add(panelLeyenda);
 		
 		pintarCuadros();
+		
+		this.setBorder(new EmptyBorder(5, 5, 5, 5));
 		
 	}
 	
@@ -57,6 +76,7 @@ public class PanelActividadesDiarias extends JPanel {
 			
 			Cuadrado grafico = new Cuadrado(actividadesMes, maximoActividad);
 			JLabel etiquetaMes = new JLabel(llave);
+			etiquetaMes.setHorizontalAlignment(JLabel.CENTER);
 			
 			panelMeses.add(etiquetaMes);
 			panelCuadros.add(grafico);
@@ -64,6 +84,33 @@ public class PanelActividadesDiarias extends JPanel {
 		}
 		
 		
+		
+		
+	}
+	
+	public void agregarElementosPanelLeyenda(JPanel panelLeyenda) {
+		
+		panelLeyenda.setLayout(new FlowLayout(FlowLayout.RIGHT));
+		
+		panelLeyenda.add(new JLabel ("Menos"));
+		
+		double numCuadros = 5.0;
+		
+		for (int i = 0; i<numCuadros; i++) {
+			
+			
+			double intensidad = i/numCuadros;
+			JPanel cuadradoColor = new JPanel();
+			
+			cuadradoColor.setBackground(Cuadrado.calcularColor(intensidad));
+			cuadradoColor.setPreferredSize(new Dimension(10,10));
+			
+			panelLeyenda.add(cuadradoColor);
+			
+			
+		}
+		
+		panelLeyenda.add(new JLabel ("Más"));
 		
 	}
 	

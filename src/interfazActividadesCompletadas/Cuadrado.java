@@ -1,6 +1,7 @@
 package interfazActividadesCompletadas;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -21,6 +22,7 @@ public class Cuadrado extends JPanel {
 			this.actividadesMax = actMaximas;
 		}
 		this.setBorder(new LineBorder(Color.black));
+		this.setPreferredSize(new Dimension(25, 25));
 	}
 	
 	public void paintComponent(Graphics g) {
@@ -36,10 +38,16 @@ public class Cuadrado extends JPanel {
         g2d.fillRect(0, 0, getWidth(), getHeight());
 	}
 	
-	public Color calcularColor(double intensidad) {
-	    int rojo = (int) ((1 - intensidad) * 255);   
-	    int verde = 255;                           
-	    int azul = (int) (intensidad * 255 + (1 - intensidad) * 255); 
+	public static Color calcularColor(double intensidad) {
+		
+		Color colorMaximo = new Color(0, 0, 255); // Genera un azul rey
+		Color colorMinimo = new Color(255, 255, 255);
+		
+        int rojo = (int) (colorMinimo.getRed() + intensidad * (colorMaximo.getRed() - colorMinimo.getRed()));
+        int verde = (int) (colorMinimo.getGreen() + intensidad * (colorMaximo.getGreen() - colorMinimo.getGreen()));
+        int azul = (int) (colorMinimo.getBlue() + intensidad * (colorMaximo.getBlue() - colorMinimo.getBlue()));
+		
+
 	    return new Color(rojo, verde, azul);
 	}
 	

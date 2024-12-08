@@ -36,6 +36,7 @@ import exceptions.TipoInvalidoValorException;
 import exceptions.UsuarioYaExistenteException;
 import learningPath.LearningPath;
 import persistenciaDatos.PersistenciaActividades;
+import persistenciaDatos.PersistenciaActividadesDiarias;
 import persistenciaDatos.PersistenciaLearningPaths;
 import persistenciaDatos.PersistenciaPreguntas;
 import persistenciaDatos.PersistenciaUsuarios;
@@ -86,7 +87,7 @@ public class Aplicacion {
 	
 	}
 	
-	public Aplicacion (String archivoUsuarios, String archivoLP, String archivoPreguntas, String archivoActividades) {
+	public Aplicacion (String archivoUsuarios, String archivoLP, String archivoPreguntas, String archivoActividades, String archivoConteoActividades) {
 		this.mapaEstudiantes = PersistenciaUsuarios.cargarEstudiantes(archivoUsuarios);
 		this.mapaProfesores = PersistenciaUsuarios.cargarProfesores(archivoUsuarios);
 		this.mapaLearningPaths = PersistenciaLearningPaths.cargarLP(archivoLP);
@@ -98,6 +99,7 @@ public class Aplicacion {
 		this.mapaPreguntasAbiertas = PersistenciaPreguntas.cargarAbiertas(archivoPreguntas);
 		this.mapaPreguntasSeleccionMultiple = PersistenciaPreguntas.cargarSM(archivoPreguntas);
 		this.mapaPreguntasBoolean = PersistenciaPreguntas.cargarBooleanas(archivoPreguntas);
+		this.mapaActividadesDiarias = PersistenciaActividadesDiarias.cargarActividadesCompletadas(archivoConteoActividades);
 	}
 
 	//Getters y Setters estructuras
@@ -1127,6 +1129,7 @@ public class Aplicacion {
 		PersistenciaUsuarios.persistirUsuarios(mapaEstudiantes, mapaProfesores, "usuarios.json");
 		PersistenciaPreguntas.persistirPreguntas(mapaPreguntasAbiertas, mapaPreguntasSeleccionMultiple, mapaPreguntasBoolean,"preguntas.json");
 		PersistenciaLearningPaths.persistirLearningPaths(mapaLearningPaths, "lp.json");
+		PersistenciaActividadesDiarias.persistirActividades(mapaActividadesDiarias, "cifrasActividades.json");
 	}
 	
 	

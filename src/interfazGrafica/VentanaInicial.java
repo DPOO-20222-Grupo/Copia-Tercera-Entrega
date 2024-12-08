@@ -28,7 +28,7 @@ public class VentanaInicial extends JFrame implements ActionListener {
 
     public VentanaInicial() {
     	
-    	aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");
+    	aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json", "cifrasActividades.json");
     	
         this.setTitle("Menú Principal");
         this.setSize(800, 600); 
