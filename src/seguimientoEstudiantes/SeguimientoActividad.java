@@ -11,6 +11,10 @@ public  class SeguimientoActividad {
 	private String nombreEstudianteSeguimiento;
 	private int tiempoTotal;
 	
+	public SeguimientoActividad() {
+	    this.estado = "Incompleta";
+	    this.tiempoTotal = 0;
+	}
 	
 	public SeguimientoActividad( Actividad actividad, Estudiante estudiante) {
 		
@@ -51,8 +55,5 @@ public  class SeguimientoActividad {
 	public void actualizarEstadoCompletado () {
 		this.setEstado("Completado");
 	}
-	
-
-
 }
 	

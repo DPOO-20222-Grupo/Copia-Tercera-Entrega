@@ -18,7 +18,7 @@ public class VentanaEstudiante extends JFrame{
 		this.aplicacion = app;
 		this.estudiante = est;
 		
-		this.panelOpciones = new PanelOpcionesEstudiante(estudiante);
+		this.panelOpciones = new PanelOpcionesEstudiante(estudiante, app);
 		this.add(panelOpciones);
 		
 		this.setVisible(true);

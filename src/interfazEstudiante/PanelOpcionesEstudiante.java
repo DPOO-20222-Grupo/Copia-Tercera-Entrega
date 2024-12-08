@@ -27,6 +27,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 import javax.swing.DefaultListCellRenderer;
 
 
@@ -43,6 +44,7 @@ import interfaz.Aplicacion;
 import learningPath.LearningPath;
 import preguntas.PreguntaAbierta;
 import preguntas.PreguntaCerrada;
+import preguntas.PreguntaSeleccionMultiple;
 import seguimientoEstudiantes.SeguimientoLearningPath;
 import user.Estudiante;
 
@@ -68,11 +70,11 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 	private JPanel panelEste;
 	private JPanel panelOeste;
 	
-	public PanelOpcionesEstudiante(Estudiante estudiante) {
+	public PanelOpcionesEstudiante(Estudiante estudiante, Aplicacion aplicacion) {
 		super();
 		this.estudiante = estudiante;
 		this.setLayout(new BorderLayout());
-		this.aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");
+		this.aplicacion = aplicacion;
 		
 		panelOeste = new JPanel();
 		
@@ -172,79 +174,88 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 	}
 	
 	private void inscribirseLP(Estudiante est) {
-		panelEste.setLayout(new BorderLayout());
-		
-		 JLabel lTitulo = new JLabel("Inscribirse a un Learning Path");
-		 lTitulo.setHorizontalAlignment(JLabel.CENTER);
-		 lTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
-		 panelEste.add(lTitulo, BorderLayout.NORTH);
-		 
-		 HashMap<String, LearningPath> mapaLP = aplicacion.getMapaLearningPaths();
-		
-		 JPanel panelOpciones = new JPanel();
-		 panelOpciones.setLayout(new GridLayout(mapaLP.size() + 1, 1));
+	    panelEste.setLayout(new BorderLayout());
 
-		 JLabel lblInstrucciones = new JLabel("Seleccione un Learning Path:");
-		 panelOpciones.add(lblInstrucciones);
+	    JLabel lTitulo = new JLabel("Inscribirse a un Learning Path");
+	    lTitulo.setHorizontalAlignment(JLabel.CENTER);
+	    lTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    panelEste.add(lTitulo, BorderLayout.NORTH);
 
-		 ButtonGroup grupoLearningPaths = new ButtonGroup();
-		 for (String idLP : mapaLP.keySet()) {
-			 JRadioButton rb = new JRadioButton(idLP);
-			 grupoLearningPaths.add(rb);
-			 panelOpciones.add(rb);
-		    }
+	    HashMap<String, LearningPath> mapaLP = aplicacion.getMapaLearningPaths();
 
-		 JScrollPane scrollPanel = new JScrollPane(panelOpciones);
-		 scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		 scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+	    JPanel panelOpciones = new JPanel();
+	    panelOpciones.setLayout(new GridLayout(mapaLP.size() + 1, 1));
 
-		 panelEste.add(scrollPanel, BorderLayout.CENTER);
+	    JLabel lblInstrucciones = new JLabel("Seleccione un Learning Path:");
+	    panelOpciones.add(lblInstrucciones);
 
-		 JPanel panelInferior = new JPanel();
-		 panelInferior.setLayout(new BorderLayout());
+	    ButtonGroup grupoLearningPaths = new ButtonGroup();
+	    for (String idLP : mapaLP.keySet()) {
+	        JRadioButton rb = new JRadioButton(idLP);
+	        grupoLearningPaths.add(rb);
+	        panelOpciones.add(rb);
+	    }
 
-		 JButton btnConfirmar = new JButton("Confirmar inscripción");
-		 panelInferior.add(btnConfirmar, BorderLayout.CENTER);
+	    JScrollPane scrollPanel = new JScrollPane(panelOpciones);
+	    scrollPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	    scrollPanel.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 
-		 btnConfirmar.addActionListener(new ActionListener() {
-			 @Override
-		     public void actionPerformed(ActionEvent e) {
-				 String seleccionado = null;
-				 for (int i = 0; i < panelOpciones.getComponentCount(); i++) {
-					 if (panelOpciones.getComponent(i) instanceof JRadioButton) {
-						 JRadioButton rb = (JRadioButton) panelOpciones.getComponent(i);
-						 if (rb.isSelected()) {
-							 seleccionado = rb.getText();
-							 break;
-		                    }
-		                }
-		            }
+	    panelEste.add(scrollPanel, BorderLayout.CENTER);
 
-				 if (seleccionado != null) {
-		                try {
-							aplicacion.inscribirEstudianteLearningPath(estudiante, aplicacion.getLearningPath(seleccionado));
-						} catch (ModificarEstudianteLearningPathException e1) {
-							e1.printStackTrace();
-						}
-		                JOptionPane.showMessageDialog(panelEste, 
-		                    String.format("Se ha inscrito exitosamente al Learning Path: %s", seleccionado),
-		                    "Inscripción exitosa", 
-		                    JOptionPane.INFORMATION_MESSAGE);
-		            } else {
-		                JOptionPane.showMessageDialog(panelEste, 
-		                    "Por favor, seleccione un Learning Path para inscribirse.",
-		                    "Error", 
-		                    JOptionPane.ERROR_MESSAGE);
-		            }
-		        }
-		    });
+	    JPanel panelInferior = new JPanel();
+	    panelInferior.setLayout(new BorderLayout());
 
-		    panelEste.add(panelInferior, BorderLayout.SOUTH);
+	    JButton btnConfirmar = new JButton("Confirmar inscripción");
+	    panelInferior.add(btnConfirmar, BorderLayout.CENTER);
 
-		    panelEste.revalidate();
-		    panelEste.repaint();
-				 
+	    btnConfirmar.addActionListener(new ActionListener() {
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            String seleccionado = null;
+	            for (int i = 0; i < panelOpciones.getComponentCount(); i++) {
+	                if (panelOpciones.getComponent(i) instanceof JRadioButton) {
+	                    JRadioButton rb = (JRadioButton) panelOpciones.getComponent(i);
+	                    if (rb.isSelected()) {
+	                        seleccionado = rb.getText();
+	                        break;
+	                    }
+	                }
+	            }
+
+	            if (seleccionado != null) {
+	                // Verificar si el estudiante ya está inscrito en el Learning Path
+	                if (est.getLearningPathsInscritos().containsKey(seleccionado)) {
+	                    JOptionPane.showMessageDialog(panelEste,
+	                            String.format("Ya está inscrito en el Learning Path: %s", seleccionado),
+	                            "Error de inscripción",
+	                            JOptionPane.WARNING_MESSAGE);
+	                } else {
+	                    try {
+	                        aplicacion.inscribirEstudianteLearningPath(estudiante, aplicacion.getLearningPath(seleccionado));
+	                        aplicacion.descargarDatos();
+	                        JOptionPane.showMessageDialog(panelEste,
+	                                String.format("Se ha inscrito exitosamente al Learning Path: %s", seleccionado),
+	                                "Inscripción exitosa",
+	                                JOptionPane.INFORMATION_MESSAGE);
+	                    } catch (ModificarEstudianteLearningPathException e1) {
+	                        e1.printStackTrace();
+	                    }
+	                }
+	            } else {
+	                JOptionPane.showMessageDialog(panelEste,
+	                        "Por favor, seleccione un Learning Path para inscribirse.",
+	                        "Error",
+	                        JOptionPane.ERROR_MESSAGE);
+	            }
+	        }
+	    });
+
+	    panelEste.add(panelInferior, BorderLayout.SOUTH);
+
+	    panelEste.revalidate();
+	    panelEste.repaint();
 	}
+
 	
 	private void verLPInscritos(Estudiante estudiante) {
 	    panelEste.setLayout(new BorderLayout());
@@ -667,7 +678,19 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 	}
 
 	private void realizarActividadSeleccionada(Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
-	    if (actividad instanceof RevisarRecurso) {
+		SeguimientoLearningPath seguimiento = learningPath.getEstudiantesInscritos().get(estudiante.getLogin());
+	    if (seguimiento == null) {
+	        JOptionPane.showMessageDialog(panelEste, "No estás inscrito en este Learning Path.", "Error", JOptionPane.ERROR_MESSAGE);
+	        return;
+	    }
+		
+	    String estado = seguimiento.getMapaSeguimientoActividades().get(actividad.getIdActividad()).getEstado();
+	    if (estado.equalsIgnoreCase("Enviado") || estado.equalsIgnoreCase("Completado") || estado.equalsIgnoreCase("Exitoso") || estado.equalsIgnoreCase("No exitoso")) {
+	        JOptionPane.showMessageDialog(panelEste, "Ya has completado esta actividad. No puedes realizarla de nuevo.", "Error", JOptionPane.ERROR_MESSAGE);
+	        return; 
+	    }
+		
+		if (actividad instanceof RevisarRecurso) {
 	        mostrarRecurso(actividad, estudiante, learningPath);
 	    } else if (actividad instanceof Encuesta) {
 	        mostrarEncuesta(actividad, estudiante, learningPath);
@@ -684,29 +707,40 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 	    RevisarRecurso recurso = (RevisarRecurso) actividad;
 	    JPanel recursoPanel = new JPanel();
 	    recursoPanel.setLayout(new BoxLayout(recursoPanel, BoxLayout.Y_AXIS));
+	    recursoPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 	    JLabel lblRecurso = new JLabel("Tipo de recurso: " + recurso.getTipoRecurso());
+	    lblRecurso.setAlignmentX(Component.CENTER_ALIGNMENT);
 	    recursoPanel.add(lblRecurso);
 
 	    JLabel lblLink = new JLabel("Enlace: " + recurso.getEnlaceRecurso());
+	    lblLink.setAlignmentX(Component.CENTER_ALIGNMENT);
 	    recursoPanel.add(lblLink);
 
 	    JButton btnCompletarRecurso = new JButton("Marcar como completado");
-	    btnCompletarRecurso.addActionListener(e -> {
-	        try {
-				aplicacion.completarEncuestaRecurso(actividad, estudiante, learningPath);
-			} catch (EstudianteNoInscritoException | ActividadYaCompletadaException e1) {
-				e1.printStackTrace();
-			}
-	    });
-
+	    btnCompletarRecurso.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    recursoPanel.add(Box.createVerticalStrut(10));
 	    recursoPanel.add(btnCompletarRecurso);
 
 	    JFrame recursoFrame = new JFrame("Realizar Recurso");
 	    recursoFrame.add(recursoPanel);
 	    recursoFrame.setSize(400, 300);
+	    recursoFrame.setLocationRelativeTo(null); 
 	    recursoFrame.setVisible(true);
+
+	    btnCompletarRecurso.addActionListener(e -> {
+	        try {
+	            aplicacion.completarEncuestaRecurso(actividad, estudiante, learningPath); // Marca como completado
+	            aplicacion.descargarDatos(); 
+	            JOptionPane.showMessageDialog(recursoFrame, "Recurso marcado como completado.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(recursoFrame, "Error al completar el recurso: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	            ex.printStackTrace();
+	        }
+	        recursoFrame.dispose();
+	    });
 	}
+
 
 	private void mostrarEncuesta(Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
 	    Encuesta encuesta = (Encuesta) actividad;
@@ -722,21 +756,31 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 
 	    JButton btnCompletarEncuesta = new JButton("Enviar respuestas");
 	    btnCompletarEncuesta.addActionListener(e -> {
+	        boolean respuestasCompletas = true;
+
 	        for (PreguntaAbierta pregunta : encuesta.getPreguntas()) {
-	            String respuesta = "";
+	            String respuesta = ""; 
 	            try {
-					aplicacion.responderPreguntaEncuesta(encuesta, estudiante, learningPath, pregunta, respuesta);
-				} catch (EstudianteNoInscritoException | ActividadYaCompletadaException e1) {
-					e1.printStackTrace();
-				}
+	                aplicacion.responderPreguntaEncuesta(encuesta, estudiante, learningPath, pregunta, respuesta);
+	            } catch (EstudianteNoInscritoException | ActividadYaCompletadaException ex) {
+	                respuestasCompletas = false;
+	                ex.printStackTrace();
+	            }
 	        }
-	        try {
-				aplicacion.completarEncuestaRecurso(actividad, estudiante, learningPath);
-			} catch (EstudianteNoInscritoException e1) {
-				e1.printStackTrace();
-			} catch (ActividadYaCompletadaException e1) {
-				e1.printStackTrace();
-			}
+
+	        if (respuestasCompletas) {
+	            try {
+	                aplicacion.completarEncuestaRecurso(encuesta, estudiante, learningPath);
+	                aplicacion.descargarDatos(); 
+	                JOptionPane.showMessageDialog(encuestaPanel, "Respuestas enviadas y actividad completada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	            } catch (EstudianteNoInscritoException | ActividadYaCompletadaException ex) {
+	                ex.printStackTrace();
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(encuestaPanel, "Hubo un error al registrar tus respuestas. Por favor, intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+	        }
+
+	        ((JFrame) SwingUtilities.getWindowAncestor(encuestaPanel)).dispose();
 	    });
 
 	    encuestaPanel.add(btnCompletarEncuesta);
@@ -748,67 +792,150 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 	}
 
 	private void mostrarQuiz(Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
-	    // Mostrar las preguntas del quiz y permitir responderlas
 	    Quiz quiz = (Quiz) actividad;
 	    JPanel quizPanel = new JPanel();
 	    quizPanel.setLayout(new BoxLayout(quizPanel, BoxLayout.Y_AXIS));
+	    quizPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+	    JLabel lblTitulo = new JLabel("Realizar Quiz: " + quiz.getTitulo());
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 16));
+	    lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    quizPanel.add(lblTitulo);
+
+	    Map<PreguntaCerrada, Integer> respuestas = new HashMap<>();
 
 	    for (PreguntaCerrada pregunta : quiz.getPreguntas()) {
-	        JLabel lblPregunta = new JLabel(pregunta.getEnunciado());
-	        quizPanel.add(lblPregunta);
-	        // Agregar opciones de respuesta (por ejemplo, botones de radio)
+	        JPanel preguntaPanel = new JPanel();
+	        preguntaPanel.setLayout(new BoxLayout(preguntaPanel, BoxLayout.Y_AXIS));
+	        preguntaPanel.setBorder(BorderFactory.createTitledBorder(pregunta.getEnunciado()));
+
+	        ButtonGroup grupoOpciones = new ButtonGroup();
+	        if (pregunta instanceof PreguntaSeleccionMultiple) {
+	            PreguntaSeleccionMultiple preguntaSeleccionMultiple = (PreguntaSeleccionMultiple) pregunta;
+
+	            JRadioButton opcion1 = new JRadioButton(preguntaSeleccionMultiple.getOpcion1());
+	            JRadioButton opcion2 = new JRadioButton(preguntaSeleccionMultiple.getOpcion2());
+	            JRadioButton opcion3 = new JRadioButton(preguntaSeleccionMultiple.getOpcion3());
+	            JRadioButton opcion4 = new JRadioButton(preguntaSeleccionMultiple.getOpcion4());
+
+	            grupoOpciones.add(opcion1);
+	            grupoOpciones.add(opcion2);
+	            grupoOpciones.add(opcion3);
+	            grupoOpciones.add(opcion4);
+
+	            preguntaPanel.add(opcion1);
+	            preguntaPanel.add(opcion2);
+	            preguntaPanel.add(opcion3);
+	            preguntaPanel.add(opcion4);
+
+	            opcion1.addActionListener(e -> respuestas.put(pregunta, 1));
+	            opcion2.addActionListener(e -> respuestas.put(pregunta, 2));
+	            opcion3.addActionListener(e -> respuestas.put(pregunta, 3));
+	            opcion4.addActionListener(e -> respuestas.put(pregunta, 4));
+
+	        } else {
+	            JRadioButton verdadero = new JRadioButton("Verdadero");
+	            JRadioButton falso = new JRadioButton("Falso");
+
+	            grupoOpciones.add(verdadero);
+	            grupoOpciones.add(falso);
+
+	            preguntaPanel.add(verdadero);
+	            preguntaPanel.add(falso);
+
+	            verdadero.addActionListener(e -> respuestas.put(pregunta, 1));
+	            falso.addActionListener(e -> respuestas.put(pregunta, 0));
+	        }
+
+	        quizPanel.add(preguntaPanel);
 	    }
 
-	    JButton btnCompletarQuiz = new JButton("Enviar respuestas");
-	    btnCompletarQuiz.addActionListener(e -> {
-	        // Aquí se debe recorrer las preguntas y obtener las respuestas para llamar a responderPreguntaQuiz()
-	        for (PreguntaCerrada pregunta : quiz.getPreguntas()) {
-	            int respuesta = 0; // Obtener respuesta seleccionada
-	            try {
-					aplicacion.responderPreguntaQuiz(quiz, estudiante, learningPath, pregunta, respuesta);
-				} catch (EstudianteNoInscritoException e1) {
-					e1.printStackTrace();
-				}
-	        }
-	    });
-
-	    quizPanel.add(btnCompletarQuiz);
+	    JButton btnEnviarQuiz = new JButton("Enviar Quiz");
+	    btnEnviarQuiz.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    quizPanel.add(Box.createVerticalStrut(10));
+	    quizPanel.add(btnEnviarQuiz);
 
 	    JFrame quizFrame = new JFrame("Realizar Quiz");
-	    quizFrame.add(quizPanel);
-	    quizFrame.setSize(400, 300);
+	    quizFrame.add(new JScrollPane(quizPanel));
+	    quizFrame.setSize(600, 400);
+	    quizFrame.setLocationRelativeTo(null); 
 	    quizFrame.setVisible(true);
+
+	    btnEnviarQuiz.addActionListener(e -> {
+	        try {
+	            
+	            if (respuestas.size() < quiz.getPreguntas().size()) {
+	                JOptionPane.showMessageDialog(quizFrame, "Debe responder todas las preguntas.", "Error", JOptionPane.ERROR_MESSAGE);
+	                return;
+	            }
+
+	            for (Map.Entry<PreguntaCerrada, Integer> entry : respuestas.entrySet()) {
+	                aplicacion.responderPreguntaQuiz(quiz, estudiante, learningPath, entry.getKey(), entry.getValue());
+	            }
+
+	            learningPath.getEstudiantesInscritos().get(estudiante.getLogin())
+	                .getMapaSeguimientoActividades().get(actividad.getIdActividad()).setEstado("completado");
+	            aplicacion.descargarDatos();
+
+	            JOptionPane.showMessageDialog(quizFrame, "Quiz enviado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(quizFrame, "Error al enviar el Quiz: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	            ex.printStackTrace();
+	        }
+
+	        quizFrame.dispose(); 
+	    });
 	}
 
+
 	private void mostrarExamen(Actividad actividad, Estudiante estudiante, LearningPath learningPath) {
-	    // Mostrar las preguntas del examen y permitir responderlas
 	    Examen examen = (Examen) actividad;
 	    JPanel examenPanel = new JPanel();
 	    examenPanel.setLayout(new BoxLayout(examenPanel, BoxLayout.Y_AXIS));
 
 	    for (PreguntaAbierta pregunta : examen.getPreguntas()) {
 	        JLabel lblPregunta = new JLabel(pregunta.getEnunciado());
-	        examenPanel.add(lblPregunta);
 	        JTextArea textAreaRespuesta = new JTextArea(3, 20);
+	        textAreaRespuesta.setLineWrap(true);
+	        textAreaRespuesta.setWrapStyleWord(true);
+	        textAreaRespuesta.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+
+	        examenPanel.add(lblPregunta);
 	        examenPanel.add(new JScrollPane(textAreaRespuesta));
 	    }
 
+
 	    JButton btnEnviarExamen = new JButton("Enviar examen");
 	    btnEnviarExamen.addActionListener(e -> {
+	        boolean respuestasCompletas = true;
+
 	        for (PreguntaAbierta pregunta : examen.getPreguntas()) {
-	            String respuesta = "";// Obtener respuesta del JTextArea correspondiente
+	            String respuesta = ""; 
 	            try {
-					aplicacion.responderPreguntaExamen(examen, estudiante, learningPath, pregunta, respuesta);
-				} catch (EstudianteNoInscritoException | ActividadYaCompletadaException e1) {
-					e1.printStackTrace();
-				}
+	                aplicacion.responderPreguntaExamen(examen, estudiante, learningPath, pregunta, respuesta);
+	            } catch (EstudianteNoInscritoException | ActividadYaCompletadaException ex) {
+	                respuestasCompletas = false;
+	                ex.printStackTrace();
+	            }
 	        }
-	        try {
-				aplicacion.enviarExamen(examen, estudiante, learningPath);
-			} catch (EstudianteNoInscritoException | ActividadYaCompletadaException e1) {
-				e1.printStackTrace();
-			}
+
+	        if (respuestasCompletas) {
+	            try {
+	                aplicacion.enviarExamen(examen, estudiante, learningPath); 
+	           
+	                aplicacion.descargarDatos(); 
+	                JOptionPane.showMessageDialog(examenPanel, "Examen enviado y guardado exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	            } catch (EstudianteNoInscritoException | ActividadYaCompletadaException ex) {
+	                JOptionPane.showMessageDialog(examenPanel, "Hubo un error al enviar el examen. Por favor, intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+	                ex.printStackTrace();
+	            }
+	        } else {
+	            JOptionPane.showMessageDialog(examenPanel, "Por favor, responde todas las preguntas antes de enviar el examen.", "Error", JOptionPane.WARNING_MESSAGE);
+	        }
+
+	        ((JFrame) SwingUtilities.getWindowAncestor(examenPanel)).dispose();
 	    });
+
 
 	    examenPanel.add(btnEnviarExamen);
 
@@ -822,33 +949,55 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 	    Tarea tarea = (Tarea) actividad;
 	    JPanel tareaPanel = new JPanel();
 	    tareaPanel.setLayout(new BoxLayout(tareaPanel, BoxLayout.Y_AXIS));
+	    tareaPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-	    JLabel lblTarea = new JLabel("Descripción de la tarea: " + tarea.getDescripcion());
-	    tareaPanel.add(lblTarea);
+	    JLabel lblTitulo = new JLabel("Título: " + tarea.getTitulo());
+	    lblTitulo.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    tareaPanel.add(lblTitulo);
+
+	    JLabel lblDescripcion = new JLabel("Descripción: " + tarea.getDescripcion());
+	    lblDescripcion.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    tareaPanel.add(lblDescripcion);
+
+	    JLabel lblMetodoEnvio = new JLabel("Ingrese el método de envío:");
+	    lblMetodoEnvio.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    tareaPanel.add(lblMetodoEnvio);
+
+	    JTextArea txtMetodoEnvio = new JTextArea(1, 20);
+	    txtMetodoEnvio.setLineWrap(true);
+	    txtMetodoEnvio.setWrapStyleWord(true);
+	    txtMetodoEnvio.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+	    tareaPanel.add(txtMetodoEnvio);
 
 	    JButton btnEnviarTarea = new JButton("Enviar tarea");
+	    btnEnviarTarea.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    tareaPanel.add(Box.createVerticalStrut(10)); 
+	    tareaPanel.add(btnEnviarTarea);
 
 	    JFrame tareaFrame = new JFrame("Realizar Tarea");
 	    tareaFrame.add(tareaPanel);
 	    tareaFrame.setSize(400, 300);
+	    tareaFrame.setLocationRelativeTo(null); 
 	    tareaFrame.setVisible(true);
 
 	    btnEnviarTarea.addActionListener(e -> {
-	        enviarTarea(tarea, estudiante, learningPath, tareaFrame);
-	    });
+	        String metodoEnvio = txtMetodoEnvio.getText().trim();
+	        if (metodoEnvio.isEmpty()) {
+	            JOptionPane.showMessageDialog(tareaFrame, "Debe ingresar un método de envío.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
 
-	    tareaPanel.add(btnEnviarTarea);
-	}
-	
-	private void enviarTarea(Tarea tarea, Estudiante estudiante, LearningPath learningPath, JFrame tareaFrame) {
-	    try {
-	        aplicacion.enviarTarea(tarea, estudiante, learningPath);
-	        JOptionPane.showMessageDialog(tareaFrame, "Tarea enviada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-	        tareaFrame.dispose(); 
-	    } catch (EstudianteNoInscritoException | ActividadYaCompletadaException e) {
-	        JOptionPane.showMessageDialog(tareaFrame, "Error al enviar la tarea: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-	        e.printStackTrace();
-	    }
+	        try {
+	            aplicacion.enviarTarea(tarea, estudiante, learningPath); 
+	            aplicacion.actualizarMetodoEnvioTarea(estudiante, learningPath, tarea, metodoEnvio);
+	            aplicacion.descargarDatos(); 
+	            JOptionPane.showMessageDialog(tareaFrame, "Tarea enviada exitosamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	        } catch (Exception ex) {
+	            JOptionPane.showMessageDialog(tareaFrame, "Error al enviar la tarea: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+	            ex.printStackTrace();
+	        }
+	        tareaFrame.dispose();
+	    });
 	}
 	
 }

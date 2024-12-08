@@ -12,6 +12,11 @@ public class SeguimientoRecurso extends SeguimientoActividad {
 		this.recurso = recurso.getTipoRecurso();
 	}
 	
+	public SeguimientoRecurso() {
+	    super();
+	    this.recurso = "";
+	}
+	
 
 	public String getRecurso() {
 		return recurso;

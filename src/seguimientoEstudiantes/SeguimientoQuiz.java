@@ -1,7 +1,6 @@
 package seguimientoEstudiantes;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import actividades.Quiz;
@@ -14,6 +13,14 @@ public class SeguimientoQuiz extends SeguimientoActividad{
 	private Map<String, PreguntaCerrada> preguntas;
 	private Map<String, Integer> respuestas;
 	private int numPreguntas;
+	
+	public SeguimientoQuiz() {
+	    super();
+	    this.respuestas = new HashMap<>();
+	    this.preguntas = new HashMap<>();
+	    this.nota = 0.0;
+	    this.numPreguntas = 0;
+	}
 	
 	public SeguimientoQuiz (Quiz quiz, Estudiante estudiante) {
 		 super(quiz, estudiante);

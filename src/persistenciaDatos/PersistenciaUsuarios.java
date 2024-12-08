@@ -64,7 +64,7 @@ public class PersistenciaUsuarios {
 				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
 				.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
 				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())	
-
+				.registerTypeAdapter(new TypeToken<Map<String, SeguimientoLearningPath>>() {}.getType(), new LearningPathsAdapter())
 				.create();
 		
 		HashMap<String, Estudiante> studentMap = new HashMap<String, Estudiante>();	
@@ -91,11 +91,9 @@ public class PersistenciaUsuarios {
 		Gson gson = new GsonBuilder()
 				.registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
 				.registerTypeAdapter(PreguntaCerrada.class, new PreguntaCerradaAdapter())
-
-
 				.registerTypeAdapter(SeguimientoActividad.class, new SeguimientoActividadAdapter())
-
 				.registerTypeAdapter(Actividad.class, new ActividadAdapter())
+				.registerTypeAdapter(new TypeToken<Map<String, SeguimientoLearningPath>>() {}.getType(), new LearningPathsAdapter())
 				.create();
 		
 		HashMap<String, Profesor> profMap = new HashMap<String, Profesor>();	
