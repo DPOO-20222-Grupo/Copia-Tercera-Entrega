@@ -70,7 +70,7 @@ public class LearningPath {
 		return titulo;
 	}
 
-	private void setTitulo(String titulo) {
+	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
 	
@@ -86,7 +86,7 @@ public class LearningPath {
 	}
 
 
-	private void setDescripcion(String descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 	
@@ -102,7 +102,7 @@ public class LearningPath {
 	}
 
 
-	private void setObjetivos(List<String> objetivos) {
+	public void setObjetivos(List<String> objetivos) {
 		this.objetivos = objetivos;
 	}
 	
@@ -144,7 +144,7 @@ public class LearningPath {
 	}
 
 
-	private void setNivelDificultad(String nivelDificultad) {
+	public void setNivelDificultad(String nivelDificultad) {
 		this.nivelDificultad = nivelDificultad;
 	}
 	
