@@ -16,13 +16,12 @@ public class VentanaEstudiante extends JFrame{
 	private Aplicacion aplicacion;
 	private Estudiante estudiante;
 	private PanelOpcionesEstudiante panelOpciones; 
-	private JPanel panelContenido;
 	
 	public VentanaEstudiante(Aplicacion app, Estudiante est) {
 		this.aplicacion = app;
 		this.estudiante = est;
 		
-		this.panelOpciones = new PanelOpcionesEstudiante(estudiante, app);
+		this.panelOpciones = new PanelOpcionesEstudiante(estudiante, aplicacion);
 		this.setLayout(new BorderLayout());
 		this.add(panelOpciones, BorderLayout.NORTH);
 
