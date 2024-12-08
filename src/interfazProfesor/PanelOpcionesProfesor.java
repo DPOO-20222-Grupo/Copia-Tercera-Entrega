@@ -1115,7 +1115,147 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 
 	private void modificarActividad(Profesor profesor) {
 		
-		
+		panelCentro.setLayout(new BorderLayout());
+
+	    JLabel lblTitulo = new JLabel("Modificar Actividad ", JLabel.CENTER);
+	    lblTitulo.setFont(new Font("Times New Roman", Font.BOLD, 18));
+	    panelCentro.add(lblTitulo, BorderLayout.NORTH);
+
+	    JPanel panelFormulario = new JPanel(new GridLayout(10, 2));
+	    JLabel lblIdActividad = new JLabel("Ingrese el ID de la Actividad");
+	    lblIdActividad.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(lblIdActividad);
+	    JTextField txtIdActividad = new JTextField();
+	    txtIdActividad.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(txtIdActividad);
+	    
+	    JLabel lbTipoActividad = new JLabel("Ingrese el tipo de la Actividad");
+	    lbTipoActividad.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(lbTipoActividad);
+	    JTextField txtIdTipo = new JTextField();
+	    txtIdTipo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(txtIdTipo);
+
+	    JLabel lblTipoAtributo = new JLabel("Seleccione el atributo a modificar");
+	    lblTipoAtributo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(lblTipoAtributo);
+
+	    JComboBox<String> comboTipoAtributo = new JComboBox<>(new String[]{"Titulo", "Descripcion", "Dificultad", "Objetivos", "Duracion"});
+	    comboTipoAtributo.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    panelFormulario.add(comboTipoAtributo);
+
+	    JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.CENTER));
+	    JButton btnModificar = new JButton("Modificar");
+	    btnModificar.setFont(new Font("Times New Roman", Font.BOLD, 30));
+	    panelBoton.add(btnModificar);
+
+	    panelFormulario.add(new JLabel());
+	    panelFormulario.add(panelBoton);
+
+	    JTextArea txtResultado = new JTextArea(5, 30);
+	    txtResultado.setEditable(false);
+	    txtResultado.setFont(new Font("Times New Roman", Font.BOLD, 14));
+	    JScrollPane scrollResultado = new JScrollPane(txtResultado);
+	    panelCentro.add(scrollResultado, BorderLayout.SOUTH);
+
+	    panelCentro.add(panelFormulario, BorderLayout.CENTER);
+
+	    btnModificar.addActionListener(e -> {
+	    	String tipoActividad = txtIdTipo.getText();
+	        String idActividad = txtIdActividad.getText();
+	        int tipo = comboTipoAtributo.getSelectedIndex();
+	        String tipoString = switch (tipo) {
+	            case 0 -> "Titulo";
+	            case 1 -> "Descripcion";
+	            case 2 -> "Dificultad";
+	            case 3 -> "Objetivos";
+	            case 4 -> "Duracion";
+	            default -> "";
+	        };
+
+	        if (idActividad.isEmpty()) {
+	            JOptionPane.showMessageDialog(this, "Debe ingresar el ID de la Actividad", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        Actividad actividad = aplicacion.getActividad(idActividad, tipoActividad);
+	        if (actividad == null) {
+	            JOptionPane.showMessageDialog(this, "Actividad no encontrada.", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        String nuevoValor = JOptionPane.showInputDialog(this, "Ingrese el nuevo valor para " + tipoString + ":");
+	        if (nuevoValor == null || nuevoValor.isEmpty()) {
+	            JOptionPane.showMessageDialog(this, "El nuevo valor no puede estar vacío", "Error", JOptionPane.ERROR_MESSAGE);
+	            return;
+	        }
+
+	        switch (tipo) {
+	            case 0: 
+				try {
+					aplicacion.modificarActividad(actividad, nuevoValor, tipoString, null , null , null);
+				} catch (ModificarObjetivosException e1) {
+					e1.printStackTrace();
+				}
+	                aplicacion.descargarDatos();
+	                break;
+	            case 1: 
+				try {
+					aplicacion.modificarActividad(actividad, nuevoValor, tipoString, null , null , null);
+				} catch (ModificarObjetivosException e1) {
+					e1.printStackTrace();
+				}
+	                aplicacion.descargarDatos();
+	                break;
+	            case 2: 
+				try {
+					aplicacion.modificarActividad(actividad, nuevoValor, tipoString, null , null , null);
+				} catch (ModificarObjetivosException e1) {
+					e1.printStackTrace();
+				}
+	                aplicacion.descargarDatos();
+	                break;
+	            case 3: 
+	            	String accion = JOptionPane.showInputDialog(this, "Ingrese la accion a realizar (Agregar/Eliminar) " + tipoString + ":");	
+	            	
+            	try {
+            		aplicacion.modificarActividad(actividad, nuevoValor, tipoString, accion , null , null);
+				} catch (ModificarObjetivosException e1) {
+					e1.printStackTrace();
+				}
+	                aplicacion.descargarDatos();            	
+	                
+	                break;
+	            
+	            case 4: 
+	            	
+	            	String duracion = JOptionPane.showInputDialog(this, "Ingrese la duracion de la actividad:");	
+	            	
+					try {
+						aplicacion.modificarActividad(actividad, nuevoValor, tipoString, null , null , Integer.parseInt(duracion));
+					} catch (ModificarObjetivosException e1) {
+						e1.printStackTrace();
+					}
+		                aplicacion.descargarDatos();
+		                break;
+	                
+	                
+	            default:
+	                JOptionPane.showMessageDialog(this, "Opción inválida", "Error", JOptionPane.ERROR_MESSAGE);
+	                return;
+	        }
+
+	        JOptionPane.showMessageDialog(this, "El atributo " + tipoString + " ha sido modificado con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	        
+	        txtResultado.setText("Actividad modificada:\n" +
+	                "ID: " + idActividad + "\n" +
+	                "Atributo modificado: " + tipoString + "\n" +
+	                "Nuevo valor: " + nuevoValor);
+	    });
+
+	    this.add(panelCentro, BorderLayout.CENTER);
+	    this.revalidate();
+	    this.repaint();
 		
 	}
 
