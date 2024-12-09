@@ -11,6 +11,11 @@ public class SeguimientoTarea extends SeguimientoActividad {
 		super(tarea, estudiante);
 		this.metodoEnvio = "";
 	}
+	
+	public SeguimientoTarea() {
+	    super();
+	    this.metodoEnvio = "";
+	}
 
 	public String getMetodoEnvio() {
 		return metodoEnvio;

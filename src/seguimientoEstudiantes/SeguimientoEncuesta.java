@@ -11,6 +11,11 @@ public class SeguimientoEncuesta extends SeguimientoActividad {
 	
 	private Map<String, String> respuestas;
 	
+	public SeguimientoEncuesta() {
+	    super();
+	    this.respuestas = new HashMap<>();
+	}
+	
 	public SeguimientoEncuesta(Encuesta encuesta, Estudiante estudiante) {
 		super(encuesta, estudiante);
 		this.respuestas = new HashMap<String, String>();

@@ -43,6 +43,7 @@ public class Estudiante extends Usuario {
 		String llave = seguimiento.getIdLearningPath();
 		
 		learningPathsInscritos.put(llave, seguimiento);
+
 		
 	}
 	

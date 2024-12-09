@@ -71,7 +71,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
     };
 
     public PanelOpcionesProfesor(Profesor profesor) {
-    	aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");
+    	aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json", "cifrasActividades.json");
         this.profesor = profesor;
         this.setLayout(new BorderLayout());
 
@@ -985,7 +985,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 
 	    Font fuente = new Font("Times New Roman", Font.BOLD, 14);
 
-	    JPanel panelEntrada = new JPanel(new GridLayout(15, 1));
+	    JPanel panelEntrada = new JPanel(new GridLayout(16, 1));
 
 	    JLabel lblTipoActividad = new JLabel("Tipo de actividad (Examen/Tarea):");
 	    lblTipoActividad.setFont(fuente);
@@ -1044,10 +1044,10 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	    JTextArea textAreaResultados = new JTextArea(20, 50);
 	    textAreaResultados.setFont(fuente);
 	    textAreaResultados.setEditable(false);
-	    JScrollPane scrollPane = new JScrollPane(textAreaResultados);
+	    panelEntrada.add(textAreaResultados);
 
-	    panelCentro.add(panelEntrada, BorderLayout.NORTH);
-	    panelCentro.add(scrollPane, BorderLayout.CENTER);
+	    panelCentro.add(panelEntrada, BorderLayout.CENTER);
+
 
 	    btnCalificar.addActionListener(e -> {
 	        String tipoActividad = txtTipoActividad.getText();
@@ -1087,6 +1087,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	                if (examen != null) {
 	                    aplicacion.calificarExamen(examen, estudiante, learningPath, nota, exitoso);
 	                    textAreaResultados.setText("Examen calificado con éxito.");
+	                    aplicacion.descargarDatos();
 	                } else {
 	                    textAreaResultados.setText("Examen no encontrado.");
 	                }
@@ -1098,6 +1099,7 @@ public class PanelOpcionesProfesor extends JPanel implements ActionListener {
 	                if (tarea != null) {
 	                    aplicacion.calificarTarea(tarea, estudiante, learningPath, exitoso);
 	                    textAreaResultados.setText("Tarea calificada con éxito.");
+	                    aplicacion.descargarDatos();
 	                } else {
 	                    textAreaResultados.setText("Tarea no encontrada.");
 	                }

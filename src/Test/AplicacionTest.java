@@ -390,7 +390,7 @@ public class AplicacionTest {
 
         app.descargarDatos();
 
-        Aplicacion nuevaApp = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");
+        Aplicacion nuevaApp = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json", "cifrasActividades.json");
 
         assertNotNull(nuevaApp.getEstudiante(estudiante.getLogin()), "El estudiante debería cargarse correctamente.");
         assertNotNull(nuevaApp.getProfesor(profesor.getLogin()), "El profesor debería cargarse correctamente.");
@@ -412,7 +412,7 @@ public class AplicacionTest {
     void testPersistenciaLearningPaths() {
         app.registrarLearningPath(learningPath);
         app.descargarDatos();
-        Aplicacion nuevaApp = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");
+        Aplicacion nuevaApp = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json", "cifrasActividades.json");
         LearningPath lpCargado = nuevaApp.getLearningPath(learningPath.getIdLearnginPath());
         assertNotNull(lpCargado, "El Learning Path debería cargarse correctamente.");
         assertEquals(learningPath.getTitulo(), lpCargado.getTitulo(), "El título del Learning Path debería coincidir.");
@@ -425,7 +425,7 @@ public class AplicacionTest {
 
         app.descargarDatos();
 
-        Aplicacion nuevaApp = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");
+        Aplicacion nuevaApp = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json", "cifrasActividades.json");
 
         assertNotNull(nuevaApp.getActividad(tarea.getIdActividad(), "Tarea"), "La actividad debería cargarse correctamente.");
         assertNotNull(nuevaApp.getPregunta(preguntaAbierta.getIdPregunta(), "Abierta"), "La pregunta debería cargarse correctamente.");

@@ -12,6 +12,12 @@ public class SeguimientoExamen extends SeguimientoActividad{
 	private float nota;
 	private Map<String, String> respuestas;
 	
+	public SeguimientoExamen() {
+	    super();
+	    this.respuestas = new HashMap<>();
+	    this.nota = 0.0f;
+	}
+	
 	public SeguimientoExamen(Examen examen, Estudiante estudiante) {
 		super(examen, estudiante);
 		this.nota = -1;

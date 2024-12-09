@@ -307,6 +307,12 @@ public abstract class Actividad {
     	
     	return id;
     }
+    
+    @Override
+    public String toString() {
+        return this.titulo; // Asume que la clase `Actividad` tiene un atributo `titulo` que almacena el nombre de la actividad.
+    }
+
 }
 
 	

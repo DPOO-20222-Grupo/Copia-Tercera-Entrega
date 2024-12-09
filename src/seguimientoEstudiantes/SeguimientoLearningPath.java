@@ -24,6 +24,14 @@ public class SeguimientoLearningPath {
     private float tasaFracaso;
 
     // Constructor
+    public SeguimientoLearningPath() {
+        this.mapaSeguimientoActividades = new HashMap<>();
+        this.progreso = 0;
+        this.totalTiempo = 0;
+        this.tasaExito = 0;
+        this.tasaFracaso = 0;
+    }
+    
     public SeguimientoLearningPath(LearningPath learningPath, Estudiante estudiante) {
         this.progreso = 0;
         this.totalTiempo = 0;

@@ -5,16 +5,10 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import actividades.Actividad;
-import preguntas.PreguntaCerrada;
-import seguimientoEstudiantes.SeguimientoActividad;
-import user.Estudiante;
-import user.Profesor;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
