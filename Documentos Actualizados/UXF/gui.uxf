@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>4</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>960</x>
+      <y>324</y>
+      <w>152</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes> VentanaInicial 
+--
+- panelBotones: JPanel           
+- panelFormulario: JPanel        
+- aplicacion: Aplicacion         
++ INSCRIBIRSE_PROFESOR: String   
++ INSCRIBIRSE_ESTUDIANTE: String 
++ INICIAR_SESION_PROFESOR: String
++ INICIAR_SESION_ESTUDIANTE: String 
++ CERRAR_SESION: String 
+--
++ VentanaInicial()               
++ actionPerformed(e: ActionEvent): void 
+- crearBoton(texto: String, comando: String): JButton 
+- mostrarFormularioRegistro(tipoUsuario: String): void 
+- mostrarFormularioInicioSesion(tipoUsuario: String): void 
+~ main(args: String[]): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>464</y>
+      <w>140</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>VentanaEstudiante
+--
+- aplicacion: Aplicacion
+- estudiante: Estudiante 
+- panelOpciones: PanelOpcionesEstudiante
+
+--
+ + VentanaEstudiante()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>592</x>
+      <y>464</y>
+      <w>300</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>PanelOpcionesEstudiante
+--
+- aplicacion: Aplicacion
+- estudiante: Estudiante
+- panelOeste: JPanel
+- panelEste: JPanel
+- grupoBotones: ButtonGroup
+--
++ PanelOpcionesEstudiante(estudiante: Estudiante, aplicacion: Aplicacion)
++ actionPerformed(e: ActionEvent): void
+- inscribirseLP(est: Estudiante): void
+- verLPInscritos(est: Estudiante): void
+- verProgresoLP(est: Estudiante): void
+- mostrarProgresoLP(learningPathSeleccionado: String, estudiante: Estudiante): void
+- calificarLP(est: Estudiante): void
+- calificarLearningPath(learningPathSeleccionado: String, calificacion: int, estudiante: Estudiante): void
+- resenarActividad(est: Estudiante): void
+- guardarResenaYCalificacion(actividadSeleccionada: Actividad, resena: String, calificacion: Integer, estudiante: Estudiante): void
+- realizarActividad(estudiante: Estudiante): void
+- realizarActividadSeleccionada(actividad: Actividad, estudiante: Estudiante, learningPath: LearningPath): void
+- mostrarRecurso(actividad: Actividad, estudiante: Estudiante, learningPath: LearningPath): void
+- mostrarEncuesta(actividad: Actividad, estudiante: Estudiante, learningPath: LearningPath): void
+- mostrarQuiz(actividad: Actividad, estudiante: Estudiante, learningPath: LearningPath): void
+- mostrarExamen(actividad: Actividad, estudiante: Estudiante, learningPath: LearningPath): void
+- mostrarTarea(actividad: Actividad, estudiante: Estudiante, learningPath: LearningPath): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>576</x>
+      <y>504</y>
+      <w>24</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;40.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>720</x>
+      <y>416</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>JPanel
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>564</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>JButton
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>336</x>
+      <y>528</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>JRadioButton
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>416</x>
+      <y>528</y>
+      <w>184</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>440.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>700</x>
+      <y>428</y>
+      <w>28</w>
+      <h>44</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>50.0;10.0;10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>416</x>
+      <y>536</y>
+      <w>184</w>
+      <h>60</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>440.0;10.0;290.0;10.0;290.0;130.0;10.0;130.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>440</x>
+      <y>420</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>JFrame
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>436</y>
+      <w>32</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0;60.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>596</x>
+      <y>412</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>PanelActividadesDiarias
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>424</y>
+      <w>44</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;100.0;10.0;10.0;90.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>720</x>
+      <y>372</y>
+      <w>100</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;230.0;10.0;230.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>428</x>
+      <y>452</y>
+      <w>484</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>InterfazEstudiante
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>536</x>
+      <y>360</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Aplicacion
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>640</x>
+      <y>360</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Estudiante
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>596</x>
+      <y>332</y>
+      <w>180</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;70.0;10.0;10.0;430.0;10.0;430.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>404</x>
+      <y>368</y>
+      <w>140</w>
+      <h>136</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>330.0;10.0;10.0;10.0;10.0;320.0;90.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>316</y>
+      <w>196</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>470.0;110.0;470.0;10.0;10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>932</x>
+      <y>304</y>
+      <w>208</w>
+      <h>144</h>
+    </coordinates>
+    <panel_attributes>interfazGrafica
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>800</x>
+      <y>376</y>
+      <w>140</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;140.0;100.0;140.0;100.0;10.0;330.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>376</x>
+      <y>424</y>
+      <w>676</w>
+      <h>312</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>1670.0;10.0;1670.0;760.0;10.0;760.0;10.0;420.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>460</x>
+      <y>136</y>
+      <w>140</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>Cuadrado
+--
+- actividadesCompletadas: int
+- actividadesMax: int
+--
++ Cuadrado(actPropias: int, actMaximas: int)
++ paintComponent(g: Graphics): void
++ calcularColor(intensidad: double): Color</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>620</x>
+      <y>136</y>
+      <w>156</w>
+      <h>76</h>
+    </coordinates>
+    <panel_attributes>PanelActividadesDiarias
+--
+- app: Aplicacion
+- fechaInicial: LocalDate
+- panelTitulo: JPanel
+- panelMeses: JPanel
+- panelCuadros: JPanel
+- panelLeyenda: JPanel
+--
++ PanelActividadesDiarias(aplicacion: Aplicacion, fecha: LocalDate)
++ pintarCuadros(): void
++ agregarElementosPanelLeyenda(panelLeyenda: JPanel): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>728</x>
+      <y>208</y>
+      <w>12</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;520.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>556</x>
+      <y>188</y>
+      <w>196</w>
+      <h>236</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>470.0;570.0;470.0;250.0;10.0;250.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>572</x>
+      <y>208</y>
+      <w>120</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;380.0;10.0;160.0;280.0;160.0;280.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>448</x>
+      <y>124</y>
+      <w>336</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>InterfazActividadesCompletadas
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>596</x>
+      <y>156</y>
+      <w>32</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>60.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>756</x>
+      <y>208</y>
+      <w>12</w>
+      <h>216</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;520.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>12</x>
+      <y>340</y>
+      <w>152</w>
+      <h>204</h>
+    </coordinates>
+    <panel_attributes> PanelOpcionesProfesor 
+--
+- profesor: Profesor                   
+- aplicacion: Aplicacion               
+- panelCentro: JPanel                  
+- OPCIONES: String[] 
+--
++ PanelOpcionesProfesor(profesor: Profesor) 
++ actionPerformed(e: ActionEvent): void 
+- crearRevisarRecurso(profesor: Profesor): void
+- crearTarea(profesor: Profesor): void         
+- crearQuiz(profesor: Profesor): void          
+- crearExamen(profesor: Profesor): void        
+- crearEncuesta(profesor: Profesor): void      
+- crearLearningPath(profesor: Profesor): void  
+- crearPregunta(profesor: Profesor): void      
+- clonarActividad(profesor: Profesor): void    
+- clonarLearningPath(profesor: Profesor): void 
+- modificarLearningPath(profesor: Profesor): void 
+- modificarActividad(profesor: Profesor): void    
+- calificarActividad(profesor: Profesor): void    
+- modificarPregunta(profesor: Profesor): void     
+- revisarActividadRepetida(profesor: Profesor): void 
+- revisarLearningPathRepetido(profesor: Profesor): void 
+- verActividades(profesor: Profesor): void           
+- verLearningPaths(profesor: Profesor): void         
+- verPreguntas(profesor: Profesor): void             
+- verProgresoLearningPathEstudiante(): void          
+- calificarResenarActividad(): void                  
+- calificarLearningPath(): void                      
+- verCalificacionLP(): void                          
+- verCalificacionActividad(): void       </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>204</x>
+      <y>432</y>
+      <w>108</w>
+      <h>32</h>
+    </coordinates>
+    <panel_attributes>VentanaProfesor
+--
+- aplicacion: Aplicacion 
+- profesor: Profesor     
+- panelOpciones: PanelOpcionesProfesor </panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>0</x>
+      <y>316</y>
+      <w>332</w>
+      <h>240</h>
+    </coordinates>
+    <panel_attributes>interfazProfesor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>160</x>
+      <y>440</y>
+      <w>52</w>
+      <h>12</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>296</x>
+      <y>404</y>
+      <w>180</w>
+      <h>36</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>430.0;40.0;430.0;10.0;10.0;10.0;10.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>272</x>
+      <y>388</y>
+      <w>332</w>
+      <h>52</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;10.0;650.0;10.0;650.0;70.0;810.0;70.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>248</x>
+      <y>300</y>
+      <w>304</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>740.0;140.0;740.0;10.0;10.0;10.0;10.0;330.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>172</x>
+      <y>256</y>
+      <w>84</w>
+      <h>28</h>
+    </coordinates>
+    <panel_attributes>Profesor
+--
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>208</x>
+      <y>280</y>
+      <w>12</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;380.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>132</x>
+      <y>420</y>
+      <w>796</w>
+      <h>264</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>1680.0;10.0;1970.0;10.0;1970.0;640.0;10.0;640.0;10.0;310.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>84</x>
+      <y>540</y>
+      <w>260</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;120.0;630.0;120.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>228</x>
+      <y>424</y>
+      <w>788</w>
+      <h>356</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>1950.0;10.0;1950.0;870.0;10.0;870.0;10.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>496</x>
+      <y>376</y>
+      <w>788</w>
+      <h>460</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>1610.0;10.0;1950.0;10.0;1950.0;1130.0;10.0;1130.0;10.0;360.0</additional_attributes>
+  </element>
+</diagram>
