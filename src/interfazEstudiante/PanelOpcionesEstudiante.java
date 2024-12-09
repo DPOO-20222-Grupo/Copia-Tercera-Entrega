@@ -357,7 +357,7 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
 
 	    if (seguimiento != null) {
 	        float progreso = seguimiento.getProgreso();
-	        JLabel lblProgreso = new JLabel(String.format("Progreso: %.2f%%", progreso));
+	        JLabel lblProgreso = new JLabel(String.format("Progreso: %.2f%%", progreso*100));
 	        panelEste.add(lblProgreso, BorderLayout.CENTER);
 
 	    } else {
