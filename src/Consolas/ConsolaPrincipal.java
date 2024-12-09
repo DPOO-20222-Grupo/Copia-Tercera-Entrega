@@ -9,7 +9,7 @@ import interfaz.Aplicacion;
 public class ConsolaPrincipal {
 	   
     private static Scanner scanner = new Scanner(System.in);
-    private static Aplicacion aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json");  
+    private static Aplicacion aplicacion = new Aplicacion("usuarios.json", "lp.json", "preguntas.json", "actividades.json", "cifrasActividades.json");  
 
     public static void main(String[] args) {
         
