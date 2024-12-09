@@ -156,6 +156,7 @@ public class PanelOpcionesEstudiante extends JPanel implements ActionListener {
                 break;
             case "Calificar":
             	calificarLP(estudiante);
+            	
                 break;
             case "Resenar":
             	resenarActividad(estudiante);

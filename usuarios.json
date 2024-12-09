@@ -1,903 +1,222 @@
 {
   "estudiantes": {
-    "d.munera": {
-      "nombre": "daniel",
-      "learningPathsInscritos": {},
-      "login": "d.munera",
-      "password": "dani2024",
-      "isLoggedIn": false
-    },
-    "c.espinosa": {
-      "nombre": "Cesar",
-      "learningPathsInscritos": {},
-      "login": "c.espinosa",
-      "password": "ayuda1097",
-      "isLoggedIn": false
-    },
-    "s.munoz": {
-      "nombre": "Santiago",
-      "learningPathsInscritos": {
-        "Introducción a las Pruebas - l.munera": {
-          "mapaSeguimientoActividades": {
-            "Quiz1 - l.munera": {
-              "nota": -1.0,
-              "preguntas": {
-                "1 - Colores": {
-                  "opcion1": "Azul",
-                  "opcion2": "Rojo",
-                  "opcion3": "Amarillo",
-                  "opcion4": "Negro",
-                  "opcionCorrecta": 4,
-                  "enunciado": "¿Qué color no es primario?",
-                  "titulo": "Colores",
-                  "id": 1,
-                  "tipoPregunta": "PreguntaSeleccionMultiple"
-                }
-              },
-              "respuestas": {
-                "1 - Colores": -1
-              },
-              "numPreguntas": 1,
-              "actividad": {
-                "calificacionMinima": 0.7,
-                "preguntas": [
-                  {
-                    "opcion1": "Azul",
-                    "opcion2": "Rojo",
-                    "opcion3": "Amarillo",
-                    "opcion4": "Negro",
-                    "opcionCorrecta": 4,
-                    "enunciado": "¿Qué color no es primario?",
-                    "titulo": "Colores",
-                    "id": 1,
-                    "tipoPregunta": "PreguntaSeleccionMultiple"
-                  }
-                ],
-                "numPreguntas": 1,
-                "tipo": "Quiz",
-                "titulo": "Quiz1",
-                "descripcion": "Primer Quiz",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 45,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Quiz"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "s.munoz",
-              "nombreEstudianteSeguimiento": "Santiago",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoQuiz"
-            },
-            "Parcial - l.munera": {
-              "nota": -1.0,
-              "respuestas": {
-                "1 - Registro de Nombres": ""
-              },
-              "actividad": {
-                "numPreguntas": 1,
-                "preguntas": [
-                  {
-                    "enunciado": "Ingrese su nombre: ",
-                    "titulo": "Registro de Nombres",
-                    "id": 1
-                  }
-                ],
-                "tipo": "Examen",
-                "titulo": "Parcial",
-                "descripcion": "Examen Parcial",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "medio",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 120,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Examen"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "s.munoz",
-              "nombreEstudianteSeguimiento": "Santiago",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoExamen"
-            },
-            "Autoevaluación - l.munera": {
-              "respuestas": {
-                "1 - Registro de Nombres": ""
-              },
-              "actividad": {
-                "preguntas": [
-                  {
-                    "enunciado": "Ingrese su nombre: ",
-                    "titulo": "Registro de Nombres",
-                    "id": 1
-                  }
-                ],
-                "numPreguntas": 1,
-                "tipo": "Encuesta",
-                "titulo": "Autoevaluación",
-                "descripcion": "Autoevaluación acitividad #1",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "Bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 15,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [
-                  "Qué despropósito"
-                ],
-                "rating": 1.0,
-                "contadorRatings": 1,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Encuesta"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "s.munoz",
-              "nombreEstudianteSeguimiento": "Santiago",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoEncuesta"
-            },
-            "Ver video - l.munera": {
-              "recurso": "video",
-              "actividad": {
-                "tipoRecurso": "video",
-                "enlaceRecurso": "enlace",
-                "tipo": "Recurso",
-                "titulo": "Ver video",
-                "descripcion": "Ver video segunda guerra mundial",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 45,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "RevisarRecurso"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "s.munoz",
-              "nombreEstudianteSeguimiento": "Santiago",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoRecurso"
-            },
-            "Tarea1 - l.munera": {
-              "metodoEnvio": "",
-              "actividad": {
-                "tipo": "Tarea",
-                "titulo": "Tarea1",
-                "descripcion": "Tarea numero uno",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 120,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Tarea"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "s.munoz",
-              "nombreEstudianteSeguimiento": "Santiago",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoTarea"
-            }
-          },
-          "loginEstudiante": "s.munoz",
-          "nombreEstudiante": "Santiago",
-          "idLearningPath": "Introducción a las Pruebas - l.munera",
-          "progreso": 0.0,
-          "totalTiempo": 0,
-          "tasaExito": 0.0,
-          "tasaFracaso": 0.0
-        }
-      },
-      "login": "s.munoz",
-      "password": "1097hhhh",
-      "isLoggedIn": true
-    },
-    "c.espinosag": {
-      "nombre": "Cesar Espinosa",
-      "learningPathsInscritos": {
-        "Introducción a las Pruebas - l.munera": {
-          "mapaSeguimientoActividades": {
-            "Quiz1 - l.munera": {
-              "nota": 0.0,
-              "preguntas": {
-                "1 - Colores": {
-                  "opcion1": "Azul",
-                  "opcion2": "Rojo",
-                  "opcion3": "Amarillo",
-                  "opcion4": "Negro",
-                  "opcionCorrecta": 4,
-                  "enunciado": "¿Qué color no es primario?",
-                  "titulo": "Colores",
-                  "id": 1,
-                  "tipoPregunta": "PreguntaSeleccionMultiple"
-                }
-              },
-              "respuestas": {
-                "1 - Colores": 1
-              },
-              "numPreguntas": 1,
-              "actividad": {
-                "calificacionMinima": 0.7,
-                "preguntas": [
-                  {
-                    "opcion1": "Azul",
-                    "opcion2": "Rojo",
-                    "opcion3": "Amarillo",
-                    "opcion4": "Negro",
-                    "opcionCorrecta": 4,
-                    "enunciado": "¿Qué color no es primario?",
-                    "titulo": "Colores",
-                    "id": 1,
-                    "tipoPregunta": "PreguntaSeleccionMultiple"
-                  }
-                ],
-                "numPreguntas": 1,
-                "tipo": "Quiz",
-                "titulo": "Quiz1",
-                "descripcion": "Primer Quiz",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 45,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Quiz"
-              },
-              "estado": "completado",
-              "loginEstudianteSeguimiento": "c.espinosag",
-              "nombreEstudianteSeguimiento": "Cesar Espinosa",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoQuiz"
-            },
-            "Parcial - l.munera": {
-              "nota": -1.0,
-              "respuestas": {
-                "1 - Registro de Nombres": ""
-              },
-              "actividad": {
-                "numPreguntas": 1,
-                "preguntas": [
-                  {
-                    "enunciado": "Ingrese su nombre: ",
-                    "titulo": "Registro de Nombres",
-                    "id": 1
-                  }
-                ],
-                "tipo": "Examen",
-                "titulo": "Parcial",
-                "descripcion": "Examen Parcial",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "medio",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 120,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Examen"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "c.espinosag",
-              "nombreEstudianteSeguimiento": "Cesar Espinosa",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoExamen"
-            },
-            "Autoevaluación - l.munera": {
-              "respuestas": {
-                "1 - Registro de Nombres": ""
-              },
-              "actividad": {
-                "preguntas": [
-                  {
-                    "enunciado": "Ingrese su nombre: ",
-                    "titulo": "Registro de Nombres",
-                    "id": 1
-                  }
-                ],
-                "numPreguntas": 1,
-                "tipo": "Encuesta",
-                "titulo": "Autoevaluación",
-                "descripcion": "Autoevaluación acitividad #1",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "Bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 15,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [
-                  "Qué despropósito",
-                  "Bien",
-                  "Super",
-                  "j"
-                ],
-                "rating": 2.75,
-                "contadorRatings": 4,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Encuesta"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "c.espinosag",
-              "nombreEstudianteSeguimiento": "Cesar Espinosa",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoEncuesta"
-            },
-            "Ver video - l.munera": {
-              "recurso": "video",
-              "actividad": {
-                "tipoRecurso": "video",
-                "enlaceRecurso": "enlace",
-                "tipo": "Recurso",
-                "titulo": "Ver video",
-                "descripcion": "Ver video segunda guerra mundial",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 45,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [
-                  "maluca"
-                ],
-                "rating": 1.0,
-                "contadorRatings": 1,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "RevisarRecurso"
-              },
-              "estado": "Completado",
-              "loginEstudianteSeguimiento": "c.espinosag",
-              "nombreEstudianteSeguimiento": "Cesar Espinosa",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoRecurso"
-            },
-            "Tarea1 - l.munera": {
-              "metodoEnvio": "",
-              "actividad": {
-                "tipo": "Tarea",
-                "titulo": "Tarea1",
-                "descripcion": "Tarea numero uno",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 120,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Tarea"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "c.espinosag",
-              "nombreEstudianteSeguimiento": "Cesar Espinosa",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoTarea"
-            }
-          },
-          "loginEstudiante": "c.espinosag",
-          "nombreEstudiante": "Cesar Espinosa",
-          "idLearningPath": "Introducción a las Pruebas - l.munera",
-          "progreso": 0.2,
-          "totalTiempo": 0,
-          "tasaExito": 0.2,
-          "tasaFracaso": 0.8
-        }
-      },
-      "login": "c.espinosag",
-      "password": "1097llll",
-      "isLoggedIn": true
-    },
-    "c.gomez": {
-      "nombre": "caterine",
-      "learningPathsInscritos": {},
-      "login": "c.gomez",
-      "password": "1097llll",
-      "isLoggedIn": false
-    },
-    "k.uchis": {
-      "nombre": "kali uchis",
-      "learningPathsInscritos": {
-        "Introducción a las Pruebas - l.munera": {
-          "mapaSeguimientoActividades": {
-            "Quiz1 - l.munera": {
-              "nota": -1.0,
-              "preguntas": {
-                "1 - Colores": {
-                  "opcion1": "Azul",
-                  "opcion2": "Rojo",
-                  "opcion3": "Amarillo",
-                  "opcion4": "Negro",
-                  "opcionCorrecta": 4,
-                  "enunciado": "¿Qué color no es primario?",
-                  "titulo": "Colores",
-                  "id": 1,
-                  "tipoPregunta": "PreguntaSeleccionMultiple"
-                }
-              },
-              "respuestas": {
-                "1 - Colores": -1
-              },
-              "numPreguntas": 1,
-              "actividad": {
-                "calificacionMinima": 0.7,
-                "preguntas": [
-                  {
-                    "opcion1": "Azul",
-                    "opcion2": "Rojo",
-                    "opcion3": "Amarillo",
-                    "opcion4": "Negro",
-                    "opcionCorrecta": 4,
-                    "enunciado": "¿Qué color no es primario?",
-                    "titulo": "Colores",
-                    "id": 1,
-                    "tipoPregunta": "PreguntaSeleccionMultiple"
-                  }
-                ],
-                "numPreguntas": 1,
-                "tipo": "Quiz",
-                "titulo": "Quiz1",
-                "descripcion": "Primer Quiz",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 45,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Quiz"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "k.uchis",
-              "nombreEstudianteSeguimiento": "kali uchis",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoQuiz"
-            },
-            "Parcial - l.munera": {
-              "nota": -1.0,
-              "respuestas": {
-                "1 - Registro de Nombres": ""
-              },
-              "actividad": {
-                "numPreguntas": 1,
-                "preguntas": [
-                  {
-                    "enunciado": "Ingrese su nombre: ",
-                    "titulo": "Registro de Nombres",
-                    "id": 1
-                  }
-                ],
-                "tipo": "Examen",
-                "titulo": "Parcial",
-                "descripcion": "Examen Parcial",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "medio",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 120,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Examen"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "k.uchis",
-              "nombreEstudianteSeguimiento": "kali uchis",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoExamen"
-            },
-            "Autoevaluación - l.munera": {
-              "respuestas": {
-                "1 - Registro de Nombres": ""
-              },
-              "actividad": {
-                "preguntas": [
-                  {
-                    "enunciado": "Ingrese su nombre: ",
-                    "titulo": "Registro de Nombres",
-                    "id": 1
-                  }
-                ],
-                "numPreguntas": 1,
-                "tipo": "Encuesta",
-                "titulo": "Autoevaluación",
-                "descripcion": "Autoevaluación acitividad #1",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "Bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 15,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [
-                  "Qué despropósito"
-                ],
-                "rating": 1.0,
-                "contadorRatings": 1,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Encuesta"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "k.uchis",
-              "nombreEstudianteSeguimiento": "kali uchis",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoEncuesta"
-            },
-            "Ver video - l.munera": {
-              "recurso": "video",
-              "actividad": {
-                "tipoRecurso": "video",
-                "enlaceRecurso": "enlace",
-                "tipo": "Recurso",
-                "titulo": "Ver video",
-                "descripcion": "Ver video segunda guerra mundial",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 45,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "RevisarRecurso"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "k.uchis",
-              "nombreEstudianteSeguimiento": "kali uchis",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoRecurso"
-            },
-            "Tarea1 - l.munera": {
-              "metodoEnvio": "",
-              "actividad": {
-                "tipo": "Tarea",
-                "titulo": "Tarea1",
-                "descripcion": "Tarea numero uno",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 120,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Tarea"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "k.uchis",
-              "nombreEstudianteSeguimiento": "kali uchis",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoTarea"
-            }
-          },
-          "loginEstudiante": "k.uchis",
-          "nombreEstudiante": "kali uchis",
-          "idLearningPath": "Introducción a las Pruebas - l.munera",
-          "progreso": 0.0,
-          "totalTiempo": 0,
-          "tasaExito": 0.0,
-          "tasaFracaso": 0.0
-        }
-      },
-      "login": "k.uchis",
-      "password": "kuchis",
-      "isLoggedIn": true
-    },
-    "o.rod": {
-      "nombre": "orod",
-      "learningPathsInscritos": {},
-      "login": "o.rod",
-      "password": "orod",
-      "isLoggedIn": false
-    },
     "d.martinezf": {
       "nombre": "Diego Martinez",
-      "learningPathsInscritos": {},
+      "learningPathsInscritos": {
+        "Introducción a las Pruebas - l.munera": {
+          "mapaSeguimientoActividades": {
+            "Quiz1 - l.munera": {
+              "nota": -1.0,
+              "preguntas": {
+                "1 - Colores": {
+                  "opcion1": "Azul",
+                  "opcion2": "Rojo",
+                  "opcion3": "Amarillo",
+                  "opcion4": "Negro",
+                  "opcionCorrecta": 4,
+                  "enunciado": "¿Qué color no es primario?",
+                  "titulo": "Colores",
+                  "id": 1,
+                  "tipoPregunta": "PreguntaSeleccionMultiple"
+                }
+              },
+              "respuestas": {
+                "1 - Colores": -1
+              },
+              "numPreguntas": 1,
+              "actividad": {
+                "calificacionMinima": 0.7,
+                "preguntas": [
+                  {
+                    "opcion1": "Azul",
+                    "opcion2": "Rojo",
+                    "opcion3": "Amarillo",
+                    "opcion4": "Negro",
+                    "opcionCorrecta": 4,
+                    "enunciado": "¿Qué color no es primario?",
+                    "titulo": "Colores",
+                    "id": 1,
+                    "tipoPregunta": "PreguntaSeleccionMultiple"
+                  }
+                ],
+                "numPreguntas": 1,
+                "tipo": "Quiz",
+                "titulo": "Quiz1",
+                "descripcion": "Primer Quiz",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "bajo",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 45,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": [],
+                "tipoActividad": "Quiz"
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "d.martinezf",
+              "nombreEstudianteSeguimiento": "Diego Martinez",
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoQuiz"
+            },
+            "Parcial - l.munera": {
+              "nota": -1.0,
+              "respuestas": {
+                "1 - Registro de Nombres": ""
+              },
+              "actividad": {
+                "numPreguntas": 1,
+                "preguntas": [
+                  {
+                    "enunciado": "Ingrese su nombre: ",
+                    "titulo": "Registro de Nombres",
+                    "id": 1
+                  }
+                ],
+                "tipo": "Examen",
+                "titulo": "Parcial",
+                "descripcion": "Examen Parcial",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "medio",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 120,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": [],
+                "tipoActividad": "Examen"
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "d.martinezf",
+              "nombreEstudianteSeguimiento": "Diego Martinez",
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoExamen"
+            },
+            "Autoevaluación - l.munera": {
+              "respuestas": {
+                "1 - Registro de Nombres": ""
+              },
+              "actividad": {
+                "preguntas": [
+                  {
+                    "enunciado": "Ingrese su nombre: ",
+                    "titulo": "Registro de Nombres",
+                    "id": 1
+                  }
+                ],
+                "numPreguntas": 1,
+                "tipo": "Encuesta",
+                "titulo": "Autoevaluación",
+                "descripcion": "Autoevaluación acitividad #1",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "Bajo",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 15,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": [],
+                "tipoActividad": "Encuesta"
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "d.martinezf",
+              "nombreEstudianteSeguimiento": "Diego Martinez",
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoEncuesta"
+            },
+            "Ver video - l.munera": {
+              "recurso": "video",
+              "actividad": {
+                "tipoRecurso": "video",
+                "enlaceRecurso": "enlace",
+                "tipo": "Recurso",
+                "titulo": "Ver video",
+                "descripcion": "Ver video segunda guerra mundial",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "bajo",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 45,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": [],
+                "tipoActividad": "RevisarRecurso"
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "d.martinezf",
+              "nombreEstudianteSeguimiento": "Diego Martinez",
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoRecurso"
+            },
+            "Tarea1 - l.munera": {
+              "metodoEnvio": "",
+              "actividad": {
+                "tipo": "Tarea",
+                "titulo": "Tarea1",
+                "descripcion": "Tarea numero uno",
+                "objetivos": [
+                  "Objetivo 1",
+                  "Objetivo 2"
+                ],
+                "nivelDificultad": "bajo",
+                "loginProfesorCreador": "l.munera",
+                "nombreProfesorCreador": "Lina Munera",
+                "duracionMinutos": 120,
+                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
+                "resenas": [],
+                "rating": 0.0,
+                "contadorRatings": 0,
+                "actividadesPrevias": [],
+                "actividadesSeguimiento": [],
+                "tipoActividad": "Tarea"
+              },
+              "estado": "Incompleta",
+              "loginEstudianteSeguimiento": "d.martinezf",
+              "nombreEstudianteSeguimiento": "Diego Martinez",
+              "tiempoTotal": 0,
+              "tipoSeguimiento": "SeguimientoTarea"
+            }
+          },
+          "loginEstudiante": "d.martinezf",
+          "nombreEstudiante": "Diego Martinez",
+          "idLearningPath": "Introducción a las Pruebas - l.munera",
+          "progreso": 0.0,
+          "totalTiempo": 0,
+          "tasaExito": 0.0,
+          "tasaFracaso": 0.0
+        }
+      },
       "login": "d.martinezf",
       "password": "Banano123",
-      "isLoggedIn": false
+      "isLoggedIn": true
     },
     "a.linares": {
       "nombre": "Andres Linares",
-      "learningPathsInscritos": {
-        "Introducción a las Pruebas - l.munera": {
-          "mapaSeguimientoActividades": {
-            "Quiz1 - l.munera": {
-              "nota": -1.0,
-              "preguntas": {
-                "1 - Colores": {
-                  "opcion1": "Azul",
-                  "opcion2": "Rojo",
-                  "opcion3": "Amarillo",
-                  "opcion4": "Negro",
-                  "opcionCorrecta": 4,
-                  "enunciado": "¿Qué color no es primario?",
-                  "titulo": "Colores",
-                  "id": 1,
-                  "tipoPregunta": "PreguntaSeleccionMultiple"
-                }
-              },
-              "respuestas": {
-                "1 - Colores": -1
-              },
-              "numPreguntas": 1,
-              "actividad": {
-                "calificacionMinima": 0.7,
-                "preguntas": [
-                  {
-                    "opcion1": "Azul",
-                    "opcion2": "Rojo",
-                    "opcion3": "Amarillo",
-                    "opcion4": "Negro",
-                    "opcionCorrecta": 4,
-                    "enunciado": "¿Qué color no es primario?",
-                    "titulo": "Colores",
-                    "id": 1,
-                    "tipoPregunta": "PreguntaSeleccionMultiple"
-                  }
-                ],
-                "numPreguntas": 1,
-                "tipo": "Quiz",
-                "titulo": "Quiz1",
-                "descripcion": "Primer Quiz",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 45,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Quiz"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "a.linares",
-              "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoQuiz"
-            },
-            "Parcial - l.munera": {
-              "nota": -1.0,
-              "respuestas": {
-                "1 - Registro de Nombres": ""
-              },
-              "actividad": {
-                "numPreguntas": 1,
-                "preguntas": [
-                  {
-                    "enunciado": "Ingrese su nombre: ",
-                    "titulo": "Registro de Nombres",
-                    "id": 1
-                  }
-                ],
-                "tipo": "Examen",
-                "titulo": "Parcial",
-                "descripcion": "Examen Parcial",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "medio",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 120,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Examen"
-              },
-              "estado": "Enviado",
-              "loginEstudianteSeguimiento": "a.linares",
-              "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoExamen"
-            },
-            "Autoevaluación - l.munera": {
-              "respuestas": {
-                "1 - Registro de Nombres": ""
-              },
-              "actividad": {
-                "preguntas": [
-                  {
-                    "enunciado": "Ingrese su nombre: ",
-                    "titulo": "Registro de Nombres",
-                    "id": 1
-                  }
-                ],
-                "numPreguntas": 1,
-                "tipo": "Encuesta",
-                "titulo": "Autoevaluación",
-                "descripcion": "Autoevaluación acitividad #1",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "Bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 15,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Encuesta"
-              },
-              "estado": "Incompleta",
-              "loginEstudianteSeguimiento": "a.linares",
-              "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoEncuesta"
-            },
-            "Ver video - l.munera": {
-              "recurso": "video",
-              "actividad": {
-                "tipoRecurso": "video",
-                "enlaceRecurso": "enlace",
-                "tipo": "Recurso",
-                "titulo": "Ver video",
-                "descripcion": "Ver video segunda guerra mundial",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 45,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "RevisarRecurso"
-              },
-              "estado": "Completado",
-              "loginEstudianteSeguimiento": "a.linares",
-              "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoRecurso"
-            },
-            "Tarea1 - l.munera": {
-              "metodoEnvio": "",
-              "actividad": {
-                "tipo": "Tarea",
-                "titulo": "Tarea1",
-                "descripcion": "Tarea numero uno",
-                "objetivos": [
-                  "Objetivo 1",
-                  "Objetivo 2"
-                ],
-                "nivelDificultad": "bajo",
-                "loginProfesorCreador": "l.munera",
-                "nombreProfesorCreador": "Lina Munera",
-                "duracionMinutos": 120,
-                "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                "resenas": [],
-                "rating": 0.0,
-                "contadorRatings": 0,
-                "actividadesPrevias": [],
-                "actividadesSeguimiento": [],
-                "tipoActividad": "Tarea"
-              },
-              "estado": "Enviado",
-              "loginEstudianteSeguimiento": "a.linares",
-              "nombreEstudianteSeguimiento": "Andres Linares",
-              "tiempoTotal": 0,
-              "tipoSeguimiento": "SeguimientoTarea"
-            }
-          },
-          "loginEstudiante": "a.linares",
-          "nombreEstudiante": "Andres Linares",
-          "idLearningPath": "Introducción a las Pruebas - l.munera",
-          "progreso": 0.6,
-          "totalTiempo": 0,
-          "tasaExito": 0.2,
-          "tasaFracaso": 0.8
-        }
-      },
+      "learningPathsInscritos": {},
       "login": "a.linares",
       "password": "Banano123",
       "isLoggedIn": false
@@ -1057,217 +376,10 @@
           "nivelDificultad": "mid",
           "duracionMinutos": 345,
           "rating": 0.0,
-          "fechaCreacion": "2024-12-08T06:09:49.7274449",
-          "fechaUltimaModificacion": "2024-12-08T06:09:49.7274449",
+          "fechaCreacion": "2024-12-08T23:52:28.172547",
+          "fechaUltimaModificacion": "2024-12-08T23:52:28.172547",
           "version": 1.0,
-          "estudiantesInscritos": {
-            "a.linares": {
-              "mapaSeguimientoActividades": {
-                "Quiz1 - l.munera": {
-                  "nota": -1.0,
-                  "preguntas": {
-                    "1 - Colores": {
-                      "opcion1": "Azul",
-                      "opcion2": "Rojo",
-                      "opcion3": "Amarillo",
-                      "opcion4": "Negro",
-                      "opcionCorrecta": 4,
-                      "enunciado": "¿Qué color no es primario?",
-                      "titulo": "Colores",
-                      "id": 1,
-                      "tipoPregunta": "PreguntaSeleccionMultiple"
-                    }
-                  },
-                  "respuestas": {
-                    "1 - Colores": -1
-                  },
-                  "numPreguntas": 1,
-                  "actividad": {
-                    "calificacionMinima": 0.7,
-                    "preguntas": [
-                      {
-                        "opcion1": "Azul",
-                        "opcion2": "Rojo",
-                        "opcion3": "Amarillo",
-                        "opcion4": "Negro",
-                        "opcionCorrecta": 4,
-                        "enunciado": "¿Qué color no es primario?",
-                        "titulo": "Colores",
-                        "id": 1,
-                        "tipoPregunta": "PreguntaSeleccionMultiple"
-                      }
-                    ],
-                    "numPreguntas": 1,
-                    "tipo": "Quiz",
-                    "titulo": "Quiz1",
-                    "descripcion": "Primer Quiz",
-                    "objetivos": [
-                      "Objetivo 1",
-                      "Objetivo 2"
-                    ],
-                    "nivelDificultad": "bajo",
-                    "loginProfesorCreador": "l.munera",
-                    "nombreProfesorCreador": "Lina Munera",
-                    "duracionMinutos": 45,
-                    "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                    "resenas": [],
-                    "rating": 0.0,
-                    "contadorRatings": 0,
-                    "actividadesPrevias": [],
-                    "actividadesSeguimiento": [],
-                    "tipoActividad": "Quiz"
-                  },
-                  "estado": "Incompleta",
-                  "loginEstudianteSeguimiento": "a.linares",
-                  "nombreEstudianteSeguimiento": "Andres Linares",
-                  "tiempoTotal": 0,
-                  "tipoSeguimiento": "SeguimientoQuiz"
-                },
-                "Parcial - l.munera": {
-                  "nota": -1.0,
-                  "respuestas": {
-                    "1 - Registro de Nombres": ""
-                  },
-                  "actividad": {
-                    "numPreguntas": 1,
-                    "preguntas": [
-                      {
-                        "enunciado": "Ingrese su nombre: ",
-                        "titulo": "Registro de Nombres",
-                        "id": 1
-                      }
-                    ],
-                    "tipo": "Examen",
-                    "titulo": "Parcial",
-                    "descripcion": "Examen Parcial",
-                    "objetivos": [
-                      "Objetivo 1",
-                      "Objetivo 2"
-                    ],
-                    "nivelDificultad": "medio",
-                    "loginProfesorCreador": "l.munera",
-                    "nombreProfesorCreador": "Lina Munera",
-                    "duracionMinutos": 120,
-                    "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                    "resenas": [],
-                    "rating": 0.0,
-                    "contadorRatings": 0,
-                    "actividadesPrevias": [],
-                    "actividadesSeguimiento": [],
-                    "tipoActividad": "Examen"
-                  },
-                  "estado": "Enviado",
-                  "loginEstudianteSeguimiento": "a.linares",
-                  "nombreEstudianteSeguimiento": "Andres Linares",
-                  "tiempoTotal": 0,
-                  "tipoSeguimiento": "SeguimientoExamen"
-                },
-                "Autoevaluación - l.munera": {
-                  "respuestas": {
-                    "1 - Registro de Nombres": ""
-                  },
-                  "actividad": {
-                    "preguntas": [
-                      {
-                        "enunciado": "Ingrese su nombre: ",
-                        "titulo": "Registro de Nombres",
-                        "id": 1
-                      }
-                    ],
-                    "numPreguntas": 1,
-                    "tipo": "Encuesta",
-                    "titulo": "Autoevaluación",
-                    "descripcion": "Autoevaluación acitividad #1",
-                    "objetivos": [
-                      "Objetivo 1",
-                      "Objetivo 2"
-                    ],
-                    "nivelDificultad": "Bajo",
-                    "loginProfesorCreador": "l.munera",
-                    "nombreProfesorCreador": "Lina Munera",
-                    "duracionMinutos": 15,
-                    "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                    "resenas": [],
-                    "rating": 0.0,
-                    "contadorRatings": 0,
-                    "actividadesPrevias": [],
-                    "actividadesSeguimiento": [],
-                    "tipoActividad": "Encuesta"
-                  },
-                  "estado": "Incompleta",
-                  "loginEstudianteSeguimiento": "a.linares",
-                  "nombreEstudianteSeguimiento": "Andres Linares",
-                  "tiempoTotal": 0,
-                  "tipoSeguimiento": "SeguimientoEncuesta"
-                },
-                "Ver video - l.munera": {
-                  "recurso": "video",
-                  "actividad": {
-                    "tipoRecurso": "video",
-                    "enlaceRecurso": "enlace",
-                    "tipo": "Recurso",
-                    "titulo": "Ver video",
-                    "descripcion": "Ver video segunda guerra mundial",
-                    "objetivos": [
-                      "Objetivo 1",
-                      "Objetivo 2"
-                    ],
-                    "nivelDificultad": "bajo",
-                    "loginProfesorCreador": "l.munera",
-                    "nombreProfesorCreador": "Lina Munera",
-                    "duracionMinutos": 45,
-                    "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                    "resenas": [],
-                    "rating": 0.0,
-                    "contadorRatings": 0,
-                    "actividadesPrevias": [],
-                    "actividadesSeguimiento": [],
-                    "tipoActividad": "RevisarRecurso"
-                  },
-                  "estado": "Completado",
-                  "loginEstudianteSeguimiento": "a.linares",
-                  "nombreEstudianteSeguimiento": "Andres Linares",
-                  "tiempoTotal": 0,
-                  "tipoSeguimiento": "SeguimientoRecurso"
-                },
-                "Tarea1 - l.munera": {
-                  "metodoEnvio": "",
-                  "actividad": {
-                    "tipo": "Tarea",
-                    "titulo": "Tarea1",
-                    "descripcion": "Tarea numero uno",
-                    "objetivos": [
-                      "Objetivo 1",
-                      "Objetivo 2"
-                    ],
-                    "nivelDificultad": "bajo",
-                    "loginProfesorCreador": "l.munera",
-                    "nombreProfesorCreador": "Lina Munera",
-                    "duracionMinutos": 120,
-                    "fechaLimite": "Oct 23, 2024, 12:00:00 AM",
-                    "resenas": [],
-                    "rating": 0.0,
-                    "contadorRatings": 0,
-                    "actividadesPrevias": [],
-                    "actividadesSeguimiento": [],
-                    "tipoActividad": "Tarea"
-                  },
-                  "estado": "Enviado",
-                  "loginEstudianteSeguimiento": "a.linares",
-                  "nombreEstudianteSeguimiento": "Andres Linares",
-                  "tiempoTotal": 0,
-                  "tipoSeguimiento": "SeguimientoTarea"
-                }
-              },
-              "loginEstudiante": "a.linares",
-              "nombreEstudiante": "Andres Linares",
-              "idLearningPath": "Introducción a las Pruebas - l.munera",
-              "progreso": 0.6,
-              "totalTiempo": 0,
-              "tasaExito": 0.2,
-              "tasaFracaso": 0.8
-            }
-          },
+          "estudiantesInscritos": {},
           "actividades": [
             {
               "preguntas": [

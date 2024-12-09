@@ -120,10 +120,6 @@ public class Main {
 		
 		LearningPath learningPath = aplicacion.getLearningPath("Introducción a las Pruebas - l.munera");
 		
-		aplicacion.inscribirEstudianteLearningPath(stud2, learningPath);
-		aplicacion.enviarExamen(ex, stud2, learningPath);
-		aplicacion.enviarTarea(ta, stud2, learningPath);
-		aplicacion.completarEncuestaRecurso(rr, stud2, learningPath);
 		
 		// Descarga de los Datos en Archivos JSON
 		aplicacion.descargarDatos();
