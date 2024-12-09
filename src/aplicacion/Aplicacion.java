@@ -1,4 +1,4 @@
-package interfaz;
+package aplicacion;
 
 
 import java.util.HashMap;  

@@ -2,8 +2,8 @@ package Consolas;
 
 import java.util.Scanner;
 
-import exceptions.UsuarioYaExistenteException;
-import interfaz.Aplicacion; 
+import aplicacion.Aplicacion;
+import exceptions.UsuarioYaExistenteException; 
 
 
 public class ConsolaPrincipal {

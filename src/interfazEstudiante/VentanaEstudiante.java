@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import interfaz.Aplicacion;
+import aplicacion.Aplicacion;
 import interfazActividadesCompletadas.PanelActividadesDiarias;
 import user.Estudiante;
 

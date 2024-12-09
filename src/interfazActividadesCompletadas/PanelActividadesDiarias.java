@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import interfaz.Aplicacion;
+import aplicacion.Aplicacion;
 
 @SuppressWarnings("serial")
 public class PanelActividadesDiarias extends JPanel {

@@ -1,8 +1,8 @@
 package interfazProfesor;
 
-import javax.swing.*;  
+import javax.swing.*;
 
-import interfaz.Aplicacion;
+import aplicacion.Aplicacion;
 import interfazProfesor.PanelOpcionesProfesor;
 import user.Profesor;
 

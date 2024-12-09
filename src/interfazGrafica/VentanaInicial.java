@@ -6,8 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import aplicacion.Aplicacion;
 import exceptions.UsuarioYaExistenteException;
-import interfaz.Aplicacion;
 import interfazEstudiante.VentanaEstudiante;
 import interfazProfesor.VentanaProfesor;
 import user.Estudiante;
